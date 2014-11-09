@@ -193,6 +193,7 @@
     <Compile Include="Models\FacadeFactory.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\DataAccess\Repository.cs" />
+    <Compile Include="Models\User\DefaultWebSecurity.cs" />
     <Compile Include="Models\User\User.cs" />
     <Compile Include="Models\User\UserAssembler.cs" />
     <Compile Include="Models\User\UserRepository.cs" />
