@@ -1,0 +1,52 @@
+﻿@using System.Web.Optimization
+@model WorkflowManagementSystem.Models.User.UserSignUpViewModel
+
+@Styles.Render("~/Content/css/theme/signup.css")
+
+
+<div class="container">
+    <div class="col-md-12">
+        @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new {@class = "form center"}))
+        {
+            <div class="row center-text">
+                <img class="logo" src="/Content/img/Mount_Royal_University_Logo.svg.png" /> <br/>
+            </div>
+
+            <div class="row">
+                <ul class="errors center-text">
+                </ul>
+            </div>
+
+            <div class="row">
+                <h6>* All fields required.</h6>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 split-left">
+                    <input class="form-control" type="text" name="firstName" placeholder="First name" tabindex="1"/>
+                </div>
+                <div class="col-md-6 split-right">
+                    <input class="form-control" type="text" name="lastName" placeholder="Last name" tabindex="2"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <input class="form-control" type="email" name="email" placeholder="Email" tabindex="3"/>
+                <abbr class="info-mark" tooltip="Must be a valid MRU email."> i </abbr>
+            </div>
+
+            <div class="row">
+                <input class="form-control" type="password" name="password" placeholder="Password" tabindex="4"/>
+                <abbr class="info-mark" tooltip="Must be at least 6 characters."> i </abbr>
+            </div>
+
+            <div class="row">
+            </div>
+
+            <div class="row center-text">
+                <input class="form-control button blue" type="submit" value="Sign Up" tabindex="6"/>
+                @Html.ActionLink("Already have an account?", "SignIn", "Account", null, new {@class = "link"})
+            </div>
+        }
+    </div>
+</div>

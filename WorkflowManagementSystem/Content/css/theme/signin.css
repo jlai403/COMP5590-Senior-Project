@@ -1,0 +1,15 @@
+.form {
+	max-width: 400px;	
+}
+
+.form .link {
+	font-size: 11px;
+}
+
+.form .row input {
+	margin-bottom: 10px;
+}
+
+.form .logo {
+	width: 100%;
+}

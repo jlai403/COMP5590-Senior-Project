@@ -1,0 +1,57 @@
+.search-results {
+	margin-top: 20px;
+	max-width: 600px;	
+}
+
+.container.item {
+	max-width: 100%;
+	font-size: 12px;
+	border-top: 1px solid #EFEFEF;
+	border-bottom: 1px solid #EFEFEF;
+	padding: 10px 20px;
+	margin-top: 0;
+}
+
+.container.item:HOVER {
+	background-color: #F9F9F9;
+	cursor: pointer;
+}
+
+.search-results a, .search-results a, 
+.search-results a:ACTIVE, .search-results a:ACTIVE,
+.search-results a:VISITED, .search-results a:VISITED{
+	text-decoration: none;
+	color: #000000;
+}
+
+.search-result {
+	cursor: pointer;
+}
+
+.search-result:HOVER {
+	background-color: #F0FFFF;
+}
+
+.search-result a {
+    display: block;
+    height: inherit;
+    width: inherit;
+}
+
+.search-results .table th {
+    cursor: pointer;
+}
+
+.sorted {
+    background-color: #f9f9f9;
+}
+
+.sorted:after {
+    content: "\E114";
+    font-family: 'Glyphicons Halflings';
+    font-size: 8px;
+    margin: 5px;
+    background-color: #ddd;
+    border-radius: 10px;
+    padding: 2px 3px;
+}

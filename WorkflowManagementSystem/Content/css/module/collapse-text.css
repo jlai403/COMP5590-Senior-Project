@@ -1,0 +1,9 @@
+.collapsed {
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+
+.show-more, .show-less {
+	cursor: pointer;
+	color: #428bca;
+}

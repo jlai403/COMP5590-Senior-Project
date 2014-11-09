@@ -1,0 +1,98 @@
+﻿<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header" style="height: 150px;">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> 
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span> 
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand nav-logo" href="/View">
+                <img class="logo" src="/Content/img/Mount_Royal_University_Logo.svg.png" />
+            </a>
+        </div>
+	
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse"
+             id="bs-example-navbar-collapse-1">
+            <ul class="nav nav-pills navbar-right">
+                <li>
+                    @*<form action="/Controller/SearchController.php?action=query"
+                          method="post">
+                        <div class="form-group has-feedback">
+                            <input class="form-control" type="text" name="queryString" placeholder="Search..." /> 
+                            <i class="glyphicon glyphicon-search form-control-feedback" style="top: 0px;"></i>
+                        </div>
+                    </form>*@
+                </li>
+						
+                <!-- NAV LINKS START -->
+                <li> @Html.ActionLink("Logout","Logout","Account") </li>
+                <!-- NAV LINKS END -->
+            </ul>
+        </div> <!-- /.navbar-collapse -->
+    </div> <!-- /.container-fluid -->
+</nav>
+		
+<div class="container">
+    <div class="row">
+        <!-- ACTIONABLE ITEMS START -->
+        <div class="col-md-6">
+            <div class="actionable-items">
+                <h6>Actionable Items</h6>
+						
+                <a href="">
+                    <div class="container item">
+                        <div class="row">
+                            <div class="col-md-4 col-xs-6"> Request Date: </div>
+                            <div class="col-md-8 col-xs-6"> </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-xs-6"> Requested By: </div>
+                            <div class="col-md-8 col-xs-6"> </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-xs-6"> Program Name: </div>
+                            <div class="col-md-8 col-xs-6"> </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-xs-6"> Status: </div>
+                            <div class="col-md-8 col-xs-6"> </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- ACTIONABLE ITEMS END -->
+				
+        <!-- REQUESTS START -->
+        <div class="col-md-6">
+            <div class="request-items">
+                <h6>Your Requested Items</h6>
+						
+                <a href="">
+                    <div class="container item">
+                        <div class="row">
+                            <div class="col-md-4 col-xs-6"> Request Date: </div>
+                            <div class="col-md-8 col-xs-6"> </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-xs-6"> Program Name: </div>
+                            <div class="col-md-8 col-xs-6"> </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-xs-6"> Reponsible Party: </div>
+                            <div class="col-md-8 col-xs-6">  </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-xs-6"> Status: </div>
+                            <div class="col-md-8 col-xs-6"> </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- REQUESTS END -->
+    </div>
+</div>

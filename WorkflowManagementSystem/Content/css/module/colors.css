@@ -1,0 +1,51 @@
+.blue {
+	background-color: #0088CC;
+}
+
+.red {
+	background-color: #F08080;
+}
+
+.button.red:HOVER {
+	background-color: #EE5C42;
+}
+
+.green {
+	background-color: #BEE554;
+}
+
+.button.green:HOVER {
+	background-color: #99CC32;
+}
+
+.button.blue:HOVER {
+	background-color: #285E8E;
+}
+
+
+.button.blue, .button.green, .button.red {
+	color: #FFFFFF;
+}
+
+/******************
+	WORKFLOW
+*******************/
+.Pending.Approval {
+	padding: 10px 0;
+	background-color: #FFEC8B;
+}
+
+.Approved {
+	padding: 10px 0;
+	background-color: #DFFFA5;
+}
+
+.Rejected {
+	padding: 10px 0;
+	background-color: #F08080;
+}
+
+.Completed {
+	padding: 10px 0;
+	background-color: #BCEE68;
+}
