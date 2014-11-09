@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using WebMatrix.WebData;
 using WorkflowManagementSystem.Models;
+using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.User;
 
 namespace WorkflowManagementSystem.Controllers
@@ -23,8 +24,18 @@ namespace WorkflowManagementSystem.Controllers
         [HttpPost]
         public ActionResult SignIn(string email, string password)
         {
-            WebSecurity.Login(email, password);
-            return RedirectToAction("Index", "Dashboard");
+            var loginSuccessful = WebSecurity.Login(email, password);
+            
+            if (loginSuccessful)
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
+            else
+            {
+                ViewBag.Email = email;
+                ViewBag.Error = "The email and password you provided are incorrect.";
+                return View("SignIn");
+            }
         }
 
         [HttpGet]
@@ -37,8 +48,10 @@ namespace WorkflowManagementSystem.Controllers
         public ActionResult SignUp(UserSignUpViewModel userSignUpViewModel)
         {
             FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
-            WebSecurity.Login(userSignUpViewModel.Email, userSignUpViewModel.Password);
-            return RedirectToAction("Index", "Dashboard");
+            var loginSuccessful = WebSecurity.Login(userSignUpViewModel.Email, userSignUpViewModel.Password);
+            if (loginSuccessful)
+                return RedirectToAction("Index", "Dashboard");
+            throw new WMSException("Error occured when signing up for user: {0}", userSignUpViewModel.Email);
         }
 
         public ActionResult Logout()

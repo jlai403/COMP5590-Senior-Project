@@ -175,6 +175,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -188,6 +189,7 @@
     <Compile Include="Models\DataAccess\MyDbContext.cs" />
     <Compile Include="Models\DataAccess\TransactionHandler.cs" />
     <Compile Include="Models\DomainFacade.cs" />
+    <Compile Include="Models\ErrorHandling\WMSException.cs" />
     <Compile Include="Models\FacadeFactory.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\DataAccess\Repository.cs" />
@@ -212,6 +214,7 @@
     <Content Include="Views\Shared\_NavigationHeaderPartial.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Errors\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
