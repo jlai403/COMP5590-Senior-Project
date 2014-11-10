@@ -31,5 +31,10 @@ namespace WorkflowManagementSystem.Models.DataAccess
         {
             _testCleanUpListener.CleanUp();
         }
+
+        public void Delete()
+        {
+            DbContext.Database.Delete();
+        }
     }
 }

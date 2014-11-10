@@ -21,10 +21,16 @@ namespace WorkflowManagementSystem.Tests
         {
             DatabaseManager.Instance.CleanUp();
         }
+
+        [TestFixtureTearDown]
+        public void TearDownFixture()
+        {
+            DatabaseManager.Instance.Delete();
+        }
     }
 
     [SetUpFixture]
-    public class TestAssemblyFixture
+    public class TestSetUpFixture
     {
         [SetUp]
         public void SetupAssembly()

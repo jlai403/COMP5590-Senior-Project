@@ -65,5 +65,22 @@ namespace WorkflowManagementSystem.Tests
             act.ShouldThrow<WMSException>().WithMessage("Last name is required.");
             FacadeFactory.GetDomainFacade().FindAllUsers().Count.ShouldBeEquivalentTo(0);
         }
+
+        [Test]
+        public void CreateUser_NoRoleSelected()
+        {
+            // assemble
+            var userSignUpViewModel = new UserSignUpViewModel();
+            userSignUpViewModel.FirstName = "Dude";
+            userSignUpViewModel.Email = "somedude@someawesomeemailprovider.com";
+            userSignUpViewModel.Password = "123456";
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Last name is required.");
+            FacadeFactory.GetDomainFacade().FindAllUsers().Count.ShouldBeEquivalentTo(0);
+        }
     }
 }
