@@ -2,7 +2,7 @@ using MyEntityFramework.Entity;
 
 namespace WorkflowManagementSystem.Models.DataAccess
 {
-    public class DefaultTestCleanUpInitializer : ICleanUpData
+    public class NullTestCleanUpInitializer : ICleanUpData
     {
         public void CleanUp()
         {

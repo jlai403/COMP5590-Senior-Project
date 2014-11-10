@@ -42,6 +42,9 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="EFHooks">
+      <HintPath>..\packages\VisoftInc.EFHooks.2.0.0.0\lib\net45\EFHooks.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
@@ -186,17 +189,19 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DataAccess\DatabaseManager.cs" />
-    <Compile Include="Models\DataAccess\DefaultTestCleanUpInitializer.cs" />
+    <Compile Include="Models\DataAccess\NullTestCleanUpInitializer.cs" />
     <Compile Include="Models\DataAccess\ICleanUpData.cs" />
     <Compile Include="Models\DataAccess\MyDbContext.cs" />
-    <Compile Include="Models\DataAccess\TestCleanUpInitializer.cs" />
+    <Compile Include="Models\DataAccess\PostDeleteHookListener.cs" />
+    <Compile Include="Models\DataAccess\PostInsertHookListener.cs" />
+    <Compile Include="Models\DataAccess\TestCleanUpListener.cs" />
     <Compile Include="Models\DataAccess\TransactionHandler.cs" />
     <Compile Include="Models\DomainFacade.cs" />
     <Compile Include="Models\ErrorHandling\WMSException.cs" />
     <Compile Include="Models\FacadeFactory.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\DataAccess\Repository.cs" />
-    <Compile Include="Models\User\DefaultWebSecurity.cs" />
+    <Compile Include="Models\User\SecurityManager.cs" />
     <Compile Include="Models\User\User.cs" />
     <Compile Include="Models\User\UserAssembler.cs" />
     <Compile Include="Models\User\UserRepository.cs" />

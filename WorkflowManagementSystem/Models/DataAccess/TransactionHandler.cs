@@ -25,14 +25,12 @@ namespace MyEntityFramework.Transaction
                 {
                     result = transaction.Invoke();
                     DatabaseManager.Instance.DbContext.SaveChanges();
+                    beginTransaction.Commit();
                 }
                 catch (Exception e)
                 {
                     beginTransaction.Rollback();
-                }
-                finally
-                {
-                    beginTransaction.Commit();
+                    throw;
                 }
             }
             return result;

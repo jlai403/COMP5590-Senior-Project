@@ -1,4 +1,6 @@
+using Microsoft.Ajax.Utilities;
 using MyEntityFramework.Entity;
+using WorkflowManagementSystem.Models.ErrorHandling;
 
 namespace WorkflowManagementSystem.Models.User
 {
@@ -16,7 +18,21 @@ namespace WorkflowManagementSystem.Models.User
             FirstName = userSignUpViewModel.FirstName;
             LastName = userSignUpViewModel.LastName;
             Email = userSignUpViewModel.Email;
+
+            AssertFirstNameIsValid();
+            AssertLastNameIsValid();
         }
 
+        private void AssertLastNameIsValid()
+        {
+            if (LastName.IsNullOrWhiteSpace())
+                throw new WMSException("Last name is required.");
+        }
+
+        private void AssertFirstNameIsValid()
+        {
+            if (FirstName.IsNullOrWhiteSpace())
+                throw new WMSException("First name is required.");
+        }
     }
 }

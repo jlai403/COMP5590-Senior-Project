@@ -1,41 +1,39 @@
-﻿using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
+using EFHooks;
 using MyEntityFramework.Entity;
 
 namespace WorkflowManagementSystem.Models.DataAccess
 {
-    public class MyDbContext : DbContext
+    public class MyDbContext : HookedDbContext
     {
-        public ICleanUpData _testCleanUpInitializer = new DefaultTestCleanUpInitializer();
-
         protected MyDbContext() : base()
         {
         }
 
         protected MyDbContext(string connectionString) : base(connectionString)
         {
+            RegisterHooks();
+        }
+
+        private void RegisterHooks()
+        {
+            RegisterHook(new PostInsertHookListener());
+            RegisterHook(new PostDeleteHookListener());
         }
 
         public void AddEntity(IEntity entity)
         {
-            _testCleanUpInitializer.EntityCreated(entity);
             Set(entity.GetType()).Add(entity);
         }
 
         public void RemoveEntity(IEntity entity)
         {
-            _testCleanUpInitializer.EntityRemoved(entity);
             Set(entity.GetType()).Remove(entity);
         }
 
         public IQueryable<T> Queryable<T>() where T : class
         {
             return Set<T>();
-        }
-
-        public void CleanUp()
-        {
-            _testCleanUpInitializer.CleanUp();
         }
     }
 }

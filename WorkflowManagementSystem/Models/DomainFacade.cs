@@ -24,7 +24,7 @@ namespace WorkflowManagementSystem.Models
                 return null;
             });
             
-            WebSecurity.CreateAccount(userSignUpViewModel.Email, userSignUpViewModel.Password);
+            SecurityManager.CreateAccount(userSignUpViewModel.Email, userSignUpViewModel.Password);
         }
     }
 }

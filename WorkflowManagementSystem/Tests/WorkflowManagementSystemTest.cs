@@ -3,6 +3,7 @@ using System.Configuration;
 using NUnit.Framework;
 using WebMatrix.WebData;
 using WorkflowManagementSystem.Models.DataAccess;
+using WorkflowManagementSystem.Models.User;
 
 namespace WorkflowManagementSystem.Tests
 {
@@ -12,7 +13,7 @@ namespace WorkflowManagementSystem.Tests
         [SetUp]
         public void SetUp()
         {
-           
+            SecurityManager._webSecurity = new TestWebSecurity();
         }
 
         [TearDown]
@@ -31,9 +32,8 @@ namespace WorkflowManagementSystem.Tests
             try
             {
                 var connectionString = ConfigurationManager.ConnectionStrings["TestDbContext"].ConnectionString;
-                var workflowManagementSystemDbContext = new WorkflowManagementSystemDbContext(connectionString);
-                workflowManagementSystemDbContext._testCleanUpInitializer = new TestCleanUpInitializer();
-                DatabaseManager.Instance.Initialize(workflowManagementSystemDbContext);
+                DatabaseManager.Instance._testCleanUpListener = new TestCleanUpListener();
+                DatabaseManager.Instance.Initialize(new WorkflowManagementSystemDbContext(connectionString));
                 
                 if (!WebSecurity.Initialized)
                 {

@@ -24,7 +24,7 @@ namespace WorkflowManagementSystem.Controllers
         [HttpPost]
         public ActionResult SignIn(string email, string password)
         {
-            var loginSuccessful = DefaultWebSecurity.Login(email, password);
+            var loginSuccessful = SecurityManager.Login(email, password);
             
             if (loginSuccessful)
             {
@@ -48,7 +48,7 @@ namespace WorkflowManagementSystem.Controllers
         public ActionResult SignUp(UserSignUpViewModel userSignUpViewModel)
         {
             FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
-            var loginSuccessful = DefaultWebSecurity.Login(userSignUpViewModel.Email, userSignUpViewModel.Password);
+            var loginSuccessful = SecurityManager.Login(userSignUpViewModel.Email, userSignUpViewModel.Password);
             if (loginSuccessful)
                 return RedirectToAction("Index", "Dashboard");
 

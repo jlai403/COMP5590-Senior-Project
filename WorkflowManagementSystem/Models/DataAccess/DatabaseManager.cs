@@ -1,11 +1,12 @@
 ﻿using System.Data.Entity;
-using MyEntityFramework.Transaction;
 
 namespace WorkflowManagementSystem.Models.DataAccess
 {
     public class DatabaseManager
     {
         private static DatabaseManager _instance;
+
+        public ICleanUpData _testCleanUpListener = new NullTestCleanUpInitializer();
 
         public static DatabaseManager Instance
         {
@@ -28,7 +29,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
 
         public void CleanUp()
         {
-            DbContext.CleanUp();
+            _testCleanUpListener.CleanUp();
         }
     }
 }

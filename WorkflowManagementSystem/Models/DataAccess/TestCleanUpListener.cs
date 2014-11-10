@@ -5,11 +5,11 @@ using MyEntityFramework.Transaction;
 
 namespace WorkflowManagementSystem.Models.DataAccess
 {
-    public class TestCleanUpInitializer : ICleanUpData
+    public class TestCleanUpListener : ICleanUpData
     {
         private List<TypePair> TypePair { get; set; }
 
-        public TestCleanUpInitializer()
+        public TestCleanUpListener()
         {
             TypePair = new List<TypePair>();
         }
