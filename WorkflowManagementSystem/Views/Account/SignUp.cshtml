@@ -1,4 +1,6 @@
 ﻿@using System.Web.Optimization
+@using NUnit.Framework
+@using WorkflowManagementSystem.Models.Roles
 @model WorkflowManagementSystem.Models.Users.UserSignUpViewModel
 
 @Styles.Render("~/Content/css/theme/signup.css")
@@ -23,24 +25,25 @@
 
             <div class="row">
                 <div class="col-md-6 split-left">
-                    <input class="form-control" type="text" name="firstName" placeholder="First name" tabindex="1"/>
+                    @Html.TextBoxFor(m => m.FirstName, new{@class="form-control", placeholder="First name", tabindex="1"})
                 </div>
                 <div class="col-md-6 split-right">
-                    <input class="form-control" type="text" name="lastName" placeholder="Last name" tabindex="2"/>
+                    @Html.TextBoxFor(m => m.LastName, new{@class="form-control", placeholder="Last name", tabindex="2"})
                 </div>
             </div>
 
             <div class="row">
-                <input class="form-control" type="email" name="email" placeholder="Email" tabindex="3"/>
+                @Html.TextBoxFor(m => m.Email, new{@class="form-control", placeholder="Email", tabindex="3"})
                 <abbr class="info-mark" tooltip="Must be a valid MRU email."> i </abbr>
             </div>
 
             <div class="row">
-                <input class="form-control" type="password" name="password" placeholder="Password" tabindex="4"/>
+                @Html.PasswordFor(m => m.Password, new{@class="form-control", placeholder="Password", tabindex="4"})
                 <abbr class="info-mark" tooltip="Must be at least 6 characters."> i </abbr>
             </div>
 
             <div class="row">
+                @Html.DropDownListFor(m => m.Roles, new MultiSelectList(ViewBag.Roles, "Name", "Name"), new{@class="form-control", multiple="true"})
             </div>
 
             <div class="row center-text">

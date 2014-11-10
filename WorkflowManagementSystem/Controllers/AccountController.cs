@@ -41,6 +41,7 @@ namespace WorkflowManagementSystem.Controllers
         [HttpGet]
         public ActionResult SignUp()
         {
+            ViewBag.Roles = FacadeFactory.GetDomainFacade().FindAllRoles();
             return View();
         }
 
