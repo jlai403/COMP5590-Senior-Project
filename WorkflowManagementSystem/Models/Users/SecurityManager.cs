@@ -1,7 +1,7 @@
 using Microsoft.Ajax.Utilities;
 using WebMatrix.WebData;
 
-namespace WorkflowManagementSystem.Models.User
+namespace WorkflowManagementSystem.Models.Users
 {
     public static class SecurityManager
     {

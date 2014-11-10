@@ -4,7 +4,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.ErrorHandling;
-using WorkflowManagementSystem.Models.User;
+using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Tests
 {
@@ -14,11 +14,14 @@ namespace WorkflowManagementSystem.Tests
         public void CreateUser()
         {
             // assemble
+            new RoleTestHelper().LoadTestRoles();
+
             var userSignUpViewModel = new UserSignUpViewModel();
             userSignUpViewModel.FirstName = "Some";
             userSignUpViewModel.LastName = "Dude";
             userSignUpViewModel.Email = "somedude@someawesomeemailprovider.com";
             userSignUpViewModel.Password = "123456";
+            userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
    
             // act
             FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
@@ -30,6 +33,43 @@ namespace WorkflowManagementSystem.Tests
             userViewModel.FirstName.ShouldBeEquivalentTo(userSignUpViewModel.FirstName);
             userViewModel.LastName.ShouldBeEquivalentTo(userSignUpViewModel.LastName);
             userViewModel.Email.ShouldBeEquivalentTo(userSignUpViewModel.Email);
+            userViewModel.Roles.Count.ShouldBeEquivalentTo(1);
+            userViewModel.Roles.Should().Contain(RoleTestHelper.FACULTY_MEMBER);
+        }
+
+        [Test]
+        public void CreateUser_MultipleRolesSelected()
+        {
+            // assemble
+            new RoleTestHelper().LoadTestRoles();
+
+            var userSignUpViewModel = new UserSignUpViewModel();
+            userSignUpViewModel.FirstName = "Some";
+            userSignUpViewModel.LastName = "Dude";
+            userSignUpViewModel.Email = "somedude@someawesomeemailprovider.com";
+            userSignUpViewModel.Password = "123456";
+            userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
+            userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_COUNCIL_MEMBER);
+            userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
+            userSignUpViewModel.Roles.Add(RoleTestHelper.APPC_MEMBER);
+            userSignUpViewModel.Roles.Add(RoleTestHelper.GFC_MEMBER);
+
+            // act
+            FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
+
+            // assert
+            var users = FacadeFactory.GetDomainFacade().FindAllUsers();
+            users.Count.ShouldBeEquivalentTo(1);
+            var userViewModel = users.First();
+            userViewModel.FirstName.ShouldBeEquivalentTo(userSignUpViewModel.FirstName);
+            userViewModel.LastName.ShouldBeEquivalentTo(userSignUpViewModel.LastName);
+            userViewModel.Email.ShouldBeEquivalentTo(userSignUpViewModel.Email);
+            userViewModel.Roles.Count.ShouldBeEquivalentTo(5);
+            userViewModel.Roles.Should().Contain(RoleTestHelper.FACULTY_MEMBER);
+            userViewModel.Roles.Should().Contain(RoleTestHelper.FACULTY_COUNCIL_MEMBER);
+            userViewModel.Roles.Should().Contain(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
+            userViewModel.Roles.Should().Contain(RoleTestHelper.APPC_MEMBER);
+            userViewModel.Roles.Should().Contain(RoleTestHelper.GFC_MEMBER);
         }
 
         [Test]
@@ -71,7 +111,8 @@ namespace WorkflowManagementSystem.Tests
         {
             // assemble
             var userSignUpViewModel = new UserSignUpViewModel();
-            userSignUpViewModel.FirstName = "Dude";
+            userSignUpViewModel.FirstName = "Some";
+            userSignUpViewModel.LastName = "Dude";
             userSignUpViewModel.Email = "somedude@someawesomeemailprovider.com";
             userSignUpViewModel.Password = "123456";
 
@@ -79,7 +120,7 @@ namespace WorkflowManagementSystem.Tests
             Action act = () => FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
 
             // assert
-            act.ShouldThrow<WMSException>().WithMessage("Last name is required.");
+            act.ShouldThrow<WMSException>().WithMessage("At least one role is required.");
             FacadeFactory.GetDomainFacade().FindAllUsers().Count.ShouldBeEquivalentTo(0);
         }
     }

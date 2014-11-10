@@ -2,7 +2,7 @@
 using WebMatrix.WebData;
 using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.ErrorHandling;
-using WorkflowManagementSystem.Models.User;
+using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Controllers
 {

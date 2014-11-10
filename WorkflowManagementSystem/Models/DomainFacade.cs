@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using WebMatrix.WebData;
-using WorkflowManagementSystem.Models.User;
+using WorkflowManagementSystem.Models.Roles;
+using WorkflowManagementSystem.Models.Users;
 using TransactionHandler = MyEntityFramework.Transaction.TransactionHandler;
 
 namespace WorkflowManagementSystem.Models
@@ -25,6 +25,24 @@ namespace WorkflowManagementSystem.Models
             });
             
             SecurityManager.CreateAccount(userSignUpViewModel.Email, userSignUpViewModel.Password);
+        }
+
+        public void CreateRole(RoleInputViewModel roleInputViewModel)
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                RoleRepository.CreateRole(roleInputViewModel);
+                return null;
+            });
+        }
+
+        public List<RoleViewModel> FindAllRoles()
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var roles = RoleRepository.FindAll();
+                return RoleAssembler.AssembleAll(roles);
+            });
         }
     }
 }

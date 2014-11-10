@@ -187,6 +187,10 @@
     <Compile Include="Migrations\201411090209483_InitialCreate.Designer.cs">
       <DependentUpon>201411090209483_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411100710239_AddRoles.cs" />
+    <Compile Include="Migrations\201411100710239_AddRoles.Designer.cs">
+      <DependentUpon>201411100710239_AddRoles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DataAccess\DatabaseManager.cs" />
     <Compile Include="Models\DataAccess\NullTestCleanUpInitializer.cs" />
@@ -201,14 +205,21 @@
     <Compile Include="Models\FacadeFactory.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\DataAccess\Repository.cs" />
-    <Compile Include="Models\User\SecurityManager.cs" />
-    <Compile Include="Models\User\User.cs" />
-    <Compile Include="Models\User\UserAssembler.cs" />
-    <Compile Include="Models\User\UserRepository.cs" />
-    <Compile Include="Models\User\UserSignUpViewModel.cs" />
-    <Compile Include="Models\User\UserViewModel.cs" />
+    <Compile Include="Models\Roles\Role.cs" />
+    <Compile Include="Models\Roles\RoleAssembler.cs" />
+    <Compile Include="Models\Roles\RoleInputViewModel.cs" />
+    <Compile Include="Models\Roles\RoleRepository.cs" />
+    <Compile Include="Models\Roles\RoleViewModel.cs" />
+    <Compile Include="Models\Users\SecurityManager.cs" />
+    <Compile Include="Models\Users\User.cs" />
+    <Compile Include="Models\Users\UserAssembler.cs" />
+    <Compile Include="Models\Users\UserRepository.cs" />
+    <Compile Include="Models\Users\UserSignUpViewModel.cs" />
+    <Compile Include="Models\Users\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\DataAccess\WorkflowManagementSystemDbContext.cs" />
+    <Compile Include="Tests\RoleTest.cs" />
+    <Compile Include="Tests\RoleTestHelper.cs" />
     <Compile Include="Tests\UserTest.cs" />
     <Compile Include="Tests\WorkflowManagementSystemTest.cs" />
     <Compile Include="WebMembershipInitializer.cs" />
@@ -239,6 +250,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201411090209483_InitialCreate.resx">
       <DependentUpon>201411090209483_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411100710239_AddRoles.resx">
+      <DependentUpon>201411100710239_AddRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

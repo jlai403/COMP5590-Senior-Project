@@ -3,7 +3,7 @@ using System.Configuration;
 using NUnit.Framework;
 using WebMatrix.WebData;
 using WorkflowManagementSystem.Models.DataAccess;
-using WorkflowManagementSystem.Models.User;
+using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Tests
 {
@@ -38,9 +38,11 @@ namespace WorkflowManagementSystem.Tests
             try
             {
                 var connectionString = ConfigurationManager.ConnectionStrings["TestDbContext"].ConnectionString;
-                DatabaseManager.Instance._testCleanUpListener = new TestCleanUpListener();
                 DatabaseManager.Instance.Initialize(new WorkflowManagementSystemDbContext(connectionString));
-                
+
+                LoadMetaData();
+                DatabaseManager.Instance._testCleanUpListener = new TestCleanUpListener();
+
                 if (!WebSecurity.Initialized)
                 {
                     WebSecurity.InitializeDatabaseConnection("TestDbContext", "Users", "Id", "Email", autoCreateTables: true);
@@ -53,6 +55,10 @@ namespace WorkflowManagementSystem.Tests
                 throw e;
             }
 
+        }
+
+        private void LoadMetaData()
+        {
         }
     }
 }

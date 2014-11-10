@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using WorkflowManagementSystem.Models.DataAccess;
 
-namespace WorkflowManagementSystem.Models.User
+namespace WorkflowManagementSystem.Models.Users
 {
     public class UserRepository : Repository
     {

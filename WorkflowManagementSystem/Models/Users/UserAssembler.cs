@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 
-namespace WorkflowManagementSystem.Models.User
+namespace WorkflowManagementSystem.Models.Users
 {
     public class UserAssembler
     {
@@ -27,6 +28,7 @@ namespace WorkflowManagementSystem.Models.User
             viewModel.FirstName = User.FirstName;
             viewModel.LastName = User.LastName;
             viewModel.Email = User.Email;
+            viewModel.Roles = User.Roles.Select(x => x.Name).ToList();
             return viewModel;
         }
     }
