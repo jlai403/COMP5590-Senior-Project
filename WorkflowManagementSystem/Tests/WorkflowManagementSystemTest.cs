@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Configuration;
-using MyEntityFramework.Transaction;
 using NUnit.Framework;
 using WebMatrix.WebData;
+using WorkflowManagementSystem.Models.DataAccess;
 
 namespace WorkflowManagementSystem.Tests
 {
@@ -18,7 +18,7 @@ namespace WorkflowManagementSystem.Tests
         [TearDown]
         public void TearDown()
         {
-            DatabaseManager.Instance.Delete();
+            DatabaseManager.Instance.CleanUp();
         }
     }
 
@@ -31,7 +31,9 @@ namespace WorkflowManagementSystem.Tests
             try
             {
                 var connectionString = ConfigurationManager.ConnectionStrings["TestDbContext"].ConnectionString;
-                DatabaseManager.Instance.Initialize(new WorkflowManagementSystemDbContext(connectionString));
+                var workflowManagementSystemDbContext = new WorkflowManagementSystemDbContext(connectionString);
+                workflowManagementSystemDbContext._testCleanUpInitializer = new TestCleanUpInitializer();
+                DatabaseManager.Instance.Initialize(workflowManagementSystemDbContext);
                 
                 if (!WebSecurity.Initialized)
                 {
@@ -47,5 +49,4 @@ namespace WorkflowManagementSystem.Tests
 
         }
     }
-
 }

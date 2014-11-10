@@ -1,4 +1,5 @@
 ﻿using System;
+using WorkflowManagementSystem.Models.DataAccess;
 
 namespace MyEntityFramework.Transaction
 {
@@ -25,7 +26,7 @@ namespace MyEntityFramework.Transaction
                     result = transaction.Invoke();
                     DatabaseManager.Instance.DbContext.SaveChanges();
                 }
-                catch
+                catch (Exception e)
                 {
                     beginTransaction.Rollback();
                 }

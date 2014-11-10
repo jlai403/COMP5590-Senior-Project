@@ -1,11 +1,12 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
+using MyEntityFramework.Transaction;
 
-namespace MyEntityFramework.Transaction
+namespace WorkflowManagementSystem.Models.DataAccess
 {
     public class DatabaseManager
     {
         private static DatabaseManager _instance;
+
         public static DatabaseManager Instance
         {
             get { return _instance ?? (_instance = new DatabaseManager()); }
@@ -20,14 +21,14 @@ namespace MyEntityFramework.Transaction
             DbContext.Database.Initialize(true);
         }
 
-        public void Delete()
-        {
-            DbContext.Database.Delete();
-        }
-
         public DbContextTransaction BeginTransaction()
         {
             return DbContext.Database.BeginTransaction();
+        }
+
+        public void CleanUp()
+        {
+            DbContext.CleanUp();
         }
     }
 }

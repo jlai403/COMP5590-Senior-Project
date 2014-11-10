@@ -186,7 +186,10 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DataAccess\DatabaseManager.cs" />
+    <Compile Include="Models\DataAccess\DefaultTestCleanUpInitializer.cs" />
+    <Compile Include="Models\DataAccess\ICleanUpData.cs" />
     <Compile Include="Models\DataAccess\MyDbContext.cs" />
+    <Compile Include="Models\DataAccess\TestCleanUpInitializer.cs" />
     <Compile Include="Models\DataAccess\TransactionHandler.cs" />
     <Compile Include="Models\DomainFacade.cs" />
     <Compile Include="Models\ErrorHandling\WMSException.cs" />

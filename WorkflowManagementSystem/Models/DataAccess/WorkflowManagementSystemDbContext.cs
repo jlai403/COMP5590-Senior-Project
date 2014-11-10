@@ -1,8 +1,6 @@
 ﻿using System.Data.Entity;
-using MyEntityFramework.Transaction;
-using WorkflowManagementSystem.Models.User;
 
-namespace WorkflowManagementSystem
+namespace WorkflowManagementSystem.Models.DataAccess
 {
     public class WorkflowManagementSystemDbContext : MyDbContext
     {
@@ -14,6 +12,6 @@ namespace WorkflowManagementSystem
         {
         }
 
-        protected DbSet<User> User { get; set; }
+        protected DbSet<User.User> User { get; set; }
     }
 }

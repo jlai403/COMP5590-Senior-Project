@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using MyEntityFramework.Repository;
+using WorkflowManagementSystem.Models.DataAccess;
 
 namespace WorkflowManagementSystem.Models.User
 {

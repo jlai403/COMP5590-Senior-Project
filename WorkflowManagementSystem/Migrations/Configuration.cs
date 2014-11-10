@@ -1,3 +1,5 @@
+using WorkflowManagementSystem.Models.DataAccess;
+
 namespace WorkflowManagementSystem.Migrations
 {
     using System;
@@ -5,7 +7,7 @@ namespace WorkflowManagementSystem.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<WorkflowManagementSystem.WorkflowManagementSystemDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<WorkflowManagementSystemDbContext>
     {
         public Configuration()
         {
@@ -13,7 +15,7 @@ namespace WorkflowManagementSystem.Migrations
             ContextKey = "WorkflowManagementSystem.WorkflowManagementSystemDbContext";
         }
 
-        protected override void Seed(WorkflowManagementSystem.WorkflowManagementSystemDbContext context)
+        protected override void Seed(WorkflowManagementSystemDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
