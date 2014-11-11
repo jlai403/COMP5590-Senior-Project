@@ -1,5 +1,5 @@
 ﻿@using System.Web.Optimization
-@model WorkflowManagementSystem.Models.Users.UserSignUpViewModel
+@model WorkflowManagementSystem.Models.Program.ProgramRequestInputViewModel
 
 @Styles.Render("~/Content/css/theme/create-program.css")
 
@@ -42,7 +42,7 @@
 						Requester
 					</div>
 					<div class="col-md-9">
-						<input class="form-control" type="text" name="requester" value="@ViewBag.UsersFullName" readonly/>
+                        @Html.TextBoxFor(m => m.Requester, new { @class="form-control", value=ViewBag.UsersFullName, @readonly="true" })
 					</div>
 				</div>
 				
@@ -51,7 +51,7 @@
 						Program Name
 					</div>
 					<div class="col-md-9">
-						<input class="form-control" type="text" name="name" placeholder="Program Name" tabindex="1"/>
+                        @Html.TextBoxFor(m => m.Name, new { @class="form-control", placeholder="Program Name", tabindex="1" })
 					</div>
 				</div>
 						

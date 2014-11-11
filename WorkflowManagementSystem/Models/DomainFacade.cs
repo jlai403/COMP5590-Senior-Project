@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Program;
 using WorkflowManagementSystem.Models.Roles;
+using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
 using WorkflowManagementSystem.Tests;
 using TransactionHandler = WorkflowManagementSystem.Models.DataAccess.TransactionHandler;
@@ -109,6 +110,24 @@ namespace WorkflowManagementSystem.Models
             {
                 var faculty = FacultyRepository.FindFaculty(facultyName);
                 return new FacultyAssembler(faculty).Assemble();
+            });
+        }
+
+        public void CreateSemester(SemesterInputViewModel semesterInputViewModel)
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                SemesterRepository.CreateSemester(semesterInputViewModel);
+                return null;
+            });
+        }
+
+        public List<SemesterViewModel> FindAllSemesters()
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var semesters = SemesterRepository.FindAllSemesters();
+                return SemesterAssembler.AssembleAll(semesters);
             });
         }
     }

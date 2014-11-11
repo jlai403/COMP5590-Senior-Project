@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201411110546413_AddFacultiesAndDisciplines.Designer.cs">
       <DependentUpon>201411110546413_AddFacultiesAndDisciplines.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411110717406_AddSemester.cs" />
+    <Compile Include="Migrations\201411110717406_AddSemester.Designer.cs">
+      <DependentUpon>201411110717406_AddSemester.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DataAccess\DatabaseManager.cs" />
     <Compile Include="Models\DataAccess\NullTestCleanUpInitializer.cs" />
@@ -228,6 +232,11 @@
     <Compile Include="Models\Roles\RoleInputViewModel.cs" />
     <Compile Include="Models\Roles\RoleRepository.cs" />
     <Compile Include="Models\Roles\RoleViewModel.cs" />
+    <Compile Include="Models\Semesters\Semester.cs" />
+    <Compile Include="Models\Semesters\SemesterAssembler.cs" />
+    <Compile Include="Models\Semesters\SemesterInputViewModel.cs" />
+    <Compile Include="Models\Semesters\SemesterRepository.cs" />
+    <Compile Include="Models\Semesters\SemesterViewModel.cs" />
     <Compile Include="Models\Users\SecurityManager.cs" />
     <Compile Include="Models\Users\User.cs" />
     <Compile Include="Models\Users\UserAssembler.cs" />
@@ -242,6 +251,7 @@
     <Compile Include="Tests\ProgramTest.cs" />
     <Compile Include="Tests\RoleTest.cs" />
     <Compile Include="Tests\RoleTestHelper.cs" />
+    <Compile Include="Tests\SemesterTest.cs" />
     <Compile Include="Tests\SemesterTestHelper.cs" />
     <Compile Include="Tests\UserTest.cs" />
     <Compile Include="Tests\UserTestHelper.cs" />
@@ -281,6 +291,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411110546413_AddFacultiesAndDisciplines.resx">
       <DependentUpon>201411110546413_AddFacultiesAndDisciplines.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411110717406_AddSemester.resx">
+      <DependentUpon>201411110717406_AddSemester.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
