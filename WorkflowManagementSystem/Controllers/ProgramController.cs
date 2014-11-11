@@ -1,0 +1,14 @@
+﻿using System.Web.Mvc;
+using WorkflowManagementSystem.Models;
+
+namespace WorkflowManagementSystem.Controllers
+{
+    public class ProgramController : Controller
+    {
+        public ActionResult CreateRequest()
+        {
+            ViewBag.UsersFullName = FacadeFactory.GetDomainFacade().FindUser(User.Identity.Name).GetFullName();
+            return View();
+        }
+    }
+}

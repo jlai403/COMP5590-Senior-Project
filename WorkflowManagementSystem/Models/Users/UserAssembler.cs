@@ -7,7 +7,7 @@ namespace WorkflowManagementSystem.Models.Users
     {
         public User User { get; set; }
 
-        private UserAssembler(User user)
+        public UserAssembler(User user)
         {
             User = user;
         }
@@ -22,8 +22,10 @@ namespace WorkflowManagementSystem.Models.Users
             return list;
         }
 
-        private UserViewModel Assemble()
+        public UserViewModel Assemble()
         {
+            if (User == null) return null;
+
             var viewModel = new UserViewModel();
             viewModel.FirstName = User.FirstName;
             viewModel.LastName = User.LastName;

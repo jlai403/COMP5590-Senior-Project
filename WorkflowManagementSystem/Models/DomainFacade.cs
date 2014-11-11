@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using WorkflowManagementSystem.Models.Faculty;
+using WorkflowManagementSystem.Models.Program;
 using WorkflowManagementSystem.Models.Roles;
 using WorkflowManagementSystem.Models.Users;
-using TransactionHandler = MyEntityFramework.Transaction.TransactionHandler;
+using WorkflowManagementSystem.Tests;
+using TransactionHandler = WorkflowManagementSystem.Models.DataAccess.TransactionHandler;
 
 namespace WorkflowManagementSystem.Models
 {
@@ -11,7 +14,7 @@ namespace WorkflowManagementSystem.Models
         {
             return TransactionHandler.Instance.Execute(() =>
             {
-                var users = UserRepository.FindAll();
+                var users = UserRepository.FindAllUsers();
                 return UserAssembler.AssembleAll(users);
             });
         }
@@ -40,8 +43,72 @@ namespace WorkflowManagementSystem.Models
         {
             return TransactionHandler.Instance.Execute(() =>
             {
-                var roles = RoleRepository.FindAll();
+                var roles = RoleRepository.FindAllRoles();
                 return RoleAssembler.AssembleAll(roles);
+            });
+        }
+
+        public UserViewModel FindUser(string email)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var user = UserRepository.FindUser(email);
+                return new UserAssembler(user).Assemble();
+            });
+        }
+
+        public void CreateProgramRequest(ProgramRequestInputViewModel programRequestInputViewModel)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<ProgramViewModel> FindAllProgramRequests()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void CreateFaculty(FacultyInputViewModel facultyInputViewModel)
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                FacultyRepository.CreateFaculty(facultyInputViewModel);
+                return null;
+            });
+        }
+
+        public List<FacultyViewModel> FindAllFaculties()
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var faculties = FacultyRepository.FindAllFaculties();
+                return FacultyAssembler.AssembleAll(faculties);
+            });
+        }
+
+        public void CreateDiscipline(DisciplineInputViewModel disciplineInputViewModel)
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                DisciplineRepository.CreateDiscipline(disciplineInputViewModel);
+                return null;
+            });
+        }
+
+        public List<DisciplineViewModel> FindAllDisciplines()
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var disciplines = DisciplineRepository.FindAllDisciplines();
+                return DisciplineAssembler.AssembleAll(disciplines);
+            });
+        }
+
+        public FacultyViewModel FindFaculty(string facultyName)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var faculty = FacultyRepository.FindFaculty(facultyName);
+                return new FacultyAssembler(faculty).Assemble();
             });
         }
     }

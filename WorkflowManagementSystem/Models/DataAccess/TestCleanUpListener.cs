@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using MyEntityFramework.Entity;
-using MyEntityFramework.Transaction;
 
 namespace WorkflowManagementSystem.Models.DataAccess
 {
@@ -29,6 +28,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
         {
             TransactionHandler.Instance.Execute(() =>
             {
+                TypePair.Reverse();
                 foreach (var typePair in TypePair)
                 {
                     var dbSet = DatabaseManager.Instance.DbContext.Set(typePair.Type);
@@ -36,6 +36,8 @@ namespace WorkflowManagementSystem.Models.DataAccess
                 }
                 return null;
             });
+
+            TypePair.Clear();
         }
     }
 

@@ -181,6 +181,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProgramController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -191,6 +192,10 @@
     <Compile Include="Migrations\201411100710239_AddRoles.cs" />
     <Compile Include="Migrations\201411100710239_AddRoles.Designer.cs">
       <DependentUpon>201411100710239_AddRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411110546413_AddFacultiesAndDisciplines.cs" />
+    <Compile Include="Migrations\201411110546413_AddFacultiesAndDisciplines.Designer.cs">
+      <DependentUpon>201411110546413_AddFacultiesAndDisciplines.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DataAccess\DatabaseManager.cs" />
@@ -204,8 +209,20 @@
     <Compile Include="Models\DomainFacade.cs" />
     <Compile Include="Models\ErrorHandling\WMSException.cs" />
     <Compile Include="Models\FacadeFactory.cs" />
+    <Compile Include="Models\Faculty\Discipline.cs" />
+    <Compile Include="Models\Faculty\DisciplineAssembler.cs" />
+    <Compile Include="Models\Faculty\DisciplineInputViewModel.cs" />
+    <Compile Include="Models\Faculty\DisciplineRepository.cs" />
+    <Compile Include="Models\Faculty\DisciplineViewModel.cs" />
+    <Compile Include="Models\Faculty\Faculty.cs" />
+    <Compile Include="Models\Faculty\FacultyAssembler.cs" />
+    <Compile Include="Models\Faculty\FacultyInputViewModel.cs" />
+    <Compile Include="Models\Faculty\FacultyRepository.cs" />
+    <Compile Include="Models\Faculty\FacultyViewModel.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\DataAccess\Repository.cs" />
+    <Compile Include="Models\Program\ProgramRequestInputViewModel.cs" />
+    <Compile Include="Models\Program\ProgramViewModel.cs" />
     <Compile Include="Models\Roles\Role.cs" />
     <Compile Include="Models\Roles\RoleAssembler.cs" />
     <Compile Include="Models\Roles\RoleInputViewModel.cs" />
@@ -219,9 +236,15 @@
     <Compile Include="Models\Users\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\DataAccess\WorkflowManagementSystemDbContext.cs" />
+    <Compile Include="Tests\DisciplineTestHelper.cs" />
+    <Compile Include="Tests\FacultyTest.cs" />
+    <Compile Include="Tests\FacultyTestHelper.cs" />
+    <Compile Include="Tests\ProgramTest.cs" />
     <Compile Include="Tests\RoleTest.cs" />
     <Compile Include="Tests\RoleTestHelper.cs" />
+    <Compile Include="Tests\SemesterTestHelper.cs" />
     <Compile Include="Tests\UserTest.cs" />
+    <Compile Include="Tests\UserTestHelper.cs" />
     <Compile Include="Tests\WorkflowManagementSystemTest.cs" />
     <Compile Include="WebMembershipInitializer.cs" />
   </ItemGroup>
@@ -236,6 +259,7 @@
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Errors\Index.cshtml" />
+    <Content Include="Views\Program\CreateRequest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -254,6 +278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411100710239_AddRoles.resx">
       <DependentUpon>201411100710239_AddRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411110546413_AddFacultiesAndDisciplines.resx">
+      <DependentUpon>201411110546413_AddFacultiesAndDisciplines.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

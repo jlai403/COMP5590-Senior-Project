@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Roles;
 using WorkflowManagementSystem.Models.Users;
 
@@ -14,8 +15,10 @@ namespace WorkflowManagementSystem.Models.DataAccess
         {
         }
 
-        protected DbSet<User> User { get; set; }
+        protected DbSet<Discipline> Discipline { get; set; }
+        protected DbSet<Faculty.Faculty> Faculty { get; set; }
         protected DbSet<Role> Role { get; set; }
+        protected DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -25,6 +28,8 @@ namespace WorkflowManagementSystem.Models.DataAccess
                 m.MapRightKey("RoleId");
                 m.ToTable("UserRoles");
             });
+
+            modelBuilder.Entity<Discipline>().HasRequired(d => d.Faculty).WithMany(f => f.Disciplines);
         }
     }
 }

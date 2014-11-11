@@ -13,7 +13,7 @@ namespace WorkflowManagementSystem.Models.Roles
             role.Update(roleInputViewModel);
         }
 
-        public static List<Role> FindAll()
+        public static List<Role> FindAllRoles()
         {
             return FindAll<Role>();
         }

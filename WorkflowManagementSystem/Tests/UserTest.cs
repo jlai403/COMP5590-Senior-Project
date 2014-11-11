@@ -73,6 +73,33 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void FindUser()
+        {
+            // assemble
+            new RoleTestHelper().LoadTestRoles();
+
+            var userSignUpViewModel = new UserSignUpViewModel();
+            userSignUpViewModel.FirstName = "Some";
+            userSignUpViewModel.LastName = "Dude";
+            userSignUpViewModel.Email = "somedude@someawesomeemailprovider.com";
+            userSignUpViewModel.Password = "123456";
+            userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
+
+            FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
+
+            // act
+            var user = FacadeFactory.GetDomainFacade().FindUser(userSignUpViewModel.Email);
+
+            // assert
+            user.Should().NotBeNull();
+            user.FirstName.ShouldBeEquivalentTo(userSignUpViewModel.FirstName);
+            user.LastName.ShouldBeEquivalentTo(userSignUpViewModel.LastName);
+            user.Email.ShouldBeEquivalentTo(userSignUpViewModel.Email);
+            user.Roles.Count.ShouldBeEquivalentTo(1);
+            user.Roles.Should().Contain(RoleTestHelper.FACULTY_MEMBER);
+        }
+
+        [Test]
         public void CreateUser_NoFirstName()
         {
             // assemble

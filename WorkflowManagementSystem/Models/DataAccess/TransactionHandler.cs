@@ -1,7 +1,6 @@
 ﻿using System;
-using WorkflowManagementSystem.Models.DataAccess;
 
-namespace MyEntityFramework.Transaction
+namespace WorkflowManagementSystem.Models.DataAccess
 {
     public class TransactionHandler
     {
@@ -31,6 +30,10 @@ namespace MyEntityFramework.Transaction
                 {
                     beginTransaction.Rollback();
                     throw;
+                }
+                finally
+                {
+                    beginTransaction.Dispose();
                 }
             }
             return result;
