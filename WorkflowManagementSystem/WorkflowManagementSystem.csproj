@@ -155,7 +155,9 @@
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\bootstrap-3.2.0-dist\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-3.2.0-dist\bootstrap.css.map" />
-    <Content Include="App.config" />
+    <Content Include="App.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

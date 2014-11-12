@@ -24,6 +24,7 @@ namespace WorkflowManagementSystem.Models.Semesters
         private SemesterViewModel Assemble()
         {
             var viewModel = new SemesterViewModel();
+            viewModel.Id = Semester.Id;
             viewModel.Year = Semester.Year;
             viewModel.Term = Semester.Term;
             return viewModel;

@@ -26,6 +26,7 @@ namespace WorkflowManagementSystem.Tests
             semesters.Count.ShouldBeEquivalentTo(1);
 
             var semester = semesters.First();
+            semester.Id.Should().BeGreaterThan(0);
             semester.Year.ShouldBeEquivalentTo("2014");
             semester.Term.ShouldBeEquivalentTo("Winter");
         }
