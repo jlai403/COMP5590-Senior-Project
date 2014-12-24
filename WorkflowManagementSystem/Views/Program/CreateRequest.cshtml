@@ -1,7 +1,4 @@
 ﻿@using System.Web.Optimization
-@using WorkflowManagementSystem.Models.Faculty
-@using WorkflowManagementSystem.Models.Semesters
-@using WorkflowManagementSystem.Views
 @model WorkflowManagementSystem.Models.Program.ProgramRequestInputViewModel
 
 @Styles.Render("~/Content/css/theme/create-program.css")
@@ -44,9 +41,9 @@
 					<div class="col-md-3">
 						Requester
 					</div>
-				    <div class="col-md-9">
-				        @Html.TextBox("Requester", (string) ViewBag.UsersFullName, new { @class = "form-control", @readonly = "true" })
-				    </div>
+					<div class="col-md-9">
+                        @Html.TextBoxFor(m => m.Requester, new { @class="form-control", value=ViewBag.UsersFullName, @readonly="true" })
+					</div>
 				</div>
 				
 				<div class="row">
@@ -54,7 +51,7 @@
 						Program Name
 					</div>
 					<div class="col-md-9">
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Program Name", tabindex = "1" })
+                        @Html.TextBoxFor(m => m.Name, new { @class="form-control", placeholder="Program Name", tabindex="1" })
 					</div>
 				</div>
 						
@@ -62,36 +59,30 @@
 					<div class="col-md-3 required">
 						Effective Term
 					</div>
-				    <div class="col-md-9">
-				        @{
-				            var semestersSelectList = Html.ConvertToSelectListItem((List<SemesterViewModel>) ViewBag.Semesters);
-				        }
-                        @Html.DropDownListFor(m => m.Semester, semestersSelectList, new {@class = "form-control", tabindex = "2"})
-				    </div>
+					<div class="col-md-9">
+						<select class="form-control" name="effectiveTerm" tabindex="2">
+						</select>
+					</div>
 				</div>
 					
 				<div class="row">
 					<div class="col-md-3 required">
 						Faculty
 					</div>
-				    <div class="col-md-9">
-				        @{
-				            var facultiesSelectList = Html.ConvertToSelectListItem((List<FacultyViewModel>) ViewBag.Faculties);
-				        }
-                        @Html.DropDownList("Faculty", facultiesSelectList, new {@class = "form-control", tabindex = "3"})
-				    </div>
+					<div class="col-md-9">
+						<select class="form-control" name="faculty" tabindex="3">
+						</select>
+					</div>
 				</div>
 						
 				<div class="row">
 					<div class="col-md-3 required">
 						Discipline
 					</div>
-				    <div class="col-md-9">
-				        @{
-				            var disciplinesSelectList = Html.ConvertToSelectListItem((List<DisciplineViewModel>) ViewBag.Disciplines);
-				        }
-				        @Html.DropDownListFor(x => x.Discipline, disciplinesSelectList, new {@class = "form-control", tabindex = "3"})
-				    </div>
+					<div class="col-md-9">
+						<select class="form-control" name="discipline" tabindex="4">
+						</select>
+					</div>
 				</div>
 						
 				<div class="row center-text" style="padding: 0 100px; margin: 15px 0;" tabindex="5">
@@ -192,8 +183,7 @@
 						Comments
 					</div>
 					<div class="col-md-9">
-					    <textarea name="comments" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="11">
-                        </textarea>
+						<textarea name="comments" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="11"></textarea>
 					</div>
 				</div>
 						
@@ -216,27 +206,16 @@
 </div>
 
 <script>
-    var disciplinesLookUp = new Array();
-    @foreach (var faculty in (List<FacultyViewModel>) ViewBag.Faculties)
-    {
-        @:disciplinesLookUp['@faculty.Name'] = new Array();
-    }
-    @foreach (var discipline in (List<DisciplineViewModel>)ViewBag.Disciplines)
-    {
-        @:disciplinesLookUp['@discipline.Faculty'].unshift(@Html.Raw(Json.Encode(discipline)));
-    }
+	$(document).ready(function() {
+		clearHighlightsOnFocus();
 
-    $(document).ready(function() {
-        clearHighlightsOnFocus();
-        setDisciplinesDropDown($("#Faculty").val());
+		// enable javascript features
+		$(".steps").removeClass("hide"); //workaround for !important attribute from bootstrap
+		$(".step-one .button").removeClass("hide"); //workaround for !important attribute from bootstrap
+		$(".step-two .button").removeClass("hide"); //workaround for !important attribute from bootstrap
 
-        // enable javascript features
-        $(".steps").removeClass("hide"); //workaround for !important attribute from bootstrap
-        $(".step-one .button").removeClass("hide"); //workaround for !important attribute from bootstrap
-        $(".step-two .button").removeClass("hide"); //workaround for !important attribute from bootstrap
-
-        $(".step-two").hide();
-        $(".step-three").hide();
+		$(".step-two").hide();
+		$(".step-three").hide();
 
         $(".step-one input, .step-one textarea").keydown(function(){
             // enter key
@@ -245,7 +224,7 @@
                 return false;
             }
         });
-        
+
         $(".step-two input, .step-two textarea").keydown(function(){
             // enter key
             if (event.keyCode == 13) {
@@ -253,147 +232,138 @@
                 return false;
             }
         });
+	});
 
-        $("#Faculty").change(function() {
-            setDisciplinesDropDown($(this).val());
-        });
-    });
-
-    function setDisciplinesDropDown(selectedFaculty) {
-        var disciplines = disciplinesLookUp[selectedFaculty];
-        $("#Discipline").empty();
-        disciplines.forEach(function (discipline) {
-            var option = $("<option></option>").val(discipline.Id).text(discipline.Code + " - " + discipline.Name);
-            $("#Discipline").append(option);
-        });
-    }
-
-    // change to step one on checkmark click
-    $(".steps").on("click", ".step-one-check .glyphicon-check", function() {
-        $(".step-one").show();
-        $(".step-one .button").show();
+	// change to step one on checkmark click
+	$(".steps").on("click", ".step-one-check .glyphicon-check", function() {
+		$(".step-one").show();
+		$(".step-one .button").show();
 		
-        $(".step-two").hide();
-        $(".step-two .button").hide();
+		$(".step-two").hide();
+		$(".step-two .button").hide();
 		
-        $(".step-three").hide();
+		$(".step-three").hide()
+
         hideContext();
-    });
+	});
 
-    // change to step two on checkmark click
-    $(".steps").on("click", ".step-two-check .glyphicon-check", function() {
-        $(".step-two").show();
-        $(".step-two .button").show();
+	// change to step two on checkmark click
+	$(".steps").on("click", ".step-two-check .glyphicon-check", function() {
+		$(".step-two").show()
+		$(".step-two .button").show();
 		
-        $(".step-one").hide();
-        $(".step-one .button").hide();
+		$(".step-one").hide()
+		$(".step-one .button").hide();
 		
-        $(".step-three").hide();
-        showContext();
-    });
-
-    // change to step three on checkmark click
-    $(".steps").on("click", ".step-three-check .glyphicon-check", function() {
-        $(".step-three").show();
-        $(".step-two").hide();
-        $(".step-two .button").hide();
-		
-        $(".step-one").hide();
-        $(".step-one .button").hide();
+		$(".step-three").hide()
 
         showContext();
-    });
+	});
+
+	// change to step three on checkmark click
+	$(".steps").on("click", ".step-three-check .glyphicon-check", function() {
+		$(".step-three").show()
+		
+		$(".step-two").hide()
+		$(".step-two .button").hide();
+		
+		$(".step-one").hide()
+		$(".step-one .button").hide();
+
+        showContext();
+	});
 
 	
-    $(".step-one .button").click(function() {
-        clearErrors();
+	$(".step-one .button").click(function() {
+		clearErrors();
 
-        validateProgramName();
+		validateProgramName();
 
-        if (hasErrors()) {
-            printErrors();
-            return false;
-        }
+		if (hasErrors()) {
+			printErrors();
+			return false;
+		}
 		
-        $(".step-one-check .glyphicon").removeClass("glyphicon-unchecked");
-        $(".step-one-check .glyphicon").addClass("glyphicon-check");
+		$(".step-one-check .glyphicon").removeClass("glyphicon-unchecked");
+		$(".step-one-check .glyphicon").addClass("glyphicon-check");
 
-        $(".step-one").hide();
-        $(".step-one .button").hide();
+		$(".step-one").hide();
+		$(".step-one .button").hide();
 
-        $(".step-two").show();
-        $(".step-two .button").removeClass("hide"); 
-        $(".step-two .button").show();
+		$(".step-two").show();
+		$(".step-two .button").removeClass("hide"); 
+		$(".step-two .button").show();
 
         showContext();
-    });
+	});
 
     function showContext(){
         $(".context").removeClass("hide"); //workaround for !important attribute from bootstrap
-        $(".context .programName").text($("#Name").val());
-        $(".context .effectiveTerm").text($("#Semester option:selected").text());
-        $(".context .faculty").text($("#Faculty option:selected").text());
-        $(".context  .discipline").text($("#Discipline option:selected").text());
+        $(".context .programName").text($("input[name='name']").val());
+        $(".context .effectiveTerm").text($("select[name='effectiveTerm'] option:selected").text());
+        $(".context .faculty").text($("select[name='faculty'] option:selected").text());
+        $(".context  .discipline").text($("select[name='discipline'] option:selected").text());
     }
 
     function hideContext(){
         $(".context").addClass("hide");
     }
 
-    function validateProgramName() {
-        var programName = $("#Name").val().trim();
-        if (programName === '') addError("Program name is required.", "name");
-    }
+	function validateProgramName() {
+		var programName = $("input[name='name']").val().trim();
+		if (programName === '') addError("Program name is required.", "name");
+	}
 
-    $(".step-two .button").click(function() {
-        clearErrors();
+	$(".step-two .button").click(function() {
+		clearErrors();
 
-        validateCrossImpact();
-        validateStudentImpact();
-        validateLibraryImpact();
-        validateItsImpact();
+		validateCrossImpact();
+		validateStudentImpact();
+		validateLibraryImpact();
+		validateItsImpact();
 
-        if (hasErrors()) {
-            printErrors();
-            return false;
-        }
+		if (hasErrors()) {
+			printErrors();
+			return false;
+		}
 		
-        $(".step-two-check .glyphicon").removeClass("glyphicon-unchecked");
-        $(".step-two-check .glyphicon").addClass("glyphicon-check");
+		$(".step-two-check .glyphicon").removeClass("glyphicon-unchecked");
+		$(".step-two-check .glyphicon").addClass("glyphicon-check");
 
-        $(".step-two").hide();
-        $(".step-two .button").hide();
-        $(".step-three").show();
+		$(".step-two").hide();
+		$(".step-two .button").hide()
+		
+		$(".step-three").show();
 
         showContext();
-    });
+	});
 
-    function validateCrossImpact() {
-        var crossImpact = $("textarea[name='crossImpact']").val().trim();
-        if (crossImpact === '') addError("Cross impact is required.", "crossImpact");
-    }
+	function validateCrossImpact() {
+		var crossImpact = $("textarea[name='crossImpact']").val().trim();
+		if (crossImpact === '') addError("Cross impact is required.", "crossImpact");
+	}
 
-    function validateStudentImpact() {
-        var studentImpact = $("textarea[name='studentImpact']").val().trim();
-        if (studentImpact === '') addError("Student impact is required.", "studentImpact");
-    }
+	function validateStudentImpact() {
+		var studentImpact = $("textarea[name='studentImpact']").val().trim();
+		if (studentImpact === '') addError("Student impact is required.", "studentImpact");
+	}
 
-    function validateLibraryImpact() {
-        var libraryImpact = $("textarea[name='libraryImpact']").val().trim();
-        if (libraryImpact === '') addError("Library impact is required.", "libraryImpact");
-    }
+	function validateLibraryImpact() {
+		var libraryImpact = $("textarea[name='libraryImpact']").val().trim();
+		if (libraryImpact === '') addError("Library impact is required.", "libraryImpact");
+	}
 
-    function validateItsImpact() {
-        var itsImpact = $("textarea[name='itsImpact']").val().trim();
-        if (itsImpact === '') addError("ITS impact is required.", "itsImpact");
-    }
+	function validateItsImpact() {
+		var itsImpact = $("textarea[name='itsImpact']").val().trim();
+		if (itsImpact === '') addError("ITS impact is required.", "itsImpact");
+	}
 	
 	
-    $(".step-three .button").click(function() {
-        $(".step-three-check .glyphicon").removeClass("glyphicon-unchecked");
-        $(".step-three-check .glyphicon").addClass("glyphicon-check");
+	$(".step-three .button").click(function() {
+		$(".step-three-check .glyphicon").removeClass("glyphicon-unchecked");
+		$(".step-three-check .glyphicon").addClass("glyphicon-check");
 
-        $("form").submit();
-    });
+		$("form").submit();
+	});
 
 </script>

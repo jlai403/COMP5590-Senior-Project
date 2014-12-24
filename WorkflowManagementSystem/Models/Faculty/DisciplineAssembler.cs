@@ -25,7 +25,6 @@ namespace WorkflowManagementSystem.Models.Faculty
         public DisciplineViewModel Assemble()
         {
             var disciplineViewModel = new DisciplineViewModel();
-            disciplineViewModel.Id = Discipline.Id;
             disciplineViewModel.Code = Discipline.Code;
             disciplineViewModel.Name = Discipline.Name;
             disciplineViewModel.Faculty = Discipline.Faculty.Name;

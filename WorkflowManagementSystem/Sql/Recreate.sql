@@ -24,12 +24,3 @@ insert into dbo.Disciplines (Code, Name, Faculty_Id)
 	values ('MKTG','Marketing',@businessId)
 		,('MGMT','Management',@businessId)
 		,('COMP','Computer Science',@scienceId);
-
-insert into dbo.Semesters ([Year], Term)
-	values ('2014','Fall')
-		,('2015','Winter')
-		,('2015','Spring')
-		,('2015','Fall')
-		,('2016','Winter')
-		,('2015','Spring')
-		,('2015','Fall');

@@ -125,12 +125,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\bootstrap-3.2.0-dist\bootstrap-theme.css" />
-    <Content Include="Content\css\bootstrap-3.2.0-dist\bootstrap-theme.min.css" />
-    <Content Include="Content\css\bootstrap-3.2.0-dist\bootstrap.css" />
-    <Content Include="Content\css\bootstrap-3.2.0-dist\bootstrap.min.css" />
-    <Content Include="Content\css\bootstrap-3.2.0-dist\js\bootstrap.js" />
-    <Content Include="Content\css\bootstrap-3.2.0-dist\js\bootstrap.min.js" />
+    <Content Include="Content\bootstrap-3.2.0-dist\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-3.2.0-dist\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-3.2.0-dist\bootstrap.css" />
+    <Content Include="Content\bootstrap-3.2.0-dist\bootstrap.min.css" />
+    <Content Include="Content\bootstrap-3.2.0-dist\js\bootstrap.js" />
+    <Content Include="Content\bootstrap-3.2.0-dist\js\bootstrap.min.js" />
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\css\module\collapse-text.css" />
     <Content Include="Content\css\module\colors.css" />
@@ -153,8 +153,8 @@
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\css\bootstrap-3.2.0-dist\bootstrap-theme.css.map" />
-    <Content Include="Content\css\bootstrap-3.2.0-dist\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-3.2.0-dist\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-3.2.0-dist\bootstrap.css.map" />
     <Content Include="App.config">
       <SubType>Designer</SubType>
     </Content>
@@ -258,7 +258,6 @@
     <Compile Include="Tests\UserTest.cs" />
     <Compile Include="Tests\UserTestHelper.cs" />
     <Compile Include="Tests\WorkflowManagementSystemTest.cs" />
-    <Compile Include="Views\CustomHtmlHelper.cs" />
     <Compile Include="WebMembershipInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
