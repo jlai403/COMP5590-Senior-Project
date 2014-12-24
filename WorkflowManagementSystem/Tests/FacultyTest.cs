@@ -78,6 +78,7 @@ namespace WorkflowManagementSystem.Tests
             disciplines.Count.ShouldBeEquivalentTo(1);
 
             var discipline = disciplines.First();
+            discipline.Id.Should().BeGreaterThan(0);
             discipline.Code.ShouldBeEquivalentTo(disciplineInputViewModel.Code);
             discipline.Name.ShouldBeEquivalentTo(disciplineInputViewModel.Name);
             discipline.Faculty.ShouldBeEquivalentTo(disciplineInputViewModel.Faculty);
