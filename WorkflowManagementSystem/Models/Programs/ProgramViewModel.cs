@@ -1,4 +1,4 @@
-namespace WorkflowManagementSystem.Models.Program
+namespace WorkflowManagementSystem.Models.Programs
 {
     public class ProgramViewModel
     {

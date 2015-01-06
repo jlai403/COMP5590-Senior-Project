@@ -63,7 +63,7 @@ namespace WorkflowManagementSystem.Tests
         public void CreateDiscipline()
         {
             // assemble
-            var faculty = new FacultyTestHelper().CreateValidFaculty();
+            var faculty = new FacultyTestHelper().CreateScienceAndTechnologyFaculty();
 
             var disciplineInputViewModel = new DisciplineInputViewModel();
             disciplineInputViewModel.Code = "COMP";
@@ -88,7 +88,7 @@ namespace WorkflowManagementSystem.Tests
         public void CreateDiscipline_NoCode()
         {
             // assemble
-            var faculty = new FacultyTestHelper().CreateValidFaculty();
+            var faculty = new FacultyTestHelper().CreateScienceAndTechnologyFaculty();
 
             var disciplineInputViewModel = new DisciplineInputViewModel();
             disciplineInputViewModel.Name = "Computer Science";
@@ -105,7 +105,7 @@ namespace WorkflowManagementSystem.Tests
         public void CreateDiscipline_NoName()
         {
             // assemble
-            var faculty = new FacultyTestHelper().CreateValidFaculty();
+            var faculty = new FacultyTestHelper().CreateScienceAndTechnologyFaculty();
 
             var disciplineInputViewModel = new DisciplineInputViewModel();
             disciplineInputViewModel.Code = "COMP";
@@ -139,7 +139,7 @@ namespace WorkflowManagementSystem.Tests
         public void FindFaculty_OneDiscipline()
         {
             // assemble
-            var expectedFaculty = new FacultyTestHelper().CreateValidFaculty();
+            var expectedFaculty = new FacultyTestHelper().CreateScienceAndTechnologyFaculty();
 
             var disciplineInputViewModel = new DisciplineInputViewModel();
             disciplineInputViewModel.Code = "COMP";

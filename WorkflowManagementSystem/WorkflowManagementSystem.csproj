@@ -203,6 +203,10 @@
     <Compile Include="Migrations\201411110717406_AddSemester.Designer.cs">
       <DependentUpon>201411110717406_AddSemester.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501060211151_AddProgram.cs" />
+    <Compile Include="Migrations\201501060211151_AddProgram.Designer.cs">
+      <DependentUpon>201501060211151_AddProgram.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DataAccess\DatabaseManager.cs" />
     <Compile Include="Models\DataAccess\NullTestCleanUpInitializer.cs" />
@@ -227,8 +231,11 @@
     <Compile Include="Models\Faculty\FacultyViewModel.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\DataAccess\Repository.cs" />
-    <Compile Include="Models\Program\ProgramRequestInputViewModel.cs" />
-    <Compile Include="Models\Program\ProgramViewModel.cs" />
+    <Compile Include="Models\Programs\Program.cs" />
+    <Compile Include="Models\Programs\ProgramAssembler.cs" />
+    <Compile Include="Models\Programs\ProgramRepository.cs" />
+    <Compile Include="Models\Programs\ProgramRequestInputViewModel.cs" />
+    <Compile Include="Models\Programs\ProgramViewModel.cs" />
     <Compile Include="Models\Roles\Role.cs" />
     <Compile Include="Models\Roles\RoleAssembler.cs" />
     <Compile Include="Models\Roles\RoleInputViewModel.cs" />
@@ -297,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411110717406_AddSemester.resx">
       <DependentUpon>201411110717406_AddSemester.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501060211151_AddProgram.resx">
+      <DependentUpon>201501060211151_AddProgram.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

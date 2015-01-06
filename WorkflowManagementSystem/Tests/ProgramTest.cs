@@ -2,49 +2,52 @@
 using FluentAssertions;
 using NUnit.Framework;
 using WorkflowManagementSystem.Models;
-using WorkflowManagementSystem.Models.Program;
+using WorkflowManagementSystem.Models.Programs;
 
 namespace WorkflowManagementSystem.Tests
 {
     public class ProgramTest : WorkflowManagementSystemTest
     {
-        //[Test]
-        //public void CreateProgramRequest()
-        //{
-        //    // assemble
-        //    var user = new UserTestHelper().CreateUserWithTestRoles();
+        [Test]
+        public void CreateProgramRequest()
+        {
+            // assemble
+            var user = new UserTestHelper().CreateUserWithTestRoles();
 
-        //    new SemesterTestHelper().LoadTestSemesters();
-        //    new DisciplineTestHelper().LoadTestDisciplines();
+            new SemesterTestHelper().LoadTestSemesters();
+            new DisciplineTestHelper().LoadTestDisciplines();
 
-        //    var programRequestInputViewModel = new ProgramRequestInputViewModel();
-        //    programRequestInputViewModel.Requester = user.GetFullName();
-        //    programRequestInputViewModel.Name = "Program Name";
-        //    programRequestInputViewModel.Semester = "2015 - Winter";
-        //    programRequestInputViewModel.Discipline = "COMP - Computer Science";
-        //    programRequestInputViewModel.CrossImpact = "Cross Impact";
-        //    programRequestInputViewModel.StudentImpact = "Student Impact";
-        //    programRequestInputViewModel.LibraryImpact = "Library Impact";
-        //    programRequestInputViewModel.ITSImpact = "ITS Impact";
-        //    programRequestInputViewModel.Comment = "Comment";
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.GetDisplayText().Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
-        //    // act
-        //    FacadeFactory.GetDomainFacade().CreateProgramRequest(programRequestInputViewModel);
+            var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.Requester = user.Email;
+            programRequestInputViewModel.Name = "Program Name";
+            programRequestInputViewModel.Semester = semester.Id;
+            programRequestInputViewModel.Discipline = discipline.Id;
+            programRequestInputViewModel.CrossImpact = "Cross Impact";
+            programRequestInputViewModel.StudentImpact = "Student Impact";
+            programRequestInputViewModel.LibraryImpact = "Library Impact";
+            programRequestInputViewModel.ITSImpact = "ITS Impact";
+            programRequestInputViewModel.Comment = "Comment";
 
-        //    // assert
-        //    var programRequests = FacadeFactory.GetDomainFacade().FindAllProgramRequests();
-        //    programRequests.Count.ShouldBeEquivalentTo(1);
+            // act
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(programRequestInputViewModel);
 
-        //    var programRequest = programRequests.First();
-        //    programRequest.Requester.ShouldBeEquivalentTo(programRequestInputViewModel.Requester);
-        //    programRequest.Name.ShouldBeEquivalentTo(programRequestInputViewModel.Name);
-        //    programRequest.Semester.ShouldBeEquivalentTo(programRequestInputViewModel.Semester);
-        //    programRequest.Discipline.ShouldBeEquivalentTo(programRequestInputViewModel.Discipline);
-        //    programRequest.CrossImpact.ShouldBeEquivalentTo(programRequestInputViewModel.CrossImpact);
-        //    programRequest.StudentImpact.ShouldBeEquivalentTo(programRequestInputViewModel.StudentImpact);
-        //    programRequest.LibraryImpact.ShouldBeEquivalentTo(programRequestInputViewModel.LibraryImpact);
-        //    programRequest.ITSImpact.ShouldBeEquivalentTo(programRequestInputViewModel.ITSImpact);
-        //    programRequest.Comment.ShouldBeEquivalentTo(programRequestInputViewModel.Comment);
-        //}
+            // assert
+            var programRequests = FacadeFactory.GetDomainFacade().FindAllProgramRequests();
+            programRequests.Count.ShouldBeEquivalentTo(1);
+
+            var programRequest = programRequests.First();
+            programRequest.Requester.ShouldBeEquivalentTo(user.GetFullName());
+            programRequest.Name.ShouldBeEquivalentTo(programRequestInputViewModel.Name);
+            programRequest.Semester.ShouldBeEquivalentTo(semester.GetDisplayText());
+            programRequest.Discipline.ShouldBeEquivalentTo(discipline.GetDisplayText());
+            programRequest.CrossImpact.ShouldBeEquivalentTo(programRequestInputViewModel.CrossImpact);
+            programRequest.StudentImpact.ShouldBeEquivalentTo(programRequestInputViewModel.StudentImpact);
+            programRequest.LibraryImpact.ShouldBeEquivalentTo(programRequestInputViewModel.LibraryImpact);
+            programRequest.ITSImpact.ShouldBeEquivalentTo(programRequestInputViewModel.ITSImpact);
+            programRequest.Comment.ShouldBeEquivalentTo(programRequestInputViewModel.Comment);
+        }
     }
 }

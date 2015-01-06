@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Microsoft.Ajax.Utilities;
 using MyEntityFramework.Entity;
 using WorkflowManagementSystem.Models.ErrorHandling;
@@ -56,6 +57,11 @@ namespace WorkflowManagementSystem.Models.Users
         {
             if (FirstName.IsNullOrWhiteSpace())
                 throw new WMSException("First name is required.");
+        }
+
+        public string GetDisplayName()
+        {
+            return string.Format("{0} {1}", FirstName, LastName);
         }
     }
 }

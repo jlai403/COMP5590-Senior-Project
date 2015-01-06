@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using WorkflowManagementSystem.Models.DataAccess;
 
 namespace WorkflowManagementSystem.Models.Semesters
@@ -15,6 +16,11 @@ namespace WorkflowManagementSystem.Models.Semesters
         public static List<Semester> FindAllSemesters()
         {
             return FindAll<Semester>();
+        }
+
+        public static Semester FindSemester(int semesterId)
+        {
+            return Queryable<Semester>().FirstOrDefault(x => x.Id == semesterId);
         }
     }
 }

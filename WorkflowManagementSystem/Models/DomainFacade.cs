@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using WorkflowManagementSystem.Models.Faculty;
-using WorkflowManagementSystem.Models.Program;
+using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Roles;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
-using WorkflowManagementSystem.Tests;
 using TransactionHandler = WorkflowManagementSystem.Models.DataAccess.TransactionHandler;
 
 namespace WorkflowManagementSystem.Models
@@ -60,12 +59,20 @@ namespace WorkflowManagementSystem.Models
 
         public void CreateProgramRequest(ProgramRequestInputViewModel programRequestInputViewModel)
         {
-            throw new System.NotImplementedException();
+            TransactionHandler.Instance.Execute(() =>
+            {
+                ProgramRepository.CreateProgram(programRequestInputViewModel);
+                return null;
+            });
         }
 
         public List<ProgramViewModel> FindAllProgramRequests()
         {
-            throw new System.NotImplementedException();
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var programs = ProgramRepository.FindAllPrograms();
+                return ProgramAssembler.AssembleAll(programs);
+            });
         }
 
         public void CreateFaculty(FacultyInputViewModel facultyInputViewModel)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using WorkflowManagementSystem.Models.DataAccess;
 using WorkflowManagementSystem.Models.ErrorHandling;
 
@@ -19,6 +20,11 @@ namespace WorkflowManagementSystem.Models.Faculty
         public static List<Discipline> FindAllDisciplines()
         {
             return FindAll<Discipline>();
+        }
+
+        public static Discipline FindDiscipline(int disciplineId)
+        {
+            return Queryable<Discipline>().FirstOrDefault(x => x.Id == disciplineId);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using WorkflowManagementSystem.Models.Faculty;
+using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Roles;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
@@ -18,6 +19,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
 
         protected DbSet<Discipline> Discipline { get; set; }
         protected DbSet<Faculty.Faculty> Faculty { get; set; }
+        protected DbSet<Program> Program { get; set; }
         protected DbSet<Role> Role { get; set; }
         protected DbSet<Semester> Semester { get; set; }
         protected DbSet<User> User { get; set; }

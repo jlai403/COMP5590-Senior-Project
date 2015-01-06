@@ -30,5 +30,10 @@ namespace WorkflowManagementSystem.Models.Semesters
             if (Year.IsNullOrWhiteSpace())
                 throw new WMSException("Year is required.");
         }
+
+        public string GetDisplayName()
+        {
+            return string.Format("{0} - {1}", Year, Term);
+        }
     }
 }
