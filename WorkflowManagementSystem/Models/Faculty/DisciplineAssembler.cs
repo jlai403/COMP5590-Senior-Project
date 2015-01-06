@@ -29,6 +29,7 @@ namespace WorkflowManagementSystem.Models.Faculty
             disciplineViewModel.Code = Discipline.Code;
             disciplineViewModel.Name = Discipline.Name;
             disciplineViewModel.Faculty = Discipline.Faculty.Name;
+            disciplineViewModel.DisplayName = Discipline.GetDisplayName();
             return disciplineViewModel;
         }
     }

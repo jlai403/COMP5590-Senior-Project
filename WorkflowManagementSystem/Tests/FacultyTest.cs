@@ -82,6 +82,7 @@ namespace WorkflowManagementSystem.Tests
             discipline.Code.ShouldBeEquivalentTo(disciplineInputViewModel.Code);
             discipline.Name.ShouldBeEquivalentTo(disciplineInputViewModel.Name);
             discipline.Faculty.ShouldBeEquivalentTo(disciplineInputViewModel.Faculty);
+            discipline.DisplayName.ShouldBeEquivalentTo("COMP - Computer Science");
         }
 
         [Test]

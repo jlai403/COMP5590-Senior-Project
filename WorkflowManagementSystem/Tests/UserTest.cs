@@ -35,6 +35,7 @@ namespace WorkflowManagementSystem.Tests
             userViewModel.Email.ShouldBeEquivalentTo(userSignUpViewModel.Email);
             userViewModel.Roles.Count.ShouldBeEquivalentTo(1);
             userViewModel.Roles.Should().Contain(RoleTestHelper.FACULTY_MEMBER);
+            userViewModel.DisplayName.ShouldBeEquivalentTo("Some Dude");
         }
 
         [Test]
@@ -64,6 +65,7 @@ namespace WorkflowManagementSystem.Tests
             userViewModel.FirstName.ShouldBeEquivalentTo(userSignUpViewModel.FirstName);
             userViewModel.LastName.ShouldBeEquivalentTo(userSignUpViewModel.LastName);
             userViewModel.Email.ShouldBeEquivalentTo(userSignUpViewModel.Email);
+            userViewModel.DisplayName.ShouldBeEquivalentTo("Some Dude");
             userViewModel.Roles.Count.ShouldBeEquivalentTo(5);
             userViewModel.Roles.Should().Contain(RoleTestHelper.FACULTY_MEMBER);
             userViewModel.Roles.Should().Contain(RoleTestHelper.FACULTY_COUNCIL_MEMBER);

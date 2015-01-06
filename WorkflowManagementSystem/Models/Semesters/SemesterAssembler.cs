@@ -27,6 +27,7 @@ namespace WorkflowManagementSystem.Models.Semesters
             viewModel.Id = Semester.Id;
             viewModel.Year = Semester.Year;
             viewModel.Term = Semester.Term;
+            viewModel.DisplayName = Semester.GetDisplayName();
             return viewModel;
         }
     }

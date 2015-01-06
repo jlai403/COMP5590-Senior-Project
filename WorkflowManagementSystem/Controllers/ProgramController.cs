@@ -7,7 +7,7 @@ namespace WorkflowManagementSystem.Controllers
     {
         public ActionResult CreateRequest()
         {
-            ViewBag.UsersFullName = FacadeFactory.GetDomainFacade().FindUser(User.Identity.Name).GetFullName();
+            ViewBag.UsersFullName = FacadeFactory.GetDomainFacade().FindUser(User.Identity.Name).DisplayName;
             ViewBag.Semesters = FacadeFactory.GetDomainFacade().FindAllSemesters();
             ViewBag.Faculties = FacadeFactory.GetDomainFacade().FindAllFaculties();
             ViewBag.Disciplines = FacadeFactory.GetDomainFacade().FindAllDisciplines();

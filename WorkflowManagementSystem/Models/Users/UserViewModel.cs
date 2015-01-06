@@ -8,10 +8,6 @@ namespace WorkflowManagementSystem.Models.Users
         public string LastName { get; set; }
         public string Email { get; set; }
         public List<string> Roles { get; set; }
-
-        public string GetFullName()
-        {
-            return FirstName + " " + LastName;
-        }
+        public string DisplayName { get; set; }
     }
 }

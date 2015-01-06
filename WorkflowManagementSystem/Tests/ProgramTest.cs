@@ -17,7 +17,7 @@ namespace WorkflowManagementSystem.Tests
             new SemesterTestHelper().LoadTestSemesters();
             new DisciplineTestHelper().LoadTestDisciplines();
 
-            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.GetDisplayText().Equals("2015 - Winter"));
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
             var programRequestInputViewModel = new ProgramRequestInputViewModel();
@@ -39,10 +39,10 @@ namespace WorkflowManagementSystem.Tests
             programRequests.Count.ShouldBeEquivalentTo(1);
 
             var programRequest = programRequests.First();
-            programRequest.Requester.ShouldBeEquivalentTo(user.GetFullName());
+            programRequest.Requester.ShouldBeEquivalentTo(user.DisplayName);
             programRequest.Name.ShouldBeEquivalentTo(programRequestInputViewModel.Name);
-            programRequest.Semester.ShouldBeEquivalentTo(semester.GetDisplayText());
-            programRequest.Discipline.ShouldBeEquivalentTo(discipline.GetDisplayText());
+            programRequest.Semester.ShouldBeEquivalentTo(semester.DisplayName);
+            programRequest.Discipline.ShouldBeEquivalentTo(discipline.DisplayName);
             programRequest.CrossImpact.ShouldBeEquivalentTo(programRequestInputViewModel.CrossImpact);
             programRequest.StudentImpact.ShouldBeEquivalentTo(programRequestInputViewModel.StudentImpact);
             programRequest.LibraryImpact.ShouldBeEquivalentTo(programRequestInputViewModel.LibraryImpact);

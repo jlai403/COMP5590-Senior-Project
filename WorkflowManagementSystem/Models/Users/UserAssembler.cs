@@ -30,6 +30,7 @@ namespace WorkflowManagementSystem.Models.Users
             viewModel.FirstName = User.FirstName;
             viewModel.LastName = User.LastName;
             viewModel.Email = User.Email;
+            viewModel.DisplayName = User.GetDisplayName();
             viewModel.Roles = User.Roles.Select(x => x.Name).ToList();
             return viewModel;
         }

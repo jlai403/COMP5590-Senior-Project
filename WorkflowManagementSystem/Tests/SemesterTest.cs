@@ -29,6 +29,7 @@ namespace WorkflowManagementSystem.Tests
             semester.Id.Should().BeGreaterThan(0);
             semester.Year.ShouldBeEquivalentTo("2014");
             semester.Term.ShouldBeEquivalentTo("Winter");
+            semester.DisplayName.ShouldBeEquivalentTo("2014 - Winter");
         }
 
         [Test]

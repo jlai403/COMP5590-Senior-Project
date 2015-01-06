@@ -11,7 +11,7 @@ namespace WorkflowManagementSystem.Views
         public static IEnumerable<SelectListItem> ConvertToSelectListItem(this HtmlHelper helper, List<SemesterViewModel> semesters)
         {
             return
-                semesters.Select(x => new SelectListItem {Value = x.Id.ToString(), Text = x.GetDisplayText()});
+                semesters.Select(x => new SelectListItem {Value = x.Id.ToString(), Text = x.DisplayName});
         }
 
         public static IEnumerable<SelectListItem> ConvertToSelectListItem(this HtmlHelper helper, List<FacultyViewModel> faculties)
@@ -23,7 +23,7 @@ namespace WorkflowManagementSystem.Views
         public static IEnumerable<SelectListItem> ConvertToSelectListItem(this HtmlHelper helper, List<DisciplineViewModel> disciplines)
         {
             return
-                disciplines.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.GetDisplayText() });
+                disciplines.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.DisplayName });
         }
     }
 }
