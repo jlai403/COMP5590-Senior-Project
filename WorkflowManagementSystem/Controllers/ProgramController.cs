@@ -1,10 +1,13 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using WorkflowManagementSystem.Models;
+using WorkflowManagementSystem.Models.Programs;
 
 namespace WorkflowManagementSystem.Controllers
 {
     public class ProgramController : Controller
     {
+        [HttpGet]
         public ActionResult CreateRequest()
         {
             ViewBag.UsersFullName = FacadeFactory.GetDomainFacade().FindUser(User.Identity.Name).DisplayName;
@@ -12,6 +15,25 @@ namespace WorkflowManagementSystem.Controllers
             ViewBag.Faculties = FacadeFactory.GetDomainFacade().FindAllFaculties();
             ViewBag.Disciplines = FacadeFactory.GetDomainFacade().FindAllDisciplines();
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateRequest(ProgramRequestInputViewModel programRequestInputViewModel)
+        {
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(User.Identity.Name, programRequestInputViewModel);
+            return RedirectToAction("Requested", "Program", new { name = programRequestInputViewModel.Name });
+        }
+
+        public ActionResult Requested(String name)
+        {
+            ViewBag.ProgramName = name;
+            return View("Requested");
+        }
+
+        public ActionResult Summary(string name)
+        {
+            var program = FacadeFactory.GetDomainFacade().FindProgram(name);
+            return View(program);
         }
     }
 }

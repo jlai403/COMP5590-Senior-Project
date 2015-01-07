@@ -1,0 +1,32 @@
+﻿<div class="container form center">
+	<div class="col-md-12 center-text">
+		<h4>Program requested is now in the approval process.</h4>
+	    <h6 class="redirect-text">
+	        @Html.ActionLink("Click here", "Summary", new {name = ViewBag.ProgramName}) to view your request
+        </h6>
+		<h6>You can also check the status of your request on the @Html.ActionLink("Homepage", "Index", "Dashboard").</h6>
+	</div>
+</div>
+
+<script>
+    var redirectSeconds = 10;
+    var redirectUrl = "@Url.Action("Summary", "Program", new {name = ViewBag.ProgramName}, Request.Url.Scheme)";
+
+    $(document).ready(function () {
+        redirectToProgramSummary();
+    });
+
+    function redirectToProgramSummary() {
+        $(".redirect-text").html("Redirecting to <a href='" + redirectUrl + "'>Program Summary</a> in <span id='seconds'></span> seconds...");
+        $("#seconds").text(redirectSeconds--);
+        setInterval(function () { redirectCountDown() }, 1000);
+    }
+
+    function redirectCountDown() {
+        $("#seconds").text(redirectSeconds--);
+        if (redirectSeconds === 0) {
+            window.location.replace(redirectUrl);
+        }
+    }
+
+</script>

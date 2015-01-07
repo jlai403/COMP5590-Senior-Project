@@ -6,7 +6,7 @@ namespace WorkflowManagementSystem.Models.Programs
     {
         public Program Program { get; set; }
 
-        private ProgramAssembler(Program program)
+        public ProgramAssembler(Program program)
         {
             Program = program;
         }
@@ -21,7 +21,7 @@ namespace WorkflowManagementSystem.Models.Programs
             return programViewModels;
         }
 
-        private ProgramViewModel Assemble()
+        public ProgramViewModel Assemble()
         {
             var programViewModel = new ProgramViewModel();
             programViewModel.Name = Program.Name;

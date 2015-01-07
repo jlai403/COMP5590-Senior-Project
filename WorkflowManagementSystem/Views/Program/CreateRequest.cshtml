@@ -6,8 +6,6 @@
 
 @Styles.Render("~/Content/css/theme/create-program.css")
 
-@{Html.RenderPartial("_NavigationHeaderPartial");}
-
 <div class="container form center">
     <div class="col-md-12">
         @using (Html.BeginForm("CreateRequest", "Program", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -45,7 +43,7 @@
 						Requester
 					</div>
 				    <div class="col-md-9">
-				        @Html.TextBox("Requester", (string) ViewBag.UsersFullName, new { @class = "form-control", @readonly = "true" })
+				        @Html.TextBox("UserName", (string) ViewBag.UsersFullName, new { @class = "form-control", @readonly = "true" })
 				    </div>
 				</div>
 				
@@ -207,7 +205,7 @@
 				</div>
 						
 				<div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
-					<input class="form-control button blue" type="submit" value="Request" tabindex="13"/>
+				    <input class="form-control button blue" type="submit" value="Request" tabindex="13"/>
 				</div>
 			</div>
 			<!-- STEP END START -->

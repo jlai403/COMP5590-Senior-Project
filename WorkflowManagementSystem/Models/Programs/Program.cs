@@ -18,9 +18,9 @@ namespace WorkflowManagementSystem.Models.Programs
         public string Comment { get; set; }
         public virtual int Id { get; set; }
 
-        public void Update(ProgramRequestInputViewModel programRequestInputViewModel)
+        public void Update(User user, ProgramRequestInputViewModel programRequestInputViewModel)
         {
-            Requester = UserRepository.FindUser(programRequestInputViewModel.Requester);
+            Requester = user;
             Name = programRequestInputViewModel.Name;
             Semester = SemesterRepository.FindSemester(programRequestInputViewModel.Semester);
             Discipline = DisciplineRepository.FindDiscipline(programRequestInputViewModel.Discipline);

@@ -57,11 +57,11 @@ namespace WorkflowManagementSystem.Models
             });
         }
 
-        public void CreateProgramRequest(ProgramRequestInputViewModel programRequestInputViewModel)
+        public void CreateProgramRequest(string email, ProgramRequestInputViewModel programRequestInputViewModel)
         {
             TransactionHandler.Instance.Execute(() =>
             {
-                ProgramRepository.CreateProgram(programRequestInputViewModel);
+                ProgramRepository.CreateProgram(email, programRequestInputViewModel);
                 return null;
             });
         }
@@ -135,6 +135,15 @@ namespace WorkflowManagementSystem.Models
             {
                 var semesters = SemesterRepository.FindAllSemesters();
                 return SemesterAssembler.AssembleAll(semesters);
+            });
+        }
+
+        public ProgramViewModel FindProgram(string name)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var program = ProgramRepository.FindProgram(name);
+                return new ProgramAssembler(program).Assemble();
             });
         }
     }

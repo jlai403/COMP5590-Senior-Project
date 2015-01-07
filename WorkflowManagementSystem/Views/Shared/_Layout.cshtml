@@ -20,6 +20,10 @@
 
     </head>
     <body>
+        @if (Request.IsAuthenticated)
+        {
+            Html.RenderPartial("_NavigationHeaderPartial");
+        }
         @RenderBody()
     </body>
 </html>

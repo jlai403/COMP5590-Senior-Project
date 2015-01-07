@@ -280,6 +280,8 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Errors\Index.cshtml" />
     <Content Include="Views\Program\CreateRequest.cshtml" />
+    <Content Include="Views\Program\Summary.cshtml" />
+    <Content Include="Views\Program\Requested.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
