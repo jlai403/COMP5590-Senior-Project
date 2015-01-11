@@ -1,0 +1,48 @@
+using System.Collections.Generic;
+using Microsoft.Ajax.Utilities;
+using MyEntityFramework.Entity;
+using WorkflowManagementSystem.Models.ErrorHandling;
+
+namespace WorkflowManagementSystem.Models.ApprovalChains
+{
+    public class ApprovalChain : IEntity
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public List<ApprovalChainStep> ApprovalChainSteps { get; set; }
+
+        public ApprovalChain()
+        {
+            ApprovalChainSteps = new List<ApprovalChainStep>();
+        }
+
+        public void Update(ApprovalChainInputViewModel approvalChainInputViewModel)
+        {
+            Name = approvalChainInputViewModel.Name;
+            var sequence = 1;
+            foreach (var roleName in approvalChainInputViewModel.Roles)
+            {
+                ApprovalChainRepository.CreateApprovalChainStep(this, roleName, sequence++);
+            }
+
+            AssertApprovalChainName();
+            AssertApprovalChainHasSteps();
+        }
+
+        private void AssertApprovalChainName()
+        {
+            if (Name.IsNullOrWhiteSpace())
+            {
+                throw new WMSException("Approval chain name is required.");
+            }
+        }
+
+        private void AssertApprovalChainHasSteps()
+        {
+            if (ApprovalChainSteps.Count == 0)
+            {
+                throw new WMSException("Approval chain '{0}' does not have any steps specified.", Name);
+            }
+        }
+    }
+}

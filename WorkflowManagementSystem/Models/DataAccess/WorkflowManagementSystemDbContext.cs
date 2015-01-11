@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Roles;
@@ -17,6 +18,8 @@ namespace WorkflowManagementSystem.Models.DataAccess
         {
         }
 
+        protected DbSet<ApprovalChain> ApprovalChain { get; set; }
+        protected DbSet<ApprovalChainStep> ApprovalChainStep { get; set; }
         protected DbSet<Discipline> Discipline { get; set; }
         protected DbSet<Faculty.Faculty> Faculty { get; set; }
         protected DbSet<Program> Program { get; set; }
@@ -34,6 +37,8 @@ namespace WorkflowManagementSystem.Models.DataAccess
             });
 
             modelBuilder.Entity<Discipline>().HasRequired(d => d.Faculty).WithMany(f => f.Disciplines);
+
+            modelBuilder.Entity<ApprovalChain>().HasMany(ac => ac.ApprovalChainSteps).WithRequired(acs => acs.ApprovalChain);
         }
     }
 }

@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.IO.Pipes;
+using System.Web.UI.WebControls.Expressions;
+using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Roles;
@@ -144,6 +147,24 @@ namespace WorkflowManagementSystem.Models
             {
                 var program = ProgramRepository.FindProgram(name);
                 return new ProgramAssembler(program).Assemble();
+            });
+        }
+
+        public void CreateApprovalChain(ApprovalChainInputViewModel approvalChainInputViewModel)
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                ApprovalChainRepository.CreateApprovalChain(approvalChainInputViewModel);
+                return null;
+            });
+        }
+
+        public List<ApprovalChainStepViewModel> FindApprovalChainSteps(string approvalChainName)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var approvalChain = ApprovalChainRepository.FindApprovalChain(approvalChainName);
+                return new ApprovalChainAssembler(approvalChain).Assemble();
             });
         }
     }
