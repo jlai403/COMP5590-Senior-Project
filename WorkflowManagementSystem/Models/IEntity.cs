@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MyEntityFramework.Entity
+namespace WorkflowManagementSystem.Models
 {
     public interface IEntity
     {

@@ -81,6 +81,7 @@
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Workflow.Runtime" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -211,6 +212,14 @@
     <Compile Include="Migrations\201501110748409_AddApprovalChain.Designer.cs">
       <DependentUpon>201501110748409_AddApprovalChain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501130235546_CreateWorkflowData.cs" />
+    <Compile Include="Migrations\201501130235546_CreateWorkflowData.Designer.cs">
+      <DependentUpon>201501130235546_CreateWorkflowData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501150725035_FixApprovalChainStepFK.cs" />
+    <Compile Include="Migrations\201501150725035_FixApprovalChainStepFK.Designer.cs">
+      <DependentUpon>201501150725035_FixApprovalChainStepFK.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -218,6 +227,7 @@
     <Compile Include="Models\ApprovalChains\ApprovalChainRepository.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainStep.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainStepViewModel.cs" />
+    <Compile Include="Models\ApprovalChains\ApprovalChainViewModel.cs" />
     <Compile Include="Models\DataAccess\DatabaseManager.cs" />
     <Compile Include="Models\DataAccess\NullTestCleanUpInitializer.cs" />
     <Compile Include="Models\DataAccess\ICleanUpData.cs" />
@@ -262,9 +272,16 @@
     <Compile Include="Models\Users\UserRepository.cs" />
     <Compile Include="Models\Users\UserSignUpViewModel.cs" />
     <Compile Include="Models\Users\UserViewModel.cs" />
+    <Compile Include="Models\Workflow\WorkflowAssembler.cs" />
+    <Compile Include="Models\Workflow\WorkflowData.cs" />
+    <Compile Include="Models\Workflow\WorkflowDataViewModel.cs" />
+    <Compile Include="Models\Workflow\WorkflowHandler.cs" />
+    <Compile Include="Models\Workflow\WorkflowRepository.cs" />
+    <Compile Include="Models\Workflow\WorkflowStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\DataAccess\WorkflowManagementSystemDbContext.cs" />
     <Compile Include="Tests\ApprovalChainTest.cs" />
+    <Compile Include="Tests\ApprovalChainTestHelper.cs" />
     <Compile Include="Tests\DisciplineTestHelper.cs" />
     <Compile Include="Tests\FacultyTest.cs" />
     <Compile Include="Tests\FacultyTestHelper.cs" />
@@ -323,6 +340,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501110748409_AddApprovalChain.resx">
       <DependentUpon>201501110748409_AddApprovalChain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501130235546_CreateWorkflowData.resx">
+      <DependentUpon>201501130235546_CreateWorkflowData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501150725035_FixApprovalChainStepFK.resx">
+      <DependentUpon>201501150725035_FixApprovalChainStepFK.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

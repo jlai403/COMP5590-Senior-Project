@@ -8,13 +8,14 @@ namespace WorkflowManagementSystem.Models.Programs
 {
     public class ProgramRepository : Repository
     {
-        public static void CreateProgram(string email, ProgramRequestInputViewModel programRequestInputViewModel)
+        public static Program CreateProgram(string email, ProgramRequestInputViewModel programRequestInputViewModel)
         {
             var user = UserRepository.FindUser(email);
             if(user == null) throw new WMSException("User '{0}' not found", email);
             var program = new Program();
             AddEntity(program);
             program.Update(user, programRequestInputViewModel);
+            return program;
         }
 
         public static List<Program> FindAllPrograms()

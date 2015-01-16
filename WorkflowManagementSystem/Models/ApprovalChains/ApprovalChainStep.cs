@@ -1,4 +1,3 @@
-using MyEntityFramework.Entity;
 using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Roles;
 
@@ -11,14 +10,13 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
         public Role Role { get; set; }
         public int Sequence { get; set; }
 
-        public ApprovalChainStep(ApprovalChain approvalChain)
-        {
-            ApprovalChain = approvalChain;
-        }
+        public ApprovalChainStep()
+        { }
 
-        public void Update(string roleName, int sequence)
+        public void Update(ApprovalChain approvalChain, string roleName, int sequence)
         {
             Sequence = sequence;
+            ApprovalChain = approvalChain;
             
             var role = RoleRepository.FindRole(roleName);
             if (role == null) throw new WMSException("Role '{0}' not found.", roleName);

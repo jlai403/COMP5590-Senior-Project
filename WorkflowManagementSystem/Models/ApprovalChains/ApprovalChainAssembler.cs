@@ -12,7 +12,7 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
             ApprovalChain = approvalChain;
         }
 
-        public List<ApprovalChainStepViewModel> Assemble()
+        public List<ApprovalChainStepViewModel> AssembleApprovalChainSteps()
         {
             return ApprovalChain.ApprovalChainSteps.Select(approvalChainStep => AssembleApprovalChainStep(approvalChainStep)).ToList();
         }
@@ -23,6 +23,19 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
             approvalChainStepViewModel.RoleName = approvalChainStep.Role.Name;
             approvalChainStepViewModel.Sequence = approvalChainStep.Sequence;
             return approvalChainStepViewModel;
+        }
+
+        public static List<ApprovalChainViewModel> AssembleAll(List<ApprovalChain> approvalChains)
+        {
+            return approvalChains.Select(approvalChain => new ApprovalChainAssembler(approvalChain).AssembleApprovalChainViewModel()).ToList();
+        }
+
+        private ApprovalChainViewModel AssembleApprovalChainViewModel()
+        {
+            var approvalChainViewModel = new ApprovalChainViewModel();
+            approvalChainViewModel.Name = ApprovalChain.Name;
+            approvalChainViewModel.ApprovalChainSteps = AssembleApprovalChainSteps();
+            return approvalChainViewModel;
         }
     }
 }

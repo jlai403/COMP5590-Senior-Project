@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Microsoft.Ajax.Utilities;
-using MyEntityFramework.Entity;
 using WorkflowManagementSystem.Models.ErrorHandling;
 
 namespace WorkflowManagementSystem.Models.ApprovalChains
@@ -9,7 +8,7 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<ApprovalChainStep> ApprovalChainSteps { get; set; }
+        public virtual List<ApprovalChainStep> ApprovalChainSteps { get; set; }
 
         public ApprovalChain()
         {
@@ -22,7 +21,7 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
             var sequence = 1;
             foreach (var roleName in approvalChainInputViewModel.Roles)
             {
-                ApprovalChainRepository.CreateApprovalChainStep(this, roleName, sequence++);
+                ApprovalChainSteps.Add(ApprovalChainRepository.CreateApprovalChainStep(this, roleName, sequence++));
             }
 
             AssertApprovalChainName();

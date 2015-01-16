@@ -5,7 +5,7 @@ namespace WorkflowManagementSystem.Tests
 {
     public class SemesterTestHelper
     {
-        public void LoadTestSemesters()
+        public void CreateTestSemesters()
         {
             var winter2015 = new SemesterInputViewModel();
             winter2015.Year = "2015";

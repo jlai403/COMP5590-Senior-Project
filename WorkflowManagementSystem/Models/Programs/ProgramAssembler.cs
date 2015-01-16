@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using WorkflowManagementSystem.Models.Workflow;
 
 namespace WorkflowManagementSystem.Models.Programs
 {
@@ -33,7 +34,9 @@ namespace WorkflowManagementSystem.Models.Programs
             programViewModel.LibraryImpact = Program.LibraryImpact;
             programViewModel.ITSImpact = Program.ITSImpact;
             programViewModel.Comment = Program.Comment;
+            programViewModel.WorkflowSteps = WorkflowAssembler.AssembleAll(Program.GetWorkflowHistory());
             return programViewModel;
         }
+
     }
 }

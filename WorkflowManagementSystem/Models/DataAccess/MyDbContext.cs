@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using EFHooks;
-using MyEntityFramework.Entity;
 
 namespace WorkflowManagementSystem.Models.DataAccess
 {

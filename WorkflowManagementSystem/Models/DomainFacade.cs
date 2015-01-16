@@ -7,6 +7,7 @@ using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Roles;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
+using WorkflowManagementSystem.Models.Workflow;
 using TransactionHandler = WorkflowManagementSystem.Models.DataAccess.TransactionHandler;
 
 namespace WorkflowManagementSystem.Models
@@ -64,7 +65,8 @@ namespace WorkflowManagementSystem.Models
         {
             TransactionHandler.Instance.Execute(() =>
             {
-                ProgramRepository.CreateProgram(email, programRequestInputViewModel);
+                var program = ProgramRepository.CreateProgram(email, programRequestInputViewModel);
+                new WorkflowHandler().InitiateWorkflow(program);
                 return null;
             });
         }
@@ -164,7 +166,16 @@ namespace WorkflowManagementSystem.Models
             return TransactionHandler.Instance.Execute(() =>
             {
                 var approvalChain = ApprovalChainRepository.FindApprovalChain(approvalChainName);
-                return new ApprovalChainAssembler(approvalChain).Assemble();
+                return new ApprovalChainAssembler(approvalChain).AssembleApprovalChainSteps();
+            });
+        }
+
+        public List<ApprovalChainViewModel> FindAllApprovalChains()
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var approvalChains = ApprovalChainRepository.FindAllApprovalChains();
+                return ApprovalChainAssembler.AssembleAll(approvalChains);
             });
         }
     }

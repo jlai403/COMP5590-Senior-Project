@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using WorkflowManagementSystem.Models;
@@ -14,7 +13,7 @@ namespace WorkflowManagementSystem.Tests
         public void CreateApprovalChain()
         {
             // assemble
-            new RoleTestHelper().LoadTestRoles();
+            new RoleTestHelper().CreateTestRoles();
 
             var approvalChainInputViewModel = new ApprovalChainInputViewModel();
             approvalChainInputViewModel.Name = "Program";
@@ -27,6 +26,8 @@ namespace WorkflowManagementSystem.Tests
             FacadeFactory.GetDomainFacade().CreateApprovalChain(approvalChainInputViewModel);
 
             // assert
+            FacadeFactory.GetDomainFacade().FindAllApprovalChains().Count.ShouldBeEquivalentTo(1);
+
             var approvalChainSteps = FacadeFactory.GetDomainFacade().FindApprovalChainSteps(approvalChainInputViewModel.Name);
             approvalChainSteps.Count.ShouldBeEquivalentTo(4);
             approvalChainSteps.Should().Contain(x => x.Sequence == 1 && x.RoleName.Equals(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER));
@@ -46,6 +47,7 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Approval chain name is required.");
+            FacadeFactory.GetDomainFacade().FindAllApprovalChains().Count.ShouldBeEquivalentTo(0);
         }
 
         [Test]
@@ -60,6 +62,7 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Approval chain 'Program' does not have any steps specified.");
+            FacadeFactory.GetDomainFacade().FindAllApprovalChains().Count.ShouldBeEquivalentTo(0);
         }
     }
 }

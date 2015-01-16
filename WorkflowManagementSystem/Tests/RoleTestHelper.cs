@@ -11,7 +11,7 @@ namespace WorkflowManagementSystem.Tests
         public const string APPC_MEMBER = "APPC Member";
         public const string GFC_MEMBER = "GFC Member";
 
-        public void LoadTestRoles()
+        public void CreateTestRoles()
         {
             FacadeFactory.GetDomainFacade().CreateRole(new RoleInputViewModel(FACULTY_MEMBER));
             FacadeFactory.GetDomainFacade().CreateRole(new RoleInputViewModel(FACULTY_CURRICULUMN_MEMBER));

@@ -14,7 +14,7 @@ namespace WorkflowManagementSystem.Tests
         public void CreateUser()
         {
             // assemble
-            new RoleTestHelper().LoadTestRoles();
+            new RoleTestHelper().CreateTestRoles();
 
             var userSignUpViewModel = new UserSignUpViewModel();
             userSignUpViewModel.FirstName = "Some";
@@ -42,7 +42,7 @@ namespace WorkflowManagementSystem.Tests
         public void CreateUser_MultipleRolesSelected()
         {
             // assemble
-            new RoleTestHelper().LoadTestRoles();
+            new RoleTestHelper().CreateTestRoles();
 
             var userSignUpViewModel = new UserSignUpViewModel();
             userSignUpViewModel.FirstName = "Some";
@@ -78,7 +78,7 @@ namespace WorkflowManagementSystem.Tests
         public void FindUser()
         {
             // assemble
-            new RoleTestHelper().LoadTestRoles();
+            new RoleTestHelper().CreateTestRoles();
 
             var userSignUpViewModel = new UserSignUpViewModel();
             userSignUpViewModel.FirstName = "Some";

@@ -1,5 +1,3 @@
-using MyEntityFramework.Entity;
-
 namespace WorkflowManagementSystem.Models.DataAccess
 {
     public interface ICleanUpData

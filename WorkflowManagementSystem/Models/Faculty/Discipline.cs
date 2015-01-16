@@ -1,15 +1,14 @@
 using Microsoft.Ajax.Utilities;
-using MyEntityFramework.Entity;
 using WorkflowManagementSystem.Models.ErrorHandling;
 
 namespace WorkflowManagementSystem.Models.Faculty
 {
     public class Discipline : IEntity
     {
-        public virtual int Id { get; set; }
+        public int Id { get; set; }
 
-        public virtual string Code { get; set; }
-        public virtual string Name { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
         public virtual Faculty Faculty { get; set; }
 
         public Discipline(){}

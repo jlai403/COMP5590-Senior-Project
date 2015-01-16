@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using WorkflowManagementSystem.Models.Workflow;
+
 namespace WorkflowManagementSystem.Models.Programs
 {
     public class ProgramViewModel
@@ -11,5 +14,11 @@ namespace WorkflowManagementSystem.Models.Programs
         public string LibraryImpact { get; set; }
         public string ITSImpact { get; set; }
         public string Comment { get; set; }
+        public List<WorkflowDataViewModel> WorkflowSteps { get; set; }
+
+        public ProgramViewModel()
+        {
+            WorkflowSteps = new List<WorkflowDataViewModel>();
+        }
     }
 }

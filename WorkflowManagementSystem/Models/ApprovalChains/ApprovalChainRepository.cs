@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using WorkflowManagementSystem.Models.DataAccess;
 
@@ -14,15 +15,20 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
 
         public static ApprovalChainStep CreateApprovalChainStep(ApprovalChain approvalChain, string roleName, int sequence)
         {
-            var approvalChainStep = new ApprovalChainStep(approvalChain);
+            var approvalChainStep = new ApprovalChainStep();
             AddEntity(approvalChainStep);
-            approvalChainStep.Update(roleName, sequence);
+            approvalChainStep.Update(approvalChain, roleName, sequence);
             return approvalChainStep;
         }
 
         public static ApprovalChain FindApprovalChain(string approvalChainName)
         {
             return Queryable<ApprovalChain>().FirstOrDefault(x => x.Name.Equals(approvalChainName));
+        }
+
+        public static List<ApprovalChain> FindAllApprovalChains()
+        {
+            return FindAll<ApprovalChain>();
         }
     }
 }

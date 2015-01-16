@@ -3,6 +3,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.Programs;
+using WorkflowManagementSystem.Models.Workflow;
 
 namespace WorkflowManagementSystem.Tests
 {
@@ -12,10 +13,12 @@ namespace WorkflowManagementSystem.Tests
         public void CreateProgramRequest()
         {
             // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+            
             var user = new UserTestHelper().CreateUserWithTestRoles();
-
-            new SemesterTestHelper().LoadTestSemesters();
-            new DisciplineTestHelper().LoadTestDisciplines();
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
@@ -48,22 +51,30 @@ namespace WorkflowManagementSystem.Tests
             programRequest.LibraryImpact.ShouldBeEquivalentTo(programRequestInputViewModel.LibraryImpact);
             programRequest.ITSImpact.ShouldBeEquivalentTo(programRequestInputViewModel.ITSImpact);
             programRequest.Comment.ShouldBeEquivalentTo(programRequestInputViewModel.Comment);
+            
+            programRequest.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            var workflowDataViewModel = programRequest.WorkflowSteps.First();
+            workflowDataViewModel.Status.ShouldBeEquivalentTo(WorkflowStatus.PENDING_APPROVAL);
+            workflowDataViewModel.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
+            workflowDataViewModel.User.Should().BeNull();
         }
 
         [Test]
         public void FindProgram()
         {
             // assemble
-            var user = new UserTestHelper().CreateUserWithTestRoles();
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
 
-            new SemesterTestHelper().LoadTestSemesters();
-            new DisciplineTestHelper().LoadTestDisciplines();
+            var user = new UserTestHelper().CreateUserWithTestRoles();
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
             var programRequestInputViewModel = new ProgramRequestInputViewModel();
-            programRequestInputViewModel.Requester = user.Email;
+            programRequestInputViewModel.Requester = user.DisplayName;
             programRequestInputViewModel.Name = "Program Name";
             programRequestInputViewModel.Semester = semester.Id;
             programRequestInputViewModel.Discipline = discipline.Id;
@@ -72,7 +83,6 @@ namespace WorkflowManagementSystem.Tests
             programRequestInputViewModel.LibraryImpact = "Library Impact";
             programRequestInputViewModel.ITSImpact = "ITS Impact";
             programRequestInputViewModel.Comment = "Comment";
-            
             FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
 
             // act
@@ -88,6 +98,12 @@ namespace WorkflowManagementSystem.Tests
             program.LibraryImpact.ShouldBeEquivalentTo(programRequestInputViewModel.LibraryImpact);
             program.ITSImpact.ShouldBeEquivalentTo(programRequestInputViewModel.ITSImpact);
             program.Comment.ShouldBeEquivalentTo(programRequestInputViewModel.Comment);
+
+            program.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            var workflowDataViewModel = program.WorkflowSteps.First();
+            workflowDataViewModel.Status.ShouldBeEquivalentTo(WorkflowStatus.PENDING_APPROVAL);
+            workflowDataViewModel.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
+            workflowDataViewModel.User.Should().BeNull();
         }
     }
 }

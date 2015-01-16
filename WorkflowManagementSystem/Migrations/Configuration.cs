@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using WorkflowManagementSystem.Models.DataAccess;
 
 namespace WorkflowManagementSystem.Migrations

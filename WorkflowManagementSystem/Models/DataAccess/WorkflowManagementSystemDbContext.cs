@@ -5,6 +5,7 @@ using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Roles;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
+using WorkflowManagementSystem.Models.Workflow;
 
 namespace WorkflowManagementSystem.Models.DataAccess
 {
@@ -26,6 +27,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
         protected DbSet<Role> Role { get; set; }
         protected DbSet<Semester> Semester { get; set; }
         protected DbSet<User> User { get; set; }
+        protected DbSet<WorkflowData> WorkflowData { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -36,9 +38,9 @@ namespace WorkflowManagementSystem.Models.DataAccess
                 m.ToTable("UserRoles");
             });
 
-            modelBuilder.Entity<Discipline>().HasRequired(d => d.Faculty).WithMany(f => f.Disciplines);
+            modelBuilder.Entity<Discipline>().HasRequired(d => d.Faculty).WithMany(f => f.Disciplines).WillCascadeOnDelete(true);
 
-            modelBuilder.Entity<ApprovalChain>().HasMany(ac => ac.ApprovalChainSteps).WithRequired(acs => acs.ApprovalChain);
+            modelBuilder.Entity<ApprovalChain>().HasMany(ac => ac.ApprovalChainSteps);
         }
     }
 }

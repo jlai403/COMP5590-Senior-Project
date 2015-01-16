@@ -1,14 +1,13 @@
 using Microsoft.Ajax.Utilities;
-using MyEntityFramework.Entity;
 using WorkflowManagementSystem.Models.ErrorHandling;
 
 namespace WorkflowManagementSystem.Models.Semesters
 {
     public class Semester : IEntity
     {
-        public virtual int Id { get; set; }
-        public virtual string Term { get; set; }
-        public virtual string Year { get; set; }
+        public int Id { get; set; }
+        public string Term { get; set; }
+        public string Year { get; set; }
 
         public void Update(SemesterInputViewModel semesterInputViewModel)
         {

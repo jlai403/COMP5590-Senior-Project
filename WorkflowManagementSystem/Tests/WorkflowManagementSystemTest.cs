@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Configuration;
-using System.Data.Entity;
 using NUnit.Framework;
 using WebMatrix.WebData;
 using WorkflowManagementSystem.Models.DataAccess;
 using WorkflowManagementSystem.Models.Users;
-using Configuration = WorkflowManagementSystem.Migrations.Configuration;
 
 namespace WorkflowManagementSystem.Tests
 {

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Microsoft.Ajax.Utilities;
-using MyEntityFramework.Entity;
 using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Roles;
 
@@ -9,10 +8,10 @@ namespace WorkflowManagementSystem.Models.Users
 {
     public class User : IEntity
     {
-        public virtual int Id { get; set; }
-        public virtual string Email { get; set; }
-        public virtual string FirstName { get; set; }
-        public virtual string LastName { get; set; }
+        public int Id { get; set; }
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public virtual List<Role> Roles { get; set; }
 
         public User()

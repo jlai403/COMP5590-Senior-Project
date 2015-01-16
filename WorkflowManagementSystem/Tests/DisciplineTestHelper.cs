@@ -5,7 +5,7 @@ namespace WorkflowManagementSystem.Tests
 {
     public class DisciplineTestHelper
     {
-        public void LoadTestDisciplines()
+        public void CreateTestDisciplines()
         {
             var businessAdministrationFaculty = new FacultyTestHelper().CreateBusinessAdministrationFaculty();
             var management = new DisciplineInputViewModel();

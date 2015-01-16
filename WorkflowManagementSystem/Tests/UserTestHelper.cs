@@ -7,8 +7,6 @@ namespace WorkflowManagementSystem.Tests
     {
         public UserViewModel CreateUserWithTestRoles()
         {
-            new RoleTestHelper().LoadTestRoles();
-            
             var userSignUpViewModel = new UserSignUpViewModel();
             userSignUpViewModel.FirstName = "Some";
             userSignUpViewModel.LastName = "Dude";
