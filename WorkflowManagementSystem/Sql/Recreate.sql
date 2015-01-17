@@ -33,3 +33,18 @@ insert into dbo.Semesters ([Year], Term)
 		,('2016','Winter')
 		,('2015','Spring')
 		,('2015','Fall');
+
+
+insert into dbo.ApprovalChains
+	values ('Program');
+
+declare @approvalChain int = (select id from dbo.ApprovalChains where Name = 'Program');
+declare @facCouMem int = (select id from dbo.Roles where Name = 'Faculty Council Member');
+declare @facCurMem int = (select id from dbo.Roles where Name = 'Faculty Curriculumn Member');
+declare @appcMem int = (select id from dbo.Roles where Name = 'APPC Member');
+declare @gfcMem int = (select id from dbo.Roles where Name = 'GFC Member');
+
+insert into dbo.ApprovalChainSteps values (1, @facCouMem, @approvalChain);
+insert into dbo.ApprovalChainSteps values (2, @facCurMem, @approvalChain);
+insert into dbo.ApprovalChainSteps values (3, @appcMem, @approvalChain);
+insert into dbo.ApprovalChainSteps values (4, @gfcMem, @approvalChain);

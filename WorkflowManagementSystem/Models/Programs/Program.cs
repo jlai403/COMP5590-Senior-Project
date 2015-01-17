@@ -6,10 +6,8 @@ using WorkflowManagementSystem.Models.Workflow;
 
 namespace WorkflowManagementSystem.Models.Programs
 {
-    public class Program : IEntity
+    public class Program : IEntity, IHaveWorkflow
     {
-        public readonly string APPROVAL_CHAIN_NAME = "Program";
-
         public int Id { get; set; }
         public virtual User Requester { get; set; }
         public string Name { get; set; }
@@ -20,7 +18,12 @@ namespace WorkflowManagementSystem.Models.Programs
         public string LibraryImpact { get; set; }
         public string ITSImpact { get; set; }
         public string Comment { get; set; }
+        
         public virtual WorkflowData CurrentWorkflowData { get; set; }
+        public string APPROVAL_CHAIN_NAME
+        {
+            get { return "Program"; }
+        }
 
         public void Update(User user, ProgramRequestInputViewModel programRequestInputViewModel)
         {
@@ -35,22 +38,17 @@ namespace WorkflowManagementSystem.Models.Programs
             Comment = programRequestInputViewModel.Comment;
         }
 
-        public List<WorkflowData> GetWorkflowHistory()
-        {
-            return TraverseWorkflowData(CurrentWorkflowData);
-        }
-
-        private List<WorkflowData> TraverseWorkflowData(WorkflowData workflowData)
+        public List<WorkflowData> GetWorkflowHistory(WorkflowData workflowData = null)
         {
             var workflowDataHistory = new List<WorkflowData>();
-            if (workflowData.PreviousWorkflowData == null)
+            workflowData = workflowData ?? CurrentWorkflowData;
+
+            if (workflowData.PreviousWorkflowData != null)
             {
-                workflowDataHistory.Add(workflowData);
+                workflowDataHistory.AddRange(GetWorkflowHistory(workflowData.PreviousWorkflowData));
             }
-            else
-            {
-                workflowDataHistory.AddRange(TraverseWorkflowData(workflowData.PreviousWorkflowData));
-            }
+
+            workflowDataHistory.Add(workflowData);
             return workflowDataHistory;
         }
     }

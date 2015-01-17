@@ -5,6 +5,10 @@ namespace WorkflowManagementSystem.Tests
 {
     public class SemesterTestHelper
     {
+        public static string WINTER_2015 = "2015 - Winter";
+        public static string SPRING_2015 = "2015 - Spring";
+        public static string FALL_2015 = "2015 - Fall";
+
         public void CreateTestSemesters()
         {
             var winter2015 = new SemesterInputViewModel();

@@ -66,7 +66,7 @@ namespace WorkflowManagementSystem.Models
             TransactionHandler.Instance.Execute(() =>
             {
                 var program = ProgramRepository.CreateProgram(email, programRequestInputViewModel);
-                new WorkflowHandler().InitiateWorkflow(program);
+                new WorkflowHandler(program).InitiateWorkflow();
                 return null;
             });
         }
@@ -176,6 +176,17 @@ namespace WorkflowManagementSystem.Models
             {
                 var approvalChains = ApprovalChainRepository.FindAllApprovalChains();
                 return ApprovalChainAssembler.AssembleAll(approvalChains);
+            });
+        }
+
+        public void ApproveProgramRequest(string email, string programName)
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                var user = UserRepository.FindUser(email);
+                var program = ProgramRepository.FindProgram(programName);
+                new WorkflowHandler(program).Approve(user);
+                return null;
             });
         }
     }

@@ -1,4 +1,5 @@
 using WorkflowManagementSystem.Models.ApprovalChains;
+using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Models.Workflow
 {
@@ -8,6 +9,7 @@ namespace WorkflowManagementSystem.Models.Workflow
         public ApprovalChainStep ApprovalChainStep { get; set; }
         public WorkflowStatus Status { get; set; }
         public WorkflowData PreviousWorkflowData { get; set; }
+        public User User { get; set; }
 
         public void Update(ApprovalChainStep approvalChainStep, WorkflowStatus status, WorkflowData previousWorkflowData)
         {
@@ -16,5 +18,15 @@ namespace WorkflowManagementSystem.Models.Workflow
             PreviousWorkflowData = previousWorkflowData;
         }
 
+        public void UpdateStatus(User user, WorkflowStatus status)
+        {
+            User = user;
+            Status = status;
+        }
+
+        public string GetUserDisplayName()
+        {
+            return User == null ? "" : User.GetDisplayName();
+        }
     }
 }

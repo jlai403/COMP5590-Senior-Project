@@ -5,6 +5,8 @@ namespace WorkflowManagementSystem.Tests
 {
     public class DisciplineTestHelper
     {
+        public static string COMP_SCI = "Computer Science";
+
         public void CreateTestDisciplines()
         {
             var businessAdministrationFaculty = new FacultyTestHelper().CreateBusinessAdministrationFaculty();
@@ -17,7 +19,7 @@ namespace WorkflowManagementSystem.Tests
             var scienceAndTechnologyFaculty = new FacultyTestHelper().CreateScienceAndTechnologyFaculty();
             var computerScience = new DisciplineInputViewModel();
             computerScience.Code = "COMP";
-            computerScience.Name = "Computer Science";
+            computerScience.Name = COMP_SCI;
             computerScience.Faculty = scienceAndTechnologyFaculty.Name;
             FacadeFactory.GetDomainFacade().CreateDiscipline(computerScience);
         }
