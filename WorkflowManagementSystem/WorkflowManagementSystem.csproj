@@ -276,6 +276,7 @@
     <Compile Include="Models\Users\UserRepository.cs" />
     <Compile Include="Models\Users\UserSignUpViewModel.cs" />
     <Compile Include="Models\Users\UserViewModel.cs" />
+    <Compile Include="Models\Workflow\CompleteWorkflowState.cs" />
     <Compile Include="Models\Workflow\IHaveWorkflow.cs" />
     <Compile Include="Models\Workflow\IWorkflowState.cs" />
     <Compile Include="Models\Workflow\ApproveWorkflowState.cs" />

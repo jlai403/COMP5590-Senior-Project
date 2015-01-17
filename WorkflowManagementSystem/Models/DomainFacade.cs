@@ -198,5 +198,16 @@ namespace WorkflowManagementSystem.Models
                 return null;
             });
         }
+
+        public void CompleteProgramRequest(string email, string programName)
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                var user = UserRepository.FindUser(email);
+                var program = ProgramRepository.FindProgram(programName);
+                new WorkflowHandler(program).Complete(user);
+                return null;
+            });
+        }
     }
 }

@@ -241,5 +241,65 @@ namespace WorkflowManagementSystem.Tests
             thirdWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.APPC_MEMBER);
             thirdWorkflowStep.User.Should().BeNullOrEmpty();
         }
+
+
+        [Test]
+        public void CompleteProgramRequest()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.Requester = requester.DisplayName;
+            programRequestInputViewModel.Name = "Program Name";
+            programRequestInputViewModel.Semester = semester.Id;
+            programRequestInputViewModel.Discipline = discipline.Id;
+            programRequestInputViewModel.CrossImpact = "Cross Impact";
+            programRequestInputViewModel.StudentImpact = "Student Impact";
+            programRequestInputViewModel.LibraryImpact = "Library Impact";
+            programRequestInputViewModel.ITSImpact = "ITS Impact";
+            programRequestInputViewModel.Comment = "Comment";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // act
+            FacadeFactory.GetDomainFacade().CompleteProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // assert
+            var program = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
+            program.WorkflowSteps.Count.Should().Be(4);
+
+            var firstWorkflowStep = program.WorkflowSteps[0];
+            firstWorkflowStep.Status.ShouldBeEquivalentTo(WorkflowStatus.APPROVED);
+            firstWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
+            firstWorkflowStep.User.ShouldBeEquivalentTo(approver.DisplayName);
+
+            var secondWorkflowStep = program.WorkflowSteps[1];
+            secondWorkflowStep.Status.ShouldBeEquivalentTo(WorkflowStatus.APPROVED);
+            secondWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_COUNCIL_MEMBER);
+            secondWorkflowStep.User.ShouldBeEquivalentTo(approver.DisplayName);
+
+            var thirdWorkflowStep = program.WorkflowSteps[2];
+            thirdWorkflowStep.Status.ShouldBeEquivalentTo(WorkflowStatus.APPROVED);
+            thirdWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.APPC_MEMBER);
+            thirdWorkflowStep.User.ShouldBeEquivalentTo(approver.DisplayName);
+
+            var fourWorkflowStep = program.WorkflowSteps[3];
+            fourWorkflowStep.Status.ShouldBeEquivalentTo(WorkflowStatus.COMPLETED);
+            fourWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.GFC_MEMBER);
+            fourWorkflowStep.User.ShouldBeEquivalentTo(approver.DisplayName);
+        }
     }
 }
