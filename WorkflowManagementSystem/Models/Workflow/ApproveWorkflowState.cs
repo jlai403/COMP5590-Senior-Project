@@ -6,6 +6,10 @@ namespace WorkflowManagementSystem.Models.Workflow
 {
     public class ApproveWorkflowState : IWorkflowState
     {
+        public void AssertWorkflowCanBeUpdated(User user, IHaveWorkflow request)
+        {
+        }
+
         public void UpdateWorkflowState(User user, IHaveWorkflow request)
         {
             var currentWorkflowData = request.CurrentWorkflowData;
