@@ -4,9 +4,9 @@ using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Models.Workflow
 {
-    public class PendingApprovalWorkflowState : IWorkflowState
+    public class ApproveWorkflowState : IWorkflowState
     {
-        public void Approve(User user, IHaveWorkflow request)
+        public void UpdateWorkflowState(User user, IHaveWorkflow request)
         {
             var currentWorkflowData = request.CurrentWorkflowData;
             currentWorkflowData.UpdateStatus(user, WorkflowStatus.APPROVED);
@@ -19,11 +19,6 @@ namespace WorkflowManagementSystem.Models.Workflow
             nextWorkflowData.PreviousWorkflowData = currentWorkflowData;
             
             request.CurrentWorkflowData = nextWorkflowData;
-        }
-
-        public void Reject()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

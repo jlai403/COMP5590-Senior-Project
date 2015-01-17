@@ -4,7 +4,6 @@ namespace WorkflowManagementSystem.Models.Workflow
 {
     public interface IWorkflowState
     {
-        void Approve(User user, IHaveWorkflow request);
-        void Reject();
+        void UpdateWorkflowState(User user, IHaveWorkflow request);
     }
 }

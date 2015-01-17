@@ -278,7 +278,8 @@
     <Compile Include="Models\Users\UserViewModel.cs" />
     <Compile Include="Models\Workflow\IHaveWorkflow.cs" />
     <Compile Include="Models\Workflow\IWorkflowState.cs" />
-    <Compile Include="Models\Workflow\PendingApprovalWorkflowState.cs" />
+    <Compile Include="Models\Workflow\ApproveWorkflowState.cs" />
+    <Compile Include="Models\Workflow\RejectWorkflowState.cs" />
     <Compile Include="Models\Workflow\WorkflowAssembler.cs" />
     <Compile Include="Models\Workflow\WorkflowData.cs" />
     <Compile Include="Models\Workflow\WorkflowDataViewModel.cs" />

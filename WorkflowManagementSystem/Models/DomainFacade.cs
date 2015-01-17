@@ -1,14 +1,12 @@
 using System.Collections.Generic;
-using System.IO.Pipes;
-using System.Web.UI.WebControls.Expressions;
 using WorkflowManagementSystem.Models.ApprovalChains;
+using WorkflowManagementSystem.Models.DataAccess;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Roles;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
 using WorkflowManagementSystem.Models.Workflow;
-using TransactionHandler = WorkflowManagementSystem.Models.DataAccess.TransactionHandler;
 
 namespace WorkflowManagementSystem.Models
 {
@@ -30,7 +28,7 @@ namespace WorkflowManagementSystem.Models
                 UserRepository.CreateUser(userSignUpViewModel);
                 return null;
             });
-            
+
             SecurityManager.CreateAccount(userSignUpViewModel.Email, userSignUpViewModel.Password);
         }
 
@@ -186,6 +184,17 @@ namespace WorkflowManagementSystem.Models
                 var user = UserRepository.FindUser(email);
                 var program = ProgramRepository.FindProgram(programName);
                 new WorkflowHandler(program).Approve(user);
+                return null;
+            });
+        }
+
+        public void RejectProgramRequest(string email, string programName)
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                var user = UserRepository.FindUser(email);
+                var program = ProgramRepository.FindProgram(programName);
+                new WorkflowHandler(program).Reject(user);
                 return null;
             });
         }

@@ -148,5 +148,98 @@ namespace WorkflowManagementSystem.Tests
             secondWorkflowStep.Status.ShouldBeEquivalentTo(WorkflowStatus.PENDING_APPROVAL);
             secondWorkflowStep.User.Should().BeNullOrEmpty();
         }
+
+        [Test]
+        public void RejectProgramRequest()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var rejector = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.Requester = requester.DisplayName;
+            programRequestInputViewModel.Name = "Program Name";
+            programRequestInputViewModel.Semester = semester.Id;
+            programRequestInputViewModel.Discipline = discipline.Id;
+            programRequestInputViewModel.CrossImpact = "Cross Impact";
+            programRequestInputViewModel.StudentImpact = "Student Impact";
+            programRequestInputViewModel.LibraryImpact = "Library Impact";
+            programRequestInputViewModel.ITSImpact = "ITS Impact";
+            programRequestInputViewModel.Comment = "Comment";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            // act
+            FacadeFactory.GetDomainFacade().RejectProgramRequest(rejector.Email, programRequestInputViewModel.Name);
+
+            // assert
+            var program = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
+            program.WorkflowSteps.Count.Should().Be(1);
+
+            var workflowStep = program.WorkflowSteps.First();
+            workflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
+            workflowStep.Status.ShouldBeEquivalentTo(WorkflowStatus.REJECTED);
+            workflowStep.User.ShouldBeEquivalentTo(rejector.DisplayName);
+        }
+
+        [Test]
+        public void ApproveProgramRequest_SecondApproval()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+            var approverTwo = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.Requester = requester.DisplayName;
+            programRequestInputViewModel.Name = "Program Name";
+            programRequestInputViewModel.Semester = semester.Id;
+            programRequestInputViewModel.Discipline = discipline.Id;
+            programRequestInputViewModel.CrossImpact = "Cross Impact";
+            programRequestInputViewModel.StudentImpact = "Student Impact";
+            programRequestInputViewModel.LibraryImpact = "Library Impact";
+            programRequestInputViewModel.ITSImpact = "ITS Impact";
+            programRequestInputViewModel.Comment = "Comment";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            
+            // act
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approverTwo.Email, programRequestInputViewModel.Name);
+
+            // assert
+            var program = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
+            program.WorkflowSteps.Count.Should().Be(3);
+
+            var firstWorkflowStep = program.WorkflowSteps[0];
+            firstWorkflowStep.Status.ShouldBeEquivalentTo(WorkflowStatus.APPROVED);
+            firstWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
+            firstWorkflowStep.User.ShouldBeEquivalentTo(approver.DisplayName);
+
+            var secondWorkflowStep = program.WorkflowSteps[1];
+            secondWorkflowStep.Status.ShouldBeEquivalentTo(WorkflowStatus.APPROVED);
+            secondWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_COUNCIL_MEMBER);
+            secondWorkflowStep.User.ShouldBeEquivalentTo(approverTwo.DisplayName);
+
+            var thirdWorkflowStep = program.WorkflowSteps[2];
+            thirdWorkflowStep.Status.ShouldBeEquivalentTo(WorkflowStatus.PENDING_APPROVAL);
+            thirdWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.APPC_MEMBER);
+            thirdWorkflowStep.User.Should().BeNullOrEmpty();
+        }
     }
 }

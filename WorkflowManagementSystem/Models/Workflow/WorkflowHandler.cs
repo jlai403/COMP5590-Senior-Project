@@ -24,12 +24,12 @@ namespace WorkflowManagementSystem.Models.Workflow
 
         public void Approve(User user)
         {
-            GetCurrentWorkflowState().Approve(user, Request);
+            WorkflowStateFactory.GetState(WorkflowStatus.APPROVED).UpdateWorkflowState(user, Request);
         }
 
-        private IWorkflowState GetCurrentWorkflowState()
+        public void Reject(User user)
         {
-            return WorkflowStateFactory.GetState(Request.CurrentWorkflowData.Status);
+            WorkflowStateFactory.GetState(WorkflowStatus.REJECTED).UpdateWorkflowState(user, Request);
         }
     }
 }
