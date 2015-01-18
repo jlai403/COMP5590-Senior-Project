@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using WorkflowManagementSystem.Models;
+using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Workflow;
 
@@ -242,7 +244,6 @@ namespace WorkflowManagementSystem.Tests
             thirdWorkflowStep.User.Should().BeNullOrEmpty();
         }
 
-
         [Test]
         public void CompleteProgramRequest()
         {
@@ -300,6 +301,265 @@ namespace WorkflowManagementSystem.Tests
             fourWorkflowStep.Status.ShouldBeEquivalentTo(WorkflowStatus.COMPLETED);
             fourWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.GFC_MEMBER);
             fourWorkflowStep.User.ShouldBeEquivalentTo(approver.DisplayName);
+        }
+
+        [Test]
+        public void CompleteProgramRequest_RejectedWorkflow()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.Requester = requester.DisplayName;
+            programRequestInputViewModel.Name = "Program Name";
+            programRequestInputViewModel.Semester = semester.Id;
+            programRequestInputViewModel.Discipline = discipline.Id;
+            programRequestInputViewModel.CrossImpact = "Cross Impact";
+            programRequestInputViewModel.StudentImpact = "Student Impact";
+            programRequestInputViewModel.LibraryImpact = "Library Impact";
+            programRequestInputViewModel.ITSImpact = "ITS Impact";
+            programRequestInputViewModel.Comment = "Comment";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().RejectProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // act
+            Action act = ()=> FacadeFactory.GetDomainFacade().CompleteProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Request has already been rejected");
+        }
+
+        [Test]
+        public void ApproveProgramRequest_CompletedWorkflow()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.Requester = requester.DisplayName;
+            programRequestInputViewModel.Name = "Program Name";
+            programRequestInputViewModel.Semester = semester.Id;
+            programRequestInputViewModel.Discipline = discipline.Id;
+            programRequestInputViewModel.CrossImpact = "Cross Impact";
+            programRequestInputViewModel.StudentImpact = "Student Impact";
+            programRequestInputViewModel.LibraryImpact = "Library Impact";
+            programRequestInputViewModel.ITSImpact = "ITS Impact";
+            programRequestInputViewModel.Comment = "Comment";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CompleteProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // act
+            Action act = ()=> FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Request has already been completed");
+        }
+
+        [Test]
+        public void ApproveProgramRequest_ApproverNotPartOfResponsibleParty()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+            var approver = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.Requester = requester.DisplayName;
+            programRequestInputViewModel.Name = "Program Name";
+            programRequestInputViewModel.Semester = semester.Id;
+            programRequestInputViewModel.Discipline = discipline.Id;
+            programRequestInputViewModel.CrossImpact = "Cross Impact";
+            programRequestInputViewModel.StudentImpact = "Student Impact";
+            programRequestInputViewModel.LibraryImpact = "Library Impact";
+            programRequestInputViewModel.ITSImpact = "ITS Impact";
+            programRequestInputViewModel.Comment = "Comment";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // assert
+            var errorMessage = string.Format("User '{0}' does not have sufficient permissions to approve request", approver.DisplayName);
+            act.ShouldThrow<WMSException>().WithMessage(errorMessage);
+        }
+
+        [Test]
+        public void RejectProgramRequest_RejectorNotPartOfResponsibleParty()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+            var approver = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, RoleTestHelper.FACULTY_COUNCIL_MEMBER, RoleTestHelper.APPC_MEMBER);
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.Requester = requester.DisplayName;
+            programRequestInputViewModel.Name = "Program Name";
+            programRequestInputViewModel.Semester = semester.Id;
+            programRequestInputViewModel.Discipline = discipline.Id;
+            programRequestInputViewModel.CrossImpact = "Cross Impact";
+            programRequestInputViewModel.StudentImpact = "Student Impact";
+            programRequestInputViewModel.LibraryImpact = "Library Impact";
+            programRequestInputViewModel.ITSImpact = "ITS Impact";
+            programRequestInputViewModel.Comment = "Comment";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().CompleteProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // assert
+            var errorMessage = string.Format("User '{0}' does not have sufficient permissions to complete request", approver.DisplayName);
+            act.ShouldThrow<WMSException>().WithMessage(errorMessage);
+        }
+
+        [Test]
+        public void CompleteProgramRequest_RejectorNotPartOfResponsibleParty()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+            var approver = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.Requester = requester.DisplayName;
+            programRequestInputViewModel.Name = "Program Name";
+            programRequestInputViewModel.Semester = semester.Id;
+            programRequestInputViewModel.Discipline = discipline.Id;
+            programRequestInputViewModel.CrossImpact = "Cross Impact";
+            programRequestInputViewModel.StudentImpact = "Student Impact";
+            programRequestInputViewModel.LibraryImpact = "Library Impact";
+            programRequestInputViewModel.ITSImpact = "ITS Impact";
+            programRequestInputViewModel.Comment = "Comment";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().RejectProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // assert
+            var errorMessage = string.Format("User '{0}' does not have sufficient permissions to reject request", approver.DisplayName);
+            act.ShouldThrow<WMSException>().WithMessage(errorMessage);
+        }
+
+        [Test]
+        public void ApproveProgramRequest_Rejected()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.Requester = requester.DisplayName;
+            programRequestInputViewModel.Name = "Program Name";
+            programRequestInputViewModel.Semester = semester.Id;
+            programRequestInputViewModel.Discipline = discipline.Id;
+            programRequestInputViewModel.CrossImpact = "Cross Impact";
+            programRequestInputViewModel.StudentImpact = "Student Impact";
+            programRequestInputViewModel.LibraryImpact = "Library Impact";
+            programRequestInputViewModel.ITSImpact = "ITS Impact";
+            programRequestInputViewModel.Comment = "Comment";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().RejectProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Request has already been rejected");
+        }
+
+        [Test]
+        public void RejectProgramRequest_CompletedWorkflow()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.Requester = requester.DisplayName;
+            programRequestInputViewModel.Name = "Program Name";
+            programRequestInputViewModel.Semester = semester.Id;
+            programRequestInputViewModel.Discipline = discipline.Id;
+            programRequestInputViewModel.CrossImpact = "Cross Impact";
+            programRequestInputViewModel.StudentImpact = "Student Impact";
+            programRequestInputViewModel.LibraryImpact = "Library Impact";
+            programRequestInputViewModel.ITSImpact = "ITS Impact";
+            programRequestInputViewModel.Comment = "Comment";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CompleteProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().RejectProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Request has already been completed");
         }
     }
 }

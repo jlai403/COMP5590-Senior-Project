@@ -1,4 +1,5 @@
-﻿using WorkflowManagementSystem.Models;
+﻿using System;
+using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Tests
@@ -10,13 +11,30 @@ namespace WorkflowManagementSystem.Tests
             var userSignUpViewModel = new UserSignUpViewModel();
             userSignUpViewModel.FirstName = "Some";
             userSignUpViewModel.LastName = "Dude";
-            userSignUpViewModel.Email = "somedude@someawesomeemailprovider.com";
+            userSignUpViewModel.Email = string.Format("{0}@someawesomeemailprovider.com", new Random().Next(0, 10000));
             userSignUpViewModel.Password = "123456";
             userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
             userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_COUNCIL_MEMBER);
             userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
             userSignUpViewModel.Roles.Add(RoleTestHelper.APPC_MEMBER);
             userSignUpViewModel.Roles.Add(RoleTestHelper.GFC_MEMBER);
+
+            FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
+
+            return FacadeFactory.GetDomainFacade().FindUser(userSignUpViewModel.Email);
+        }
+
+        public UserViewModel CreateUserRoles(params string[] roles)
+        {
+            var userSignUpViewModel = new UserSignUpViewModel();
+            userSignUpViewModel.FirstName = "Some";
+            userSignUpViewModel.LastName = "Dude";
+            userSignUpViewModel.Email = string.Format("{0}@someawesomeemailprovider.com", new Random().Next(0, 10000));
+            userSignUpViewModel.Password = "123456";
+            foreach (var role in roles)
+            {
+                userSignUpViewModel.Roles.Add(role);
+            }
 
             FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
 
