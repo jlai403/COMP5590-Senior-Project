@@ -6,12 +6,14 @@ namespace WorkflowManagementSystem.Tests
 {
     public class UserTestHelper
     {
+        private static Random Random = new Random();
+
         public UserViewModel CreateUserWithTestRoles()
         {
             var userSignUpViewModel = new UserSignUpViewModel();
             userSignUpViewModel.FirstName = "Some";
             userSignUpViewModel.LastName = "Dude";
-            userSignUpViewModel.Email = string.Format("{0}@someawesomeemailprovider.com", new Random().Next(0, 10000));
+            userSignUpViewModel.Email = string.Format("{0}@someawesomeemailprovider.com", Random.Next(0, 99999));
             userSignUpViewModel.Password = "123456";
             userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
             userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_COUNCIL_MEMBER);
@@ -29,7 +31,7 @@ namespace WorkflowManagementSystem.Tests
             var userSignUpViewModel = new UserSignUpViewModel();
             userSignUpViewModel.FirstName = "Some";
             userSignUpViewModel.LastName = "Dude";
-            userSignUpViewModel.Email = string.Format("{0}@someawesomeemailprovider.com", new Random().Next(0, 10000));
+            userSignUpViewModel.Email = string.Format("{0}@someawesomeemailprovider.com", Random.Next(0, 99999));
             userSignUpViewModel.Password = "123456";
             foreach (var role in roles)
             {

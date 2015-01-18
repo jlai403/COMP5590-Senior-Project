@@ -26,9 +26,17 @@ namespace WorkflowManagementSystem.Models.Users
             Email = userSignUpViewModel.Email;
             UpdateRoles(userSignUpViewModel.Roles);
 
+            AssertEmailIsNotTaken();
             AssertFirstNameIsValid();
             AssertLastNameIsValid();
             AssertAtLeastOneRoleIsSelected();
+        }
+
+        private void AssertEmailIsNotTaken()
+        {
+            if (UserRepository.FindUser(Email) != null)
+                throw new WMSException("Email '{0}' has already been taken.", Email);
+
         }
 
         private void UpdateRoles(List<string> roleNames)

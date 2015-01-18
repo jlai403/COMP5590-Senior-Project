@@ -39,6 +39,27 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void CreateUser_EmailTaken()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+
+            var userSignUpViewModel = new UserSignUpViewModel();
+            userSignUpViewModel.FirstName = "Some";
+            userSignUpViewModel.LastName = "Dude";
+            userSignUpViewModel.Email = "somedude@someawesomeemailprovider.com";
+            userSignUpViewModel.Password = "123456";
+            userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
+            FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
+
+            // act
+            Action act = ()=> FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage(string.Format("Email '{0}' has already been taken.", userSignUpViewModel.Email));
+        }
+
+        [Test]
         public void CreateUser_MultipleRolesSelected()
         {
             // assemble
