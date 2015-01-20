@@ -25,6 +25,7 @@ namespace WorkflowManagementSystem.Models.Programs
         public ProgramViewModel Assemble()
         {
             var programViewModel = new ProgramViewModel();
+            programViewModel.RequestedDateUTC = Program.RequestedDateUTC;
             programViewModel.Name = Program.Name;
             programViewModel.Requester = Program.Requester.GetDisplayName();
             programViewModel.Semester = Program.Semester.GetDisplayName();

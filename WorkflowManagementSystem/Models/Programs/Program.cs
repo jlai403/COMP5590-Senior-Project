@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Semesters;
@@ -9,6 +10,7 @@ namespace WorkflowManagementSystem.Models.Programs
     public class Program : IEntity, IHaveWorkflow
     {
         public int Id { get; set; }
+        public DateTime RequestedDateUTC { get; set; }
         public virtual User Requester { get; set; }
         public string Name { get; set; }
         public virtual Semester Semester { get; set; }
@@ -27,6 +29,7 @@ namespace WorkflowManagementSystem.Models.Programs
 
         public void Update(User user, ProgramRequestInputViewModel programRequestInputViewModel)
         {
+            RequestedDateUTC = programRequestInputViewModel.RequestedDateUTC;
             Requester = user;
             Name = programRequestInputViewModel.Name;
             Semester = SemesterRepository.FindSemester(programRequestInputViewModel.Semester);
@@ -37,6 +40,7 @@ namespace WorkflowManagementSystem.Models.Programs
             ITSImpact = programRequestInputViewModel.ITSImpact;
             Comment = programRequestInputViewModel.Comment;
         }
+
 
         public List<WorkflowData> GetWorkflowHistory(WorkflowData workflowData = null)
         {

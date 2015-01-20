@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using WorkflowManagementSystem.Models.Workflow;
 
@@ -15,6 +16,7 @@ namespace WorkflowManagementSystem.Models.Programs
         public string ITSImpact { get; set; }
         public string Comment { get; set; }
         public List<WorkflowDataViewModel> WorkflowSteps { get; set; }
+        public DateTime RequestedDateUTC { get; set; }
 
         public ProgramViewModel()
         {

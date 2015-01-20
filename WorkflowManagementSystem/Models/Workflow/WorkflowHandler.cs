@@ -1,5 +1,6 @@
 using System.Linq;
 using WorkflowManagementSystem.Models.ApprovalChains;
+using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Models.Workflow
@@ -16,8 +17,11 @@ namespace WorkflowManagementSystem.Models.Workflow
         public void InitiateWorkflow()
         {
             var approvalChain = ApprovalChainRepository.FindApprovalChain(Request.APPROVAL_CHAIN_NAME);
-            var approvalChainStep = approvalChain.ApprovalChainSteps.First();
 
+            if (approvalChain == null) 
+                throw new WMSException("Unable to find Approval Chain for '{0}'", Request.APPROVAL_CHAIN_NAME);
+
+            var approvalChainStep = approvalChain.ApprovalChainSteps.First();
             var workflowData = WorkflowRepository.CreateWorkflowData(approvalChainStep);
             Request.CurrentWorkflowData = workflowData;
         }

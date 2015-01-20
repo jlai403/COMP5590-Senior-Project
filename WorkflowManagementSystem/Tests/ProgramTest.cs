@@ -26,6 +26,7 @@ namespace WorkflowManagementSystem.Tests
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
             var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.RequestedDateUTC = new DateTime(2015, 1, 19);
             programRequestInputViewModel.Requester = user.DisplayName;
             programRequestInputViewModel.Name = "Program Name";
             programRequestInputViewModel.Semester = semester.Id;
@@ -44,6 +45,7 @@ namespace WorkflowManagementSystem.Tests
             programRequests.Count.ShouldBeEquivalentTo(1);
 
             var programRequest = programRequests.First();
+            programRequest.RequestedDateUTC.ShouldBeEquivalentTo(programRequestInputViewModel.RequestedDateUTC);
             programRequest.Requester.ShouldBeEquivalentTo(user.DisplayName);
             programRequest.Name.ShouldBeEquivalentTo(programRequestInputViewModel.Name);
             programRequest.Semester.ShouldBeEquivalentTo(semester.DisplayName);
@@ -62,6 +64,28 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void CreateProgram_NoApprovalChain()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
+            
+            // act
+            Action act = ()=> FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Unable to find Approval Chain for 'Program'");
+        }
+
+        [Test]
         public void FindProgram()
         {
             // assemble
@@ -75,16 +99,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
-            var programRequestInputViewModel = new ProgramRequestInputViewModel();
-            programRequestInputViewModel.Requester = user.DisplayName;
-            programRequestInputViewModel.Name = "Program Name";
-            programRequestInputViewModel.Semester = semester.Id;
-            programRequestInputViewModel.Discipline = discipline.Id;
-            programRequestInputViewModel.CrossImpact = "Cross Impact";
-            programRequestInputViewModel.StudentImpact = "Student Impact";
-            programRequestInputViewModel.LibraryImpact = "Library Impact";
-            programRequestInputViewModel.ITSImpact = "ITS Impact";
-            programRequestInputViewModel.Comment = "Comment";
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
 
             // act
@@ -123,16 +138,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
 
-            var programRequestInputViewModel = new ProgramRequestInputViewModel();
-            programRequestInputViewModel.Requester = requester.DisplayName;
-            programRequestInputViewModel.Name = "Program Name";
-            programRequestInputViewModel.Semester = semester.Id;
-            programRequestInputViewModel.Discipline = discipline.Id;
-            programRequestInputViewModel.CrossImpact = "Cross Impact";
-            programRequestInputViewModel.StudentImpact = "Student Impact";
-            programRequestInputViewModel.LibraryImpact = "Library Impact";
-            programRequestInputViewModel.ITSImpact = "ITS Impact";
-            programRequestInputViewModel.Comment = "Comment";
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             // act
@@ -166,16 +172,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
 
-            var programRequestInputViewModel = new ProgramRequestInputViewModel();
-            programRequestInputViewModel.Requester = requester.DisplayName;
-            programRequestInputViewModel.Name = "Program Name";
-            programRequestInputViewModel.Semester = semester.Id;
-            programRequestInputViewModel.Discipline = discipline.Id;
-            programRequestInputViewModel.CrossImpact = "Cross Impact";
-            programRequestInputViewModel.StudentImpact = "Student Impact";
-            programRequestInputViewModel.LibraryImpact = "Library Impact";
-            programRequestInputViewModel.ITSImpact = "ITS Impact";
-            programRequestInputViewModel.Comment = "Comment";
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             // act
@@ -207,16 +204,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
 
-            var programRequestInputViewModel = new ProgramRequestInputViewModel();
-            programRequestInputViewModel.Requester = requester.DisplayName;
-            programRequestInputViewModel.Name = "Program Name";
-            programRequestInputViewModel.Semester = semester.Id;
-            programRequestInputViewModel.Discipline = discipline.Id;
-            programRequestInputViewModel.CrossImpact = "Cross Impact";
-            programRequestInputViewModel.StudentImpact = "Student Impact";
-            programRequestInputViewModel.LibraryImpact = "Library Impact";
-            programRequestInputViewModel.ITSImpact = "ITS Impact";
-            programRequestInputViewModel.Comment = "Comment";
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
@@ -259,16 +247,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
 
-            var programRequestInputViewModel = new ProgramRequestInputViewModel();
-            programRequestInputViewModel.Requester = requester.DisplayName;
-            programRequestInputViewModel.Name = "Program Name";
-            programRequestInputViewModel.Semester = semester.Id;
-            programRequestInputViewModel.Discipline = discipline.Id;
-            programRequestInputViewModel.CrossImpact = "Cross Impact";
-            programRequestInputViewModel.StudentImpact = "Student Impact";
-            programRequestInputViewModel.LibraryImpact = "Library Impact";
-            programRequestInputViewModel.ITSImpact = "ITS Impact";
-            programRequestInputViewModel.Comment = "Comment";
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
@@ -318,16 +297,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
 
-            var programRequestInputViewModel = new ProgramRequestInputViewModel();
-            programRequestInputViewModel.Requester = requester.DisplayName;
-            programRequestInputViewModel.Name = "Program Name";
-            programRequestInputViewModel.Semester = semester.Id;
-            programRequestInputViewModel.Discipline = discipline.Id;
-            programRequestInputViewModel.CrossImpact = "Cross Impact";
-            programRequestInputViewModel.StudentImpact = "Student Impact";
-            programRequestInputViewModel.LibraryImpact = "Library Impact";
-            programRequestInputViewModel.ITSImpact = "ITS Impact";
-            programRequestInputViewModel.Comment = "Comment";
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             FacadeFactory.GetDomainFacade().RejectProgramRequest(approver.Email, programRequestInputViewModel.Name);
@@ -354,16 +324,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
 
-            var programRequestInputViewModel = new ProgramRequestInputViewModel();
-            programRequestInputViewModel.Requester = requester.DisplayName;
-            programRequestInputViewModel.Name = "Program Name";
-            programRequestInputViewModel.Semester = semester.Id;
-            programRequestInputViewModel.Discipline = discipline.Id;
-            programRequestInputViewModel.CrossImpact = "Cross Impact";
-            programRequestInputViewModel.StudentImpact = "Student Impact";
-            programRequestInputViewModel.LibraryImpact = "Library Impact";
-            programRequestInputViewModel.ITSImpact = "ITS Impact";
-            programRequestInputViewModel.Comment = "Comment";
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
@@ -393,16 +354,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
 
-            var programRequestInputViewModel = new ProgramRequestInputViewModel();
-            programRequestInputViewModel.Requester = requester.DisplayName;
-            programRequestInputViewModel.Name = "Program Name";
-            programRequestInputViewModel.Semester = semester.Id;
-            programRequestInputViewModel.Discipline = discipline.Id;
-            programRequestInputViewModel.CrossImpact = "Cross Impact";
-            programRequestInputViewModel.StudentImpact = "Student Impact";
-            programRequestInputViewModel.LibraryImpact = "Library Impact";
-            programRequestInputViewModel.ITSImpact = "ITS Impact";
-            programRequestInputViewModel.Comment = "Comment";
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             // act
@@ -428,16 +380,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
 
-            var programRequestInputViewModel = new ProgramRequestInputViewModel();
-            programRequestInputViewModel.Requester = requester.DisplayName;
-            programRequestInputViewModel.Name = "Program Name";
-            programRequestInputViewModel.Semester = semester.Id;
-            programRequestInputViewModel.Discipline = discipline.Id;
-            programRequestInputViewModel.CrossImpact = "Cross Impact";
-            programRequestInputViewModel.StudentImpact = "Student Impact";
-            programRequestInputViewModel.LibraryImpact = "Library Impact";
-            programRequestInputViewModel.ITSImpact = "ITS Impact";
-            programRequestInputViewModel.Comment = "Comment";
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
@@ -467,16 +410,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
 
-            var programRequestInputViewModel = new ProgramRequestInputViewModel();
-            programRequestInputViewModel.Requester = requester.DisplayName;
-            programRequestInputViewModel.Name = "Program Name";
-            programRequestInputViewModel.Semester = semester.Id;
-            programRequestInputViewModel.Discipline = discipline.Id;
-            programRequestInputViewModel.CrossImpact = "Cross Impact";
-            programRequestInputViewModel.StudentImpact = "Student Impact";
-            programRequestInputViewModel.LibraryImpact = "Library Impact";
-            programRequestInputViewModel.ITSImpact = "ITS Impact";
-            programRequestInputViewModel.Comment = "Comment";
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             // act
@@ -501,17 +435,8 @@ namespace WorkflowManagementSystem.Tests
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
 
-            var programRequestInputViewModel = new ProgramRequestInputViewModel();
-            programRequestInputViewModel.Requester = requester.DisplayName;
-            programRequestInputViewModel.Name = "Program Name";
-            programRequestInputViewModel.Semester = semester.Id;
-            programRequestInputViewModel.Discipline = discipline.Id;
-            programRequestInputViewModel.CrossImpact = "Cross Impact";
-            programRequestInputViewModel.StudentImpact = "Student Impact";
-            programRequestInputViewModel.LibraryImpact = "Library Impact";
-            programRequestInputViewModel.ITSImpact = "ITS Impact";
-            programRequestInputViewModel.Comment = "Comment";
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             FacadeFactory.GetDomainFacade().RejectProgramRequest(approver.Email, programRequestInputViewModel.Name);
@@ -538,16 +463,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
 
-            var programRequestInputViewModel = new ProgramRequestInputViewModel();
-            programRequestInputViewModel.Requester = requester.DisplayName;
-            programRequestInputViewModel.Name = "Program Name";
-            programRequestInputViewModel.Semester = semester.Id;
-            programRequestInputViewModel.Discipline = discipline.Id;
-            programRequestInputViewModel.CrossImpact = "Cross Impact";
-            programRequestInputViewModel.StudentImpact = "Student Impact";
-            programRequestInputViewModel.LibraryImpact = "Library Impact";
-            programRequestInputViewModel.ITSImpact = "ITS Impact";
-            programRequestInputViewModel.Comment = "Comment";
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);

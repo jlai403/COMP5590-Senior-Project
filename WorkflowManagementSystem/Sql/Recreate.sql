@@ -1,6 +1,9 @@
 ﻿use WMS
 go
 
+delete from dbo.ApprovalChainSteps;
+delete from dbo.ApprovalChains;
+delete from dbo.Programs;
 delete from dbo.UserRoles;
 delete from dbo.Roles;
 delete from dbo.Users;

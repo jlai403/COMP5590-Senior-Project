@@ -1,3 +1,5 @@
+using System;
+
 namespace WorkflowManagementSystem.Models.Programs
 {
     public class ProgramRequestInputViewModel
@@ -11,5 +13,11 @@ namespace WorkflowManagementSystem.Models.Programs
         public string LibraryImpact { get; set; }
         public string ITSImpact { get; set; }
         public string Comment { get; set; }
+        public DateTime RequestedDateUTC { get; set; }
+
+        public ProgramRequestInputViewModel()
+        {
+            RequestedDateUTC = DateTime.UtcNow;
+        }
     }
 }

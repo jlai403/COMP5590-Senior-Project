@@ -31,10 +31,6 @@ namespace WorkflowManagementSystem.Models.DataAccess
                     beginTransaction.Rollback();
                     throw;
                 }
-                finally
-                {
-                    beginTransaction.Dispose();
-                }
             }
             return result;
         }

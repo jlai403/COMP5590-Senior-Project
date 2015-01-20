@@ -224,6 +224,10 @@
     <Compile Include="Migrations\201501160743062_AddUserToWorkflowData.Designer.cs">
       <DependentUpon>201501160743062_AddUserToWorkflowData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501200221090_AddRequestedDateToProgram.cs" />
+    <Compile Include="Migrations\201501200221090_AddRequestedDateToProgram.Designer.cs">
+      <DependentUpon>201501200221090_AddRequestedDateToProgram.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -296,6 +300,7 @@
     <Compile Include="Tests\FacultyTest.cs" />
     <Compile Include="Tests\FacultyTestHelper.cs" />
     <Compile Include="Tests\ProgramTest.cs" />
+    <Compile Include="Tests\ProgramTestHelper.cs" />
     <Compile Include="Tests\RoleTest.cs" />
     <Compile Include="Tests\RoleTestHelper.cs" />
     <Compile Include="Tests\SemesterTest.cs" />
@@ -359,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501160743062_AddUserToWorkflowData.resx">
       <DependentUpon>201501160743062_AddUserToWorkflowData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501200221090_AddRequestedDateToProgram.resx">
+      <DependentUpon>201501200221090_AddRequestedDateToProgram.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
