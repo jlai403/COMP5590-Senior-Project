@@ -83,6 +83,7 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Unable to find Approval Chain for 'Program'");
+            FacadeFactory.GetDomainFacade().FindAllProgramRequests().Count.ShouldBeEquivalentTo(0);
         }
 
         [Test]
