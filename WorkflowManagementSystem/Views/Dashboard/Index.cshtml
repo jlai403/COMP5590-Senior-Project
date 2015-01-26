@@ -1,4 +1,5 @@
 ﻿@using System.Web.Optimization
+@model WorkflowManagementSystem.Controllers.DashboardViewModel
 
 @Styles.Render("~/Content/css/theme/dashboard.css")
 
@@ -37,27 +38,30 @@
         <div class="col-md-6">
             <div class="request-items">
                 <h6>Your Requested Items</h6>
-						
-                <a href="">
-                    <div class="container item">
-                        <div class="row">
-                            <div class="col-md-4 col-xs-6"> Request Date: </div>
-                            <div class="col-md-8 col-xs-6"> </div>
+
+                @foreach (var userRequest in Model.UserRequests)
+                {
+                    <a href="@Url.Action("Summary", "Program", new {userRequest.Name})">
+                        <div class="container item">
+                            <div class="row">
+                                <div class="col-md-4 col-xs-6"> Request Date: </div>
+                                <div class="col-md-8 col-xs-6"> @userRequest.RequestedDateUTC </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-xs-6"> Program Name: </div>
+                                <div class="col-md-8 col-xs-6"> @userRequest.Name </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-xs-6"> Reponsible Party: </div>
+                                <div class="col-md-8 col-xs-6"> @userRequest.CurrentResponsibleParty() </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-xs-6"> Status: </div>
+                                <div class="col-md-8 col-xs-6"> @userRequest.CurrentStatus() </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4 col-xs-6"> Program Name: </div>
-                            <div class="col-md-8 col-xs-6"> </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 col-xs-6"> Reponsible Party: </div>
-                            <div class="col-md-8 col-xs-6">  </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 col-xs-6"> Status: </div>
-                            <div class="col-md-8 col-xs-6"> </div>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                }
             </div>
         </div>
         <!-- REQUESTS END -->

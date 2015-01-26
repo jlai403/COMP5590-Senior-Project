@@ -63,6 +63,8 @@ namespace WorkflowManagementSystem.Tests
         public void CreateUser_MultipleRolesSelected()
         {
             // assemble
+            FacadeFactory.GetDomainFacade().FindAllUsers().Count.ShouldBeEquivalentTo(0);
+
             new RoleTestHelper().CreateTestRoles();
 
             var userSignUpViewModel = new UserSignUpViewModel();

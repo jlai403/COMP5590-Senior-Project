@@ -124,6 +124,88 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void FindAllProgramsRequestedByUser()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
+
+            var programRequestInputViewModelTwo = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModelTwo);
+
+            // act
+            var programs = FacadeFactory.GetDomainFacade().FindAllProgramsRequestedByUser(user.Email);
+
+            // assert
+            programs.Count.ShouldBeEquivalentTo(2);
+
+            new ProgramTestHelper().AssertProgramRequest(programRequestInputViewModel, programs.First(), user.DisplayName, semester.DisplayName, discipline.DisplayName);
+            new ProgramTestHelper().AssertProgramRequest(programRequestInputViewModelTwo, programs.Last(), user.DisplayName, semester.DisplayName, discipline.DisplayName);
+        }
+
+        [Test]
+        public void FindAllProgramRequestsAwaitingForAction()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+            var approver = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
+
+            // act
+            var programs = FacadeFactory.GetDomainFacade().FindAllProgramRequestsAwaitingForAction(approver.Email);
+
+            // assert
+            programs.Count.ShouldBeEquivalentTo(1);
+
+            new ProgramTestHelper().AssertProgramRequest(programRequestInputViewModel, programs.First(), user.DisplayName, semester.DisplayName, discipline.DisplayName);
+        }
+
+        [Test]
+        public void FindAllProgramRequestsAwaitingForAction_NoneForApproverRole()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+            var approver = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
+
+            // act
+            var programs = FacadeFactory.GetDomainFacade().FindAllProgramRequestsAwaitingForAction(approver.Email);
+
+            // assert
+            programs.Count.ShouldBeEquivalentTo(0);
+        }
+
+        [Test]
         public void ApproveProgramRequest()
         {
             // assemble
@@ -307,6 +389,7 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Request has already been rejected");
+            FacadeFactory.GetDomainFacade().FindAllProgramRequests().Count.ShouldBeEquivalentTo(1);
         }
 
         [Test]
@@ -337,6 +420,7 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Request has already been completed");
+            FacadeFactory.GetDomainFacade().FindAllProgramRequests().Count.ShouldBeEquivalentTo(1);
         }
 
         [Test]

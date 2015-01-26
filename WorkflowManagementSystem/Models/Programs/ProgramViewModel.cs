@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using WorkflowManagementSystem.Models.Workflow;
 
 namespace WorkflowManagementSystem.Models.Programs
@@ -21,6 +22,16 @@ namespace WorkflowManagementSystem.Models.Programs
         public ProgramViewModel()
         {
             WorkflowSteps = new List<WorkflowDataViewModel>();
+        }
+
+        public string CurrentResponsibleParty()
+        {
+            return WorkflowSteps.Last().ResponsibleParty;
+        }
+
+        public string CurrentStatus()
+        {
+            return WorkflowSteps.Last().GetStatusDisplay();
         }
     }
 }

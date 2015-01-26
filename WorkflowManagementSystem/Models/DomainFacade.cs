@@ -209,5 +209,23 @@ namespace WorkflowManagementSystem.Models
                 return null;
             });
         }
+
+        public List<ProgramViewModel> FindAllProgramsRequestedByUser(string userEmail)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var programs = ProgramRepository.FindAllProgramsRequestedByUser(userEmail);
+                return ProgramAssembler.AssembleAll(programs);
+            });
+        }
+
+        public List<ProgramViewModel> FindAllProgramRequestsAwaitingForAction(string email)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var programs = ProgramRepository.FindAllProgramRequestsAwaitingForAction(email);
+                return ProgramAssembler.AssembleAll(programs);
+            });
+        }
     }
 }

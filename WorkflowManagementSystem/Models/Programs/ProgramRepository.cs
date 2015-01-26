@@ -27,5 +27,17 @@ namespace WorkflowManagementSystem.Models.Programs
         {
             return Queryable<Program>().FirstOrDefault(x => x.Name.Equals(name));
         }
+
+        public static List<Program> FindAllProgramsRequestedByUser(string userEmail)
+        {
+            return Queryable<Program>().Where(x => x.Requester.Email.Equals(userEmail)).ToList();
+        }
+
+        public static List<Program> FindAllProgramRequestsAwaitingForAction(string email)
+        {
+            var user = UserRepository.FindUser(email);
+            var userRoles = user.Roles.Select(x => x.Id);
+            return Queryable<Program>().Where(x => userRoles.Contains(x.CurrentWorkflowData.ApprovalChainStep.Role.Id)).ToList();
+        }
     }
 }

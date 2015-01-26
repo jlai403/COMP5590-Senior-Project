@@ -1,6 +1,7 @@
 ﻿use WMS
 go
 
+delete from dbo.WorkflowDatas
 delete from dbo.ApprovalChainSteps;
 delete from dbo.ApprovalChains;
 delete from dbo.Programs;
