@@ -44,6 +44,7 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Year is required.");
+            FacadeFactory.GetDomainFacade().FindAllSemesters().Count.ShouldBeEquivalentTo(0);
         }
 
         [Test]
@@ -58,6 +59,7 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Term is required.");
+            FacadeFactory.GetDomainFacade().FindAllSemesters().Count.ShouldBeEquivalentTo(0);
         }
     }
 }

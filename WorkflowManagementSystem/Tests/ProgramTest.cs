@@ -391,6 +391,10 @@ namespace WorkflowManagementSystem.Tests
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Request has already been rejected");
             FacadeFactory.GetDomainFacade().FindAllProgramRequests().Count.ShouldBeEquivalentTo(1);
+
+            var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
+            programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            programViewModel.WorkflowSteps.Last().Status.ShouldBeEquivalentTo(WorkflowStatus.REJECTED);
         }
 
         [Test]
@@ -422,6 +426,10 @@ namespace WorkflowManagementSystem.Tests
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Request has already been completed");
             FacadeFactory.GetDomainFacade().FindAllProgramRequests().Count.ShouldBeEquivalentTo(1);
+
+            var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
+            programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(4);
+            programViewModel.WorkflowSteps.Last().Status.ShouldBeEquivalentTo(WorkflowStatus.COMPLETED);
         }
 
         [Test]
@@ -448,6 +456,10 @@ namespace WorkflowManagementSystem.Tests
             // assert
             var errorMessage = string.Format("User '{0}' does not have sufficient permissions to approve request", approver.DisplayName);
             act.ShouldThrow<WMSException>().WithMessage(errorMessage);
+
+            var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
+            programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            programViewModel.WorkflowSteps.Last().Status.ShouldBeEquivalentTo(WorkflowStatus.PENDING_APPROVAL);
         }
 
         [Test]
@@ -478,6 +490,10 @@ namespace WorkflowManagementSystem.Tests
             // assert
             var errorMessage = string.Format("User '{0}' does not have sufficient permissions to complete request", approver.DisplayName);
             act.ShouldThrow<WMSException>().WithMessage(errorMessage);
+
+            var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
+            programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(4);
+            programViewModel.WorkflowSteps.Last().Status.ShouldBeEquivalentTo(WorkflowStatus.PENDING_APPROVAL);
         }
 
         [Test]
@@ -504,6 +520,10 @@ namespace WorkflowManagementSystem.Tests
             // assert
             var errorMessage = string.Format("User '{0}' does not have sufficient permissions to reject request", approver.DisplayName);
             act.ShouldThrow<WMSException>().WithMessage(errorMessage);
+
+            var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
+            programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            programViewModel.WorkflowSteps.Last().Status.ShouldBeEquivalentTo(WorkflowStatus.PENDING_APPROVAL);
         }
 
         [Test]
@@ -531,6 +551,9 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Request has already been rejected");
+            var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
+            programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            programViewModel.WorkflowSteps.Last().Status.ShouldBeEquivalentTo(WorkflowStatus.REJECTED);
         }
 
         [Test]
@@ -561,6 +584,9 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Request has already been completed");
+            var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
+            programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(4);
+            programViewModel.WorkflowSteps.Last().Status.ShouldBeEquivalentTo(WorkflowStatus.COMPLETED);
         }
     }
 }

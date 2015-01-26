@@ -57,6 +57,7 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage(string.Format("Email '{0}' has already been taken.", userSignUpViewModel.Email));
+            FacadeFactory.GetDomainFacade().FindAllUsers().Count.ShouldBeEquivalentTo(1);
         }
 
         [Test]

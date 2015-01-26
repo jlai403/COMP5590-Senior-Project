@@ -41,6 +41,7 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Faculty name is required.");
+            FacadeFactory.GetDomainFacade().FindAllFaculties().Count.ShouldBeEquivalentTo(0);
         }
 
         [Test]
@@ -100,6 +101,7 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Discipline code is required.");
+            FacadeFactory.GetDomainFacade().FindAllDisciplines().Count.ShouldBeEquivalentTo(0);
         }
 
         [Test]
@@ -117,6 +119,7 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Discipline name is required.");
+            FacadeFactory.GetDomainFacade().FindAllDisciplines().Count.ShouldBeEquivalentTo(0);
         }
 
         [Test]
@@ -133,6 +136,7 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Cannot find faculty: ");
+            FacadeFactory.GetDomainFacade().FindAllDisciplines().Count.ShouldBeEquivalentTo(0);
         }
 
 
