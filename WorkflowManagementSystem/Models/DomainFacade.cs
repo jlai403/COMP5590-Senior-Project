@@ -227,5 +227,14 @@ namespace WorkflowManagementSystem.Models
                 return ProgramAssembler.AssembleAll(programs);
             });
         }
+
+        public bool IsProgramRequestCurrentlyOnLastWorkflowStep(string name)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var program = ProgramRepository.FindProgram(name);
+                return program.CurrentWorkflowData.IsLastWorkflowStep();
+            });
+        }
     }
 }

@@ -1,0 +1,125 @@
+﻿@using System.Web.Optimization
+@model WorkflowManagementSystem.Models.Programs.ProgramViewModel
+
+@Styles.Render("~/Content/css/theme/update-program.css")
+
+<div class="container program-summary center">
+	<div class="col-xs-12">
+		<div class="row center-text">
+			<h3 style="margin: 20px;">Update Program Status</h3>
+		</div>
+				
+		<div class="row">
+			<div class="col-sm-6 summary-details">
+				<div class="row center-text">
+					<h5>Summary</h5>
+				</div>
+						
+				<div class="details small-text">
+					<div class="row">
+						<div class="col-xs-6 bold-text right-align"> Requested On: </div>
+						<div class="col-xs-6 "> @Model.RequestedDateUTC </div>
+					</div>
+							
+					<div class="row">
+						<div class="col-xs-6 bold-text right-align"> Requested By: </div>
+						<div class="col-xs-6 "> @Model.Requester </div>
+					</div>
+							
+					<div class="row">
+						<div class="col-xs-6 bold-text right-align"> Name: </div>
+						<div class="col-xs-6 "> @Model.Name </div>
+					</div>
+							
+					<div class="row">
+						<div class="col-xs-6 bold-text right-align"> Discipline: </div>
+						<div class="col-xs-6 "> @Model.Discipline </div>
+					</div>
+							
+					<div class="row">
+						<div class="col-xs-6 bold-text right-align"> Cross Impact: </div>
+						<div class="col-xs-6 "> 
+							<p class=cross-impact> @Model.CrossImpact </p> 
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-6 bold-text right-align"> Student Impact: </div>
+						<div class="col-xs-6">
+							<p class="student-impact"> @Model.StudentImpact </p>
+						</div>
+					</div>
+							
+					<div class="row">
+						<div class="col-xs-6 bold-text right-align"> Library Impact: </div>
+						<div class="col-xs-6">
+							<p class="library-impact"> @Model.LibraryImpact </p> 
+						</div>
+					</div>
+							
+					<div class="row">
+						<div class="col-xs-6 bold-text right-align"> ITS Impact: </div>
+						<div class="col-xs-6"> 
+							<p class="its-impact"> @Model.ITSImpact </p> 
+						</div>
+					</div>
+				</div> <!-- div.details end -->
+			</div> <!-- div.col-xs-6 end -->
+
+			<div class="col-sm-6 workflow-details">
+				<div class="row center-text">
+					<h5>Workflow</h5>
+				</div>
+
+			    <div class="workflow-details small-text">
+			        @foreach (var workflowStep in Model.WorkflowSteps)
+			        {
+			            <div class="row detail @workflowStep.GetStatusDisplay() ?>">
+			                <div class="col-xs-5 right-align">
+			                    Role:
+			                </div>
+			                <div class="col-xs-7 left-align">
+			                    @workflowStep.ResponsibleParty
+			                </div>
+
+			                <div class="row">
+			                    <div class="col-xs-5 right-align">
+			                        Status:
+			                    </div>
+			                    <div class="col-xs-7 left-align">
+			                        @workflowStep.GetStatusDisplay()
+			                    </div>
+			                </div>
+
+			                <div class="row">
+			                    <div class="col-xs-5 right-align">
+
+			                        @if (workflowStep.IsApproved())
+			                        {
+			                            @:Approved By:
+			                        }
+			                        @if (workflowStep.IsRejected())
+			                        {
+			                            @:Rejected By:
+			                        }
+			                    </div>
+			                    <div class="col-xs-7 left-align">
+			                        @workflowStep.User
+			                    </div>
+			                </div>
+			            </div>
+			        }
+			    </div>
+
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-xs-6">
+                        @Html.ActionLink("approve", "Approve", "Program", new {name = Model.Name}, new {@class="form-control button green"})
+                    </div>
+				    <div class="col-xs-6">
+                        @Html.ActionLink("reject", "Reject", "Program", new {name = Model.Name}, new {@class="form-control button red"})
+				    </div>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>

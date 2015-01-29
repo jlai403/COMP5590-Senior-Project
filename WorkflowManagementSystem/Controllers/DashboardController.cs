@@ -11,7 +11,7 @@ namespace WorkflowManagementSystem.Controllers
         {
             var awaitingRequests = FacadeFactory.GetDomainFacade().FindAllProgramRequestsAwaitingForAction(User.Identity.Name);
             var requests = FacadeFactory.GetDomainFacade().FindAllProgramsRequestedByUser(User.Identity.Name);
-            var dashboardViewModel = new DashboardViewModel(requests);
+            var dashboardViewModel = new DashboardViewModel(requests, awaitingRequests);
             return View(dashboardViewModel);
         }
     }
@@ -19,10 +19,12 @@ namespace WorkflowManagementSystem.Controllers
     public class DashboardViewModel
     {
         public List<ProgramViewModel> UserRequests { get; set; }
+        public List<ProgramViewModel> ActionableRequests { get; set; }
 
-        public DashboardViewModel(List<ProgramViewModel> userRequests)
+        public DashboardViewModel(List<ProgramViewModel> userRequests, List<ProgramViewModel> actionableRequests)
         {
             UserRequests = userRequests;
+            ActionableRequests = actionableRequests;
         }
     }
 }

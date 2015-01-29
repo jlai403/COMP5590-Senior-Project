@@ -316,6 +316,99 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void ApproveProgramRequest_WorkflowOnLastStep()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+            var approverTwo = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approverTwo.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approverTwo.Email, programRequestInputViewModel.Name);
+
+            // act
+            Action act = ()=> FacadeFactory.GetDomainFacade().ApproveProgramRequest(approverTwo.Email, programRequestInputViewModel.Name);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Request is currently on the last workflow and should be completed.");
+            FacadeFactory.GetDomainFacade().FindAllProgramRequests().Count.ShouldBeEquivalentTo(1);
+
+            var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
+            programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(4);
+            programViewModel.WorkflowSteps.Last().Status.ShouldBeEquivalentTo(WorkflowStatus.PENDING_APPROVAL);
+        }
+
+        [Test]
+        public void IsProgramRequestCurrentlyOnLastWorkflowStep()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+            var approverTwo = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+
+            // act
+            var result = FacadeFactory.GetDomainFacade().IsProgramRequestCurrentlyOnLastWorkflowStep(programRequestInputViewModel.Name);
+
+            // assert
+            result.Should().BeFalse();
+        }
+
+        [Test]
+        public void IsProgramRequestCurrentlyOnLastWorkflowStep_CurrentlyOnLastWorkflowStep()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+            var approverTwo = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approverTwo.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approverTwo.Email, programRequestInputViewModel.Name);
+
+            // act
+            var result = FacadeFactory.GetDomainFacade().IsProgramRequestCurrentlyOnLastWorkflowStep(programRequestInputViewModel.Name);
+
+            // assert
+            result.Should().BeTrue();
+        }
+
+        [Test]
         public void CompleteProgramRequest()
         {
             // assemble

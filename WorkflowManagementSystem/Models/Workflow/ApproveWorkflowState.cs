@@ -12,6 +12,13 @@ namespace WorkflowManagementSystem.Models.Workflow
             AssertUserHasSufficientPermissions(user, request);
             AssertWorkflowIsNotRejected(request);
             AssertWorkflowIsNotCompleted(request);
+            AssertWorkflowIsNotOnLastStep(request);
+        }
+
+        private void AssertWorkflowIsNotOnLastStep(IHaveWorkflow request)
+        {
+            if (request.CurrentWorkflowData.IsLastWorkflowStep())
+                throw new WMSException("Request is currently on the last workflow and should be completed.");
         }
 
         private void AssertUserHasSufficientPermissions(User user, IHaveWorkflow request)

@@ -9,27 +9,30 @@
         <div class="col-md-6">
             <div class="actionable-items">
                 <h6>Actionable Items</h6>
-						
-                <a href="">
-                    <div class="container item">
-                        <div class="row">
-                            <div class="col-md-4 col-xs-6"> Request Date: </div>
-                            <div class="col-md-8 col-xs-6"> </div>
+
+                @foreach (var actionItem in Model.ActionableRequests)
+                {
+                    <a href="@Url.Action("UpdateStatus", "Program", new {actionItem.Name})">
+                        <div class="container item">
+                            <div class="row">
+                                <div class="col-md-4 col-xs-6"> Request Date: </div>
+                                <div class="col-md-8 col-xs-6"> @actionItem.RequestedDateUTC </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-xs-6"> Requested By: </div>
+                                <div class="col-md-8 col-xs-6"> @actionItem.Requester </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-xs-6"> Program Name: </div>
+                                <div class="col-md-8 col-xs-6"> @actionItem.Name </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-xs-6"> Status: </div>
+                                <div class="col-md-8 col-xs-6"> @actionItem.CurrentStatus() </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4 col-xs-6"> Requested By: </div>
-                            <div class="col-md-8 col-xs-6"> </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 col-xs-6"> Program Name: </div>
-                            <div class="col-md-8 col-xs-6"> </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 col-xs-6"> Status: </div>
-                            <div class="col-md-8 col-xs-6"> </div>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                }
             </div>
         </div>
         <!-- ACTIONABLE ITEMS END -->

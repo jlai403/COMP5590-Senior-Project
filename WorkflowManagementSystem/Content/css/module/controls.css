@@ -1,0 +1,7 @@
+﻿.form-control.button {
+    text-align: center;
+}
+
+a.button:hover {
+    text-decoration: none;
+}

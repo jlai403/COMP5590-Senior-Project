@@ -6,6 +6,9 @@
 
 @Styles.Render("~/Content/css/theme/create-program.css")
 
+<script src="/Content/js/animation.js"></script>
+<script src="/Content/js/errors.js"></script>
+
 <div class="container form center">
     <div class="col-md-12">
         @using (Html.BeginForm("CreateRequest", "Program", FormMethod.Post, new { enctype = "multipart/form-data" }))
