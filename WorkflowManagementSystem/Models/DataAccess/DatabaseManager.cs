@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Data;
+using System.Data.Entity;
 
 namespace WorkflowManagementSystem.Models.DataAccess
 {
@@ -22,9 +23,9 @@ namespace WorkflowManagementSystem.Models.DataAccess
             DbContext.Database.Initialize(true);
         }
 
-        public DbContextTransaction BeginTransaction()
+        public DbContextTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
-            return DbContext.Database.BeginTransaction();
+            return DbContext.Database.BeginTransaction(isolationLevel);
         }
 
         public void CleanUp()

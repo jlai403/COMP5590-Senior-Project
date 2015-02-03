@@ -48,10 +48,20 @@ namespace WorkflowManagementSystem.Controllers
         [HttpPost]
         public ActionResult SignUp(UserSignUpViewModel userSignUpViewModel)
         {
-            FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
-            var loginSuccessful = SecurityManager.Login(userSignUpViewModel.Email, userSignUpViewModel.Password);
-            if (loginSuccessful)
-                return RedirectToAction("Index", "Dashboard");
+            try
+            {
+                FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
+                var loginSuccessful = SecurityManager.Login(userSignUpViewModel.Email, userSignUpViewModel.Password);
+                if (loginSuccessful)
+                    return RedirectToAction("Index", "Dashboard");
+            }
+            catch (WMSException e)
+            {
+                ViewBag.Roles = FacadeFactory.GetDomainFacade().FindAllRoles();
+                ViewBag.ErrorMessage = e.Message;
+                return View(userSignUpViewModel);
+            }
+            
 
             throw new WMSException("Error occured when signing up for user: {0}", userSignUpViewModel.Email);
         }

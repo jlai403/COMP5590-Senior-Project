@@ -28,6 +28,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
                 }
                 catch (Exception e)
                 {
+                    DatabaseManager.Instance.DbContext.SaveChanges();
                     beginTransaction.Rollback();
                     throw;
                 }
