@@ -33,7 +33,7 @@ namespace WorkflowManagementSystem.Models.Workflow
 
         public bool IsLastWorkflowStep()
         {
-            return ApprovalChainStep.ApprovalChain.ApprovalChainSteps.Last().Sequence == ApprovalChainStep.Sequence;
+            return ApprovalChainStep.ApprovalChain.ApprovalChainSteps.Max(x => x.Sequence) == ApprovalChainStep.Sequence;
         }
     }
 }

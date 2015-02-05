@@ -6,8 +6,8 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
     public class ApprovalChainStep : IEntity
     {
         public int Id { get; set; }
-        public ApprovalChain ApprovalChain { get; set; }
-        public Role Role { get; set; }
+        public virtual ApprovalChain ApprovalChain { get; set; }
+        public virtual Role Role { get; set; }
         public int Sequence { get; set; }
 
         public ApprovalChainStep()

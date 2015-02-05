@@ -9,7 +9,6 @@ namespace WorkflowManagementSystem.Models.DataAccess
         public ICleanUpData _testCleanUpListener = new NullTestCleanUpInitializer();
         public ICreateUnitOfWork _newUnitOfWorkCreationStrategy = new DefaultUnitOfWorkCreationgStrategy();
 
-
         public static DatabaseManager Instance
         {
             get { return _instance ?? (_instance = new DatabaseManager()); }
