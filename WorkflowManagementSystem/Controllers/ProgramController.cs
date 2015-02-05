@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using WorkflowManagementSystem.Models;
-using WorkflowManagementSystem.Models.Attachments;
 using WorkflowManagementSystem.Models.ErrorHandling;
+using WorkflowManagementSystem.Models.Files;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Workflow;
 
@@ -31,14 +31,14 @@ namespace WorkflowManagementSystem.Controllers
                 foreach (var file in files)
                 {
                     if (file == null) continue;
-                    var attachmentInputViewModel = new AttachmentInputViewModel
+                    var attachmentInputViewModel = new FileInputViewModel
                     {
                         WorkflowItemName = programRequestInputViewModel.Name,
                         FileName = file.FileName,
                         Content = file.InputStream,
                         ContentType = file.ContentType
                     };
-                    FacadeFactory.GetDomainFacade().UploadAttachment(User.Identity.Name, attachmentInputViewModel, WorkflowItemTypes.Program);
+                    FacadeFactory.GetDomainFacade().UploadFile(User.Identity.Name, attachmentInputViewModel, WorkflowItemTypes.Program);
                 }
             }
             catch (WMSException e)

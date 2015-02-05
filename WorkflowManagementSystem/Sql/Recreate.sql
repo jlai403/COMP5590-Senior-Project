@@ -1,7 +1,7 @@
 ﻿use WMS
 go
 
-delete from dbo.Attachments;
+delete from dbo.Files;
 delete from dbo.Comments;
 delete from dbo.WorkflowDatas
 delete from dbo.ApprovalChainSteps;

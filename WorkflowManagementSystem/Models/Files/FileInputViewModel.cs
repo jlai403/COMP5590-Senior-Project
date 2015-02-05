@@ -1,8 +1,8 @@
 using System.IO;
 
-namespace WorkflowManagementSystem.Models.Attachments
+namespace WorkflowManagementSystem.Models.Files
 {
-    public class AttachmentInputViewModel
+    public class FileInputViewModel
     {
         public string WorkflowItemName { get; set; }
         public string FileName { get; set; }

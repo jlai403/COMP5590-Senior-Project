@@ -2,9 +2,9 @@
 using System.IO;
 using WorkflowManagementSystem.Models.Users;
 
-namespace WorkflowManagementSystem.Models.Attachments
+namespace WorkflowManagementSystem.Models.Files
 {
-    public class Attachment : IEntity
+    public class File : IEntity
     {
         public int Id { get; set; }
         public User User { get; set; }
@@ -14,12 +14,12 @@ namespace WorkflowManagementSystem.Models.Attachments
         public byte[] Content { get; set; }
         public string ContentType { get; set; }
 
-        public void Update(User user, AttachmentInputViewModel attachmentInputViewModel)
+        public void Update(User user, FileInputViewModel fileInputViewModel)
         {
             User = user;
-            FileName = attachmentInputViewModel.FileName;
-            Content = GetBytes(attachmentInputViewModel.Content);
-            ContentType = attachmentInputViewModel.ContentType;
+            FileName = fileInputViewModel.FileName;
+            Content = GetBytes(fileInputViewModel.Content);
+            ContentType = fileInputViewModel.ContentType;
             FileId = Guid.NewGuid();
         }
 

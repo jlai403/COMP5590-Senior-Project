@@ -1,12 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Web.UI.WebControls;
 using FluentAssertions;
 using NUnit.Framework;
 using WorkflowManagementSystem.Models;
-using WorkflowManagementSystem.Models.Attachments;
 using WorkflowManagementSystem.Models.ErrorHandling;
+using WorkflowManagementSystem.Models.Files;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Workflow;
 
@@ -92,7 +91,7 @@ namespace WorkflowManagementSystem.Tests
             var content = new MemoryStream(expectedContentBytes);
             var expectedContentType = "text/pdf";
 
-            var attachmentInputViewModel = new AttachmentInputViewModel
+            var attachmentInputViewModel = new FileInputViewModel
             {
                 WorkflowItemName = programRequestInputViewModel.Name,
                 FileName = attachmentFileName,
@@ -101,7 +100,7 @@ namespace WorkflowManagementSystem.Tests
             };
 
             // act
-            FacadeFactory.GetDomainFacade().UploadAttachment(user.Email, attachmentInputViewModel, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().UploadFile(user.Email, attachmentInputViewModel, WorkflowItemTypes.Program);
 
             // assert
             var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);

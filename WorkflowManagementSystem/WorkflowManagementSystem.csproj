@@ -184,6 +184,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProgramController.cs" />
     <Compile Include="Global.asax.cs">
@@ -241,6 +242,10 @@
     <Compile Include="Migrations\201502051712381_AddAttachmentsToWorkflowItem.Designer.cs">
       <DependentUpon>201502051712381_AddAttachmentsToWorkflowItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502052230140_RenameAttachmentsToFile.cs" />
+    <Compile Include="Migrations\201502052230140_RenameAttachmentsToFile.Designer.cs">
+      <DependentUpon>201502052230140_RenameAttachmentsToFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -249,10 +254,11 @@
     <Compile Include="Models\ApprovalChains\ApprovalChainStep.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainStepViewModel.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainViewModel.cs" />
-    <Compile Include="Models\Attachments\Attachment.cs" />
-    <Compile Include="Models\Attachments\AttachmentAssembler.cs" />
-    <Compile Include="Models\Attachments\AttachmentInputViewModel.cs" />
-    <Compile Include="Models\Attachments\AttachmentRepository.cs" />
+    <Compile Include="Models\Files\File.cs" />
+    <Compile Include="Models\Files\FileAssembler.cs" />
+    <Compile Include="Models\Files\FileInputViewModel.cs" />
+    <Compile Include="Models\Files\FileRepository.cs" />
+    <Compile Include="Models\Files\FileViewModel.cs" />
     <Compile Include="Models\DataAccess\DatabaseManager.cs" />
     <Compile Include="Models\DataAccess\NullTestCleanUpInitializer.cs" />
     <Compile Include="Models\DataAccess\ICleanUpData.cs" />
@@ -319,6 +325,7 @@
     <Compile Include="Models\DataAccess\WorkflowManagementSystemDbContext.cs" />
     <Compile Include="Tests\ApprovalChainTest.cs" />
     <Compile Include="Tests\ApprovalChainTestHelper.cs" />
+    <Compile Include="Tests\FileTest.cs" />
     <Compile Include="Tests\DisciplineTestHelper.cs" />
     <Compile Include="Tests\FacultyTest.cs" />
     <Compile Include="Tests\FacultyTestHelper.cs" />
@@ -401,6 +408,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502051712381_AddAttachmentsToWorkflowItem.resx">
       <DependentUpon>201502051712381_AddAttachmentsToWorkflowItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502052230140_RenameAttachmentsToFile.resx">
+      <DependentUpon>201502052230140_RenameAttachmentsToFile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

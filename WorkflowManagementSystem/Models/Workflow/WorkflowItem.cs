@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using WorkflowManagementSystem.Models.Attachments;
+using WorkflowManagementSystem.Models.Files;
 using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Models.Workflow
@@ -11,7 +11,7 @@ namespace WorkflowManagementSystem.Models.Workflow
         public virtual WorkflowData CurrentWorkflowData { get; set; }
         public abstract string APPROVAL_CHAIN_NAME { get; }
         public virtual List<Comment> Comments { get; set; }
-        public virtual List<Attachment> Attachments { get; set; }
+        public virtual List<File> Attachments { get; set; }
 
         public WorkflowItem()
         {
@@ -25,10 +25,10 @@ namespace WorkflowManagementSystem.Models.Workflow
             return comment;
         }
 
-        public void AddAttachment(User user, AttachmentInputViewModel attachmentInputViewModel)
+        public void AddAttachments(User user, FileInputViewModel fileInputViewModel)
         {
-            var attachment = AttachmentRepository.CreateAttachment(user, attachmentInputViewModel);
-            Attachments.Add(attachment);
+            var file = FileRepository.CreateFile(user, fileInputViewModel);
+            Attachments.Add(file);
         }
     }
 }

@@ -1,9 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using WorkflowManagementSystem.Models.ApprovalChains;
-using WorkflowManagementSystem.Models.Attachments;
 using WorkflowManagementSystem.Models.DataAccess;
 using WorkflowManagementSystem.Models.Faculty;
+using WorkflowManagementSystem.Models.Files;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Roles;
 using WorkflowManagementSystem.Models.Semesters;
@@ -249,13 +250,22 @@ namespace WorkflowManagementSystem.Models
             });
         }
 
-        public void UploadAttachment(string email, AttachmentInputViewModel attachmentInputViewModel, WorkflowItemTypes workflowItemType)
+        public void UploadFile(string email, FileInputViewModel fileInputViewModel, WorkflowItemTypes workflowItemType)
         {
             TransactionHandler.Instance.Execute(() =>
             {
                 var user = UserRepository.FindUser(email);
-                AttachmentRepository.UploadAttachment(user, attachmentInputViewModel, workflowItemType);
+                FileRepository.UploadFile(user, fileInputViewModel, workflowItemType);
                 return null;
+            });
+        }
+
+        public FileViewModel FindFile(Guid fileId)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var file = FileRepository.FindFile(fileId);
+                return new FileAssembler(file).Assemble();
             });
         }
     }

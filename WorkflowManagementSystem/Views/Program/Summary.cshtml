@@ -64,6 +64,20 @@
                             <p class="its-impact"> @Model.ITSImpact </p>
                         </div>
                     </div>
+
+                    @if (Model.Attachments.Count > 0)
+                    {
+                        <div class="row">
+						    <div class="col-xs-6 bold-text right-align"> Attachments: </div>
+						    <div class="col-xs-6"> 
+							    @foreach (var attachment in Model.Attachments)
+							    {
+                                    @Html.ActionLink(attachment.Key, "Download", "File", new {fileId = attachment.Value}, new {target="_blank"})
+                                    <br/>
+							    }
+						    </div>
+					    </div>
+                    }
                 </div>
             </div>
             <!-- summary details end -->
@@ -143,7 +157,7 @@
                 }
 
                 <div class="row add-comment" style="margin-top: 20px;">
-                    @using (Html.BeginForm("AddComment", "Program", FormMethod.Post, new {id = "add-comment-form"}))
+                    @using (Html.BeginForm("AddComment", "Program", FormMethod.Post, new { id = "add-comment-form" }))
                     {
                         @Html.Hidden("WorkflowItemName", Model.Name)
                         <textarea name="Text" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="11"></textarea>
