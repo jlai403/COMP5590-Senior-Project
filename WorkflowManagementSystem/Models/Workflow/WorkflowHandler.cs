@@ -7,9 +7,9 @@ namespace WorkflowManagementSystem.Models.Workflow
 {
     public class WorkflowHandler
     {
-        public IHaveWorkflow Request { get; set; }
+        public WorkflowItem Request { get; set; }
 
-        public WorkflowHandler(IHaveWorkflow request)
+        public WorkflowHandler(WorkflowItem request)
         {
             Request = request;
         }

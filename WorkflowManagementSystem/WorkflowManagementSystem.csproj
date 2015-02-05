@@ -229,6 +229,10 @@
     <Compile Include="Migrations\201501200221090_AddRequestedDateToProgram.Designer.cs">
       <DependentUpon>201501200221090_AddRequestedDateToProgram.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502050339513_RefactorProgramToExtendWorkflowItem.cs" />
+    <Compile Include="Migrations\201502050339513_RefactorProgramToExtendWorkflowItem.Designer.cs">
+      <DependentUpon>201502050339513_RefactorProgramToExtendWorkflowItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -282,7 +286,7 @@
     <Compile Include="Models\Users\UserSignUpViewModel.cs" />
     <Compile Include="Models\Users\UserViewModel.cs" />
     <Compile Include="Models\Workflow\CompleteWorkflowState.cs" />
-    <Compile Include="Models\Workflow\IHaveWorkflow.cs" />
+    <Compile Include="Models\Workflow\WorkflowItem.cs" />
     <Compile Include="Models\Workflow\IWorkflowState.cs" />
     <Compile Include="Models\Workflow\ApproveWorkflowState.cs" />
     <Compile Include="Models\Workflow\RejectWorkflowState.cs" />
@@ -369,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501200221090_AddRequestedDateToProgram.resx">
       <DependentUpon>201501200221090_AddRequestedDateToProgram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502050339513_RefactorProgramToExtendWorkflowItem.resx">
+      <DependentUpon>201502050339513_RefactorProgramToExtendWorkflowItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

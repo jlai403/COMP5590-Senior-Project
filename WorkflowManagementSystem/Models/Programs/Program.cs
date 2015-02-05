@@ -7,9 +7,8 @@ using WorkflowManagementSystem.Models.Workflow;
 
 namespace WorkflowManagementSystem.Models.Programs
 {
-    public class Program : IEntity, IHaveWorkflow
+    public class Program : WorkflowItem
     {
-        public int Id { get; set; }
         public DateTime RequestedDateUTC { get; set; }
         public virtual User Requester { get; set; }
         public string Name { get; set; }
@@ -21,11 +20,7 @@ namespace WorkflowManagementSystem.Models.Programs
         public string ITSImpact { get; set; }
         public string Comment { get; set; }
         
-        public virtual WorkflowData CurrentWorkflowData { get; set; }
-        public string APPROVAL_CHAIN_NAME
-        {
-            get { return "Program"; }
-        }
+        public override string APPROVAL_CHAIN_NAME { get { return "Program"; } }
 
         public void Update(User user, ProgramRequestInputViewModel programRequestInputViewModel)
         {

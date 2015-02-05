@@ -7,7 +7,7 @@ namespace WorkflowManagementSystem.Models.Workflow
 {
     public class ApproveWorkflowState : IWorkflowState
     {
-        protected override void AssertWorkflowCanBeUpdated(User user, IHaveWorkflow request)
+        protected override void AssertWorkflowCanBeUpdated(User user, WorkflowItem request)
         {
             AssertUserHasSufficientPermissions(user, request);
             AssertWorkflowIsNotRejected(request);
@@ -15,31 +15,31 @@ namespace WorkflowManagementSystem.Models.Workflow
             AssertWorkflowIsNotOnLastStep(request);
         }
 
-        private void AssertWorkflowIsNotOnLastStep(IHaveWorkflow request)
+        private void AssertWorkflowIsNotOnLastStep(WorkflowItem request)
         {
             if (request.CurrentWorkflowData.IsLastWorkflowStep())
                 throw new WMSException("Request is currently on the last workflow and should be completed.");
         }
 
-        private void AssertUserHasSufficientPermissions(User user, IHaveWorkflow request)
+        private void AssertUserHasSufficientPermissions(User user, WorkflowItem request)
         {
             if (!user.Roles.Contains(request.CurrentWorkflowData.ApprovalChainStep.Role))
                 throw new WMSException("User '{0}' does not have sufficient permissions to approve request", user.GetDisplayName());
         }
 
-        private void AssertWorkflowIsNotRejected(IHaveWorkflow request)
+        private void AssertWorkflowIsNotRejected(WorkflowItem request)
         {
             if (request.CurrentWorkflowData.Status == WorkflowStatus.REJECTED)
                 throw new WMSException("Request has already been rejected");
         }
 
-        private void AssertWorkflowIsNotCompleted(IHaveWorkflow request)
+        private void AssertWorkflowIsNotCompleted(WorkflowItem request)
         {
             if (request.CurrentWorkflowData.Status == WorkflowStatus.COMPLETED)
                 throw new WMSException("Request has already been completed");
         }
 
-        protected override void Update(User user, IHaveWorkflow request)
+        protected override void Update(User user, WorkflowItem request)
         {
             var currentWorkflowData = request.CurrentWorkflowData;
             currentWorkflowData.UpdateStatus(user, WorkflowStatus.APPROVED);

@@ -23,14 +23,18 @@ namespace WorkflowManagementSystem.Models.DataAccess
         protected DbSet<ApprovalChainStep> ApprovalChainStep { get; set; }
         protected DbSet<Discipline> Discipline { get; set; }
         protected DbSet<Faculty.Faculty> Faculty { get; set; }
-        protected DbSet<Program> Program { get; set; }
+        protected DbSet<WorkflowItem> WorkflowItem { get; set; }
         protected DbSet<Role> Role { get; set; }
         protected DbSet<Semester> Semester { get; set; }
         protected DbSet<User> User { get; set; }
         protected DbSet<WorkflowData> WorkflowData { get; set; }
-
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<WorkflowItem>().HasRequired(x => x.CurrentWorkflowData);
+            modelBuilder.Entity<Program>().ToTable("Programs");
+
             modelBuilder.Entity<User>().HasMany(u => u.Roles).WithMany(r => r.Users).Map(m =>
             {
                 m.MapLeftKey("UserId");
@@ -42,5 +46,6 @@ namespace WorkflowManagementSystem.Models.DataAccess
 
             modelBuilder.Entity<ApprovalChain>().HasMany(ac => ac.ApprovalChainSteps);
         }
+
     }
 }
