@@ -237,13 +237,13 @@ namespace WorkflowManagementSystem.Models
             });
         }
 
-        public void AddComment(string email, CommentInputViewModel commentInputViewModel, WorkflowItemTypes workflowItemType)
+        public CommentViewModel AddComment(string email, CommentInputViewModel commentInputViewModel, WorkflowItemTypes workflowItemType)
         {
-            TransactionHandler.Instance.Execute(() =>
+            return TransactionHandler.Instance.Execute(() =>
             {
                 var user = UserRepository.FindUser(email);
-                CommentRepository.AddComment(user, commentInputViewModel, workflowItemType);
-                return null;
+                var addedComment = CommentRepository.AddComment(user, commentInputViewModel, workflowItemType);
+                return new CommentAssembler(addedComment).Assemble();
             });
         }
     }

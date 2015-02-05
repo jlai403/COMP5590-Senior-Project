@@ -21,6 +21,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
 
         protected DbSet<ApprovalChain> ApprovalChain { get; set; }
         protected DbSet<ApprovalChainStep> ApprovalChainStep { get; set; }
+        protected DbSet<Comment> Comment { get; set; }
         protected DbSet<Discipline> Discipline { get; set; }
         protected DbSet<Faculty.Faculty> Faculty { get; set; }
         protected DbSet<WorkflowItem> WorkflowItem { get; set; }

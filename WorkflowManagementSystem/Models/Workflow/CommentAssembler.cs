@@ -7,7 +7,7 @@ namespace WorkflowManagementSystem.Models.Workflow
     {
         private Comment Comment { get; set; }
 
-        private CommentAssembler(Comment comment)
+        public CommentAssembler(Comment comment)
         {
             Comment = comment;
         }
@@ -17,7 +17,7 @@ namespace WorkflowManagementSystem.Models.Workflow
             return comments.Select(comment => new CommentAssembler(comment).Assemble()).ToList();
         }
 
-        private CommentViewModel Assemble()
+        public CommentViewModel Assemble()
         {
             var commentViewModel = new CommentViewModel();
             commentViewModel.User = Comment.User.GetDisplayName();

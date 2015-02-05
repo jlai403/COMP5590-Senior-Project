@@ -768,12 +768,16 @@ namespace WorkflowManagementSystem.Tests
             commentInputViewModel.DateTimeUtc = new DateTime(2015, 1, 20);
 
             // act
-            FacadeFactory.GetDomainFacade().AddComment(commenter.Email, commentInputViewModel, WorkflowItemTypes.Program);
+            var comment = FacadeFactory.GetDomainFacade().AddComment(commenter.Email, commentInputViewModel, WorkflowItemTypes.Program);
 
             // assert
+            comment.User.ShouldBeEquivalentTo(commenter.DisplayName);
+            comment.Text.ShouldBeEquivalentTo(commentInputViewModel.Text);
+            comment.DateTimeUtc.ShouldBeEquivalentTo(commentInputViewModel.DateTimeUtc);
+            
             var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
             programViewModel.Comments.Count.ShouldBeEquivalentTo(2);
-            var comment = programViewModel.Comments.Last();
+            comment = programViewModel.Comments.Last();
             comment.User.ShouldBeEquivalentTo(commenter.DisplayName);
             comment.Text.ShouldBeEquivalentTo(commentInputViewModel.Text);
             comment.DateTimeUtc.ShouldBeEquivalentTo(commentInputViewModel.DateTimeUtc);

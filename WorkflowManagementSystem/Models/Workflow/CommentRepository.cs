@@ -14,10 +14,10 @@ namespace WorkflowManagementSystem.Models.Workflow
             return comment;
         }
 
-        public static void AddComment(User user, CommentInputViewModel commentInputViewModel, WorkflowItemTypes workflowItemType)
+        public static Comment AddComment(User user, CommentInputViewModel commentInputViewModel, WorkflowItemTypes workflowItemType)
         {
             var workflowItem = WorkflowRepository.FindWorkflowItemForType(workflowItemType, commentInputViewModel.WorkflowItemName);
-            workflowItem.AddComment(user, commentInputViewModel.DateTimeUtc, commentInputViewModel.Text);
+            return workflowItem.AddComment(user, commentInputViewModel.DateTimeUtc, commentInputViewModel.Text);
         }
     }
 }

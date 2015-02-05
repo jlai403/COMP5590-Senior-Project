@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
-using System.Web.Routing;
-using System.Web.UI;
 using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Programs;
+using WorkflowManagementSystem.Models.Workflow;
 
 namespace WorkflowManagementSystem.Controllers
 {
@@ -66,6 +65,12 @@ namespace WorkflowManagementSystem.Controllers
         {
             FacadeFactory.GetDomainFacade().RejectProgramRequest(User.Identity.Name, name);
             return RedirectToAction("Summary", new { name });
+        }
+
+        public ActionResult AddComment(CommentInputViewModel commentInputViewModel)
+        {
+            var commentViewModel = FacadeFactory.GetDomainFacade().AddComment(User.Identity.Name, commentInputViewModel, WorkflowItemTypes.Program);
+            return PartialView("_WorkflowItemCommentPartial", commentViewModel);
         }
     }
 }

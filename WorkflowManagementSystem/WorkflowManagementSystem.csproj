@@ -341,6 +341,7 @@
     <Content Include="Views\Program\Summary.cshtml" />
     <Content Include="Views\Program\Requested.cshtml" />
     <Content Include="Views\Program\UpdateStatus.cshtml" />
+    <Content Include="Views\Shared\_WorkflowItemCommentPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
