@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using WorkflowManagementSystem.Models;
+using WorkflowManagementSystem.Models.Attachments;
 using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Workflow;
@@ -20,11 +23,23 @@ namespace WorkflowManagementSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateRequest(ProgramRequestInputViewModel programRequestInputViewModel)
+        public ActionResult CreateRequest(ProgramRequestInputViewModel programRequestInputViewModel, List<HttpPostedFileBase> files)
         {
             try
             {
                 FacadeFactory.GetDomainFacade().CreateProgramRequest(User.Identity.Name, programRequestInputViewModel);
+                foreach (var file in files)
+                {
+                    if (file == null) continue;
+                    var attachmentInputViewModel = new AttachmentInputViewModel
+                    {
+                        WorkflowItemName = programRequestInputViewModel.Name,
+                        FileName = file.FileName,
+                        Content = file.InputStream,
+                        ContentType = file.ContentType
+                    };
+                    FacadeFactory.GetDomainFacade().UploadAttachment(User.Identity.Name, attachmentInputViewModel, WorkflowItemTypes.Program);
+                }
             }
             catch (WMSException e)
             {

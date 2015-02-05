@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Models.Attachments
@@ -17,10 +18,20 @@ namespace WorkflowManagementSystem.Models.Attachments
         {
             User = user;
             FileName = attachmentInputViewModel.FileName;
-            Content = attachmentInputViewModel.Content.ToArray();
+            Content = GetBytes(attachmentInputViewModel.Content);
             ContentType = attachmentInputViewModel.ContentType;
             FileId = Guid.NewGuid();
         }
 
+        private byte[] GetBytes(Stream stream)
+        {
+            byte[] byteArray;
+            using(var ms = new MemoryStream())
+            {
+                stream.CopyTo(ms);
+                byteArray = ms.ToArray();
+            }
+            return byteArray;
+        }
     }
 }

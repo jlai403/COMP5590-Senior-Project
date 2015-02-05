@@ -6,7 +6,7 @@ namespace WorkflowManagementSystem.Models.Attachments
     {
         public string WorkflowItemName { get; set; }
         public string FileName { get; set; }
-        public MemoryStream Content { get; set; }
+        public Stream Content { get; set; }
         public string ContentType { get; set; }
     }
 }
