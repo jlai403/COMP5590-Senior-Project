@@ -15,9 +15,9 @@ namespace WorkflowManagementSystem.Models.Programs
         public string StudentImpact { get; set; }
         public string LibraryImpact { get; set; }
         public string ITSImpact { get; set; }
-        public string Comment { get; set; }
         public List<WorkflowDataViewModel> WorkflowSteps { get; set; }
         public DateTime RequestedDateUTC { get; set; }
+        public List<CommentViewModel> Comments { get; set; }
 
         public ProgramViewModel()
         {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
@@ -18,7 +19,6 @@ namespace WorkflowManagementSystem.Models.Programs
         public string StudentImpact { get; set; }
         public string LibraryImpact { get; set; }
         public string ITSImpact { get; set; }
-        public string Comment { get; set; }
         
         public override string APPROVAL_CHAIN_NAME { get { return "Program"; } }
 
@@ -33,9 +33,12 @@ namespace WorkflowManagementSystem.Models.Programs
             StudentImpact = programRequestInputViewModel.StudentImpact;
             LibraryImpact = programRequestInputViewModel.LibraryImpact;
             ITSImpact = programRequestInputViewModel.ITSImpact;
-            Comment = programRequestInputViewModel.Comment;
-        }
 
+            if (!programRequestInputViewModel.Comment.IsNullOrWhiteSpace())
+            {
+                AddComment(user, programRequestInputViewModel.RequestedDateUTC, programRequestInputViewModel.Comment);
+            }
+        }
 
         public List<WorkflowData> GetWorkflowHistory(WorkflowData workflowData = null)
         {

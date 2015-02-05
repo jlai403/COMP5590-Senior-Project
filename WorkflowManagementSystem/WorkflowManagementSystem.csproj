@@ -233,6 +233,10 @@
     <Compile Include="Migrations\201502050339513_RefactorProgramToExtendWorkflowItem.Designer.cs">
       <DependentUpon>201502050339513_RefactorProgramToExtendWorkflowItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502050550331_AddCommentsToWorkflowItem.cs" />
+    <Compile Include="Migrations\201502050550331_AddCommentsToWorkflowItem.Designer.cs">
+      <DependentUpon>201502050550331_AddCommentsToWorkflowItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -285,6 +289,10 @@
     <Compile Include="Models\Users\UserRepository.cs" />
     <Compile Include="Models\Users\UserSignUpViewModel.cs" />
     <Compile Include="Models\Users\UserViewModel.cs" />
+    <Compile Include="Models\Workflow\Comment.cs" />
+    <Compile Include="Models\Workflow\CommentAssembler.cs" />
+    <Compile Include="Models\Workflow\CommentRepository.cs" />
+    <Compile Include="Models\Workflow\CommentViewModel.cs" />
     <Compile Include="Models\Workflow\CompleteWorkflowState.cs" />
     <Compile Include="Models\Workflow\WorkflowItem.cs" />
     <Compile Include="Models\Workflow\IWorkflowState.cs" />
@@ -376,6 +384,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502050339513_RefactorProgramToExtendWorkflowItem.resx">
       <DependentUpon>201502050339513_RefactorProgramToExtendWorkflowItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502050550331_AddCommentsToWorkflowItem.resx">
+      <DependentUpon>201502050550331_AddCommentsToWorkflowItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

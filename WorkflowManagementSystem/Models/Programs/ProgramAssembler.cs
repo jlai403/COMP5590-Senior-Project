@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using WorkflowManagementSystem.Models.Workflow;
 
 namespace WorkflowManagementSystem.Models.Programs
 {
     public class ProgramAssembler
     {
-        public Program Program { get; set; }
+        private Program Program { get; set; }
 
         public ProgramAssembler(Program program)
         {
@@ -14,12 +15,7 @@ namespace WorkflowManagementSystem.Models.Programs
 
         public static List<ProgramViewModel> AssembleAll(List<Program> programs)
         {
-            var programViewModels = new List<ProgramViewModel>();
-            foreach (var program in programs)
-            {
-                programViewModels.Add(new ProgramAssembler(program).Assemble());
-            }
-            return programViewModels;
+            return programs.Select(program => new ProgramAssembler(program).Assemble()).ToList();
         }
 
         public ProgramViewModel Assemble()
@@ -34,7 +30,7 @@ namespace WorkflowManagementSystem.Models.Programs
             programViewModel.StudentImpact = Program.StudentImpact;
             programViewModel.LibraryImpact = Program.LibraryImpact;
             programViewModel.ITSImpact = Program.ITSImpact;
-            programViewModel.Comment = Program.Comment;
+            programViewModel.Comments = CommentAssembler.AssembleAll(Program.Comments);
             programViewModel.WorkflowSteps = WorkflowAssembler.AssembleAll(Program.GetWorkflowHistory());
             return programViewModel;
         }

@@ -54,8 +54,65 @@ namespace WorkflowManagementSystem.Tests
             programRequest.StudentImpact.ShouldBeEquivalentTo(programRequestInputViewModel.StudentImpact);
             programRequest.LibraryImpact.ShouldBeEquivalentTo(programRequestInputViewModel.LibraryImpact);
             programRequest.ITSImpact.ShouldBeEquivalentTo(programRequestInputViewModel.ITSImpact);
-            programRequest.Comment.ShouldBeEquivalentTo(programRequestInputViewModel.Comment);
             
+            programRequest.Comments.Count.ShouldBeEquivalentTo(1);
+            var comment = programRequest.Comments.First();
+            comment.User.ShouldBeEquivalentTo(user.DisplayName);
+            comment.Text.ShouldBeEquivalentTo(programRequestInputViewModel.Comment);
+            comment.DateTimeUtc.ShouldBeEquivalentTo(programRequestInputViewModel.RequestedDateUTC);
+            
+            programRequest.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            var workflowDataViewModel = programRequest.WorkflowSteps.First();
+            workflowDataViewModel.Status.ShouldBeEquivalentTo(WorkflowStatus.PENDING_APPROVAL);
+            workflowDataViewModel.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
+            workflowDataViewModel.User.Should().BeNullOrEmpty();
+        }
+
+        [Test]
+        public void CreateProgramRequest_NoComment()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.RequestedDateUTC = new DateTime(2015, 1, 19);
+            programRequestInputViewModel.Requester = user.DisplayName;
+            programRequestInputViewModel.Name = "Program Name";
+            programRequestInputViewModel.Semester = semester.Id;
+            programRequestInputViewModel.Discipline = discipline.Id;
+            programRequestInputViewModel.CrossImpact = "Cross Impact";
+            programRequestInputViewModel.StudentImpact = "Student Impact";
+            programRequestInputViewModel.LibraryImpact = "Library Impact";
+            programRequestInputViewModel.ITSImpact = "ITS Impact";
+
+            // act
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
+
+            // assert
+            var programRequests = FacadeFactory.GetDomainFacade().FindAllProgramRequests();
+            programRequests.Count.ShouldBeEquivalentTo(1);
+
+            var programRequest = programRequests.First();
+            programRequest.RequestedDateUTC.ShouldBeEquivalentTo(programRequestInputViewModel.RequestedDateUTC);
+            programRequest.Requester.ShouldBeEquivalentTo(user.DisplayName);
+            programRequest.Name.ShouldBeEquivalentTo(programRequestInputViewModel.Name);
+            programRequest.Semester.ShouldBeEquivalentTo(semester.DisplayName);
+            programRequest.Discipline.ShouldBeEquivalentTo(discipline.DisplayName);
+            programRequest.CrossImpact.ShouldBeEquivalentTo(programRequestInputViewModel.CrossImpact);
+            programRequest.StudentImpact.ShouldBeEquivalentTo(programRequestInputViewModel.StudentImpact);
+            programRequest.LibraryImpact.ShouldBeEquivalentTo(programRequestInputViewModel.LibraryImpact);
+            programRequest.ITSImpact.ShouldBeEquivalentTo(programRequestInputViewModel.ITSImpact);
+
+            programRequest.Comments.Count.ShouldBeEquivalentTo(0);
+
             programRequest.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
             var workflowDataViewModel = programRequest.WorkflowSteps.First();
             workflowDataViewModel.Status.ShouldBeEquivalentTo(WorkflowStatus.PENDING_APPROVAL);
@@ -115,7 +172,12 @@ namespace WorkflowManagementSystem.Tests
             program.StudentImpact.ShouldBeEquivalentTo(programRequestInputViewModel.StudentImpact);
             program.LibraryImpact.ShouldBeEquivalentTo(programRequestInputViewModel.LibraryImpact);
             program.ITSImpact.ShouldBeEquivalentTo(programRequestInputViewModel.ITSImpact);
-            program.Comment.ShouldBeEquivalentTo(programRequestInputViewModel.Comment);
+
+            program.Comments.Count.ShouldBeEquivalentTo(1);
+            var comment = program.Comments.First();
+            comment.User.ShouldBeEquivalentTo(user.DisplayName);
+            comment.Text.ShouldBeEquivalentTo(programRequestInputViewModel.Comment);
+            comment.DateTimeUtc.ShouldBeEquivalentTo(programRequestInputViewModel.RequestedDateUTC);
 
             program.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
             var workflowDataViewModel = program.WorkflowSteps.First();

@@ -39,7 +39,11 @@ namespace WorkflowManagementSystem.Tests
             actual.StudentImpact.ShouldBeEquivalentTo(expected.StudentImpact);
             actual.LibraryImpact.ShouldBeEquivalentTo(expected.LibraryImpact);
             actual.ITSImpact.ShouldBeEquivalentTo(expected.ITSImpact);
-            actual.Comment.ShouldBeEquivalentTo(expected.Comment);
+
+            actual.Comments.Count.ShouldBeEquivalentTo(1);
+            var comment = actual.Comments.First();
+            comment.Text.ShouldBeEquivalentTo(expected.Comment);
+            comment.DateTimeUtc.ShouldBeEquivalentTo(expected.RequestedDateUTC);
 
             actual.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
             var workflowDataViewModel = actual.WorkflowSteps.First();
