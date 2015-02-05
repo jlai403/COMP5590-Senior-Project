@@ -18,7 +18,7 @@ namespace WorkflowManagementSystem.Models.Workflow
 
         public void AddComment(User user, DateTime commentDateTimeUtc, string comment)
         {
-            Comments.Add(CommentRepository.AddComment(user, commentDateTimeUtc, comment));
+            Comments.Add(CommentRepository.CreateComment(user, commentDateTimeUtc, comment));
         }
     }
 }

@@ -236,5 +236,15 @@ namespace WorkflowManagementSystem.Models
                 return program.CurrentWorkflowData.IsLastWorkflowStep();
             });
         }
+
+        public void AddComment(string email, CommentInputViewModel commentInputViewModel, WorkflowItemTypes workflowItemType)
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                var user = UserRepository.FindUser(email);
+                CommentRepository.AddComment(user, commentInputViewModel, workflowItemType);
+                return null;
+            });
+        }
     }
 }

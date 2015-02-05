@@ -291,6 +291,7 @@
     <Compile Include="Models\Users\UserViewModel.cs" />
     <Compile Include="Models\Workflow\Comment.cs" />
     <Compile Include="Models\Workflow\CommentAssembler.cs" />
+    <Compile Include="Models\Workflow\CommentInputViewModel.cs" />
     <Compile Include="Models\Workflow\CommentRepository.cs" />
     <Compile Include="Models\Workflow\CommentViewModel.cs" />
     <Compile Include="Models\Workflow\CompleteWorkflowState.cs" />
@@ -302,6 +303,7 @@
     <Compile Include="Models\Workflow\WorkflowData.cs" />
     <Compile Include="Models\Workflow\WorkflowDataViewModel.cs" />
     <Compile Include="Models\Workflow\WorkflowHandler.cs" />
+    <Compile Include="Models\Workflow\WorkflowItemTypes.cs" />
     <Compile Include="Models\Workflow\WorkflowRepository.cs" />
     <Compile Include="Models\Workflow\WorkflowStateFactory.cs" />
     <Compile Include="Models\Workflow\WorkflowStatus.cs" />

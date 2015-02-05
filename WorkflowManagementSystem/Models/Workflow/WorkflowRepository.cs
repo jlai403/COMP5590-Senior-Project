@@ -1,5 +1,7 @@
+using System;
 using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.DataAccess;
+using WorkflowManagementSystem.Models.Programs;
 
 namespace WorkflowManagementSystem.Models.Workflow
 {
@@ -12,6 +14,17 @@ namespace WorkflowManagementSystem.Models.Workflow
             workflowData.Update(approvalChainStep, WorkflowStatus.PENDING_APPROVAL, null);
             
             return workflowData;
+        }
+
+        public static WorkflowItem FindWorkflowItemForType(WorkflowItemTypes workflowItemType, string workflowItemName)
+        {
+            switch (workflowItemType)
+            {
+                case WorkflowItemTypes.Program:
+                    return ProgramRepository.FindProgram(workflowItemName);
+                default:
+                    throw new NotImplementedException(string.Format("Unknown WorkflowItemType: '{0}'", workflowItemType));
+            }
         }
     }
 }

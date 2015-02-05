@@ -743,5 +743,40 @@ namespace WorkflowManagementSystem.Tests
             programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(4);
             programViewModel.WorkflowSteps.Last().Status.ShouldBeEquivalentTo(WorkflowStatus.COMPLETED);
         }
+
+        [Test]
+        public void AddComment_Program()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var commenter = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var commentInputViewModel = new CommentInputViewModel();
+            commentInputViewModel.WorkflowItemName = programRequestInputViewModel.Name;
+            commentInputViewModel.Text = "Comment Two";
+            commentInputViewModel.DateTimeUtc = new DateTime(2015, 1, 20);
+
+            // act
+            FacadeFactory.GetDomainFacade().AddComment(commenter.Email, commentInputViewModel, WorkflowItemTypes.Program);
+
+            // assert
+            var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
+            programViewModel.Comments.Count.ShouldBeEquivalentTo(2);
+            var comment = programViewModel.Comments.Last();
+            comment.User.ShouldBeEquivalentTo(commenter.DisplayName);
+            comment.Text.ShouldBeEquivalentTo(commentInputViewModel.Text);
+            comment.DateTimeUtc.ShouldBeEquivalentTo(commentInputViewModel.DateTimeUtc);
+        }
     }
 }
