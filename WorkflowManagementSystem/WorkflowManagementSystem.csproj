@@ -237,6 +237,10 @@
     <Compile Include="Migrations\201502050550331_AddCommentsToWorkflowItem.Designer.cs">
       <DependentUpon>201502050550331_AddCommentsToWorkflowItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502051712381_AddAttachmentsToWorkflowItem.cs" />
+    <Compile Include="Migrations\201502051712381_AddAttachmentsToWorkflowItem.Designer.cs">
+      <DependentUpon>201502051712381_AddAttachmentsToWorkflowItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -245,6 +249,10 @@
     <Compile Include="Models\ApprovalChains\ApprovalChainStep.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainStepViewModel.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainViewModel.cs" />
+    <Compile Include="Models\Attachments\Attachment.cs" />
+    <Compile Include="Models\Attachments\AttachmentAssembler.cs" />
+    <Compile Include="Models\Attachments\AttachmentInputViewModel.cs" />
+    <Compile Include="Models\Attachments\AttachmentRepository.cs" />
     <Compile Include="Models\DataAccess\DatabaseManager.cs" />
     <Compile Include="Models\DataAccess\NullTestCleanUpInitializer.cs" />
     <Compile Include="Models\DataAccess\ICleanUpData.cs" />
@@ -390,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502050550331_AddCommentsToWorkflowItem.resx">
       <DependentUpon>201502050550331_AddCommentsToWorkflowItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502051712381_AddAttachmentsToWorkflowItem.resx">
+      <DependentUpon>201502051712381_AddAttachmentsToWorkflowItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

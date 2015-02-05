@@ -1,8 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Web.UI.WebControls;
 using FluentAssertions;
 using NUnit.Framework;
 using WorkflowManagementSystem.Models;
+using WorkflowManagementSystem.Models.Attachments;
 using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Workflow;
@@ -66,6 +69,45 @@ namespace WorkflowManagementSystem.Tests
             workflowDataViewModel.Status.ShouldBeEquivalentTo(WorkflowStatus.PENDING_APPROVAL);
             workflowDataViewModel.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
             workflowDataViewModel.User.Should().BeNullOrEmpty();
+        }
+
+        [Test]
+        public void UploadAttachment_Program()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
+
+            var attachmentFileName = "some pdf";
+            var expectedContentBytes = new byte[] { 0xFF, 0xFF, 0x00, 0xAA };
+            var content = new MemoryStream(expectedContentBytes);
+            var expectedContentType = "text/pdf";
+
+            var attachmentInputViewModel = new AttachmentInputViewModel
+            {
+                WorkflowItemName = programRequestInputViewModel.Name,
+                FileName = attachmentFileName,
+                Content = content,
+                ContentType = expectedContentType
+            };
+
+            // act
+            FacadeFactory.GetDomainFacade().UploadAttachment(user.Email, attachmentInputViewModel, WorkflowItemTypes.Program);
+
+            // assert
+            var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
+            programViewModel.Attachments.Count.ShouldBeEquivalentTo(1);
+            programViewModel.Attachments.First().Key.ShouldBeEquivalentTo(attachmentFileName);
+            programViewModel.Attachments.First().Value.Should().NotBeEmpty();
         }
 
         [Test]

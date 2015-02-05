@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using WorkflowManagementSystem.Models.ApprovalChains;
+using WorkflowManagementSystem.Models.Attachments;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Roles;
@@ -20,6 +21,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
         }
 
         protected DbSet<ApprovalChain> ApprovalChain { get; set; }
+        protected DbSet<Attachment> Attachment { get; set; }
         protected DbSet<ApprovalChainStep> ApprovalChainStep { get; set; }
         protected DbSet<Comment> Comment { get; set; }
         protected DbSet<Discipline> Discipline { get; set; }

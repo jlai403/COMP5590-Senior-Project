@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.IO;
 using WorkflowManagementSystem.Models.ApprovalChains;
+using WorkflowManagementSystem.Models.Attachments;
 using WorkflowManagementSystem.Models.DataAccess;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Programs;
@@ -244,6 +246,16 @@ namespace WorkflowManagementSystem.Models
                 var user = UserRepository.FindUser(email);
                 var addedComment = CommentRepository.AddComment(user, commentInputViewModel, workflowItemType);
                 return new CommentAssembler(addedComment).Assemble();
+            });
+        }
+
+        public void UploadAttachment(string email, AttachmentInputViewModel attachmentInputViewModel, WorkflowItemTypes workflowItemType)
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                var user = UserRepository.FindUser(email);
+                AttachmentRepository.UploadAttachment(user, attachmentInputViewModel, workflowItemType);
+                return null;
             });
         }
     }

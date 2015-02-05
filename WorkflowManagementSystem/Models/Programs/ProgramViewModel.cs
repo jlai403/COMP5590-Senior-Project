@@ -18,6 +18,7 @@ namespace WorkflowManagementSystem.Models.Programs
         public List<WorkflowDataViewModel> WorkflowSteps { get; set; }
         public DateTime RequestedDateUTC { get; set; }
         public List<CommentViewModel> Comments { get; set; }
+        public Dictionary<string, Guid> Attachments { get; set; }
 
         public ProgramViewModel()
         {

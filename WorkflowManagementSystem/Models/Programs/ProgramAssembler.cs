@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using WorkflowManagementSystem.Models.Attachments;
 using WorkflowManagementSystem.Models.Workflow;
 
 namespace WorkflowManagementSystem.Models.Programs
@@ -32,6 +33,7 @@ namespace WorkflowManagementSystem.Models.Programs
             programViewModel.ITSImpact = Program.ITSImpact;
             programViewModel.Comments = CommentAssembler.AssembleAll(Program.Comments);
             programViewModel.WorkflowSteps = WorkflowAssembler.AssembleAll(Program.GetWorkflowHistory());
+            programViewModel.Attachments = AttachmentAssembler.AssembleAll(Program.Attachments);
             return programViewModel;
         }
 
