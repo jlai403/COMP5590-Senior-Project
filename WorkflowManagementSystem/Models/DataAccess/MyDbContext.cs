@@ -7,6 +7,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
     {
         protected MyDbContext() : base()
         {
+            RegisterHooks();
         }
 
         protected MyDbContext(string connectionString) : base(connectionString)

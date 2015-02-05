@@ -8,7 +8,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
     {
         protected static void AddEntity(IEntity entity)
         {
-            DatabaseManager.Instance.DbContext.AddEntity(entity);
+            TransactionHandler.Instance.CurrentDbContext().AddEntity(entity);
         }
 
         protected static void FindEntity<T>(int id)
@@ -18,12 +18,12 @@ namespace WorkflowManagementSystem.Models.DataAccess
 
         protected static List<T> FindAll<T>() where T : class
         {
-            return DatabaseManager.Instance.DbContext.Set<T>().ToList();
+            return TransactionHandler.Instance.CurrentDbContext().Set<T>().ToList();
         }
 
         protected static IQueryable<T> Queryable<T>() where T : class
         {
-            return DatabaseManager.Instance.DbContext.Queryable<T>();
+            return TransactionHandler.Instance.CurrentDbContext().Queryable<T>();
         }
     }
 }

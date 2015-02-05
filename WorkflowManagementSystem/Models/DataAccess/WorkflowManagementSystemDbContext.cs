@@ -11,7 +11,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
 {
     public class WorkflowManagementSystemDbContext : MyDbContext
     {
-        public WorkflowManagementSystemDbContext()
+        public WorkflowManagementSystemDbContext() : base()
         {
         }
 

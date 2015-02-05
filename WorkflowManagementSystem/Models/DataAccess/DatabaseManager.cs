@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Data.Entity;
+﻿using System.Configuration;
 
 namespace WorkflowManagementSystem.Models.DataAccess
 {
@@ -8,24 +7,17 @@ namespace WorkflowManagementSystem.Models.DataAccess
         private static DatabaseManager _instance;
 
         public ICleanUpData _testCleanUpListener = new NullTestCleanUpInitializer();
+        public ICreateUnitOfWork _newUnitOfWorkCreationStrategy = new DefaultUnitOfWorkCreationgStrategy();
+
 
         public static DatabaseManager Instance
         {
             get { return _instance ?? (_instance = new DatabaseManager()); }
         }
 
-        public MyDbContext DbContext { get; set; }
-
-
         public void Initialize(MyDbContext dbContext)
         {
-            DbContext = dbContext;
-            DbContext.Database.Initialize(true);
-        }
-
-        public DbContextTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
-        {
-            return DbContext.Database.BeginTransaction(isolationLevel);
+            dbContext.Database.Initialize(true);
         }
 
         public void CleanUp()
@@ -33,9 +25,36 @@ namespace WorkflowManagementSystem.Models.DataAccess
             _testCleanUpListener.CleanUp();
         }
 
-        public void Delete()
+        public MyDbContext CreateNewUnitOfWork()
         {
-            DbContext.Database.Delete();
+            return _newUnitOfWorkCreationStrategy.CreateNewUnitOfWork();
+        }
+
+
+        public void Delete(MyDbContext dbContext)
+        {
+            dbContext.Database.Delete();
+        }
+    }
+
+    public interface ICreateUnitOfWork
+    {
+        MyDbContext CreateNewUnitOfWork();
+    }
+
+    public class DefaultUnitOfWorkCreationgStrategy : ICreateUnitOfWork
+    {
+        public MyDbContext CreateNewUnitOfWork()
+        {
+            return new WorkflowManagementSystemDbContext();
+        }
+    }
+
+    public class TestUnitOfWorkCreationStategy : ICreateUnitOfWork
+    {
+        public MyDbContext CreateNewUnitOfWork()
+        {
+            return new WorkflowManagementSystemDbContext(ConfigurationManager.ConnectionStrings["TestDbContext"].ConnectionString);
         }
     }
 }

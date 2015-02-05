@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Models.DataAccess
 {
@@ -30,8 +31,12 @@ namespace WorkflowManagementSystem.Models.DataAccess
                 TypePair.Reverse();
                 foreach (var typePair in TypePair)
                 {
-                    var dbSet = DatabaseManager.Instance.DbContext.Set(typePair.Type);
-                    dbSet.Remove(typePair.Entity);
+                    var dbSet = TransactionHandler.Instance.CurrentDbContext().Set(typePair.Type);
+                    var entity = (IEntity)dbSet.Find(typePair.Entity.Id); // query for entity first so EF updates EntityState from Detached
+                    if (entity != null)
+                    {
+                        dbSet.Remove(entity);
+                    }
                 }
                 return null;
             });

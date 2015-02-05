@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.UI;
 using WorkflowManagementSystem.Models;
+using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Programs;
 
 namespace WorkflowManagementSystem.Controllers
@@ -22,7 +23,15 @@ namespace WorkflowManagementSystem.Controllers
         [HttpPost]
         public ActionResult CreateRequest(ProgramRequestInputViewModel programRequestInputViewModel)
         {
-            FacadeFactory.GetDomainFacade().CreateProgramRequest(User.Identity.Name, programRequestInputViewModel);
+            try
+            {
+                FacadeFactory.GetDomainFacade().CreateProgramRequest(User.Identity.Name, programRequestInputViewModel);
+            }
+            catch (WMSException e)
+            {
+                ViewBag.ErrorMessage = e.Message;
+                return View("CreateRequest", programRequestInputViewModel);
+            }
             return RedirectToAction("Requested", "Program", new { name = programRequestInputViewModel.Name });
         }
 

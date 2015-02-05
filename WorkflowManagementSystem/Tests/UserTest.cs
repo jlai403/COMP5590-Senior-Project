@@ -176,5 +176,24 @@ namespace WorkflowManagementSystem.Tests
             act.ShouldThrow<WMSException>().WithMessage("At least one role is required.");
             FacadeFactory.GetDomainFacade().FindAllUsers().Count.ShouldBeEquivalentTo(0);
         }
+
+        [Test]
+        public void CreateUser_PasswordInvalidLength()
+        {
+            // assemble
+            var userSignUpViewModel = new UserSignUpViewModel();
+            userSignUpViewModel.FirstName = "Some";
+            userSignUpViewModel.LastName = "Dude";
+            userSignUpViewModel.Email = "somedude@someawesomeemailprovider.com";
+            userSignUpViewModel.Password = "12345";
+            userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Password must be at least 6 characters long.");
+            FacadeFactory.GetDomainFacade().FindAllUsers().Count.ShouldBeEquivalentTo(0);
+        }
     }
 }

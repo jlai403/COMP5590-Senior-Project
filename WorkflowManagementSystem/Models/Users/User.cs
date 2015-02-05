@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Roles;
@@ -8,16 +7,16 @@ namespace WorkflowManagementSystem.Models.Users
 {
     public class User : IEntity
     {
-        public int Id { get; set; }
-        public string Email { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public virtual List<Role> Roles { get; set; }
-
         public User()
         {
             Roles = new List<Role>();
         }
+
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public virtual List<Role> Roles { get; set; }
+        public int Id { get; set; }
 
         public void Update(UserSignUpViewModel userSignUpViewModel)
         {
@@ -30,13 +29,19 @@ namespace WorkflowManagementSystem.Models.Users
             AssertFirstNameIsValid();
             AssertLastNameIsValid();
             AssertAtLeastOneRoleIsSelected();
+            AssertPasswordIsValid(userSignUpViewModel.Password);
+        }
+
+        private void AssertPasswordIsValid(string password)
+        {
+            if (password.Length < 6)
+                throw new WMSException("Password must be at least 6 characters long.");
         }
 
         private void AssertEmailIsNotTaken()
         {
             if (UserRepository.FindUser(Email) != null)
                 throw new WMSException("Email '{0}' has already been taken.", Email);
-
         }
 
         private void UpdateRoles(List<string> roleNames)

@@ -21,12 +21,6 @@ namespace WorkflowManagementSystem.Tests
         {
             DatabaseManager.Instance.CleanUp();
         }
-
-        [TestFixtureTearDown]
-        public void TearDownFixture()
-        {
-            DatabaseManager.Instance.Delete();
-        }
     }
 
     [SetUpFixture]
@@ -38,10 +32,13 @@ namespace WorkflowManagementSystem.Tests
             try
             {
                 var connectionString = ConfigurationManager.ConnectionStrings["TestDbContext"].ConnectionString;
-                DatabaseManager.Instance.Initialize(new WorkflowManagementSystemDbContext(connectionString));
-
-                LoadMetaData();
+                
+                var workflowManagementSystemDbContext = new WorkflowManagementSystemDbContext(connectionString);
                 DatabaseManager.Instance._testCleanUpListener = new TestCleanUpListener();
+                DatabaseManager.Instance._newUnitOfWorkCreationStrategy = new TestUnitOfWorkCreationStategy();
+
+                DatabaseManager.Instance.Delete(workflowManagementSystemDbContext);
+                DatabaseManager.Instance.Initialize(workflowManagementSystemDbContext);
 
                 if (!WebSecurity.Initialized)
                 {
@@ -55,10 +52,6 @@ namespace WorkflowManagementSystem.Tests
                 throw e;
             }
 
-        }
-
-        private void LoadMetaData()
-        {
         }
     }
 }
