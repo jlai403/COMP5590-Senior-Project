@@ -35,6 +35,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
+            modelBuilder.Entity<WorkflowItem>().HasRequired(x => x.Requester);
             modelBuilder.Entity<WorkflowItem>().HasRequired(x => x.CurrentWorkflowData);
             modelBuilder.Entity<Program>().ToTable("Programs");
 

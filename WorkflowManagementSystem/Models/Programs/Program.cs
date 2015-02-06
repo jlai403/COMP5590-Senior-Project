@@ -10,9 +10,6 @@ namespace WorkflowManagementSystem.Models.Programs
 {
     public class Program : WorkflowItem
     {
-        public DateTime RequestedDateUTC { get; set; }
-        public virtual User Requester { get; set; }
-        public string Name { get; set; }
         public virtual Semester Semester { get; set; }
         public virtual Discipline Discipline { get; set; }
         public string CrossImpact { get; set; }
@@ -24,9 +21,8 @@ namespace WorkflowManagementSystem.Models.Programs
 
         public void Update(User user, ProgramRequestInputViewModel programRequestInputViewModel)
         {
-            RequestedDateUTC = programRequestInputViewModel.RequestedDateUTC;
-            Requester = user;
-            Name = programRequestInputViewModel.Name;
+            UpdateWorkflowItem(user, programRequestInputViewModel.Name, programRequestInputViewModel.RequestedDateUTC, WorkflowItemTypes.Program);
+            
             Semester = SemesterRepository.FindSemester(programRequestInputViewModel.Semester);
             Discipline = DisciplineRepository.FindDiscipline(programRequestInputViewModel.Discipline);
             CrossImpact = programRequestInputViewModel.CrossImpact;

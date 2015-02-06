@@ -4,18 +4,18 @@ namespace WorkflowManagementSystem.Models.Workflow
 {
     public class WorkflowDataViewModel
     {
-        public WorkflowStatus Status { get; set; }
+        public WorkflowStates States { get; set; }
         public string ResponsibleParty { get; set; }
         public string User { get; set; }
 
         public bool IsApproved()
         {
-            return Status == WorkflowStatus.APPROVED;
+            return States == WorkflowStates.APPROVED;
         }
 
         public bool IsRejected()
         {
-            return Status == WorkflowStatus.REJECTED;
+            return States == WorkflowStates.REJECTED;
         }
 
         public string GetStatusDisplay()
@@ -24,7 +24,7 @@ namespace WorkflowManagementSystem.Models.Workflow
                 return "Approved";
             else if (IsRejected())
                 return "Rejected:";
-            else if (Status == WorkflowStatus.COMPLETED)
+            else if (States == WorkflowStates.COMPLETED)
                 return "Completed";
             else
                 return "Pending Approval";

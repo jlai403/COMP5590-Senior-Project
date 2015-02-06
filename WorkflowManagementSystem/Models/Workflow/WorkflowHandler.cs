@@ -28,17 +28,17 @@ namespace WorkflowManagementSystem.Models.Workflow
 
         public void Approve(User user)
         {
-            WorkflowStateFactory.GetState(WorkflowStatus.APPROVED).UpdateRequestToCurrentState(user, Request);
+            WorkflowStateFactory.GetState(WorkflowStates.APPROVED).UpdateRequestToCurrentState(user, Request);
         }
 
         public void Reject(User user)
         {
-            WorkflowStateFactory.GetState(WorkflowStatus.REJECTED).UpdateRequestToCurrentState(user, Request);
+            WorkflowStateFactory.GetState(WorkflowStates.REJECTED).UpdateRequestToCurrentState(user, Request);
         }
 
         public void Complete(User user)
         {
-            WorkflowStateFactory.GetState(WorkflowStatus.COMPLETED).UpdateRequestToCurrentState(user, Request);
+            WorkflowStateFactory.GetState(WorkflowStates.COMPLETED).UpdateRequestToCurrentState(user, Request);
         }
     }
 }

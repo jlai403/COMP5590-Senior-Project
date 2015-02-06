@@ -20,12 +20,12 @@ namespace WorkflowManagementSystem.Models.Workflow
 
         private void AssertWorkflowIsNotCompleted(WorkflowItem request)
         {
-            if (request.CurrentWorkflowData.Status == WorkflowStatus.COMPLETED)
+            if (request.CurrentWorkflowData.State == WorkflowStates.COMPLETED)
                 throw new WMSException("Request has already been completed");
         }
         protected override void Update(User user, WorkflowItem request)
         {
-            request.CurrentWorkflowData.Status = WorkflowStatus.REJECTED;
+            request.CurrentWorkflowData.State = WorkflowStates.REJECTED;
             request.CurrentWorkflowData.User = user;
         }
     }

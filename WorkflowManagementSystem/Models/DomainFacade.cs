@@ -270,5 +270,14 @@ namespace WorkflowManagementSystem.Models
                 return new FileAssembler(file).Assemble();
             });
         }
+
+        public List<ActionableWorkflowItemViewModel> FindWorkflowItemsAwaitingForAction(string email)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var actionableWorkflowItems = WorkflowRepository.FindWorkflowItemsAwaitingForAction(email);
+                return WorkflowAssembler.AssembleWorkflowItemsAwaitingForAction(actionableWorkflowItems);
+            });
+        }
     }
 }

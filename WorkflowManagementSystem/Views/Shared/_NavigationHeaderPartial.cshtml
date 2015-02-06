@@ -14,17 +14,16 @@
         </div>
 	
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse"
-             id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav nav-pills navbar-right">
                 <li>
-                    @*<form action="/Controller/SearchController.php?action=query"
-                          method="post">
+                    @using (Html.BeginForm("Search", "Search", FormMethod.Post))
+                    {
                         <div class="form-group has-feedback">
-                            <input class="form-control" type="text" name="queryString" placeholder="Search..." /> 
+                            <input class="form-control" type="text" name="queryString" placeholder="Search..."/>
                             <i class="glyphicon glyphicon-search form-control-feedback" style="top: 0px;"></i>
                         </div>
-                    </form>*@
+                    }
                 </li>
 						
                 <!-- NAV LINKS START -->

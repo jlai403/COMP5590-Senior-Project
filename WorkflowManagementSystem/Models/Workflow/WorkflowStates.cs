@@ -1,6 +1,6 @@
 namespace WorkflowManagementSystem.Models.Workflow
 {
-    public enum WorkflowStatus
+    public enum WorkflowStates
     {
         PENDING_APPROVAL,
         APPROVED,

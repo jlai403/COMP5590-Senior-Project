@@ -4,18 +4,18 @@ namespace WorkflowManagementSystem.Models.Workflow
 {
     public class WorkflowStateFactory
     {
-        public static IWorkflowState GetState(WorkflowStatus status)
+        public static IWorkflowState GetState(WorkflowStates states)
         {
-            switch (status)
+            switch (states)
             {
-                case WorkflowStatus.APPROVED:
+                case WorkflowStates.APPROVED:
                     return new ApproveWorkflowState();
-                case WorkflowStatus.REJECTED:
+                case WorkflowStates.REJECTED:
                     return new RejectWorkflowState();
-                case WorkflowStatus.COMPLETED:
+                case WorkflowStates.COMPLETED:
                     return new CompleteWorkflowState();
                 default:
-                    throw new WMSException("Unknown Workflow State '{0}'", status);
+                    throw new WMSException("Unknown Workflow State '{0}'", states);
             }
         }
     }

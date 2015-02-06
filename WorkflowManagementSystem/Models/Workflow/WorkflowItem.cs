@@ -8,10 +8,15 @@ namespace WorkflowManagementSystem.Models.Workflow
     public abstract class WorkflowItem : IEntity
     {
         public int Id { get; set; }
+        public WorkflowItemTypes Type { get; set; }
+        public DateTime RequestedDateUTC { get; set; }
+        public virtual User Requester { get; set; }
         public virtual WorkflowData CurrentWorkflowData { get; set; }
-        public abstract string APPROVAL_CHAIN_NAME { get; }
         public virtual List<Comment> Comments { get; set; }
         public virtual List<File> Attachments { get; set; }
+
+        public abstract string APPROVAL_CHAIN_NAME { get; }
+        public string Name { get; set; }
 
         public WorkflowItem()
         {
@@ -29,6 +34,14 @@ namespace WorkflowManagementSystem.Models.Workflow
         {
             var file = FileRepository.CreateFile(user, fileInputViewModel);
             Attachments.Add(file);
+        }
+
+        protected void UpdateWorkflowItem(User user, string name, DateTime requestedDateUtc, WorkflowItemTypes workflowItemType)
+        {
+            Requester = user;
+            Name = name;
+            RequestedDateUTC = requestedDateUtc;
+            Type = workflowItemType;
         }
     }
 }

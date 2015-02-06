@@ -188,6 +188,7 @@
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProgramController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -246,6 +247,10 @@
     <Compile Include="Migrations\201502052230140_RenameAttachmentsToFile.cs" />
     <Compile Include="Migrations\201502052230140_RenameAttachmentsToFile.Designer.cs">
       <DependentUpon>201502052230140_RenameAttachmentsToFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502060721142_AddedTypeToWorkflowItemAndPulledCommonWorkflowItemPropertiesFromProgramUpToParent.cs" />
+    <Compile Include="Migrations\201502060721142_AddedTypeToWorkflowItemAndPulledCommonWorkflowItemPropertiesFromProgramUpToParent.Designer.cs">
+      <DependentUpon>201502060721142_AddedTypeToWorkflowItemAndPulledCommonWorkflowItemPropertiesFromProgramUpToParent.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
@@ -319,9 +324,10 @@
     <Compile Include="Models\Workflow\WorkflowDataViewModel.cs" />
     <Compile Include="Models\Workflow\WorkflowHandler.cs" />
     <Compile Include="Models\Workflow\WorkflowItemTypes.cs" />
+    <Compile Include="Models\Workflow\ActionableWorkflowItemViewModel.cs" />
     <Compile Include="Models\Workflow\WorkflowRepository.cs" />
     <Compile Include="Models\Workflow\WorkflowStateFactory.cs" />
-    <Compile Include="Models\Workflow\WorkflowStatus.cs" />
+    <Compile Include="Models\Workflow\WorkflowStates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\DataAccess\WorkflowManagementSystemDbContext.cs" />
     <Compile Include="Tests\ApprovalChainTest.cs" />
@@ -338,6 +344,7 @@
     <Compile Include="Tests\SemesterTestHelper.cs" />
     <Compile Include="Tests\UserTest.cs" />
     <Compile Include="Tests\UserTestHelper.cs" />
+    <Compile Include="Tests\WorkflowItemTest.cs" />
     <Compile Include="Tests\WorkflowManagementSystemTest.cs" />
     <Compile Include="Views\CustomHtmlHelper.cs" />
     <Compile Include="WebMembershipInitializer.cs" />
@@ -360,6 +367,7 @@
     <Content Include="Views\Shared\_WorkflowItemCommentPartial.cshtml" />
     <Content Include="Views\Program\_ProgramSummaryDetailsPartial.cshtml" />
     <Content Include="Views\Program\_ProgramWorkflowStepsPartial.cshtml" />
+    <Content Include="Views\Search\SearchResults.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -414,6 +422,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502052230140_RenameAttachmentsToFile.resx">
       <DependentUpon>201502052230140_RenameAttachmentsToFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502060721142_AddedTypeToWorkflowItemAndPulledCommonWorkflowItemPropertiesFromProgramUpToParent.resx">
+      <DependentUpon>201502060721142_AddedTypeToWorkflowItemAndPulledCommonWorkflowItemPropertiesFromProgramUpToParent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

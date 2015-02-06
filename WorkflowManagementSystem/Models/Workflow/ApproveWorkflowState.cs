@@ -29,20 +29,20 @@ namespace WorkflowManagementSystem.Models.Workflow
 
         private void AssertWorkflowIsNotRejected(WorkflowItem request)
         {
-            if (request.CurrentWorkflowData.Status == WorkflowStatus.REJECTED)
+            if (request.CurrentWorkflowData.State == WorkflowStates.REJECTED)
                 throw new WMSException("Request has already been rejected");
         }
 
         private void AssertWorkflowIsNotCompleted(WorkflowItem request)
         {
-            if (request.CurrentWorkflowData.Status == WorkflowStatus.COMPLETED)
+            if (request.CurrentWorkflowData.State == WorkflowStates.COMPLETED)
                 throw new WMSException("Request has already been completed");
         }
 
         protected override void Update(User user, WorkflowItem request)
         {
             var currentWorkflowData = request.CurrentWorkflowData;
-            currentWorkflowData.UpdateStatus(user, WorkflowStatus.APPROVED);
+            currentWorkflowData.UpdateStatus(user, WorkflowStates.APPROVED);
 
             var approvalChain = ApprovalChainRepository.FindApprovalChain(request.APPROVAL_CHAIN_NAME);
             int nextApprovalChainStepSequence = currentWorkflowData.ApprovalChainStep.Sequence + 1;

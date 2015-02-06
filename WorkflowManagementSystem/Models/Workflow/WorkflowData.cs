@@ -9,21 +9,21 @@ namespace WorkflowManagementSystem.Models.Workflow
     {
         public virtual int Id { get; set; }
         public virtual ApprovalChainStep ApprovalChainStep { get; set; }
-        public virtual WorkflowStatus Status { get; set; }
+        public virtual WorkflowStates State { get; set; }
         public virtual WorkflowData PreviousWorkflowData { get; set; }
         public virtual User User { get; set; }
 
-        public void Update(ApprovalChainStep approvalChainStep, WorkflowStatus status, WorkflowData previousWorkflowData)
+        public void Update(ApprovalChainStep approvalChainStep, WorkflowStates states, WorkflowData previousWorkflowData)
         {
             ApprovalChainStep = approvalChainStep;
-            Status = status;
+            State = states;
             PreviousWorkflowData = previousWorkflowData;
         }
 
-        public void UpdateStatus(User user, WorkflowStatus status)
+        public void UpdateStatus(User user, WorkflowStates state)
         {
             User = user;
-            Status = status;
+            State = state;
         }
 
         public string GetUserDisplayName()
