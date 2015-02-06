@@ -88,7 +88,7 @@ namespace WorkflowManagementSystem.Controllers
             new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
             new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"]);
 
-            return RedirectToAction("Summary", new { workflowItemName });
+            return RedirectToAction("Summary", new { name = workflowItemName });
         }
 
         public ActionResult Reject(string workflowItemName)
@@ -98,7 +98,7 @@ namespace WorkflowManagementSystem.Controllers
             new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
             new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"]);
 
-            return RedirectToAction("Summary", new { workflowItemName });
+            return RedirectToAction("Summary", new { name = workflowItemName });
         }
 
         public ActionResult AddComment(CommentInputViewModel commentInputViewModel)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.DataAccess;
+using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Files;
 using WorkflowManagementSystem.Models.Programs;
@@ -149,6 +150,7 @@ namespace WorkflowManagementSystem.Models
             return TransactionHandler.Instance.Execute(() =>
             {
                 var program = ProgramRepository.FindProgram(name);
+                if (program == null) throw new WMSException("Program '{0}' not found.", name);
                 return new ProgramAssembler(program).Assemble();
             });
         }

@@ -71,6 +71,17 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void FindProgram_NotFound()
+        {
+            // assemble
+            // act
+            Action action = ()=> FacadeFactory.GetDomainFacade().FindProgram("unknown");
+
+            // assert
+            action.ShouldThrow<WMSException>().WithMessage("Program 'unknown' not found.");
+        }
+
+        [Test]
         public void UploadAttachment_Program()
         {
             // assemble
