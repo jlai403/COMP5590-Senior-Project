@@ -1,0 +1,41 @@
+﻿@model List<WorkflowManagementSystem.Models.Workflow.WorkflowDataViewModel>
+
+<div class="workflow-details small-text">
+    @foreach (var workflowStep in Model)
+    {
+        <div class="row detail @workflowStep.GetStatusDisplay() ?>">
+            <div class="col-xs-5 right-align">
+                Role:
+            </div>
+            <div class="col-xs-7 left-align">
+                @workflowStep.ResponsibleParty
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5 right-align">
+                    Status:
+                </div>
+                <div class="col-xs-7 left-align">
+                    @workflowStep.GetStatusDisplay()
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5 right-align">
+
+                    @if (workflowStep.IsApproved())
+                    {
+                        @:Approved By:
+                    }
+                    @if (workflowStep.IsRejected())
+                    {
+                        @:Rejected By:
+                    }
+                </div>
+                <div class="col-xs-7 left-align">
+                    @workflowStep.User
+                </div>
+            </div>
+        </div>
+    }
+</div>

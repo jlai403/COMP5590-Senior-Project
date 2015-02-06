@@ -91,16 +91,10 @@ namespace WorkflowManagementSystem.Tests
             var content = new MemoryStream(expectedContentBytes);
             var expectedContentType = "text/pdf";
 
-            var attachmentInputViewModel = new FileInputViewModel
-            {
-                WorkflowItemName = programRequestInputViewModel.Name,
-                FileName = attachmentFileName,
-                Content = content,
-                ContentType = expectedContentType
-            };
+            var fileInputViewModel = new FileInputViewModel(programRequestInputViewModel.Name, attachmentFileName, content, expectedContentType);
 
             // act
-            FacadeFactory.GetDomainFacade().UploadFile(user.Email, attachmentInputViewModel, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().UploadFile(user.Email, fileInputViewModel, WorkflowItemTypes.Program);
 
             // assert
             var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);

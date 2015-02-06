@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Files;
@@ -28,18 +30,8 @@ namespace WorkflowManagementSystem.Controllers
             try
             {
                 FacadeFactory.GetDomainFacade().CreateProgramRequest(User.Identity.Name, programRequestInputViewModel);
-                foreach (var file in files)
-                {
-                    if (file == null) continue;
-                    var attachmentInputViewModel = new FileInputViewModel
-                    {
-                        WorkflowItemName = programRequestInputViewModel.Name,
-                        FileName = file.FileName,
-                        Content = file.InputStream,
-                        ContentType = file.ContentType
-                    };
-                    FacadeFactory.GetDomainFacade().UploadFile(User.Identity.Name, attachmentInputViewModel, WorkflowItemTypes.Program);
-                }
+                
+                new FileController().UploadAttachments(User.Identity.Name, programRequestInputViewModel.Name, files);
             }
             catch (WMSException e)
             {
@@ -61,25 +53,52 @@ namespace WorkflowManagementSystem.Controllers
             return View(program);
         }
 
+        [HttpGet]
         public ActionResult UpdateStatus(string name)
         {
             var program = FacadeFactory.GetDomainFacade().FindProgram(name);
             return View(program);
         }
 
-        public ActionResult Approve(string name)
+        [HttpPost]
+        public ActionResult UpdateStatus(string workflowItemName, string submit, CommentInputViewModel commentInputViewModel, List<HttpPostedFileBase> files)
         {
-            if (FacadeFactory.GetDomainFacade().IsProgramRequestCurrentlyOnLastWorkflowStep(name))
-                FacadeFactory.GetDomainFacade().CompleteProgramRequest(User.Identity.Name, name);
-            else
-                FacadeFactory.GetDomainFacade().ApproveProgramRequest(User.Identity.Name, name);
-            return RedirectToAction("Summary", new {name});
+            TempData["commentInputViewModel"] = commentInputViewModel;
+            TempData["files"] = files;
+            switch (submit)
+            {
+                case "approve":
+                    return RedirectToAction("Approve", new { workflowItemName });
+                case "reject":
+                    return RedirectToAction("Reject", new { workflowItemName});
+                default:
+                    TempData.Remove("commentInputViewModel");
+                    TempData.Remove("files");
+                    throw new WMSException("Unknown/unimplemented action '{0}", submit);
+            }
         }
 
-        public ActionResult Reject(string name)
+        public ActionResult Approve(string workflowItemName)
         {
-            FacadeFactory.GetDomainFacade().RejectProgramRequest(User.Identity.Name, name);
-            return RedirectToAction("Summary", new { name });
+            if (FacadeFactory.GetDomainFacade().IsProgramRequestCurrentlyOnLastWorkflowStep(workflowItemName))
+                FacadeFactory.GetDomainFacade().CompleteProgramRequest(User.Identity.Name, workflowItemName);
+            else
+                FacadeFactory.GetDomainFacade().ApproveProgramRequest(User.Identity.Name, workflowItemName);
+
+            new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
+            new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"]);
+
+            return RedirectToAction("Summary", new { workflowItemName });
+        }
+
+        public ActionResult Reject(string workflowItemName)
+        {
+            FacadeFactory.GetDomainFacade().RejectProgramRequest(User.Identity.Name, workflowItemName);
+
+            new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
+            new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"]);
+
+            return RedirectToAction("Summary", new { workflowItemName });
         }
 
         public ActionResult AddComment(CommentInputViewModel commentInputViewModel)

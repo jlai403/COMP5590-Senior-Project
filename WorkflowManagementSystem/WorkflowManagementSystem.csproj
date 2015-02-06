@@ -182,6 +182,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\FileController.cs" />
@@ -357,6 +358,8 @@
     <Content Include="Views\Program\Requested.cshtml" />
     <Content Include="Views\Program\UpdateStatus.cshtml" />
     <Content Include="Views\Shared\_WorkflowItemCommentPartial.cshtml" />
+    <Content Include="Views\Program\_ProgramSummaryDetailsPartial.cshtml" />
+    <Content Include="Views\Program\_ProgramWorkflowStepsPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

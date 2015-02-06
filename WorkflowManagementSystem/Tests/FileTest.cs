@@ -29,13 +29,7 @@ namespace WorkflowManagementSystem.Tests
             var expectedContentBytes = new byte[] { 0xFF, 0xFF, 0x00, 0xAA };
             var content = new MemoryStream(expectedContentBytes);
 
-            var fileInputViewModel = new FileInputViewModel
-            {
-                WorkflowItemName = programRequestInputViewModel.Name,
-                FileName = "some pdf",
-                Content = content,
-                ContentType = "text/pdf"
-            };
+            var fileInputViewModel = new FileInputViewModel(programRequestInputViewModel.Name, "some pdf", content, "text/pdf");
 
             FacadeFactory.GetDomainFacade().UploadFile(user.Email, fileInputViewModel, WorkflowItemTypes.Program);
             var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
