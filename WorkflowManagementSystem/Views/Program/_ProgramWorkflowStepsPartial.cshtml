@@ -1,9 +1,10 @@
-﻿@model List<WorkflowManagementSystem.Models.Workflow.WorkflowDataViewModel>
+﻿@using WorkflowManagementSystem.Views
+@model List<WorkflowManagementSystem.Models.Workflow.WorkflowDataViewModel>
 
 <div class="workflow-details small-text">
     @foreach (var workflowStep in Model)
     {
-        <div class="row detail @workflowStep.GetStatusDisplay() ?>">
+        <div class="row detail @Html.GetWorkflowStatusDisplay(workflowStep.State) ?>">
             <div class="col-xs-5 right-align">
                 Role:
             </div>
@@ -16,7 +17,7 @@
                     Status:
                 </div>
                 <div class="col-xs-7 left-align">
-                    @workflowStep.GetStatusDisplay()
+                    @Html.GetWorkflowStatusDisplay(workflowStep.State)
                 </div>
             </div>
 

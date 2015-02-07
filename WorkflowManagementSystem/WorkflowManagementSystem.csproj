@@ -347,6 +347,7 @@
     <Compile Include="Tests\WorkflowItemTest.cs" />
     <Compile Include="Tests\WorkflowManagementSystemTest.cs" />
     <Compile Include="Views\CustomHtmlHelper.cs" />
+    <Compile Include="Views\WorkflowHtmlHelper.cs" />
     <Compile Include="WebMembershipInitializer.cs" />
   </ItemGroup>
   <ItemGroup>

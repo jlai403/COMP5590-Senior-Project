@@ -27,7 +27,7 @@ namespace WorkflowManagementSystem.Models.Workflow
         {
             var workflowDataViewModel = new WorkflowDataViewModel();
             workflowDataViewModel.ResponsibleParty = WorkflowData.ApprovalChainStep.Role.Name;
-            workflowDataViewModel.States = WorkflowData.State;
+            workflowDataViewModel.State = WorkflowData.State;
             workflowDataViewModel.User = WorkflowData.GetUserDisplayName();
             return workflowDataViewModel;
         }

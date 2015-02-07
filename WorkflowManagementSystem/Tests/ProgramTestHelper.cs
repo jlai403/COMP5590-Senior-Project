@@ -47,7 +47,7 @@ namespace WorkflowManagementSystem.Tests
 
             actual.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
             var workflowDataViewModel = actual.WorkflowSteps.First();
-            workflowDataViewModel.States.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
+            workflowDataViewModel.State.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
             workflowDataViewModel.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
             workflowDataViewModel.User.Should().BeNullOrEmpty();
         }

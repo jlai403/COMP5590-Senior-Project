@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.Programs;
+using WorkflowManagementSystem.Models.Workflow;
 
 namespace WorkflowManagementSystem.Controllers
 {
@@ -9,9 +10,9 @@ namespace WorkflowManagementSystem.Controllers
     {
         public ActionResult Index()
         {
-            var awaitingRequests = FacadeFactory.GetDomainFacade().FindAllProgramRequestsAwaitingForAction(User.Identity.Name);
+            var actionItems = FacadeFactory.GetDomainFacade().FindWorkflowItemsAwaitingForAction(User.Identity.Name);
             var requests = FacadeFactory.GetDomainFacade().FindAllProgramsRequestedByUser(User.Identity.Name);
-            var dashboardViewModel = new DashboardViewModel(requests, awaitingRequests);
+            var dashboardViewModel = new DashboardViewModel(requests, actionItems);
             return View(dashboardViewModel);
         }
     }
@@ -19,12 +20,12 @@ namespace WorkflowManagementSystem.Controllers
     public class DashboardViewModel
     {
         public List<ProgramViewModel> UserRequests { get; set; }
-        public List<ProgramViewModel> ActionableRequests { get; set; }
+        public List<ActionableWorkflowItemViewModel> ActionItems { get; set; }
 
-        public DashboardViewModel(List<ProgramViewModel> userRequests, List<ProgramViewModel> actionableRequests)
+        public DashboardViewModel(List<ProgramViewModel> userRequests, List<ActionableWorkflowItemViewModel> actionItems)
         {
             UserRequests = userRequests;
-            ActionableRequests = actionableRequests;
+            ActionItems = actionItems;
         }
     }
 }

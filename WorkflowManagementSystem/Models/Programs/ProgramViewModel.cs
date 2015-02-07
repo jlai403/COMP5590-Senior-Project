@@ -30,9 +30,9 @@ namespace WorkflowManagementSystem.Models.Programs
             return WorkflowSteps.Last().ResponsibleParty;
         }
 
-        public string CurrentStatus()
+        public WorkflowStates CurrentState()
         {
-            return WorkflowSteps.Last().GetStatusDisplay();
+            return WorkflowSteps.Last().State;
         }
     }
 }

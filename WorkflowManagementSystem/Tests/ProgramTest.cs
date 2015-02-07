@@ -65,7 +65,7 @@ namespace WorkflowManagementSystem.Tests
             
             programRequest.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
             var workflowDataViewModel = programRequest.WorkflowSteps.First();
-            workflowDataViewModel.States.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
+            workflowDataViewModel.State.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
             workflowDataViewModel.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
             workflowDataViewModel.User.Should().BeNullOrEmpty();
         }
@@ -161,7 +161,7 @@ namespace WorkflowManagementSystem.Tests
 
             programRequest.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
             var workflowDataViewModel = programRequest.WorkflowSteps.First();
-            workflowDataViewModel.States.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
+            workflowDataViewModel.State.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
             workflowDataViewModel.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
             workflowDataViewModel.User.Should().BeNullOrEmpty();
         }
@@ -227,7 +227,7 @@ namespace WorkflowManagementSystem.Tests
 
             program.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
             var workflowDataViewModel = program.WorkflowSteps.First();
-            workflowDataViewModel.States.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
+            workflowDataViewModel.State.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
             workflowDataViewModel.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
             workflowDataViewModel.User.Should().BeNullOrEmpty();
         }
@@ -263,58 +263,6 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void FindAllProgramRequestsAwaitingForAction()
-        {
-            // assemble
-            new RoleTestHelper().CreateTestRoles();
-            new ApprovalChainTestHelper().CreateProgramApprovalChain();
-            new SemesterTestHelper().CreateTestSemesters();
-            new DisciplineTestHelper().CreateTestDisciplines();
-
-            var user = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
-            var approver = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
-
-            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
-            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
-
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
-            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
-
-            // act
-            var programs = FacadeFactory.GetDomainFacade().FindAllProgramRequestsAwaitingForAction(approver.Email);
-
-            // assert
-            programs.Count.ShouldBeEquivalentTo(1);
-
-            new ProgramTestHelper().AssertProgramRequest(programRequestInputViewModel, programs.First(), user.DisplayName, semester.DisplayName, discipline.DisplayName);
-        }
-
-        [Test]
-        public void FindAllProgramRequestsAwaitingForAction_NoneForApproverRole()
-        {
-            // assemble
-            new RoleTestHelper().CreateTestRoles();
-            new ApprovalChainTestHelper().CreateProgramApprovalChain();
-            new SemesterTestHelper().CreateTestSemesters();
-            new DisciplineTestHelper().CreateTestDisciplines();
-
-            var user = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
-            var approver = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
-
-            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
-            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
-
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
-            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
-
-            // act
-            var programs = FacadeFactory.GetDomainFacade().FindAllProgramRequestsAwaitingForAction(approver.Email);
-
-            // assert
-            programs.Count.ShouldBeEquivalentTo(0);
-        }
-
-        [Test]
         public void ApproveProgramRequest()
         {
             // assemble
@@ -340,11 +288,11 @@ namespace WorkflowManagementSystem.Tests
             program.WorkflowSteps.Count.Should().Be(2);
 
             var firstWorkflowStep = program.WorkflowSteps.First();
-            firstWorkflowStep.States.ShouldBeEquivalentTo(WorkflowStates.APPROVED);
+            firstWorkflowStep.State.ShouldBeEquivalentTo(WorkflowStates.APPROVED);
             firstWorkflowStep.User.ShouldBeEquivalentTo(approver.DisplayName);
 
             var secondWorkflowStep = program.WorkflowSteps.Last();
-            secondWorkflowStep.States.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
+            secondWorkflowStep.State.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
             secondWorkflowStep.User.Should().BeNullOrEmpty();
         }
 
@@ -375,7 +323,7 @@ namespace WorkflowManagementSystem.Tests
 
             var workflowStep = program.WorkflowSteps.First();
             workflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
-            workflowStep.States.ShouldBeEquivalentTo(WorkflowStates.REJECTED);
+            workflowStep.State.ShouldBeEquivalentTo(WorkflowStates.REJECTED);
             workflowStep.User.ShouldBeEquivalentTo(rejector.DisplayName);
         }
 
@@ -408,17 +356,17 @@ namespace WorkflowManagementSystem.Tests
             program.WorkflowSteps.Count.Should().Be(3);
 
             var firstWorkflowStep = program.WorkflowSteps[0];
-            firstWorkflowStep.States.ShouldBeEquivalentTo(WorkflowStates.APPROVED);
+            firstWorkflowStep.State.ShouldBeEquivalentTo(WorkflowStates.APPROVED);
             firstWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
             firstWorkflowStep.User.ShouldBeEquivalentTo(approver.DisplayName);
 
             var secondWorkflowStep = program.WorkflowSteps[1];
-            secondWorkflowStep.States.ShouldBeEquivalentTo(WorkflowStates.APPROVED);
+            secondWorkflowStep.State.ShouldBeEquivalentTo(WorkflowStates.APPROVED);
             secondWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_COUNCIL_MEMBER);
             secondWorkflowStep.User.ShouldBeEquivalentTo(approverTwo.DisplayName);
 
             var thirdWorkflowStep = program.WorkflowSteps[2];
-            thirdWorkflowStep.States.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
+            thirdWorkflowStep.State.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
             thirdWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.APPC_MEMBER);
             thirdWorkflowStep.User.Should().BeNullOrEmpty();
         }
@@ -455,7 +403,7 @@ namespace WorkflowManagementSystem.Tests
 
             var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
             programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(4);
-            programViewModel.WorkflowSteps.Last().States.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
+            programViewModel.WorkflowSteps.Last().State.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
         }
 
         [Test]
@@ -546,22 +494,22 @@ namespace WorkflowManagementSystem.Tests
             program.WorkflowSteps.Count.Should().Be(4);
 
             var firstWorkflowStep = program.WorkflowSteps[0];
-            firstWorkflowStep.States.ShouldBeEquivalentTo(WorkflowStates.APPROVED);
+            firstWorkflowStep.State.ShouldBeEquivalentTo(WorkflowStates.APPROVED);
             firstWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
             firstWorkflowStep.User.ShouldBeEquivalentTo(approver.DisplayName);
 
             var secondWorkflowStep = program.WorkflowSteps[1];
-            secondWorkflowStep.States.ShouldBeEquivalentTo(WorkflowStates.APPROVED);
+            secondWorkflowStep.State.ShouldBeEquivalentTo(WorkflowStates.APPROVED);
             secondWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.FACULTY_COUNCIL_MEMBER);
             secondWorkflowStep.User.ShouldBeEquivalentTo(approver.DisplayName);
 
             var thirdWorkflowStep = program.WorkflowSteps[2];
-            thirdWorkflowStep.States.ShouldBeEquivalentTo(WorkflowStates.APPROVED);
+            thirdWorkflowStep.State.ShouldBeEquivalentTo(WorkflowStates.APPROVED);
             thirdWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.APPC_MEMBER);
             thirdWorkflowStep.User.ShouldBeEquivalentTo(approver.DisplayName);
 
             var fourWorkflowStep = program.WorkflowSteps[3];
-            fourWorkflowStep.States.ShouldBeEquivalentTo(WorkflowStates.COMPLETED);
+            fourWorkflowStep.State.ShouldBeEquivalentTo(WorkflowStates.COMPLETED);
             fourWorkflowStep.ResponsibleParty.ShouldBeEquivalentTo(RoleTestHelper.GFC_MEMBER);
             fourWorkflowStep.User.ShouldBeEquivalentTo(approver.DisplayName);
         }
@@ -595,7 +543,7 @@ namespace WorkflowManagementSystem.Tests
 
             var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
             programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
-            programViewModel.WorkflowSteps.Last().States.ShouldBeEquivalentTo(WorkflowStates.REJECTED);
+            programViewModel.WorkflowSteps.Last().State.ShouldBeEquivalentTo(WorkflowStates.REJECTED);
         }
 
         [Test]
@@ -630,7 +578,7 @@ namespace WorkflowManagementSystem.Tests
 
             var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
             programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(4);
-            programViewModel.WorkflowSteps.Last().States.ShouldBeEquivalentTo(WorkflowStates.COMPLETED);
+            programViewModel.WorkflowSteps.Last().State.ShouldBeEquivalentTo(WorkflowStates.COMPLETED);
         }
 
         [Test]
@@ -660,7 +608,7 @@ namespace WorkflowManagementSystem.Tests
 
             var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
             programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
-            programViewModel.WorkflowSteps.Last().States.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
+            programViewModel.WorkflowSteps.Last().State.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
         }
 
         [Test]
@@ -694,7 +642,7 @@ namespace WorkflowManagementSystem.Tests
 
             var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
             programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(4);
-            programViewModel.WorkflowSteps.Last().States.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
+            programViewModel.WorkflowSteps.Last().State.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
         }
 
         [Test]
@@ -724,7 +672,7 @@ namespace WorkflowManagementSystem.Tests
 
             var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
             programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
-            programViewModel.WorkflowSteps.Last().States.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
+            programViewModel.WorkflowSteps.Last().State.ShouldBeEquivalentTo(WorkflowStates.PENDING_APPROVAL);
         }
 
         [Test]
@@ -754,7 +702,7 @@ namespace WorkflowManagementSystem.Tests
             act.ShouldThrow<WMSException>().WithMessage("Request has already been rejected");
             var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
             programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
-            programViewModel.WorkflowSteps.Last().States.ShouldBeEquivalentTo(WorkflowStates.REJECTED);
+            programViewModel.WorkflowSteps.Last().State.ShouldBeEquivalentTo(WorkflowStates.REJECTED);
         }
 
         [Test]
@@ -787,7 +735,7 @@ namespace WorkflowManagementSystem.Tests
             act.ShouldThrow<WMSException>().WithMessage("Request has already been completed");
             var programViewModel = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
             programViewModel.WorkflowSteps.Count.ShouldBeEquivalentTo(4);
-            programViewModel.WorkflowSteps.Last().States.ShouldBeEquivalentTo(WorkflowStates.COMPLETED);
+            programViewModel.WorkflowSteps.Last().State.ShouldBeEquivalentTo(WorkflowStates.COMPLETED);
         }
 
         [Test]

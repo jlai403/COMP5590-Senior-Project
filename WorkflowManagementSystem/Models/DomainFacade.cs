@@ -224,15 +224,6 @@ namespace WorkflowManagementSystem.Models
             });
         }
 
-        public List<ProgramViewModel> FindAllProgramRequestsAwaitingForAction(string email)
-        {
-            return TransactionHandler.Instance.Execute(() =>
-            {
-                var programs = ProgramRepository.FindAllProgramRequestsAwaitingForAction(email);
-                return ProgramAssembler.AssembleAll(programs);
-            });
-        }
-
         public bool IsProgramRequestCurrentlyOnLastWorkflowStep(string name)
         {
             return TransactionHandler.Instance.Execute(() =>

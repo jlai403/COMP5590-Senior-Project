@@ -1,4 +1,6 @@
 ﻿@using System.Web.Optimization
+@using WorkflowManagementSystem.Models.Workflow
+@using WorkflowManagementSystem.Views
 @model WorkflowManagementSystem.Controllers.DashboardViewModel
 
 @Styles.Render("~/Content/css/theme/dashboard.css")
@@ -10,9 +12,9 @@
             <div class="actionable-items">
                 <h6>Actionable Items</h6>
 
-                @foreach (var actionItem in Model.ActionableRequests)
+                @foreach (var actionItem in Model.ActionItems)
                 {
-                    <a href="@Url.Action("UpdateStatus", "Program", new {actionItem.Name})">
+                    <a href="@Url.Action("UpdateStatus", actionItem.Type.ToString(), new {actionItem.Name})">
                         <div class="container item">
                             <div class="row">
                                 <div class="col-md-4 col-xs-6"> Request Date: </div>
@@ -28,7 +30,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4 col-xs-6"> Status: </div>
-                                <div class="col-md-8 col-xs-6"> @actionItem.CurrentStatus() </div>
+                                <div class="col-md-8 col-xs-6"> @Html.GetWorkflowStatusDisplay(actionItem.CurrentState) </div>
                             </div>
                         </div>
                     </a>
@@ -60,7 +62,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4 col-xs-6"> Status: </div>
-                                <div class="col-md-8 col-xs-6"> @userRequest.CurrentStatus() </div>
+                                <div class="col-md-8 col-xs-6"> @Html.GetWorkflowStatusDisplay(userRequest.CurrentState()) </div>
                             </div>
                         </div>
                     </a>
