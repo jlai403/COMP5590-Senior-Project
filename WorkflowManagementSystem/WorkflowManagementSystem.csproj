@@ -137,14 +137,14 @@
     <Content Include="Content\css\module\colors.css" />
     <Content Include="Content\css\module\controls.css" />
     <Content Include="Content\css\module\errors.css" />
+    <Content Include="Content\css\module\nav.css" />
     <Content Include="Content\css\theme\create-program.css" />
     <Content Include="Content\css\theme\dashboard.css" />
     <Content Include="Content\css\theme\layout.css" />
-    <Content Include="Content\css\theme\program-summary.css" />
+    <Content Include="Content\css\theme\workflow-item.css" />
     <Content Include="Content\css\theme\search-results.css" />
     <Content Include="Content\css\theme\signin.css" />
     <Content Include="Content\css\theme\signup.css" />
-    <Content Include="Content\css\theme\update-program.css" />
     <Content Include="Content\img\Mount_Royal_University_Logo.svg.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Migrations\fonts\glyphicons-halflings-regular.svg" />

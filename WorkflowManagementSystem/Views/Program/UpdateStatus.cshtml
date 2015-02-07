@@ -1,26 +1,26 @@
 ﻿@using System.Web.Optimization
 @model WorkflowManagementSystem.Models.Programs.ProgramViewModel
 
-@Styles.Render("~/Content/css/theme/update-program.css")
+@Styles.Render("~/Content/css/theme/workflow-item.css")
 
-<div class="container program-summary center">
+<div class="container workflow-item center">
 	<div class="col-xs-12">
 		<div class="row center-text">
-			<h3 style="margin: 20px;">Update Program Status</h3>
+			<p class="header">Update Program Status</p>
 		</div>
 				
-		<div class="row">
+		<div class="row content">
 			@{Html.RenderPartial("_ProgramSummaryDetailsPartial", Model);}
 
             <!-- workflow details start -->
             <div class="col-sm-6 workflow-details">
                 <div class="row center-text">
-                    <h5>Workflow</h5>
+                    <p class="sub-header">Workflow</p>
                 </div>
 
                 @{ Html.RenderPartial("_ProgramWorkflowStepsPartial", Model.WorkflowSteps); }
 
-                @using (Html.BeginForm("UpdateStatus", "Program", FormMethod.Post, new { @class = "update-program-form", enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("UpdateStatus", "Program", FormMethod.Post, new { @class = "update-workflow-item-form", enctype = "multipart/form-data" }))
                 {
                     @Html.Hidden("workflowItemName", Model.Name)
                     <div class="row left-align" style="padding: 0 15px; margin-top: 15px;">
@@ -50,10 +50,10 @@
 		    <!-- workflow details end -->
 
             <!-- comments start -->
-            <div class="row">
-                <div class="col-xs-12 comments">
+            <div class="row content comments">
+                <div class="col-xs-12">
                     <div class="row center-text">
-                        <h5>Comments</h5>
+                        <p class="sub-header">Comments</p>
                     </div>
 
                     @if (Model.Comments.Count == 0)

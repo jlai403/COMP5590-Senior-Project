@@ -12,7 +12,7 @@ namespace WorkflowManagementSystem.Views
                 case WorkflowStates.APPROVED:
                     return "Approved";
                 case WorkflowStates.REJECTED:
-                    return "Rejected:";
+                    return "Rejected";
                 case WorkflowStates.COMPLETED:
                     return "Completed";
                 default:

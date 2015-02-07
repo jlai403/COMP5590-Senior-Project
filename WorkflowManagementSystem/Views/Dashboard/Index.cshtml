@@ -1,5 +1,4 @@
 ﻿@using System.Web.Optimization
-@using WorkflowManagementSystem.Models.Workflow
 @using WorkflowManagementSystem.Views
 @model WorkflowManagementSystem.Controllers.DashboardViewModel
 
@@ -10,26 +9,26 @@
         <!-- ACTIONABLE ITEMS START -->
         <div class="col-md-6">
             <div class="actionable-items">
-                <h6>Actionable Items</h6>
+                <p class="header">Actionable Items</p>
 
                 @foreach (var actionItem in Model.ActionItems)
                 {
                     <a href="@Url.Action("UpdateStatus", actionItem.Type.ToString(), new {actionItem.Name})">
                         <div class="container item">
                             <div class="row">
-                                <div class="col-md-4 col-xs-6"> Request Date: </div>
+                                <div class="col-md-4 col-xs-6 bold-text"> Request Date: </div>
                                 <div class="col-md-8 col-xs-6"> @actionItem.RequestedDateUTC </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-xs-6"> Requested By: </div>
+                                <div class="col-md-4 col-xs-6 bold-text"> Requested By: </div>
                                 <div class="col-md-8 col-xs-6"> @actionItem.Requester </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-xs-6"> Program Name: </div>
+                                <div class="col-md-4 col-xs-6 bold-text"> Program Name: </div>
                                 <div class="col-md-8 col-xs-6"> @actionItem.Name </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-xs-6"> Status: </div>
+                                <div class="col-md-4 col-xs-6 bold-text"> Status: </div>
                                 <div class="col-md-8 col-xs-6"> @Html.GetWorkflowStatusDisplay(actionItem.CurrentState) </div>
                             </div>
                         </div>
@@ -42,26 +41,26 @@
         <!-- REQUESTS START -->
         <div class="col-md-6">
             <div class="request-items">
-                <h6>Your Requested Items</h6>
+                <p class="header">Your Requested Items</p>
 
                 @foreach (var userRequest in Model.UserRequests)
                 {
                     <a href="@Url.Action("Summary", "Program", new {userRequest.Name})">
                         <div class="container item">
                             <div class="row">
-                                <div class="col-md-4 col-xs-6"> Request Date: </div>
+                                <div class="col-md-4 col-xs-6 bold-text"> Request Date: </div>
                                 <div class="col-md-8 col-xs-6"> @userRequest.RequestedDateUTC </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-xs-6"> Program Name: </div>
+                                <div class="col-md-4 col-xs-6 bold-text"> Program Name: </div>
                                 <div class="col-md-8 col-xs-6"> @userRequest.Name </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-xs-6"> Reponsible Party: </div>
+                                <div class="col-md-4 col-xs-6 bold-text"> Reponsible Party: </div>
                                 <div class="col-md-8 col-xs-6"> @userRequest.CurrentResponsibleParty() </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-xs-6"> Status: </div>
+                                <div class="col-md-4 col-xs-6 bold-text"> Status: </div>
                                 <div class="col-md-8 col-xs-6"> @Html.GetWorkflowStatusDisplay(userRequest.CurrentState()) </div>
                             </div>
                         </div>

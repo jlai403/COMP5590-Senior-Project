@@ -1,21 +1,21 @@
 ﻿@using System.Web.Optimization
 @model WorkflowManagementSystem.Models.Programs.ProgramViewModel
 
-@Styles.Render("~/Content/css/theme/program-summary.css")
+@Styles.Render("~/Content/css/theme/workflow-item.css")
 
-<div class="container program-summary center">
+<div class="container workflow-item center">
     <div class="col-xs-12">
         <div class="row center-text">
-            <h3 style="margin: 20px;">Program Request</h3>
+            <p class="header">Program Request</p>
         </div>
 
-        <div class="row">
+        <div class="row content">
             @{Html.RenderPartial("_ProgramSummaryDetailsPartial", Model);}
 
             <!-- workflow details start -->
             <div class="col-sm-6 workflow-details">
                 <div class="row center-text">
-                    <h5>Workflow</h5>
+                    <p class="sub-header">Workflow</p>
                 </div>
 
                 @{Html.RenderPartial("_ProgramWorkflowStepsPartial", Model.WorkflowSteps);}
@@ -24,10 +24,10 @@
         </div>
 
         <!-- comments start -->
-        <div class="row">
-            <div class="col-xs-12 comments">
+        <div class="row content comments">
+            <div class="col-xs-12">
                 <div class="row center-text">
-                    <h5>Comments</h5>
+                    <p class="sub-header">Comments</p>
                 </div>
 
                 @if (Model.Comments.Count == 0)
@@ -53,7 +53,7 @@
                     {
                         @Html.Hidden("WorkflowItemName", Model.Name)
                         <textarea name="Text" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="11"></textarea>
-                        <input class="form-control button blue" type="submit" value="Add Comment" tabindex="13" style="max-width: 400px; margin: 15px auto;"/>
+                        <input class="form-control button dark-blue" type="submit" value="Add Comment" tabindex="13" style="max-width: 400px; margin: 15px auto;"/>
                     }
                 </div>
             </div>
