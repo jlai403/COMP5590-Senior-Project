@@ -43,5 +43,19 @@ namespace WorkflowManagementSystem.Models.Workflow
             RequestedDateUTC = requestedDateUtc;
             Type = workflowItemType;
         }
+
+        public List<WorkflowData> GetWorkflowHistory(WorkflowData workflowData = null)
+        {
+            var workflowDataHistory = new List<WorkflowData>();
+            workflowData = workflowData ?? CurrentWorkflowData;
+
+            if (workflowData.PreviousWorkflowData != null)
+            {
+                workflowDataHistory.AddRange(GetWorkflowHistory(workflowData.PreviousWorkflowData));
+            }
+
+            workflowDataHistory.Add(workflowData);
+            return workflowDataHistory;
+        }
     }
 }

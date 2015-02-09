@@ -35,19 +35,5 @@ namespace WorkflowManagementSystem.Models.Programs
                 AddComment(user, programRequestInputViewModel.RequestedDateUTC, programRequestInputViewModel.Comment);
             }
         }
-
-        public List<WorkflowData> GetWorkflowHistory(WorkflowData workflowData = null)
-        {
-            var workflowDataHistory = new List<WorkflowData>();
-            workflowData = workflowData ?? CurrentWorkflowData;
-
-            if (workflowData.PreviousWorkflowData != null)
-            {
-                workflowDataHistory.AddRange(GetWorkflowHistory(workflowData.PreviousWorkflowData));
-            }
-
-            workflowDataHistory.Add(workflowData);
-            return workflowDataHistory;
-        }
     }
 }

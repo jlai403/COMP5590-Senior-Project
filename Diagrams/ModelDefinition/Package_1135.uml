@@ -1,0 +1,1449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="8281dada-61fb-4ca1-89b8-f35ac011e3db"
+  name="ApprovalChains"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="18dbe6ef-d21f-4e08-88d6-2439770c4878"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DWorkflowManagementSystem.Models.ApprovalChains"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="800268ba-0c52-4eee-a8d0-f1653eed592a"
+        name="ApprovalChainStep"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="55fdadd6-979e-487e-960f-c7431b76d802"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChainStep"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="b2aee0bb-c86c-4b65-9886-8b87d8cc4a34"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c80fd72d-ff2d-4748-9d2c-13a98db85cd4">
+                <propertyInstance
+                  Id="b5cb345a-e510-41e8-928e-a389009c75d9"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="3c6b66f5-98cd-4e60-b538-c7bc849fd153">
+                <propertyInstance
+                  Id="3cc4873d-1c57-4b2f-a9b4-df810e36ee6c"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="10448520-d2b3-4f4b-9cc0-35503dc04624">
+                <propertyInstance
+                  Id="92f8f203-af6a-4e12-862d-4d8cb9da5994"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d281e100-8c00-438c-8703-9efeb91541ec">
+                <propertyInstance
+                  Id="b6e104c3-50c6-4682-8b47-b49b9092cc55"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="15510ec3-729f-4a6a-b493-daaacfdf4c71">
+                <propertyInstance
+                  Id="49871782-540c-4167-a3c2-f78b93b3c87d"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <suppliersInternal>
+          <interfaceRealization
+            Id="48241bce-30b3-4569-a8fe-395966794fb8">
+            <interfaceMoniker
+              Id="05c4fb8a-e001-4723-a854-f551469fa405"
+              LastKnownName="IEntity"
+              LastKnownLocation="Package1_1120.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <targetEnds>
+          <association
+            Id="64c85873-e0d5-400f-a491-773a1ebb020b"
+            isDerived="false"
+            sourceEndRoleName="ApprovalChainStep"
+            targetEndRoleName="ApprovalChain"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="dda9481b-6b6d-4c51-9fd6-dbe1fe306d80"
+              LastKnownName="ApprovalChain"
+              LastKnownLocation="Package_1135.uml" />
+            <description>Property ApprovalChain references type ApprovalChain.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bc0744d0-8fcc-4618-a3d3-3a69fbdf92f9"
+                  name="ApprovalChainStep"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="1ef82735-fddb-43b3-acc8-8991f69d75bc"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="2c03ff80-b1f0-40db-ace7-ade7fd51603d"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="00cb4b2e-4023-47e9-ad62-b1567e8c37a6"
+                  name="ApprovalChain"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="85db1245-4bc0-4a5a-bba9-592c1ed06169"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="ed009a6c-16ee-4cdb-b4ec-77be45c2c74e"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="6fb0f972-95ea-429a-8de8-38dd753a4d85"
+            isDerived="false"
+            sourceEndRoleName="ApprovalChainStep"
+            targetEndRoleName="Role"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="b49e42d5-1c35-4661-9472-f0c20000aca4"
+              LastKnownName="Role"
+              LastKnownLocation="Package_1141.uml" />
+            <description>Property Role references type Role.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d76528b1-f12f-42a6-90c7-4ea09a8963a2"
+                  name="ApprovalChainStep"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="1b953711-8b54-4594-af50-ada3e35dfe69"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="f67469cb-11cd-4f9f-acab-f6d9ed7c5910"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ca2b6426-2949-4708-9dfa-a8a2eb9edb43"
+                  name="Role"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="8b64e888-8944-4327-9988-e03680b1a084"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="ffcf943b-1c49-4bdd-a31b-f54310b4bb7e"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="ac681f3b-1c8f-4a91-8dc3-3fcd837378ab"
+            name="Id"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="52ac0468-c8e4-4906-af75-193174e19451"
+                handle="viewcode://./CodeSchema_Property?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChainStep Member%3DId"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="05175aa0-4e9c-4357-be6f-0545a3140211"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1d4bbe8e-47a6-40ab-b914-9bc9b9cbb77d">
+                    <propertyInstance
+                      Id="d26adea2-30e1-4b35-a077-75fc6a03b4e8"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ea1720c6-701d-4d54-bdc1-0968cc4ad283">
+                    <propertyInstance
+                      Id="914cb4fa-8ae4-45e6-af72-3f1da4f93e07"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a230a054-8bed-4e2d-b518-322d90656c85">
+                    <propertyInstance
+                      Id="311f53ee-4b14-456c-b84d-e090541a3f7c"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="618ff98f-860c-4d93-9a5f-2a25a8eec045">
+                    <propertyInstance
+                      Id="14444ab8-3263-4ebb-b56c-ac895849686b"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cc7933d3-c92a-4640-abcb-a8d9c30b11e0">
+                    <propertyInstance
+                      Id="b1a07954-a1e0-4556-ade6-f3e1913f6c73"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b647d49e-37c4-45d2-8427-6aebeabda8e3">
+                    <propertyInstance
+                      Id="eb6d1072-fb09-4b20-944c-3465223be3e3"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6d167299-6321-43c9-bc4d-56033ef07a23">
+                    <propertyInstance
+                      Id="3cde810c-8760-4676-88e5-330ff081b47b"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                LastKnownName="Integer"
+                LastKnownLocation="Diagrams.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="66bd3425-a05d-4cd8-b908-ed8748a9b45c"
+            name="ApprovalChain"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="c2f44495-248d-4000-bdd5-7ebdf4b84690"
+                handle="viewcode://./CodeSchema_Property?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChainStep Member%3DApprovalChain"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="e40cae21-5e27-4afc-92e0-fb03d2821db4"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="523f6f65-d81d-4b65-8859-f404552c6e6f">
+                    <propertyInstance
+                      Id="f718d751-fa11-42af-98cf-692de604ef8e"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="53d629f7-3c91-4d45-af3e-6bc8b80cb3b0">
+                    <propertyInstance
+                      Id="49d6e4bb-c8c7-4620-8654-1f01717f60bc"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="04bdcb76-b6f3-4998-9bab-d849c495353a">
+                    <propertyInstance
+                      Id="2e9d0277-9574-41e7-8f1d-5831cc07db84"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="00e1849d-5678-4e0c-b379-cb954ce39806">
+                    <propertyInstance
+                      Id="eaada8dd-7126-4907-a1b3-1b19024d770c"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="90dcbed3-aae7-4040-8ae6-2df6358826b0">
+                    <propertyInstance
+                      Id="0e8c78d7-9077-4923-acd7-1be4a1de9a01"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c78caeaf-84b7-4734-95b7-8d93e30741bb">
+                    <propertyInstance
+                      Id="a61954c0-2a41-4b66-a926-c6fd36b1d51d"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0e12ff65-3bca-4fc9-8774-8a0be2f29e3a">
+                    <propertyInstance
+                      Id="397d319c-a732-4d9d-9078-0a5b9479fb8b"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="dda9481b-6b6d-4c51-9fd6-dbe1fe306d80"
+                LastKnownName="ApprovalChain"
+                LastKnownLocation="Package_1135.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="90d8fc49-3020-48fd-946c-beafc7231429"
+            name="Role"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="22013757-32a1-407a-bec0-f32e8d609d0f"
+                handle="viewcode://./CodeSchema_Property?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChainStep Member%3DRole"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="120c3335-0a3b-455b-94bd-01234290119d"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="04b62fb1-f4ef-4307-9b18-54a406dc0503">
+                    <propertyInstance
+                      Id="597e4d06-1a5b-4203-9b45-8b3acd380600"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5ac39a2b-f650-4c38-b512-9016908d522c">
+                    <propertyInstance
+                      Id="f21fc994-cfc7-4756-a4fe-da8a6d813b59"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a8b415e6-0a50-43d7-9aa7-c8d11c31efcb">
+                    <propertyInstance
+                      Id="2d2c35e7-429d-49dd-b9d9-5f6ad2eda5c3"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="30c59522-d51e-4170-a799-4641e8cd1169">
+                    <propertyInstance
+                      Id="62827bb2-e7ee-4060-897c-946c9b82c971"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f82954d3-7433-4fdc-8f9b-e32c784bac67">
+                    <propertyInstance
+                      Id="ab0cf8a3-6fea-4b76-80fa-29ad7fec27bf"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bcd07832-f320-4d8f-980e-090cf4d146c3">
+                    <propertyInstance
+                      Id="818512ad-6d3b-4bb7-b05c-1336ce3fe3fc"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="82c112ae-cdea-4d71-96b0-b8bc8920c813">
+                    <propertyInstance
+                      Id="52c96cf7-6006-4a97-a204-1f1a068798af"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="b49e42d5-1c35-4661-9472-f0c20000aca4"
+                LastKnownName="Role"
+                LastKnownLocation="Package_1141.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="eab0c8ed-edcc-4d4e-a6c6-1729536b8b53"
+            name="Sequence"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="ea9054e1-9d24-4f98-9932-f4b36daf5150"
+                handle="viewcode://./CodeSchema_Property?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChainStep Member%3DSequence"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="b72105ee-104a-4196-9732-c1b3d05a5a0e"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d904f59d-29d5-4deb-a770-e5b39ab58ae0">
+                    <propertyInstance
+                      Id="21099f01-f709-442f-b013-8871b39052fd"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b4070703-73d3-4e28-8b13-df92ca819058">
+                    <propertyInstance
+                      Id="ac9e4fec-04fc-489d-a804-2b487ce25faf"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8928e28d-dd06-42c2-bfb4-0d087149632a">
+                    <propertyInstance
+                      Id="d4c15a21-c60b-4810-af9c-46689845f547"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="58b7be11-807a-40b7-8a8f-f734c2f3cd62">
+                    <propertyInstance
+                      Id="f36912c8-f04a-49db-9573-e88df3628f0a"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8e6a7eb1-c8ca-4307-8366-065e10760437">
+                    <propertyInstance
+                      Id="411c2f78-c9e3-4320-abfb-4c5eec4d67ad"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c4400ceb-cb9f-462a-8b7f-3ed60193261d">
+                    <propertyInstance
+                      Id="d7abf9d1-80fd-4851-b903-4573723169f4"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="16569280-7833-42a2-8c92-d27e194d4f60">
+                    <propertyInstance
+                      Id="77421591-6d7a-4b80-9d92-fac0ad414c45"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                LastKnownName="Integer"
+                LastKnownLocation="Diagrams.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="049a237d-1f8d-41b0-9334-fe38d1276a3b"
+            name="ApprovalChainStep"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="92445d92-e97e-4a4a-91ef-a92676229463"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChainStep Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="41880c39-a8fd-4e7e-aecc-2da4becc3448"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8e1541d2-65ec-440b-bee0-94bf9de78be0">
+                    <propertyInstance
+                      Id="3be4be73-1e1d-4048-ad15-ed3cb719dca9"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="963d3be4-b0ce-4ca7-898f-bb23ba99acd3">
+                    <propertyInstance
+                      Id="767385cc-a618-4881-9e2e-dcfb075eb70a"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="18b1c8ff-34a8-43a5-9a3b-2fa47bc12dc6">
+                    <propertyInstance
+                      Id="7cf54035-f12e-4a4b-af0d-20767421c535"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="dd433334-007f-4c8c-93c9-c8da651c9e5c">
+                    <propertyInstance
+                      Id="ea25ddcf-fa0c-46ae-a84f-867f89b71b5f"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="98315254-280c-495a-ae51-11ce28610ee4">
+                    <propertyInstance
+                      Id="47298edf-686e-4b64-868b-50781cdcf78b"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9eeb1255-8a56-4f74-869d-0e274b4a5f70">
+                    <propertyInstance
+                      Id="b3bb3d48-bb9b-4ddc-85d0-17aaea7571b9"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="158ca7b2-1822-4579-922f-a3bc0edec0db"
+            name="Update"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="9af33dac-f898-4ada-9b33-d3087330016c"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChainStep Member%3D(Name%3DUpdate OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChain)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="269d40e0-6de6-42e3-a12b-a52b16b58a1f"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bf632e38-a6ad-404f-a91a-e673c4db4ba4">
+                    <propertyInstance
+                      Id="38928876-e416-4772-b0cd-ca60545f8228"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="162dda1e-4901-484f-98d7-200796bfdd82">
+                    <propertyInstance
+                      Id="845daaac-3ea4-4364-827d-434dbdf2076a"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d1232143-af1b-45d4-a9e9-9458b3f26b5a">
+                    <propertyInstance
+                      Id="072fbed1-3367-4c58-a9fa-d0b65caf2da4"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="135fd8ac-7d4a-41e3-8aaa-00d73e94f33b">
+                    <propertyInstance
+                      Id="88a683ac-3b05-490f-867e-5ebd9268a115"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2c186e4c-bc77-45f4-8503-61f079243a0c">
+                    <propertyInstance
+                      Id="222543c5-1bf3-44ea-86fa-2d918bd8179f"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0c17e53e-909e-49f3-bd8f-68c611164c08">
+                    <propertyInstance
+                      Id="c4de57b2-40fa-43ee-81bf-20843daeba51"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="13cc025f-ba9b-4b73-a9e6-dbd284e52a50"
+                  name="approvalChain"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="0c0345d3-13fd-4fa4-9196-e24bfc6c6482"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChainStep Member%3D(Name%3DUpdate OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChain)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DapprovalChain"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="dda9481b-6b6d-4c51-9fd6-dbe1fe306d80"
+                      LastKnownName="ApprovalChain"
+                      LastKnownLocation="Package_1135.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0a3edf46-61d9-4344-99a4-e1f26eae7b3a"
+                  name="roleName"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="94454a7f-4913-4ffe-9191-bd6095217bd8"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChainStep Member%3D(Name%3DUpdate OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChain)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DroleName"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="Diagrams.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="727712bb-5e2c-4749-a78b-f3183425ea35"
+                  name="sequence"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="b7716e73-6e6b-4bc8-b0b3-5bfe406da9e6"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChainStep Member%3D(Name%3DUpdate OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChain)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files (x86)%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.5%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3Dsequence"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="Diagrams.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="dda9481b-6b6d-4c51-9fd6-dbe1fe306d80"
+        name="ApprovalChain"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="bb66263e-61da-43d2-8cdd-600620050e8d"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChain"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="31322d4d-bc4d-41e2-abeb-0ee4bde5b153"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0bbd8d52-15f6-4c31-9c43-e66c917e9f6e">
+                <propertyInstance
+                  Id="f8268481-8069-4b13-97d9-e620fef943f0"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="628a7948-6fed-43ea-b942-a8dcb3152108">
+                <propertyInstance
+                  Id="757c04b7-fc1d-4c87-8d5b-c4aa5fe79095"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="98db9657-8d88-4836-99af-c35b0571aef4">
+                <propertyInstance
+                  Id="2eda8f81-1ec0-445f-97b0-c4139e51e581"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a0691186-9df7-432c-bce2-4f5dcc4ef515">
+                <propertyInstance
+                  Id="d5817065-4193-4bee-bc92-f7e88d8294ef"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="3d00db4f-13b2-4e16-89bd-4da32d6ca0c1">
+                <propertyInstance
+                  Id="ffa246d2-6acd-4787-acac-063938528d7f"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <suppliersInternal>
+          <interfaceRealization
+            Id="d7125c28-47e2-4feb-bb78-5fcc0335d176">
+            <interfaceMoniker
+              Id="05c4fb8a-e001-4723-a854-f551469fa405"
+              LastKnownName="IEntity"
+              LastKnownLocation="Package1_1120.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <targetEnds>
+          <association
+            Id="f7e17850-f7e4-4767-8324-3665ea5aa6d9"
+            isDerived="false"
+            sourceEndRoleName="ApprovalChain"
+            targetEndRoleName="ApprovalChainSteps"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="4da88f72-a777-484f-a3a6-663d79438c25"
+              LastKnownName="List&lt;ApprovalChainStep‎&gt;"
+              LastKnownLocation="Package3_1124.uml" />
+            <description>Property ApprovalChainSteps references type List&lt;ApprovalChainStep‎&gt;.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1a39f64f-8ee1-43ac-91a3-08be7c103ed2"
+                  name="ApprovalChain"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="141b82f9-883c-48ee-a7aa-c760e95fcb9a"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="68c8112c-49f6-4fd5-b67a-731bfdbcb2d2"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fb482cfd-993a-4320-a311-f8d1b8f2d7ad"
+                  name="ApprovalChainSteps"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="fa56cfd7-6a89-4e3c-a52e-91a849f0aa78"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="1f08e5ab-c39b-4530-9035-e55a3913ad58"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="4807a5cd-ec54-431f-b56c-46ffabac7acc"
+            name="ApprovalChainSteps"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="d3ec0d76-6696-4e05-be9a-0b08f9620600"
+                handle="viewcode://./CodeSchema_Property?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChain Member%3DApprovalChainSteps"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="0996da45-9827-4547-8183-5b7a766779b3"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="314a557a-b97e-4878-a1f5-b60f237de412">
+                    <propertyInstance
+                      Id="3037a4e2-797c-479c-a960-a2fa306f9629"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b247e1ed-fa30-4fdc-b9b5-4860d72de0c5">
+                    <propertyInstance
+                      Id="ea714cdd-77a1-4cf1-a6f4-b7078e7e4492"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="70e49078-3506-42cc-a639-c34ac4b0dbd9">
+                    <propertyInstance
+                      Id="9fafa140-6d81-43c8-9bec-ba7e28f0dc8d"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="df57b2ce-5870-47cc-8a8b-be7588096aef">
+                    <propertyInstance
+                      Id="78ec8118-63c5-4830-aaea-b60154fab07d"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="01013eaa-761d-48a1-b799-3eb3ccedff66">
+                    <propertyInstance
+                      Id="e6608075-cf5d-46e5-82b5-a0f0ccd379ea"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e5fe1b08-2dcd-4078-9fbd-877ba278a3d8">
+                    <propertyInstance
+                      Id="2d2bf541-ab22-478c-ab9f-dac82d4feee1"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="626670c1-46b3-413d-8fda-64d3e26d733c">
+                    <propertyInstance
+                      Id="135d9c46-5b55-4339-9538-dfde3b3a92d1"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="4da88f72-a777-484f-a3a6-663d79438c25"
+                LastKnownName="List&lt;ApprovalChainStep‎&gt;"
+                LastKnownLocation="Package3_1124.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="1db76d23-71eb-4ed1-be36-c8b83c160a33"
+            name="Id"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="22c97730-a40b-439b-a546-0bc0cdd47c95"
+                handle="viewcode://./CodeSchema_Property?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChain Member%3DId"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="5cea1222-435f-4880-94cc-119cefa4a2d4"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="64b66c81-2313-4f64-a6d9-63cf894acb44">
+                    <propertyInstance
+                      Id="12d1f7be-b969-4a4b-805e-9b68579f65c7"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f48cb87d-6df1-49e3-8ce9-0b9087081652">
+                    <propertyInstance
+                      Id="cb8e72cd-1fcd-4211-a5ef-10891df45f75"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d585ba4a-282a-438d-8a63-30df11ab4961">
+                    <propertyInstance
+                      Id="d7562b20-6b66-4187-8dd7-75f0d8585866"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4468df06-7011-44f6-90fc-a52a91865c70">
+                    <propertyInstance
+                      Id="ce14adf3-7a31-4b53-9f80-3841d6a1ced7"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b162dc32-a668-4035-ad7c-dea095640ae8">
+                    <propertyInstance
+                      Id="bdd71970-da4b-4a52-a9f3-cfbf3d83a3e8"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="00254b2d-ba0a-4303-9d2b-5dc97875872e">
+                    <propertyInstance
+                      Id="9eab019d-8325-4196-a66c-cdc5d86f5e64"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ca60a0ed-4256-461b-b6f2-711276ed88a2">
+                    <propertyInstance
+                      Id="69ee4c68-652c-403d-b1cd-1be4b4b2d706"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                LastKnownName="Integer"
+                LastKnownLocation="Diagrams.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="4f5e8601-c2fa-429a-93ac-a0a448e66b4a"
+            name="Name"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="a09d19f6-b4d3-4cf4-84ee-a0d5025b61f4"
+                handle="viewcode://./CodeSchema_Property?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChain Member%3DName"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="4420ab73-7b06-4728-8013-f0abbd859246"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d3317545-a4e2-4556-b23c-74be830abe16">
+                    <propertyInstance
+                      Id="3ec03ebd-21dc-432e-9eea-de66b2afc7ca"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="91dfea04-ba4f-4224-95df-7d8ef2a81edb">
+                    <propertyInstance
+                      Id="29b55906-14f0-40ad-9aa0-fa74239f611a"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a5201119-8d6e-4588-b019-419f9ffb67a2">
+                    <propertyInstance
+                      Id="06fc90bb-84ab-4d5b-ae9e-27d32914ad5f"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4c475094-9586-46a6-9d7b-960acdeffa0f">
+                    <propertyInstance
+                      Id="fb955620-027f-4e58-b4f1-f80473aeb247"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5fbec80a-2c0f-49b9-85ef-bcda3648cef4">
+                    <propertyInstance
+                      Id="4c02826b-2a35-4991-af28-401020963ec1"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="87d41018-68fa-4567-bcb9-f117afd7b747">
+                    <propertyInstance
+                      Id="8e5adf19-d249-4bad-ae4c-52ce520527b4"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b0d952b5-dc92-42e6-adcf-8c544a7292ac">
+                    <propertyInstance
+                      Id="a765084c-3a62-40f3-ab2d-a68b8718feea"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                LastKnownName="String"
+                LastKnownLocation="Diagrams.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="ac55bf1b-c1dc-4d2b-bc52-6ef16631d7b8"
+            name="Update"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="fc477430-dba6-4afa-9c6b-27e4eece248b"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChain Member%3D(Name%3DUpdate OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChainInputViewModel)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="8b5dea53-56a0-45b0-b350-fa2bf2cfa704"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c2ba4004-3e65-4d93-8892-97c8fd04a056">
+                    <propertyInstance
+                      Id="dae756a4-c7d1-4e21-a76c-4a70af5a3670"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="af8e03f6-7d32-4f47-8952-fd5b58c8c3d2">
+                    <propertyInstance
+                      Id="4a3d8ad2-31a1-4633-99b9-d25e77a23b75"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="57eab46a-7cbd-4992-96ff-5e17c3261a21">
+                    <propertyInstance
+                      Id="42a8371e-28a9-42ce-9ddf-9e5adb2ca525"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f5c610f5-54df-42d4-8335-83de514f9818">
+                    <propertyInstance
+                      Id="932cf6bb-56ad-4215-ace7-d2452819b1c8"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="87d0a8ab-c085-494f-b3e8-e0d1ba040036">
+                    <propertyInstance
+                      Id="6c69e249-66b4-4549-ba3b-a1e6de2de32d"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="697f1273-a395-4ca0-ab64-76d1b3ee482d">
+                    <propertyInstance
+                      Id="ebc46893-d52d-4a6b-97ff-b7f2d3137f0f"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="ded7e939-fa92-435e-882f-526950e8a6e3"
+                  name="approvalChainInputViewModel"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="8af5fd13-0514-4839-8777-feb2c4e1fbfe"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChain Member%3D(Name%3DUpdate OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChainInputViewModel)]) ParameterIdentifier%3DapprovalChainInputViewModel"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="e7bd2794-a05e-429f-90c2-44ccd795b5af"
+                      LastKnownName="ApprovalChainInputViewModel"
+                      LastKnownLocation="Package_1135.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="9cd78121-bb7f-4508-861f-e989ae489e53"
+            name="ApprovalChain"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="20e13252-6757-43ef-83f3-76dd68560fd2"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChain Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="3de9d540-a6a3-4d61-b724-68bd003295d0"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8445f7f2-99e9-46e5-aaf1-6ecc0def8a9b">
+                    <propertyInstance
+                      Id="858b539f-f3bd-4456-b945-b688ec3ef748"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bea309b5-edf0-4706-92b1-612f927c8239">
+                    <propertyInstance
+                      Id="f4d76649-28ce-4d26-8ecf-c9358fdedcad"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ba1ab658-4b52-4085-9677-8dde276fcbee">
+                    <propertyInstance
+                      Id="aff89741-cdb4-44c1-9087-740ce56c1e8a"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ed5e046a-b51c-4d79-9a2a-da00e0e6f59e">
+                    <propertyInstance
+                      Id="e3235aff-7d54-4225-9bfb-4dab7e20ab85"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="77b36f6e-0e2d-4398-ac90-f0fa8c857545">
+                    <propertyInstance
+                      Id="fbe36ef6-4f47-4d82-9a69-37b0c22d757e"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="83a40e9f-7d74-4e80-be0d-28013dd57972">
+                    <propertyInstance
+                      Id="0941af88-989b-4683-9018-5df5c6cc8d57"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="69cf27dc-47e1-46af-93fe-43420113a7bd"
+            name="AssertApprovalChainHasSteps"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="bc3d776f-84f0-43dc-b418-23cf70fac29e"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChain Member%3DAssertApprovalChainHasSteps"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="c5c4cae1-5bfe-4e29-867b-7ded943a8f49"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="938d19e1-73de-4404-844c-10936e6d8243">
+                    <propertyInstance
+                      Id="f7536438-5ad2-4619-b25e-62d9c01b7c07"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1cd5e3d0-3beb-4cde-96f8-b1f46407cc7c">
+                    <propertyInstance
+                      Id="28d5f543-dcff-430a-ade3-f237c5ebdff9"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="221d2a73-9c3e-46ef-8968-8ad0b2bc89fc">
+                    <propertyInstance
+                      Id="a4bf642e-bd85-42ab-8fbe-bc88656eb31a"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c0996c06-ab94-46e8-94d9-be7786dc8915">
+                    <propertyInstance
+                      Id="f951f532-a8c2-40fd-8932-586ea757ecb5"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a152ac43-14d1-430a-bed7-826e205f222a">
+                    <propertyInstance
+                      Id="f13de87b-4a2b-446a-b2ab-9e58eacd1daf"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="380ff628-141c-42c5-813d-bfd296e94926">
+                    <propertyInstance
+                      Id="da6a4a0b-24f6-43a6-935f-b6c87f8fb1ad"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="6df86e36-aa78-4a5e-9409-5a8368b74986"
+            name="AssertApprovalChainName"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="88532f46-a06b-42e3-b70c-0edd51bea44c"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChain Member%3DAssertApprovalChainName"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="0459aa1b-09a4-4de3-8e1d-afc38e33be4f"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a06ef68d-b2bb-4b31-8120-86f71dcb6f3e">
+                    <propertyInstance
+                      Id="5d304175-a634-4dd8-9541-20e7709e7f68"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a1261a66-23ed-4bb1-9cfa-1e8128fc942a">
+                    <propertyInstance
+                      Id="58e1f9f9-46b6-4101-b52a-ad9733ab8c76"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1d575305-272c-4e36-bb85-c3ba32b9cb86">
+                    <propertyInstance
+                      Id="1a18686d-c35e-46c7-bc3d-7222eb22d768"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e83c122e-c34d-4135-a675-606cc9bd5645">
+                    <propertyInstance
+                      Id="3593b96a-1856-40a5-bf9a-03d998324e79"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8b444312-7110-4ddf-a34a-568211af9790">
+                    <propertyInstance
+                      Id="479eb55c-7054-4c54-b65b-3cd8bf5972da"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d0227b07-6b43-460b-8266-e32c2ab90e77">
+                    <propertyInstance
+                      Id="d678befb-ce70-493b-9446-1b38867ae77d"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="e7bd2794-a05e-429f-90c2-44ccd795b5af"
+        name="ApprovalChainInputViewModel"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="62732017-b51a-415b-b232-665d776a8407"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.ApprovalChains Type%3DApprovalChainInputViewModel"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="99f55128-468f-4318-ae37-982561b7778d"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5f978f7c-ee62-45b0-98b7-64d3bbbdff90">
+                <propertyInstance
+                  Id="295bb010-8fa5-4677-909b-0e34ab5c6ac1"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="dfff1490-b345-4afe-8aca-8c9b14600afb">
+                <propertyInstance
+                  Id="9eef11f3-c580-4d09-92ea-14a44349dcb8"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ffa8410f-d232-46dc-aabb-cb1ffe5e8133">
+                <propertyInstance
+                  Id="659fff38-5bc9-4cac-8b18-419f12b017dc"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="81be796c-3f80-4af8-b0d5-85d389d873e7">
+                <propertyInstance
+                  Id="c41124db-e202-4f5c-aa0c-693c86c2201d"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b86bbaa8-e3cd-4a83-bc4e-11d17d02f12d">
+                <propertyInstance
+                  Id="191bf759-a5ba-4d41-b7f3-6a3eee6f2b47"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

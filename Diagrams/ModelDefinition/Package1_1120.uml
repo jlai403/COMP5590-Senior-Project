@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="eaeefeaa-9a3d-4e34-a4f7-58be31a5a512"
+  name="Models"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="df555c27-ce2f-49a1-ada9-847275269c6c"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DWorkflowManagementSystem.Models"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="1f4acd65-0a4c-4e33-8a51-a76496ea4d78"
+        LastKnownName="Workflow"
+        LastKnownLocation="Package2_1120.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="1e9a6d39-a0b2-4e4e-8fc2-a2d67b56b70b"
+        LastKnownName="Users"
+        LastKnownLocation="Package3_1120.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="05c4fb8a-e001-4723-a854-f551469fa405"
+        name="IEntity"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="5210bf88-e448-44bb-8e3e-0da04d835231"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models Type%3DIEntity"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="ac696b79-1420-40f1-a649-35733c158158"
+            name="interface"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d1bfcff7-e6a4-48b5-ae70-b4e9ba6edd0d">
+                <propertyInstance
+                  Id="a4d8890e-3cb9-4565-9e62-25d6d42e5b14"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e7dea2e1-b104-4aac-8845-515038a04548">
+                <propertyInstance
+                  Id="80328be0-2217-435c-b481-4f133252c6a4"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="765d137b-ead4-44b5-8d50-31620223afa1">
+                <propertyInstance
+                  Id="5c1735a0-bf82-43c7-84a0-75f655246f9a"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a88b15a0-5613-4b18-b5d3-0ba1f687d836">
+                <propertyInstance
+                  Id="ec9a0e42-294d-4f17-8455-9039096e8baf"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedAttributes>
+          <property
+            Id="71ec1a9a-9c83-4c61-a0c4-0605f1533cf8"
+            name="Id"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="b0e847cb-18a7-4adf-a27d-0277ab58b995"
+                handle="viewcode://./CodeSchema_Property?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models Type%3DIEntity Member%3DId"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="1f84b5f1-1eef-4ecc-a56b-d33917229912"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f9fb91dc-32bb-421e-8378-266ff851fdd1">
+                    <propertyInstance
+                      Id="69fe8ce1-d697-4d56-b8be-a24e662d7cc5"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="511b3457-7c27-4f66-98e6-3c8286a4dbb2">
+                    <propertyInstance
+                      Id="33a338d4-f3dd-40d1-b30e-246f51198c31"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="93f6b0c9-3893-4954-aea8-ba598e1327fb">
+                    <propertyInstance
+                      Id="ed8bbf8e-f5c6-4821-a931-56ea3fe05724"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7463d352-8bdc-4be8-9bde-887fecf95765">
+                    <propertyInstance
+                      Id="5c7ae87e-e1f1-4039-9156-8b187925b1bc"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4204f66a-f7d3-4995-a6d3-b8f09d6e4975">
+                    <propertyInstance
+                      Id="ca12876e-4601-4a36-8c35-afc53e6b5502"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b61ae944-175c-41d7-a48d-bf1c5cd1360c">
+                    <propertyInstance
+                      Id="ea40aebe-37fa-4685-9911-32c3f8fe8521"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5c1b856d-6109-4435-88a6-7507aaade573">
+                    <propertyInstance
+                      Id="58b8089c-cd52-43a8-b129-5fff217c9878"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                LastKnownName="Integer"
+                LastKnownLocation="Diagrams.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributes>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="985d1b22-43b5-4cb4-9c82-9759d11e3740"
+        LastKnownName="Programs"
+        LastKnownLocation="Package_1124.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="fdcc9dd4-aaa3-430e-90cd-888f2f96194a"
+        LastKnownName="Semesters"
+        LastKnownLocation="Package4_1124.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="1b7f501c-cf23-4821-b5e0-d0db22aa0579"
+        LastKnownName="Faculty"
+        LastKnownLocation="Package5_1124.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="294a4e85-de92-4260-9906-5cc5051690a3"
+        LastKnownName="Files"
+        LastKnownLocation="Package6_1124.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="8281dada-61fb-4ca1-89b8-f35ac011e3db"
+        LastKnownName="ApprovalChains"
+        LastKnownLocation="Package_1135.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="4f963f4f-1eae-4e4e-96be-f1407ac353fb"
+        LastKnownName="Roles"
+        LastKnownLocation="Package_1141.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

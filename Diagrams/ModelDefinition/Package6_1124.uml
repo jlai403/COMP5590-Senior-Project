@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="294a4e85-de92-4260-9906-5cc5051690a3"
+  name="Files"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="d9ae784c-9aca-4402-bbf4-382b1f06c5cd"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DWorkflowManagementSystem.Models.Files"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="77dbdd2c-b529-476d-8bd1-b734988ab1b3"
+        name="FileInputViewModel"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="f14a2949-522e-4792-a818-a225fbfa0f61"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.Files Type%3DFileInputViewModel"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="65f557a3-0fd6-458f-94a9-2740f2305615"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="981e5ec7-5d7e-4d6a-97ad-5bf01498c004">
+                <propertyInstance
+                  Id="11a132db-087d-475f-9c34-1d4241b270c0"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="738cf1d7-f704-40b8-9fcd-f479c171f2c6">
+                <propertyInstance
+                  Id="b121678d-c283-42d6-bf80-70ee116099bb"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="91ff0744-7ded-445c-aedc-eff3ecd37216">
+                <propertyInstance
+                  Id="736554e5-5598-47d6-9b5f-d7806dbc0c5f"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="048c5d05-46bb-4b33-8072-d2616efc22ba">
+                <propertyInstance
+                  Id="dcde7878-91c5-47d6-a410-1963aaa47504"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e31b42ad-faa7-40f5-8572-c456dc3c1f98">
+                <propertyInstance
+                  Id="83b65ffd-e6ce-49ea-98c9-3b440038c42e"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="c5f48e4d-6206-4ad9-a11f-2c56cd1405b0"
+        name="File"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="87903a07-2b83-4134-9583-7d5bf18b677c"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.Files Type%3DFile"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="a69efde6-a02b-49ab-9c62-0538d4f3db05"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="78870932-cc80-434b-982f-cae33fc6305d">
+                <propertyInstance
+                  Id="47548416-e463-4d02-8524-50f19d46d788"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d1db3b50-f65d-4b1f-870c-7047608f8ac2">
+                <propertyInstance
+                  Id="7b43adf5-21ad-428c-a8bd-2a757a61ce6b"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="43d815b2-6a80-4c8a-a260-129dbb98b214">
+                <propertyInstance
+                  Id="fd8b16b9-96ad-41ce-9d81-5c2f29cf7f1d"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7bea2e8d-0cdd-4977-8b00-7c7cb752dd9a">
+                <propertyInstance
+                  Id="33274e64-8001-4025-9ad6-30e5ad50a914"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="6aa14515-7fe9-4b1a-85bb-b08a31a604a6">
+                <propertyInstance
+                  Id="c7170af8-94ec-4cf2-95f7-ec7af816cfda"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <suppliersInternal>
+          <interfaceRealization
+            Id="48d1e90d-578c-4c92-b837-c9c9194148da">
+            <interfaceMoniker
+              Id="05c4fb8a-e001-4723-a854-f551469fa405"
+              LastKnownName="IEntity"
+              LastKnownLocation="Package1_1120.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
