@@ -49,6 +49,7 @@ body {
 	color: #FFFFFF;
 	background-color: #0088CC;
 	padding: 1px 10px;
+    border: none;
 }
 
 /*.info-mark[tooltip]:hover:after {
