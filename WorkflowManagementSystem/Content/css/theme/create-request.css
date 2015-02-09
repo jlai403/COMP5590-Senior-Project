@@ -36,16 +36,27 @@
 	width: 100%;
 }
 
-.steps {
-	margin-bottom: 20px;
+.progress-container {
+    padding: 15px;
 }
 
-.steps .glyphicon {
-	font-size: 2rem;
+.progress-steps * {
+    text-transform: uppercase;
+    font-size: 10px;
 }
 
-.step-one, .step-two, .step-three {
-    padding: 0 25px;
+.progress-steps .step-two-progress {
+    margin-left: -4%;
+    text-align: center;
+}
+
+.progress-steps .step-three-progress {
+    margin-left: 4%;
+    text-align: center;
+}
+
+.progress-steps .step-complete-progress {
+    text-align: right;
 }
 
 /** Desktop Specific css **/

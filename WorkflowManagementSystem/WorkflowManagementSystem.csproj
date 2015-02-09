@@ -138,7 +138,7 @@
     <Content Include="Content\css\module\controls.css" />
     <Content Include="Content\css\module\errors.css" />
     <Content Include="Content\css\module\nav.css" />
-    <Content Include="Content\css\theme\create-program.css" />
+    <Content Include="Content\css\theme\create-request.css" />
     <Content Include="Content\css\theme\dashboard.css" />
     <Content Include="Content\css\theme\layout.css" />
     <Content Include="Content\css\theme\workflow-item.css" />
