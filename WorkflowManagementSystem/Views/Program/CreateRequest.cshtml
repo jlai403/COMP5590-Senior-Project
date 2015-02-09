@@ -8,6 +8,173 @@
 @Scripts.Render("~/Content/js/animation.js")
 @Scripts.Render("~/Content/js/errors.js")
 
+<script>
+    var disciplinesLookUp = new Array();
+    @foreach (var faculty in (List<FacultyViewModel>) ViewBag.Faculties)
+    {
+        @:disciplinesLookUp['@faculty.Name'] = new Array();
+    }
+    @foreach (var discipline in (List<DisciplineViewModel>)ViewBag.Disciplines)
+    {
+        @:disciplinesLookUp['@discipline.Faculty'].unshift(@Html.Raw(Json.Encode(discipline)));
+    }
+
+    $(document).ready(function() {
+        setDisciplinesDropDown($("#Faculty").val());
+
+        showStepOne();
+        setProgressBar("1%");
+
+        $(".step-one input, .step-one textarea").keydown(function(){
+            // enter key
+            if (event.keyCode == 13) {
+                $(".step-one .button").click();
+                return false;
+            }
+        });
+        
+        $(".step-two input, .step-two textarea").keydown(function(){
+            // enter key
+            if (event.keyCode == 13) {
+                $(".step-two .button").click();
+                return false;
+            }
+        });
+
+        $("#Faculty").change(function() {
+            setDisciplinesDropDown($(this).val());
+        });
+    });
+
+    function showStepOne() {
+        $(".step-one").show();
+        $(".step-two").hide();
+        $(".step-three").hide();
+    }
+
+    function showStepTwo() {
+        $(".step-one").hide();
+        $(".step-two").show();
+        $(".step-three").hide();
+    }
+
+    function showStepThree() {
+        $(".step-three").show();
+        $(".step-one").hide();
+        $(".step-two").hide();
+    }
+
+    function setProgressBar(progress) {
+        $(".progress-bar").css("width", progress);
+    }
+
+    function setDisciplinesDropDown(selectedFaculty) {
+        var disciplines = disciplinesLookUp[selectedFaculty];
+        $("#Discipline").empty();
+        disciplines.forEach(function (discipline) {
+            var option = $("<option></option>").val(discipline.Id).text(discipline.Code + " - " + discipline.Name);
+            $("#Discipline").append(option);
+        });
+    }
+
+    // STEP ONE
+    $(".step-one .button").click(function() {
+        clearErrors();
+
+        validateProgramName();
+
+        if (hasErrors()) {
+            printErrors();
+            return false;
+        }
+
+        showStepTwo();
+        showContext();
+        setProgressBar("33.33%");
+        $(".step-one-progress").on("click", function(e) {
+            showStepOne();
+        });
+
+        $(".step-two-progress").addClass("cursor");
+        $(".step-two-progress").on("click", function (e) {
+            $(".step-one .button").click();
+        });
+        return true;
+    });
+
+    function showContext(){
+        $(".context").removeClass("hide"); //workaround for !important attribute from bootstrap
+        $(".context .programName").text($("#Name").val());
+        $(".context .effectiveTerm").text($("#Semester option:selected").text());
+        $(".context .faculty").text($("#Faculty option:selected").text());
+        $(".context  .discipline").text($("#Discipline option:selected").text());
+    }
+
+    function hideContext(){
+        $(".context").addClass("hide");
+    }
+
+    function validateProgramName() {
+        var programName = $("#Name").val().trim();
+        if (programName === '') addError("Program name is required.", "Name");
+    }
+
+    // STEP TWO 
+    $(".step-two .button").click(function() {
+        clearErrors();
+
+        validateCrossImpact();
+        validateStudentImpact();
+        validateLibraryImpact();
+        validateItsImpact();
+
+        if (hasErrors()) {
+            printErrors();
+            return false;
+        }
+		
+        showStepThree();
+        showContext();
+        setProgressBar("66.66%");
+
+        $(".step-two-progress").on("click", function (e) {
+            showStepTwo();
+        });
+
+        $(".step-three-progress").addClass("cursor");
+        $(".step-three-progress").on("click", function (e) {
+            $(".step-two .button").click();
+        });
+        return true;
+    });
+
+    function validateCrossImpact() {
+        var crossImpact = $("textarea[name='CrossImpact']").val().trim();
+        if (crossImpact === '') addError("Cross impact is required.", "CrossImpact");
+    }
+
+    function validateStudentImpact() {
+        var studentImpact = $("textarea[name='StudentImpact']").val().trim();
+        if (studentImpact === '') addError("Student impact is required.", "StudentImpact");
+    }
+
+    function validateLibraryImpact() {
+        var libraryImpact = $("textarea[name='LibraryImpact']").val().trim();
+        if (libraryImpact === '') addError("Library impact is required.", "LibraryImpact");
+    }
+
+    function validateItsImpact() {
+        var itsImpact = $("textarea[name='ItsImpact']").val().trim();
+        if (itsImpact === '') addError("ITS impact is required.", "ItsImpact");
+    }
+	
+    // STEP THREE 
+    $(".step-three .button").click(function () {
+        $("form").submit();
+    });
+
+</script>
+
 <div class="container form center">
     <div class="col-md-12">
         @using (Html.BeginForm("CreateRequest", "Program", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -214,171 +381,3 @@
         }
 	</div>
 </div>
-
-<script>
-    var disciplinesLookUp = new Array();
-    @foreach (var faculty in (List<FacultyViewModel>) ViewBag.Faculties)
-    {
-        @:disciplinesLookUp['@faculty.Name'] = new Array();
-    }
-    @foreach (var discipline in (List<DisciplineViewModel>)ViewBag.Disciplines)
-    {
-        @:disciplinesLookUp['@discipline.Faculty'].unshift(@Html.Raw(Json.Encode(discipline)));
-    }
-
-    $(document).ready(function() {
-        clearHighlightsOnFocus();
-        setDisciplinesDropDown($("#Faculty").val());
-
-        showStepOne();
-        setProgressBar("1%");
-
-        $(".step-one input, .step-one textarea").keydown(function(){
-            // enter key
-            if (event.keyCode == 13) {
-                $(".step-one .button").click();
-                return false;
-            }
-        });
-        
-        $(".step-two input, .step-two textarea").keydown(function(){
-            // enter key
-            if (event.keyCode == 13) {
-                $(".step-two .button").click();
-                return false;
-            }
-        });
-
-        $("#Faculty").change(function() {
-            setDisciplinesDropDown($(this).val());
-        });
-    });
-
-    function showStepOne() {
-        $(".step-one").show();
-        $(".step-two").hide();
-        $(".step-three").hide();
-    }
-
-    function showStepTwo() {
-        $(".step-one").hide();
-        $(".step-two").show();
-        $(".step-three").hide();
-    }
-
-    function showStepThree() {
-        $(".step-three").show();
-        $(".step-one").hide();
-        $(".step-two").hide();
-    }
-
-    function setProgressBar(progress) {
-        $(".progress-bar").css("width", progress);
-    }
-
-    function setDisciplinesDropDown(selectedFaculty) {
-        var disciplines = disciplinesLookUp[selectedFaculty];
-        $("#Discipline").empty();
-        disciplines.forEach(function (discipline) {
-            var option = $("<option></option>").val(discipline.Id).text(discipline.Code + " - " + discipline.Name);
-            $("#Discipline").append(option);
-        });
-    }
-
-    // STEP ONE
-    $(".step-one .button").click(function() {
-        clearErrors();
-
-        validateProgramName();
-
-        if (hasErrors()) {
-            printErrors();
-            return false;
-        }
-
-        showStepTwo();
-        showContext();
-        setProgressBar("33.33%");
-        $(".step-one-progress").on("click", function(e) {
-            showStepOne();
-        });
-
-        $(".step-two-progress").addClass("cursor");
-        $(".step-two-progress").on("click", function (e) {
-            $(".step-one .button").click();
-        });
-        return true;
-    });
-
-    function showContext(){
-        $(".context").removeClass("hide"); //workaround for !important attribute from bootstrap
-        $(".context .programName").text($("#Name").val());
-        $(".context .effectiveTerm").text($("#Semester option:selected").text());
-        $(".context .faculty").text($("#Faculty option:selected").text());
-        $(".context  .discipline").text($("#Discipline option:selected").text());
-    }
-
-    function hideContext(){
-        $(".context").addClass("hide");
-    }
-
-    function validateProgramName() {
-        var programName = $("#Name").val().trim();
-        if (programName === '') addError("Program name is required.", "Name");
-    }
-
-    // STEP TWO 
-    $(".step-two .button").click(function() {
-        clearErrors();
-
-        validateCrossImpact();
-        validateStudentImpact();
-        validateLibraryImpact();
-        validateItsImpact();
-
-        if (hasErrors()) {
-            printErrors();
-            return false;
-        }
-		
-        showStepThree();
-        showContext();
-        setProgressBar("66.66%");
-
-        $(".step-two-progress").on("click", function (e) {
-            showStepTwo();
-        });
-
-        $(".step-three-progress").addClass("cursor");
-        $(".step-three-progress").on("click", function (e) {
-            $(".step-two .button").click();
-        });
-        return true;
-    });
-
-    function validateCrossImpact() {
-        var crossImpact = $("textarea[name='CrossImpact']").val().trim();
-        if (crossImpact === '') addError("Cross impact is required.", "CrossImpact");
-    }
-
-    function validateStudentImpact() {
-        var studentImpact = $("textarea[name='StudentImpact']").val().trim();
-        if (studentImpact === '') addError("Student impact is required.", "StudentImpact");
-    }
-
-    function validateLibraryImpact() {
-        var libraryImpact = $("textarea[name='LibraryImpact']").val().trim();
-        if (libraryImpact === '') addError("Library impact is required.", "LibraryImpact");
-    }
-
-    function validateItsImpact() {
-        var itsImpact = $("textarea[name='ItsImpact']").val().trim();
-        if (itsImpact === '') addError("ITS impact is required.", "ItsImpact");
-    }
-	
-    // STEP THREE 
-    $(".step-three .button").click(function () {
-        $("form").submit();
-    });
-
-</script>

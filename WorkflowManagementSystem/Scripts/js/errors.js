@@ -1,4 +1,8 @@
-var errors = []
+$(document).ready(function () {
+    clearHighlightsOnFocus();
+});
+
+var errors = [];
 
 function addError(errorText, inputName) {
 	errors.push($("<li>" + errorText + "</li>"));
