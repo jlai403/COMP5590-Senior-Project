@@ -3,6 +3,11 @@
 
 @Styles.Render("~/Content/css/theme/signup.css")
 
+<script>
+    $(document).ready(function() {
+        $("[data-toggle='tooltip']").tooltip();
+    });
+</script>
 
 <div class="container">
     <div class="col-md-12">
@@ -36,12 +41,12 @@
 
             <div class="row">
                 @Html.TextBoxFor(m => m.Email, new{@class="form-control", placeholder="Email", tabindex="3"})
-                <abbr class="info-mark" tooltip="Must be a valid MRU email."> i </abbr>
+                <abbr class="info-mark btn btn-default cursor" data-toggle="tooltip" data-placement="right" title="Must be a valid MRU email."> i </abbr>
             </div>
 
             <div class="row">
                 @Html.PasswordFor(m => m.Password, new{@class="form-control", placeholder="Password", tabindex="4"})
-                <abbr class="info-mark" tooltip="Must be at least 6 characters."> i </abbr>
+                <abbr class="info-mark btn btn-default cursor" data-toggle="tooltip" data-placement="right" title="Must be at least 6 characters."> i </abbr>
             </div>
 
             <div class="row">

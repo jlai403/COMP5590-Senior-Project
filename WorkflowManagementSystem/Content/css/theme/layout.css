@@ -25,7 +25,7 @@ body {
 }
 
 .cursor {
-	cursor: pointer;
+	cursor: pointer !important;
 }
 
 .small-text, .small-text * {
@@ -51,7 +51,7 @@ body {
 	padding: 1px 10px;
 }
 
-.info-mark[tooltip]:hover:after {
+/*.info-mark[tooltip]:hover:after {
 	font-weight: 400;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 12px;
@@ -76,7 +76,7 @@ body {
 	background-image: -moz-linear-gradient(top, #EEEEEE, #DDDDDD);
 	background-image: -ms-linear-gradient(top, #EEEEEE, #DDDDDD);
 	background-image: -o-linear-gradient(top, #EEEEEE, #DDDDDD);
-}
+}*/
 
 .hide {
 	display: none;
