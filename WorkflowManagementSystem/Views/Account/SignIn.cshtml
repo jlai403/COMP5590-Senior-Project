@@ -1,6 +1,35 @@
 ﻿@using System.Web.Optimization
 
 @Styles.Render("~/Content/css/theme/signin.css")
+@Scripts.Render("~/Content/js/errors.js")
+
+<script>
+    $(document).ready(function(){
+        clearHighlightsOnFocus();
+
+        $('.form').submit(function (e) {
+            clearErrors();
+            validateEmail();
+            validatePassword();
+            if (hasErrors()) {
+                e.preventDefault();
+                printErrors();
+                return false;
+            };
+            return true;
+        });
+    });
+
+	function validateEmail() {
+		var email = $("input[name='email']").val().trim();
+		if (email === '') addError("You must enter an email.","email");
+	}
+
+	function validatePassword() {
+		var password = $("input[name='password']").val().trim();
+		if (password === '') addError("You must enter a password.","password");
+	}
+</script>
 
 <div class="container">
     <div class="col-md-12">

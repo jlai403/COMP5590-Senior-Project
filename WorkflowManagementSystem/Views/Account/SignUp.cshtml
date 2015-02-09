@@ -2,11 +2,55 @@
 @model WorkflowManagementSystem.Models.Users.UserSignUpViewModel
 
 @Styles.Render("~/Content/css/theme/signup.css")
+@Scripts.Render("~/Content/js/errors.js")
 
 <script>
     $(document).ready(function() {
         $("[data-toggle='tooltip']").tooltip();
+        clearHighlightsOnFocus();
+
+        $(".form").submit(function (e) {
+            clearErrors();
+            validateFirstName();
+            validateLastName();
+            validateEmail();
+            validatePassword();
+            validateAtLeastOneRoleSelected();
+            if (hasErrors()) {
+                e.preventDefault();
+                printErrors();
+                return false;
+            }
+
+            return true;
+        });
     });
+
+    function validateFirstName() {
+        var firstName = $("input[name='FirstName']").val().trim();
+        if (firstName.trim() === '') addError("First name is required.", "FirstName");
+    }
+
+    function validateLastName() {
+        var lastName = $("input[name='LastName']").val().trim();
+        if (lastName.trim() === '') addError("Last name is required.", "LastName");
+    }
+
+    function validateEmail() {
+        var email = $("input[name='Email']").val().trim();
+        var validEmail = new RegExp("[\w\d\.]+@@mtroyal\.ca/"); // 1 or more characters or digits, ends with @@mtroyal.ca
+        if (email === '' || validEmail.test(email)) addError("Email must be a valid '@@mtroyal.ca' email.", "Email");
+    }
+
+    function validatePassword() {
+        var password = $("input[name='Password']").val().trim();
+        if (password === '' || password.length < 6) addError("Password must be at least 6 characters long.", "Password");
+    }
+
+    function validateAtLeastOneRoleSelected() {
+        var roles = $("select[name='Roles'] option:selected");
+        if (roles.length === 0) addError("At least one role must be selected.", "Roles");
+    }
 </script>
 
 <div class="container">
