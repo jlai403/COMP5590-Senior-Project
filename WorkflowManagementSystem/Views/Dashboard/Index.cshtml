@@ -16,19 +16,19 @@
                     <a href="@Url.Action("UpdateStatus", actionItem.Type.ToString(), new {actionItem.Name})">
                         <div class="container item">
                             <div class="row">
-                                <div class="col-md-4 col-xs-6 bold-text"> Request Date: </div>
+                                <div class="col-md-4 col-xs-6 bold-text text-uppercase"> Request Date: </div>
                                 <div class="col-md-8 col-xs-6"> @actionItem.RequestedDateUTC </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-xs-6 bold-text"> Requested By: </div>
+                                <div class="col-md-4 col-xs-6 bold-text text-uppercase"> Requested By: </div>
                                 <div class="col-md-8 col-xs-6"> @actionItem.Requester </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-xs-6 bold-text"> Program Name: </div>
+                                <div class="col-md-4 col-xs-6 bold-text text-uppercase"> Program Name: </div>
                                 <div class="col-md-8 col-xs-6"> @actionItem.Name </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-xs-6 bold-text"> Status: </div>
+                                <div class="col-md-4 col-xs-6 bold-text text-uppercase"> Status: </div>
                                 <div class="col-md-8 col-xs-6"> @Html.GetWorkflowStatusDisplay(actionItem.CurrentState) </div>
                             </div>
                         </div>
@@ -48,19 +48,19 @@
                     <a href="@Url.Action("Summary", "Program", new {userRequest.Name})">
                         <div class="container item">
                             <div class="row">
-                                <div class="col-md-4 col-xs-6 bold-text"> Request Date: </div>
+                                <div class="col-md-4 col-xs-6 bold-text text-uppercase"> Request Date: </div>
                                 <div class="col-md-8 col-xs-6"> @userRequest.RequestedDateUTC </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-xs-6 bold-text"> Program Name: </div>
+                                <div class="col-md-4 col-xs-6 bold-text text-uppercase"> Program Name: </div>
                                 <div class="col-md-8 col-xs-6"> @userRequest.Name </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-xs-6 bold-text"> Reponsible Party: </div>
+                                <div class="col-md-4 col-xs-6 bold-text text-uppercase"> Reponsible Party: </div>
                                 <div class="col-md-8 col-xs-6"> @userRequest.CurrentResponsibleParty() </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 col-xs-6 bold-text"> Status: </div>
+                                <div class="col-md-4 col-xs-6 bold-text text-uppercase"> Status: </div>
                                 <div class="col-md-8 col-xs-6"> @Html.GetWorkflowStatusDisplay(userRequest.CurrentState()) </div>
                             </div>
                         </div>

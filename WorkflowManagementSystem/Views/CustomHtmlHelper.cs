@@ -16,14 +16,13 @@ namespace WorkflowManagementSystem.Views
 
         public static IEnumerable<SelectListItem> ConvertToSelectListItem(this HtmlHelper helper, List<FacultyViewModel> faculties)
         {
-            return
-                faculties.Select(x => new SelectListItem{Value = x.Name, Text = x.Name});
+            return faculties.Select(x => new SelectListItem{Value = x.Name, Text = x.Name});
         }
 
         public static IEnumerable<SelectListItem> ConvertToSelectListItem(this HtmlHelper helper, List<DisciplineViewModel> disciplines)
         {
             return
-                disciplines.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.DisplayName });
+                disciplines.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.DisplayName }).OrderBy(x => x.Text);
         }
     }
 }

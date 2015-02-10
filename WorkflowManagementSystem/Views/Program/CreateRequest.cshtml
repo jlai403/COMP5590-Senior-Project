@@ -224,7 +224,7 @@
     }
     @foreach (var discipline in (List<DisciplineViewModel>)ViewBag.Disciplines)
     {
-        @:disciplinesLookUp['@discipline.Faculty'].unshift(@Html.Raw(Json.Encode(discipline)));
+        @:disciplinesLookUp['@discipline.Faculty'].push(@Html.Raw(Json.Encode(discipline)));
     }
 
     $(document).ready(function() {

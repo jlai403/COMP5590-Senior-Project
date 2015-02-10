@@ -61,6 +61,17 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void FindFaculty_NoFaculty()
+        {
+            // assemble
+            // act
+            var faculty = FacadeFactory.GetDomainFacade().FindFaculty("Nothing");
+
+            // assert
+            faculty.Should().BeNull();
+        }
+
+        [Test]
         public void CreateDiscipline()
         {
             // assemble

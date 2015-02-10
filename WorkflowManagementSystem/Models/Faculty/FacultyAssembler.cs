@@ -23,6 +23,8 @@ namespace WorkflowManagementSystem.Models.Faculty
 
         public FacultyViewModel Assemble()
         {
+            if (Faculty == null) return null;
+            
             var facultyViewModel = new FacultyViewModel();
             facultyViewModel.Name = Faculty.Name;
             foreach (var discipline in Faculty.Disciplines)

@@ -5,7 +5,7 @@
     @foreach (var workflowStep in Model)
     {
         <div class="row detail @Html.GetWorkflowStatusDisplay(workflowStep.State) ?>">
-            <div class="col-xs-5 right-align">
+            <div class="col-xs-5 right-align bold-text">
                 Role:
             </div>
             <div class="col-xs-7 left-align">
@@ -13,7 +13,7 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-5 right-align">
+                <div class="col-xs-5 right-align bold-text">
                     Status:
                 </div>
                 <div class="col-xs-7 left-align">
@@ -22,7 +22,7 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-5 right-align">
+                <div class="col-xs-5 right-align bold-text">
 
                     @if (workflowStep.IsApproved())
                     {
