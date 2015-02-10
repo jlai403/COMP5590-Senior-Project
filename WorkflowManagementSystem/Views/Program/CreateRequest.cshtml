@@ -8,6 +8,214 @@
 @Scripts.Render("~/Content/js/animation.js")
 @Scripts.Render("~/Content/js/errors.js")
 
+<div class="container form center">
+    <div class="col-md-12">
+        @using (Html.BeginForm("CreateRequest", "Program", FormMethod.Post, new {enctype = "multipart/form-data"}))
+        {
+            <div class="row center-text">
+                <p class="header">Create Program</p>
+            </div>
+
+            <div class="progress-container">
+                <div class="row">
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 10%"></div>
+                    </div>
+                </div>
+                <div class="row progress-steps">
+                    <div class="col-xs-3 step-one-progress cursor">program</div>
+                    <div class="col-xs-3 step-two-progress">impacts</div>
+                    <div class="col-xs-3 step-three-progress">comments/<br/>attachments
+                    </div>
+                    <div class="col-xs-3 step-complete-progress">complete</div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom: 15px;">
+                <ul class="errors center-text">
+                    @if (ViewBag.ErrorMessage != null)
+                    {
+                        <li>@ViewBag.ErrorMessage</li>
+                    }
+                </ul>
+            </div>
+
+            <!-- CONTEXT FOR STEP TWO AND THREE -->
+            <div class="context hide small-text" style="padding: 10px 0; margin: -15px 0 15px; background-color: #FAFAFA;">
+                <div class="row">
+                    <div class="col-xs-5 right-align">
+                        Program Name:
+                    </div>
+                    <div class="col-xs-5">
+                        <span class="programName left-align"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5 right-align">
+                        Effective Term:
+                    </div>
+                    <div class="col-xs-5">
+                        <span class="effectiveTerm left-align"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5 right-align">
+                        Faculty:
+                    </div>
+                    <div class="col-xs-5">
+                        <span class="faculty left-align"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5 right-align">
+                        Discipline:
+                    </div>
+                    <div class="col-xs-5">
+                        <span class="discipline left-align"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- END CONTEXT FOR STEP TWO AND THREE -->
+
+            <!-- STEP ONE START -->
+            <div class="step-one">
+                <div class="row">
+                    <div class="col-md-3">
+                        Requester
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBox("UserName", (string) ViewBag.UsersFullName, new {@class = "form-control", @readonly = "true"})
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 required">
+                        Program Name
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.Name, new {@class = "form-control", placeholder = "Program Name", tabindex = "1"})
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 required">
+                        Effective Term
+                    </div>
+                    <div class="col-md-9">
+                        @{
+                            var semestersSelectList = Html.ConvertToSelectListItem((List<SemesterViewModel>) ViewBag.Semesters);
+                        }
+                        @Html.DropDownListFor(m => m.Semester, semestersSelectList, new {@class = "form-control", tabindex = "2"})
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 required">
+                        Faculty
+                    </div>
+                    <div class="col-md-9">
+                        @{
+                            var facultiesSelectList = Html.ConvertToSelectListItem((List<FacultyViewModel>) ViewBag.Faculties);
+                        }
+                        @Html.DropDownList("Faculty", facultiesSelectList, new {@class = "form-control", tabindex = "3"})
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 required">
+                        Discipline
+                    </div>
+                    <div class="col-md-9">
+                        @{
+                            var disciplinesSelectList = Html.ConvertToSelectListItem((List<DisciplineViewModel>) ViewBag.Disciplines);
+                        }
+                        @Html.DropDownListFor(x => x.Discipline, disciplinesSelectList, new {@class = "form-control", tabindex = "3"})
+                    </div>
+                </div>
+
+                <div class="row center-text" style="padding: 0 100px; margin: 15px 0;" tabindex="5">
+                    <input class="form-control button dark-blue" type="button" value="Next"/>
+                </div>
+            </div>
+            <!-- STEP ONE END -->
+
+            <!-- STEP TWO START -->
+            <div class="step-two">
+                <div class="row">
+                    <div class="col-md-3 required">
+                        Cross Impact
+                    </div>
+                    <div class="col-md-9">
+                        <textarea name="CrossImpact" class="form-control expandOnFocus" rows="2" tabindex="6"
+                                  placeholder="Please identify how impact to other departments has been addressed, including General Education as appropriate"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 required">
+                        Student Impact
+                    </div>
+                    <div class="col-md-9">
+                        <textarea name="StudentImpact" class="form-control expandOnFocus" rows="2" tabindex="7"
+                                  placeholder="Please identify how student input or impact has been assessed"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 required">
+                        Library Impact
+                    </div>
+                    <div class="col-md-9">
+                        <textarea name="LibraryImpact" class="form-control expandOnFocus" rows="2" tabindex="8"
+                                  placeholder="Please identify how impact to the Library has been addressed"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 required">
+                        ITS Impact
+                    </div>
+                    <div class="col-md-9">
+                        <textarea name="ItsImpact" class="form-control expandOnFocus" rows="2" tabindex="9"
+                                  placeholder="Please identify how impact to ITS has been addressed"></textarea>
+                    </div>
+                </div>
+
+                <div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
+                    <input class="form-control button dark-blue" type="button" value="Next" tabindex="10"/>
+                </div>
+            </div>
+            <!-- STEP TWO END -->
+
+            <!-- STEP THREE START -->
+            <div class="step-three">
+                <div class="row">
+                    <div class="col-md-3">
+                        Comments
+                    </div>
+                    <div class="col-md-9">
+                        <textarea name="Comment" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="11"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        Attachments
+                    </div>
+                    <div class="col-md-9">
+                        <input name="Files" type="file" multiple style="font-size: 12px;" tabindex="12"/>
+                    </div>
+                </div>
+
+                <div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
+                    <input class="form-control button dark-blue" type="submit" value="Request" tabindex="13"/>
+                </div>
+            </div>
+            <!-- STEP END START -->
+        }
+    </div>
+</div>
+
 <script>
     var disciplinesLookUp = new Array();
     @foreach (var faculty in (List<FacultyViewModel>) ViewBag.Faculties)
@@ -174,210 +382,3 @@
     });
 
 </script>
-
-<div class="container form center">
-    <div class="col-md-12">
-        @using (Html.BeginForm("CreateRequest", "Program", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-           <div class="row center-text">
-				<p class="header">Create Program</p>
-			</div>
-					
-			<div class="progress-container">
-			    <div class="row">
-			        <div class="progress">
-			            <div class="progress-bar" style="width: 10%"></div>
-			        </div>
-			    </div>
-			    <div class="row progress-steps">
-			        <div class="col-xs-3 step-one-progress cursor">program</div>
-			        <div class="col-xs-3 step-two-progress">impacts</div>
-			        <div class="col-xs-3 step-three-progress">comments/<br/>attachments</div>
-			        <div class="col-xs-3 step-complete-progress">complete</div>
-			    </div>
-			</div>
-
-            <div class="row" style="margin-bottom: 15px;">
-                <ul class="errors center-text">
-                    @if (ViewBag.ErrorMessage != null)
-                    {
-                        <li>@ViewBag.ErrorMessage</li>
-                    }
-                </ul>
-            </div>
-            
-            <!-- CONTEXT FOR STEP TWO AND THREE -->
-            <div class="context hide small-text" style="padding: 10px 0; margin: -15px 0 15px; background-color:#FAFAFA;">
-                <div class="row" >
-                    <div class="col-xs-5 right-align">
-                        Program Name:
-                    </div>
-                    <div class="col-xs-5">
-                        <span class="programName left-align"></span>
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-xs-5 right-align">
-                        Effective Term:
-                    </div>
-                    <div class="col-xs-5">
-                        <span class="effectiveTerm left-align"></span>
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-xs-5 right-align">
-                        Faculty:
-                    </div>
-                    <div class="col-xs-5">
-                        <span class="faculty left-align"></span>
-                    </div>
-                </div>
-                <div class="row" >
-                    <div class="col-xs-5 right-align">
-                        Discipline:
-                    </div>
-                    <div class="col-xs-5">
-                        <span class="discipline left-align"></span>
-                    </div>
-                </div>
-            </div>
-            <!-- END CONTEXT FOR STEP TWO AND THREE -->
-					
-			<!-- STEP ONE START -->
-			<div class="step-one">
-				<div class="row">
-					<div class="col-md-3">
-						Requester
-					</div>
-				    <div class="col-md-9">
-				        @Html.TextBox("UserName", (string) ViewBag.UsersFullName, new { @class = "form-control", @readonly = "true" })
-				    </div>
-				</div>
-				
-				<div class="row">
-					<div class="col-md-3 required">
-						Program Name
-					</div>
-					<div class="col-md-9">
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Program Name", tabindex = "1" })
-					</div>
-				</div>
-						
-				<div class="row">
-					<div class="col-md-3 required">
-						Effective Term
-					</div>
-				    <div class="col-md-9">
-				        @{
-				            var semestersSelectList = Html.ConvertToSelectListItem((List<SemesterViewModel>) ViewBag.Semesters);
-				        }
-                        @Html.DropDownListFor(m => m.Semester, semestersSelectList, new {@class = "form-control", tabindex = "2"})
-				    </div>
-				</div>
-					
-				<div class="row">
-					<div class="col-md-3 required">
-						Faculty
-					</div>
-				    <div class="col-md-9">
-				        @{
-				            var facultiesSelectList = Html.ConvertToSelectListItem((List<FacultyViewModel>) ViewBag.Faculties);
-				        }
-                        @Html.DropDownList("Faculty", facultiesSelectList, new {@class = "form-control", tabindex = "3"})
-				    </div>
-				</div>
-						
-				<div class="row">
-					<div class="col-md-3 required">
-						Discipline
-					</div>
-				    <div class="col-md-9">
-				        @{
-				            var disciplinesSelectList = Html.ConvertToSelectListItem((List<DisciplineViewModel>) ViewBag.Disciplines);
-				        }
-				        @Html.DropDownListFor(x => x.Discipline, disciplinesSelectList, new {@class = "form-control", tabindex = "3"})
-				    </div>
-				</div>
-						
-				<div class="row center-text" style="padding: 0 100px; margin: 15px 0;" tabindex="5">
-					<input class="form-control button dark-blue" type="button" value="Next"/>
-				</div>
-			</div>
-			<!-- STEP ONE END -->
-
-            <!-- STEP TWO START -->
-			<div class="step-two">
-				<div class="row">
-					<div class="col-md-3 required">
-						Cross Impact
-					</div>
-					<div class="col-md-9">
-						<textarea name="crossImpact" class="form-control expandOnFocus"  rows="2" tabindex="6"
-							placeholder="Please identify how impact to other departments has been addressed, including General Education as appropriate"></textarea>
-					</div>
-				</div>
-						
-				<div class="row">
-					<div class="col-md-3 required">
-						Student Impact
-					</div>
-					<div class="col-md-9">
-						<textarea name="studentImpact" class="form-control expandOnFocus"  rows="2" tabindex="7"
-							placeholder="Please identify how student input or impact has been assessed"></textarea>
-					</div>
-				</div>
-						
-				<div class="row">
-					<div class="col-md-3 required">
-						Library Impact
-					</div>
-					<div class="col-md-9">
-						<textarea name="libraryImpact" class="form-control expandOnFocus"  rows="2" tabindex="8"
-							placeholder="Please identify how impact to the Library has been addressed"></textarea>
-					</div>
-				</div>
-						
-				<div class="row">
-					<div class="col-md-3 required">
-						ITS Impact
-					</div>
-					<div class="col-md-9">
-						<textarea name="itsImpact" class="form-control expandOnFocus"  rows="2" tabindex="9"
-							placeholder="Please identify how impact to ITS has been addressed"></textarea>
-					</div>
-				</div>
-						
-				<div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
-					<input class="form-control button dark-blue" type="button" value="Next" tabindex="10"/>
-				</div>
-			</div>
-			<!-- STEP TWO END -->
-					
-			<!-- STEP THREE START -->
-			<div class="step-three">
-				<div class="row">
-					<div class="col-md-3">
-						Comments
-					</div>
-					<div class="col-md-9">
-					    <textarea name="comment" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="11"></textarea>
-					</div>
-				</div>
-						
-				<div class="row">
-					<div class="col-md-3">
-						Attachments
-					</div>
-					<div class="col-md-9">
-						<input name="files" type="file" multiple style="font-size:12px;" tabindex="12"/>
-					</div>
-				</div>
-						
-				<div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
-				    <input class="form-control button dark-blue" type="submit" value="Request" tabindex="13"/>
-				</div>
-			</div>
-			<!-- STEP END START -->
-        }
-	</div>
-</div>
