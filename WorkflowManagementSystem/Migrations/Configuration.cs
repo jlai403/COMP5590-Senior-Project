@@ -33,9 +33,16 @@ namespace WorkflowManagementSystem.Migrations
             FacadeFactory.GetDomainFacade().CreateFaculty(new FacultyInputViewModel { Name = "Science and Technology" });
 
             // DISCIPLINES
-            FacadeFactory.GetDomainFacade().CreateDiscipline(new DisciplineInputViewModel { Code = "MKTG", Faculty = "Bissett School of Business", Name = "Marketing" });
+            FacadeFactory.GetDomainFacade().CreateDiscipline(new DisciplineInputViewModel { Code = "ACCT", Faculty = "Bissett School of Business", Name = "Accounting" });
+            FacadeFactory.GetDomainFacade().CreateDiscipline(new DisciplineInputViewModel { Code = "HRES", Faculty = "Bissett School of Business", Name = "Human Resources" });
+            FacadeFactory.GetDomainFacade().CreateDiscipline(new DisciplineInputViewModel { Code = "INBU", Faculty = "Bissett School of Business", Name = "International Business" });
             FacadeFactory.GetDomainFacade().CreateDiscipline(new DisciplineInputViewModel { Code = "MGMT", Faculty = "Bissett School of Business", Name = "Management" });
-            FacadeFactory.GetDomainFacade().CreateDiscipline(new DisciplineInputViewModel{ Code = "COMP", Faculty = "Science and Technology", Name = "Computer Science" });
+            FacadeFactory.GetDomainFacade().CreateDiscipline(new DisciplineInputViewModel { Code = "MKTG", Faculty = "Bissett School of Business", Name = "Marketing" });
+            FacadeFactory.GetDomainFacade().CreateDiscipline(new DisciplineInputViewModel { Code = "BIOL", Faculty = "Science and Technology", Name = "Biology" });
+            FacadeFactory.GetDomainFacade().CreateDiscipline(new DisciplineInputViewModel { Code = "CHEM", Faculty = "Science and Technology", Name = "Chemistry" });
+            FacadeFactory.GetDomainFacade().CreateDiscipline(new DisciplineInputViewModel { Code = "COMP", Faculty = "Science and Technology", Name = "Computer Science" });
+            FacadeFactory.GetDomainFacade().CreateDiscipline(new DisciplineInputViewModel { Code = "MATH", Faculty = "Science and Technology", Name = "Math" });
+            FacadeFactory.GetDomainFacade().CreateDiscipline(new DisciplineInputViewModel { Code = "PHYS", Faculty = "Science and Technology", Name = "Physics" });
 
             // SEMESTERS
             FacadeFactory.GetDomainFacade().CreateSemester(new SemesterInputViewModel { Term = "Fall", Year = "2014" });
