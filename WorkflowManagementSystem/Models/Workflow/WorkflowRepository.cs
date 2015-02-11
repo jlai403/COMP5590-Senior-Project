@@ -36,5 +36,10 @@ namespace WorkflowManagementSystem.Models.Workflow
             var userRoles = user.Roles.Select(x => x.Id);
             return Queryable<WorkflowItem>().Where(x => userRoles.Contains(x.CurrentWorkflowData.ApprovalChainStep.Role.Id)).ToList();
         }
+
+        public static List<WorkflowItem> FindWorkflowItemsRequestedByUser(string email)
+        {
+            return Queryable<WorkflowItem>().Where(x => x.Requester.Email.Equals(email)).ToList();
+        }
     }
 }

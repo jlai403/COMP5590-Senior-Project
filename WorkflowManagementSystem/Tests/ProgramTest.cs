@@ -233,36 +233,6 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void FindAllProgramsRequestedByUser()
-        {
-            // assemble
-            new RoleTestHelper().CreateTestRoles();
-            new ApprovalChainTestHelper().CreateProgramApprovalChain();
-            new SemesterTestHelper().CreateTestSemesters();
-            new DisciplineTestHelper().CreateTestDisciplines();
-
-            var user = new UserTestHelper().CreateUserWithTestRoles();
-
-            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
-            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
-
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
-            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
-
-            var programRequestInputViewModelTwo = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
-            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModelTwo);
-
-            // act
-            var programs = FacadeFactory.GetDomainFacade().FindAllProgramsRequestedByUser(user.Email);
-
-            // assert
-            programs.Count.ShouldBeEquivalentTo(2);
-
-            new ProgramTestHelper().AssertProgramRequest(programRequestInputViewModel, programs.First(), user.DisplayName, semester.DisplayName, discipline.DisplayName);
-            new ProgramTestHelper().AssertProgramRequest(programRequestInputViewModelTwo, programs.Last(), user.DisplayName, semester.DisplayName, discipline.DisplayName);
-        }
-
-        [Test]
         public void ApproveProgramRequest()
         {
             // assemble

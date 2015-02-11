@@ -32,20 +32,21 @@ namespace WorkflowManagementSystem.Models.Workflow
             return workflowDataViewModel;
         }
 
-        public static List<ActionableWorkflowItemViewModel> AssembleWorkflowItemsAwaitingForAction(List<WorkflowItem> actionableWorkflowItems)
+        public static List<WorkflowItemViewModel> AssembleWorkflowItems(List<WorkflowItem> actionableWorkflowItems)
         {
-            return actionableWorkflowItems.Select(workflowItem => new WorkflowAssembler(workflowItem).AssembleActionableWorkflowItem()).ToList();
+            return actionableWorkflowItems.Select(workflowItem => new WorkflowAssembler(workflowItem).AssembleWorkflowItem()).ToList();
         }
 
-        private ActionableWorkflowItemViewModel AssembleActionableWorkflowItem()
+        private WorkflowItemViewModel AssembleWorkflowItem()
         {
-            var actionableWorkflowViewModel = new ActionableWorkflowItemViewModel();
-            actionableWorkflowViewModel.Name = WorkflowItem.Name;
-            actionableWorkflowViewModel.Requester = WorkflowItem.Requester.GetDisplayName();
-            actionableWorkflowViewModel.RequestedDateUTC = WorkflowItem.RequestedDateUTC;
-            actionableWorkflowViewModel.CurrentState = WorkflowItem.CurrentWorkflowData.State;
-            actionableWorkflowViewModel.Type = WorkflowItem.Type;
-            return actionableWorkflowViewModel;
+            var workflowItemViewModel = new WorkflowItemViewModel();
+            workflowItemViewModel.Name = WorkflowItem.Name;
+            workflowItemViewModel.Requester = WorkflowItem.Requester.GetDisplayName();
+            workflowItemViewModel.RequestedDateUTC = WorkflowItem.RequestedDateUTC;
+            workflowItemViewModel.CurrentState = WorkflowItem.CurrentWorkflowData.State;
+            workflowItemViewModel.Type = WorkflowItem.Type;
+            workflowItemViewModel.CurrentResponsibleParty = WorkflowItem.CurrentWorkflowData.ApprovalChainStep.Role.Name;
+            return workflowItemViewModel;
         }
     }
 }

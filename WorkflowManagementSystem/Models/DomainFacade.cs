@@ -215,15 +215,6 @@ namespace WorkflowManagementSystem.Models
             });
         }
 
-        public List<ProgramViewModel> FindAllProgramsRequestedByUser(string userEmail)
-        {
-            return TransactionHandler.Instance.Execute(() =>
-            {
-                var programs = ProgramRepository.FindAllProgramsRequestedByUser(userEmail);
-                return ProgramAssembler.AssembleAll(programs);
-            });
-        }
-
         public bool IsProgramRequestCurrentlyOnLastWorkflowStep(string name)
         {
             return TransactionHandler.Instance.Execute(() =>
@@ -262,12 +253,21 @@ namespace WorkflowManagementSystem.Models
             });
         }
 
-        public List<ActionableWorkflowItemViewModel> FindWorkflowItemsAwaitingForAction(string email)
+        public List<WorkflowItemViewModel> FindWorkflowItemsAwaitingForAction(string email)
         {
             return TransactionHandler.Instance.Execute(() =>
             {
                 var actionableWorkflowItems = WorkflowRepository.FindWorkflowItemsAwaitingForAction(email);
-                return WorkflowAssembler.AssembleWorkflowItemsAwaitingForAction(actionableWorkflowItems);
+                return WorkflowAssembler.AssembleWorkflowItems(actionableWorkflowItems);
+            });
+        }
+
+        public List<WorkflowItemViewModel> FindWorkflowItemsRequestedByUser(string email)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var actionableWorkflowItems = WorkflowRepository.FindWorkflowItemsRequestedByUser(email);
+                return WorkflowAssembler.AssembleWorkflowItems(actionableWorkflowItems);
             });
         }
     }
