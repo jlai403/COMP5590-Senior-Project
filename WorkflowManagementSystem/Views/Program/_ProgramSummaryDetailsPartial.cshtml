@@ -1,4 +1,18 @@
-﻿@model WorkflowManagementSystem.Models.Programs.ProgramViewModel
+﻿@using System.Web.Optimization
+@model WorkflowManagementSystem.Models.Programs.ProgramViewModel
+
+@Styles.Render("~/Content/css/module/collapse-text.css")
+@Scripts.Render("~/Scripts/js/collapse-text.js")
+@Scripts.Render("~/Scripts/js/animation.js")
+
+<script>
+    $(document).ready(function () {
+        $(".cross-impact").addReadMore();
+        $(".student-impact").addReadMore();
+        $(".library-impact").addReadMore();
+        $(".its-impact").addReadMore();
+    });
+</script>
 
 <!-- summary details start -->
 <div class="col-sm-6 summary-details">
