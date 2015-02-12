@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Semesters;

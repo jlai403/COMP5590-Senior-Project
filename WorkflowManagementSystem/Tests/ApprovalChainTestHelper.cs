@@ -7,12 +7,22 @@ namespace WorkflowManagementSystem.Tests
     {
         public void CreateProgramApprovalChain()
         {
+            CreateApprovalChain("Program", RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, RoleTestHelper.FACULTY_COUNCIL_MEMBER, RoleTestHelper.APPC_MEMBER, RoleTestHelper.GFC_MEMBER);
+        }
+
+        public void CreateCoursesApprovalChain()
+        {
+            CreateApprovalChain("Course", RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, RoleTestHelper.FACULTY_COUNCIL_MEMBER, RoleTestHelper.APPC_MEMBER, RoleTestHelper.GFC_MEMBER);
+        }
+
+        public void CreateApprovalChain(string name, params string[] roles)
+        {
             var approvalChainInputViewModel = new ApprovalChainInputViewModel();
-            approvalChainInputViewModel.Name = "Program";
-            approvalChainInputViewModel.Roles.Add(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
-            approvalChainInputViewModel.Roles.Add(RoleTestHelper.FACULTY_COUNCIL_MEMBER);
-            approvalChainInputViewModel.Roles.Add(RoleTestHelper.APPC_MEMBER);
-            approvalChainInputViewModel.Roles.Add(RoleTestHelper.GFC_MEMBER);
+            approvalChainInputViewModel.Name = name;
+            foreach (var role in roles)
+            {
+                approvalChainInputViewModel.Roles.Add(role);   
+            }
 
             FacadeFactory.GetDomainFacade().CreateApprovalChain(approvalChainInputViewModel);
         }

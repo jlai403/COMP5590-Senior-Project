@@ -24,6 +24,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
         protected DbSet<File> File { get; set; }
         protected DbSet<ApprovalChainStep> ApprovalChainStep { get; set; }
         protected DbSet<Comment> Comment { get; set; }
+        protected DbSet<Course.Course> Course { get; set; }
         protected DbSet<Discipline> Discipline { get; set; }
         protected DbSet<Faculty.Faculty> Faculty { get; set; }
         protected DbSet<WorkflowItem> WorkflowItem { get; set; }
@@ -38,6 +39,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
             modelBuilder.Entity<WorkflowItem>().HasRequired(x => x.Requester);
             modelBuilder.Entity<WorkflowItem>().HasRequired(x => x.CurrentWorkflowData);
             modelBuilder.Entity<Program>().ToTable("Programs");
+            modelBuilder.Entity<Course.Course>().ToTable("Courses");
 
             modelBuilder.Entity<User>().HasMany(u => u.Roles).WithMany(r => r.Users).Map(m =>
             {

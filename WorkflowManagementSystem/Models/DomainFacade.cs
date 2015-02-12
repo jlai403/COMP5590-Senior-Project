@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using WorkflowManagementSystem.Models.ApprovalChains;
+using WorkflowManagementSystem.Models.Course;
 using WorkflowManagementSystem.Models.DataAccess;
 using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Faculty;
@@ -268,6 +269,25 @@ namespace WorkflowManagementSystem.Models
             {
                 var actionableWorkflowItems = WorkflowRepository.FindWorkflowItemsRequestedByUser(email);
                 return WorkflowAssembler.AssembleWorkflowItems(actionableWorkflowItems);
+            });
+        }
+
+        public void CreateCourseRequest(string email, CourseRequestInputViewModel courseRequestInputViewModel)
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                var course = CourseRepository.CreateCourse(email, courseRequestInputViewModel);
+                new WorkflowHandler(course).InitiateWorkflow();
+                return null;
+            });
+        }
+
+        public CourseViewModel FindCourse(string name)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var course = CourseRepository.FindCourse(name);
+                return new CourseAssembler(course).Assemble();
             });
         }
     }
