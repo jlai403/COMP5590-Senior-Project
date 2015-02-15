@@ -2,7 +2,7 @@
 	<div class="col-md-12 center-text">
 		<h4>Program requested is now in the approval process.</h4>
 	    <h6 class="redirect-text">
-	        @Html.ActionLink("Click here", "Summary", new {name = ViewBag.ProgramName}) to view your request
+	        @Html.ActionLink("Click here", "Index", new {name = ViewBag.ProgramName}) to view your request
         </h6>
 		<h6>You can also check the status of your request on the @Html.ActionLink("Homepage", "Index", "Dashboard").</h6>
 	</div>
@@ -10,7 +10,7 @@
 
 <script>
     var redirectSeconds = 10;
-    var redirectUrl = "@Url.Action("Summary", "Program", new {name = ViewBag.ProgramName}, Request.Url.Scheme)";
+    var redirectUrl = "@Url.Action("Index", "Program", new {name = ViewBag.ProgramName}, Request.Url.Scheme)";
 
     $(document).ready(function () {
         redirectToProgramSummary();

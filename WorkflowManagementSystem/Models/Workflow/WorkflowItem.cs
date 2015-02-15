@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using WorkflowManagementSystem.Models.Files;
+using WorkflowManagementSystem.Models.Search;
 using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Models.Workflow
 {
-    public abstract class WorkflowItem : IEntity
+    public abstract class WorkflowItem : IEntity, IIndexable
     {
         public int Id { get; set; }
         public WorkflowItemTypes Type { get; set; }
@@ -57,5 +58,12 @@ namespace WorkflowManagementSystem.Models.Workflow
             workflowDataHistory.Add(workflowData);
             return workflowDataHistory;
         }
+
+        /*** IInvertedIndex overrides ***/
+        public HashSet<string> ExtractKeys()
+        {
+            return ExtractSearchKeysForWorkflowItem();
+        }
+        protected abstract HashSet<string> ExtractSearchKeysForWorkflowItem();
     }
 }

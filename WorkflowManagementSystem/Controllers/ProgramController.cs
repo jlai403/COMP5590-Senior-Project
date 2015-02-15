@@ -45,7 +45,7 @@ namespace WorkflowManagementSystem.Controllers
             return View("Requested");
         }
 
-        public ActionResult Summary(string name)
+        public ActionResult Index(string name)
         {
             var program = FacadeFactory.GetDomainFacade().FindProgram(name);
             return View(program);
@@ -86,7 +86,7 @@ namespace WorkflowManagementSystem.Controllers
             new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
             new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"]);
 
-            return RedirectToAction("Summary", new { name = workflowItemName });
+            return RedirectToAction("Index", new { name = workflowItemName });
         }
 
         public ActionResult Reject(string workflowItemName)
@@ -96,7 +96,7 @@ namespace WorkflowManagementSystem.Controllers
             new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
             new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"]);
 
-            return RedirectToAction("Summary", new { name = workflowItemName });
+            return RedirectToAction("Index", new { name = workflowItemName });
         }
 
         public ActionResult AddComment(CommentInputViewModel commentInputViewModel)

@@ -49,7 +49,7 @@
 
                 @foreach (var userRequest in Model.UserRequests)
                 {
-                    <a href="@Url.Action("Summary", "Program", new {userRequest.Name})">
+                    <a href="@Url.Action("Index", "Program", new {userRequest.Name})">
                         <div class="container item">
                             <div class="row">
                                 <div class="col-md-4 col-xs-6 bold-text text-uppercase"> Request Date: </div>

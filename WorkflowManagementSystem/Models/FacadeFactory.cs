@@ -6,5 +6,10 @@ namespace WorkflowManagementSystem.Models
         {
             return new DomainFacade();
         }
+
+        public static SearchFacade GetSearchFacade()
+        {
+            return new SearchFacade();
+        }
     }
 }

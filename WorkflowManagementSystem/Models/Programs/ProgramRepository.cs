@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WorkflowManagementSystem.Models.DataAccess;
 using WorkflowManagementSystem.Models.ErrorHandling;
+using WorkflowManagementSystem.Models.Search;
 using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Models.Programs
@@ -15,6 +16,7 @@ namespace WorkflowManagementSystem.Models.Programs
             var program = new Program();
             AddEntity(program);
             program.Update(user, programRequestInputViewModel);
+            SearchRepository.AddIndex(program);
             return program;
         }
 
@@ -26,18 +28,6 @@ namespace WorkflowManagementSystem.Models.Programs
         public static Program FindProgram(string name)
         {
             return Queryable<Program>().FirstOrDefault(x => x.Name.Equals(name));
-        }
-
-        public static List<Program> FindAllProgramsRequestedByUser(string userEmail)
-        {
-            return Queryable<Program>().Where(x => x.Requester.Email.Equals(userEmail)).ToList();
-        }
-
-        public static List<Program> FindAllProgramRequestsAwaitingForAction(string email)
-        {
-            var user = UserRepository.FindUser(email);
-            var userRoles = user.Roles.Select(x => x.Id);
-            return Queryable<Program>().Where(x => userRoles.Contains(x.CurrentWorkflowData.ApprovalChainStep.Role.Id)).ToList();
         }
     }
 }

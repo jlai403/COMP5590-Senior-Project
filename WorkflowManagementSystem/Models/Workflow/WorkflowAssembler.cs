@@ -18,12 +18,12 @@ namespace WorkflowManagementSystem.Models.Workflow
             WorkflowItem = workflowItem;
         }
 
-        public static List<WorkflowDataViewModel> AssembleAll(List<WorkflowData> workflowHistory)
+        public static List<WorkflowDataViewModel> AssembleWorkflowDatas(List<WorkflowData> workflowHistory)
         {
-            return workflowHistory.Select(workflowData => new WorkflowAssembler(workflowData).Assemble()).ToList();
+            return workflowHistory.Select(workflowData => new WorkflowAssembler(workflowData).AssembleWorkflowData()).ToList();
         }
 
-        private WorkflowDataViewModel Assemble()
+        private WorkflowDataViewModel AssembleWorkflowData()
         {
             var workflowDataViewModel = new WorkflowDataViewModel();
             workflowDataViewModel.ResponsibleParty = WorkflowData.ApprovalChainStep.Role.Name;

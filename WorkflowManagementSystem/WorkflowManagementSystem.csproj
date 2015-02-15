@@ -256,6 +256,10 @@
     <Compile Include="Migrations\201502112328532_AddCourseRequest.Designer.cs">
       <DependentUpon>201502112328532_AddCourseRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502150812283_AddWorkflowInvertedIndex.cs" />
+    <Compile Include="Migrations\201502150812283_AddWorkflowInvertedIndex.Designer.cs">
+      <DependentUpon>201502150812283_AddWorkflowInvertedIndex.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -307,6 +311,14 @@
     <Compile Include="Models\Roles\RoleInputViewModel.cs" />
     <Compile Include="Models\Roles\RoleRepository.cs" />
     <Compile Include="Models\Roles\RoleViewModel.cs" />
+    <Compile Include="Models\SearchFacade.cs" />
+    <Compile Include="Models\Search\IIndex.cs" />
+    <Compile Include="Models\Search\IIndexable.cs" />
+    <Compile Include="Models\Search\IndexFactory.cs" />
+    <Compile Include="Models\Search\IndexKey.cs" />
+    <Compile Include="Models\Search\SearchRepository.cs" />
+    <Compile Include="Models\Search\SearchResultViewModel.cs" />
+    <Compile Include="Models\Search\WorkflowItemIndex.cs" />
     <Compile Include="Models\Semesters\Semester.cs" />
     <Compile Include="Models\Semesters\SemesterAssembler.cs" />
     <Compile Include="Models\Semesters\SemesterInputViewModel.cs" />
@@ -350,6 +362,7 @@
     <Compile Include="Tests\ProgramTestHelper.cs" />
     <Compile Include="Tests\RoleTest.cs" />
     <Compile Include="Tests\RoleTestHelper.cs" />
+    <Compile Include="Tests\SearchTest.cs" />
     <Compile Include="Tests\SemesterTest.cs" />
     <Compile Include="Tests\SemesterTestHelper.cs" />
     <Compile Include="Tests\UserTest.cs" />
@@ -372,7 +385,7 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Errors\Index.cshtml" />
     <Content Include="Views\Program\CreateRequest.cshtml" />
-    <Content Include="Views\Program\Summary.cshtml" />
+    <Content Include="Views\Program\Index.cshtml" />
     <Content Include="Views\Program\Requested.cshtml" />
     <Content Include="Views\Program\UpdateStatus.cshtml" />
     <Content Include="Views\Shared\_WorkflowItemCommentPartial.cshtml" />
@@ -439,6 +452,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502112328532_AddCourseRequest.resx">
       <DependentUpon>201502112328532_AddCourseRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502150812283_AddWorkflowInvertedIndex.resx">
+      <DependentUpon>201502150812283_AddWorkflowInvertedIndex.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

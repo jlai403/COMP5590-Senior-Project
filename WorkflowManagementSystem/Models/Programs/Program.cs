@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Semesters;
@@ -32,6 +33,18 @@ namespace WorkflowManagementSystem.Models.Programs
             {
                 AddComment(user, programRequestInputViewModel.RequestedDateUTC, programRequestInputViewModel.Comment);
             }
+        }
+
+        protected override HashSet<string> ExtractSearchKeysForWorkflowItem()
+        {
+            var searchKeys = new HashSet<string>();
+            searchKeys.Add(Type.ToString().ToLower());
+            searchKeys.UnionWith(Name.ToLower().Split(' '));
+            searchKeys.UnionWith(CrossImpact.ToLower().Split(' '));
+            searchKeys.UnionWith(StudentImpact.ToLower().Split(' '));
+            searchKeys.UnionWith(LibraryImpact.ToLower().Split(' '));
+            searchKeys.UnionWith(ITSImpact.ToLower().Split(' '));
+            return searchKeys;
         }
     }
 }

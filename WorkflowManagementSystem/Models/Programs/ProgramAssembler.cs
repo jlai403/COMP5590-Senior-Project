@@ -32,7 +32,7 @@ namespace WorkflowManagementSystem.Models.Programs
             programViewModel.LibraryImpact = Program.LibraryImpact;
             programViewModel.ITSImpact = Program.ITSImpact;
             programViewModel.Comments = CommentAssembler.AssembleAll(Program.Comments);
-            programViewModel.WorkflowSteps = WorkflowAssembler.AssembleAll(Program.GetWorkflowHistory());
+            programViewModel.WorkflowSteps = WorkflowAssembler.AssembleWorkflowDatas(Program.GetWorkflowHistory());
             programViewModel.Attachments = FileAssembler.AssembleAll(Program.Attachments);
             return programViewModel;
         }

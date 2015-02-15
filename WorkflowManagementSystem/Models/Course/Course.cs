@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
 using WorkflowManagementSystem.Models.Workflow;
@@ -28,6 +29,11 @@ namespace WorkflowManagementSystem.Models.Course
             StudentImpact = courseRequestInputViewModel.StudentImpact;
             LibraryImpact = courseRequestInputViewModel.LibraryImpact;
             ITSImpact = courseRequestInputViewModel.ITSImpact;
+        }
+
+        protected override HashSet<string> ExtractSearchKeysForWorkflowItem()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -4,6 +4,7 @@ using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Files;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Roles;
+using WorkflowManagementSystem.Models.Search;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
 using WorkflowManagementSystem.Models.Workflow;
@@ -27,11 +28,13 @@ namespace WorkflowManagementSystem.Models.DataAccess
         protected DbSet<Course.Course> Course { get; set; }
         protected DbSet<Discipline> Discipline { get; set; }
         protected DbSet<Faculty.Faculty> Faculty { get; set; }
-        protected DbSet<WorkflowItem> WorkflowItem { get; set; }
+        protected DbSet<IndexKey> IndexKey { get; set; }
         protected DbSet<Role> Role { get; set; }
         protected DbSet<Semester> Semester { get; set; }
         protected DbSet<User> User { get; set; }
         protected DbSet<WorkflowData> WorkflowData { get; set; }
+        protected DbSet<WorkflowItem> WorkflowItem { get; set; }
+        protected DbSet<WorkflowItemIndex> WorkflowItemIndices { get; set; }
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
