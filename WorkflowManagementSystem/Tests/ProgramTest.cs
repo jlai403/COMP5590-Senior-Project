@@ -71,6 +71,41 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void CreateProgramRequest_NameExists()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var programRequestInputViewModel = new ProgramRequestInputViewModel();
+            programRequestInputViewModel.RequestedDateUTC = new DateTime(2015, 1, 19);
+            programRequestInputViewModel.Requester = user.DisplayName;
+            programRequestInputViewModel.Name = "Program Name";
+            programRequestInputViewModel.Semester = semester.Id;
+            programRequestInputViewModel.Discipline = discipline.Id;
+            programRequestInputViewModel.CrossImpact = "Cross Impact";
+            programRequestInputViewModel.StudentImpact = "Student Impact";
+            programRequestInputViewModel.LibraryImpact = "Library Impact";
+            programRequestInputViewModel.ITSImpact = "ITS Impact";
+            programRequestInputViewModel.Comment = "Comment";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Program with the name 'Program Name' already exists.");
+        }
+
+
+        [Test]
         public void FindProgram_NotFound()
         {
             // assemble

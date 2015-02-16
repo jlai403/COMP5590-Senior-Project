@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.Ajax.Utilities;
+using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
@@ -20,6 +21,8 @@ namespace WorkflowManagementSystem.Models.Programs
 
         public void Update(User user, ProgramRequestInputViewModel programRequestInputViewModel)
         {
+            AssertProgramWithNameDoesntAlreadyExist(programRequestInputViewModel.Name);
+            
             UpdateWorkflowItem(user, programRequestInputViewModel.Name, programRequestInputViewModel.RequestedDateUTC, WorkflowItemTypes.Program);
             
             Semester = SemesterRepository.FindSemester(programRequestInputViewModel.Semester);
@@ -35,11 +38,18 @@ namespace WorkflowManagementSystem.Models.Programs
             }
         }
 
+        private void AssertProgramWithNameDoesntAlreadyExist(string name)
+        {
+            if (ProgramRepository.FindProgram(name) != null)
+                throw new WMSException("Program with the name '{0}' already exists.", name);
+        }
+
         protected override HashSet<string> ExtractSearchKeysForWorkflowItem()
         {
             var searchKeys = new HashSet<string>();
             searchKeys.Add(Type.ToString().ToLower());
             searchKeys.UnionWith(Name.ToLower().Split(' '));
+            searchKeys.UnionWith(Requester.GetDisplayName().ToLower().Split(' '));
             searchKeys.UnionWith(CrossImpact.ToLower().Split(' '));
             searchKeys.UnionWith(StudentImpact.ToLower().Split(' '));
             searchKeys.UnionWith(LibraryImpact.ToLower().Split(' '));

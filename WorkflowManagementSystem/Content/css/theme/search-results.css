@@ -1,20 +1,28 @@
-.search-results {
+.container.search-results {
 	margin-top: 20px;
-	max-width: 600px;	
+    max-width: 600px;
+    background-color: #ffffff;
+	box-shadow: 0 0 40px #CDCDCD;
+    padding: 0;
 }
 
-.container.item {
-	max-width: 100%;
-	font-size: 12px;
-	border-top: 1px solid #EFEFEF;
-	border-bottom: 1px solid #EFEFEF;
-	padding: 10px 20px;
-	margin-top: 0;
+.container .header {
+    margin-top: 0;
+    padding: 30px;
+    background-color: #34495e;
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-size: 20px;
 }
 
-.container.item:HOVER {
-	background-color: #F9F9F9;
-	cursor: pointer;
+.container.search-results .row.content {
+    padding: 10px 20px 0;
+}
+
+.search-key-words {
+    font-size: 25px;
 }
 
 .search-results a, .search-results a, 

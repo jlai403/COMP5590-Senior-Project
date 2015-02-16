@@ -1,1 +1,105 @@
-﻿@model dynamic
+﻿@using System.Web.Optimization
+@model List<WorkflowManagementSystem.Models.Workflow.WorkflowItemViewModel>
+
+@Styles.Render("~/Content/css/theme/search-results.css")
+
+<div class="container search-results center">
+    <div class="col-xs-12">
+        <div class="row center-text">
+            <p class="header">Search Results</p>
+        </div>
+
+        <div class="row content">
+            @using (Html.BeginForm("Search", "Search", FormMethod.Post))
+            {
+                <input name="keywords" class="async-search form-control" type="text">
+                <i class="glyphicon glyphicon-search form-control-feedback" style="float: right; position: relative; top: -34px;"></i>
+            }
+        </div>
+
+        <div class="row content center-text">
+            <span class="search-key-words">
+                Search Results For '<span class="keywords">@ViewBag.Keywords</span>'
+            </span>
+        </div>
+
+        <div class="row content">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Requester</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var workflowItem in Model)
+                {
+                    <tr class="search-result cursor" data-url="@Url.Action("Index", workflowItem.Type.ToString(), new {name = workflowItem.Name})">
+                        <td>
+                            @workflowItem.Type
+                        </td>
+                        <td>
+                            @workflowItem.Name
+                        </td>
+                        <td>
+                            @workflowItem.Requester
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        bindSearchResultRedirect();
+    });
+
+    $('.async-search').keyup(function(){
+        var keywords = $(this).val();
+        $('.keywords').text(keywords);
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "@Url.Action("Search")",
+            data: { 
+                keywords : keywords, 
+                async : true 
+            },
+            async: true,
+            success: function(jsonData){
+                reloadSearchResults(jsonData);
+                bindSearchResultRedirect();
+            }
+        });
+    });
+
+    $(".search-results .table").on("click", "th", function(e){
+        var clickedElement = $(this);
+    });
+
+    function bindSearchResultRedirect() {
+        $(".search-result").click(function () {
+            window.location.href = $(this).data('url');
+        });
+    }
+
+    function reloadSearchResults(jsonData){
+        var searchResultBody = $(".search-results .table tbody");
+        searchResultBody.empty();
+        for (var index in jsonData) {
+            var searchResult = jsonData[index];
+            var row = $("<tr></tr>").addClass("search-result").attr("data-url", searchResult.uri);
+            var typeColumn = $("<td></td>").text(searchResult.type);
+            var nameColumn = $("<td></td>").text(searchResult.name);
+            var requesterColumn = $("<td></td>").text(searchResult.requester);
+            row.append(typeColumn);
+            row.append(nameColumn);
+            row.append(requesterColumn);
+            searchResultBody.append(row);
+        }
+    }
+</script>

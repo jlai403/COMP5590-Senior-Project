@@ -1,12 +1,30 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
+using WorkflowManagementSystem.Models;
 
 namespace WorkflowManagementSystem.Controllers
 {
     public class SearchController : Controller
     {
-        public ActionResult Search()
+        public ActionResult Search(string keywords, bool async = false)
         {
-            return View("SearchResults");
+            var workflowItems = FacadeFactory.GetSearchFacade().SearchWorkflowItems(keywords);
+            if(async)
+            {
+                var resultsJson = workflowItems.Select(x =>
+                    new
+                    {
+                        uri = Url.Action("Index", x.Type.ToString(), new { name = x.Name }),
+                        name = x.Name,
+                        requester = x.Requester,
+                        type = x.Type.ToString()
+                    }).ToList();
+
+                return Json(resultsJson);   
+            }
+
+            ViewBag.Keywords = keywords;
+            return View("SearchResults", workflowItems);
         }
     }
 }

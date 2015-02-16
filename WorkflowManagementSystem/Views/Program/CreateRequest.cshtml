@@ -147,7 +147,7 @@
                     </div>
                     <div class="col-md-9">
                         <textarea name="CrossImpact" class="form-control expandOnFocus" rows="2" tabindex="6"
-                                  placeholder="Please identify how impact to other departments has been addressed, including General Education as appropriate"></textarea>
+                                  placeholder="Please identify how impact to other departments has been addressed, including General Education as appropriate">@(Model == null ? "" : Model.CrossImpact)</textarea>
                     </div>
                 </div>
 
@@ -157,7 +157,7 @@
                     </div>
                     <div class="col-md-9">
                         <textarea name="StudentImpact" class="form-control expandOnFocus" rows="2" tabindex="7"
-                                  placeholder="Please identify how student input or impact has been assessed"></textarea>
+                                  placeholder="Please identify how student input or impact has been assessed">@(Model == null ? "" : Model.StudentImpact)</textarea>
                     </div>
                 </div>
 
@@ -167,7 +167,7 @@
                     </div>
                     <div class="col-md-9">
                         <textarea name="LibraryImpact" class="form-control expandOnFocus" rows="2" tabindex="8"
-                                  placeholder="Please identify how impact to the Library has been addressed"></textarea>
+                                  placeholder="Please identify how impact to the Library has been addressed">@(Model == null ? "" : Model.LibraryImpact)</textarea>
                     </div>
                 </div>
 
@@ -177,7 +177,8 @@
                     </div>
                     <div class="col-md-9">
                         <textarea name="ItsImpact" class="form-control expandOnFocus" rows="2" tabindex="9"
-                                  placeholder="Please identify how impact to ITS has been addressed"></textarea>
+                                  placeholder="Please identify how impact to ITS has been add
+                            ressed">@(Model == null ? "" : Model.ITSImpact)</textarea>
                     </div>
                 </div>
 
@@ -194,7 +195,7 @@
                         Comments
                     </div>
                     <div class="col-md-9">
-                        <textarea name="Comment" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="11"></textarea>
+                        <textarea name="Comment" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="11">@(Model == null ? "" : Model.Comment)</textarea>
                     </div>
                 </div>
 

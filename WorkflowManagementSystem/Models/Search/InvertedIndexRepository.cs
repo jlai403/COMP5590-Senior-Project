@@ -6,7 +6,7 @@ using WorkflowManagementSystem.Models.Workflow;
 
 namespace WorkflowManagementSystem.Models.Search
 {
-    public class SearchRepository : Repository
+    public class InvertedIndexRepository : Repository
     {
         public static List<WorkflowItem> SearchWorkflowItem(string searchQuery)
         {

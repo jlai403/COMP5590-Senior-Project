@@ -7,11 +7,11 @@ namespace WorkflowManagementSystem.Models
 {
     public class SearchFacade
     {
-        public List<WorkflowItemViewModel> Search(string searchQuery)
+        public List<WorkflowItemViewModel> SearchWorkflowItems(string searchQuery)
         {
             return TransactionHandler.Instance.Execute(() =>
             {
-                var searchResults = SearchRepository.SearchWorkflowItem(searchQuery);
+                var searchResults = InvertedIndexRepository.SearchWorkflowItem(searchQuery);
                 return WorkflowAssembler.AssembleWorkflowItems(searchResults);
             });
         }

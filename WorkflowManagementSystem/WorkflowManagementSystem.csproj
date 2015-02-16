@@ -316,7 +316,7 @@
     <Compile Include="Models\Search\IIndexable.cs" />
     <Compile Include="Models\Search\IndexFactory.cs" />
     <Compile Include="Models\Search\IndexKey.cs" />
-    <Compile Include="Models\Search\SearchRepository.cs" />
+    <Compile Include="Models\Search\InvertedIndexRepository.cs" />
     <Compile Include="Models\Search\SearchResultViewModel.cs" />
     <Compile Include="Models\Search\WorkflowItemIndex.cs" />
     <Compile Include="Models\Semesters\Semester.cs" />

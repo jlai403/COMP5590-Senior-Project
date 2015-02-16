@@ -60,7 +60,7 @@ namespace WorkflowManagementSystem.Tests
             FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, dogeProgram);
 
             // act
-            var workflowItemResults = FacadeFactory.GetSearchFacade().Search("Cross");
+            var workflowItemResults = FacadeFactory.GetSearchFacade().SearchWorkflowItems("Cross");
 
             // assert
             workflowItemResults.Count().ShouldBeEquivalentTo(2);
@@ -131,7 +131,7 @@ namespace WorkflowManagementSystem.Tests
             FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, muchProgram);
 
             // act
-            var workflowItemResults = FacadeFactory.GetSearchFacade().Search("random much");
+            var workflowItemResults = FacadeFactory.GetSearchFacade().SearchWorkflowItems("random much");
 
             // assert
             workflowItemResults.Count().ShouldBeEquivalentTo(2);

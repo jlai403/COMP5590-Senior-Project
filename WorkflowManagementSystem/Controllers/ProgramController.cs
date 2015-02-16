@@ -12,13 +12,17 @@ namespace WorkflowManagementSystem.Controllers
 {
     public class ProgramController : Controller
     {
-        [HttpGet]
-        public ActionResult CreateRequest()
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             ViewBag.UsersFullName = FacadeFactory.GetDomainFacade().FindUser(User.Identity.Name).DisplayName;
             ViewBag.Semesters = FacadeFactory.GetDomainFacade().FindAllSemesters();
             ViewBag.Faculties = FacadeFactory.GetDomainFacade().FindAllFaculties();
             ViewBag.Disciplines = FacadeFactory.GetDomainFacade().FindAllDisciplines();
+        }
+
+        [HttpGet]
+        public ActionResult CreateRequest()
+        {
             return View();
         }
 

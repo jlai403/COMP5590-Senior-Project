@@ -21,7 +21,7 @@ namespace WorkflowManagementSystem.Models.Search
 
         public void AddIndex(IIndexable indexable)
         {
-            var index = SearchRepository.CreateIndex(this, indexable);
+            var index = InvertedIndexRepository.CreateIndex(this, indexable);
             Indice.Add(index);
         }
     }
