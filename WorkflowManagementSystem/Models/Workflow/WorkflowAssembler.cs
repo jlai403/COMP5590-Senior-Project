@@ -32,7 +32,7 @@ namespace WorkflowManagementSystem.Models.Workflow
             return workflowDataViewModel;
         }
 
-        public static List<WorkflowItemViewModel> AssembleWorkflowItems(List<WorkflowItem> actionableWorkflowItems)
+        public static List<WorkflowItemViewModel> AssembleWorkflowItems(IEnumerable<WorkflowItem> actionableWorkflowItems)
         {
             return actionableWorkflowItems.Select(workflowItem => new WorkflowAssembler(workflowItem).AssembleWorkflowItem()).ToList();
         }

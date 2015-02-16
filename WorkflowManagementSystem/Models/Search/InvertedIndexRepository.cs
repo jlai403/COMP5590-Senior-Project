@@ -8,11 +8,11 @@ namespace WorkflowManagementSystem.Models.Search
 {
     public class InvertedIndexRepository : Repository
     {
-        public static List<WorkflowItem> SearchWorkflowItem(string searchQuery)
+        public static HashSet<WorkflowItem> SearchWorkflowItem(string searchQuery)
         {
             var searchKeys = new Regex("[a-z]+").Matches(searchQuery.ToLower()).Cast<Match>().Select(x => x.Value).ToArray();
             var workflowItemIndices = Queryable<WorkflowItemIndex>().Where(x => searchKeys.Contains(x.Key.Key));
-            return workflowItemIndices.Select(x => x.Entity).ToList();
+            return new HashSet<WorkflowItem>(workflowItemIndices.Select(x => x.Entity));
         }
 
         public static void AddIndex(IIndexable indexedEntity)
