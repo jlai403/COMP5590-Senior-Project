@@ -1,0 +1,19 @@
+﻿table.tablesorter th.headerSortUp::after { 
+    content: "\E113";
+    font-family: 'Glyphicons Halflings';
+    font-size: 8px;
+    margin: 5px;
+    background-color: #ddd;
+    border-radius: 20px;
+    padding: 3px 4px; 
+} 
+
+table.tablesorter th.headerSortDown::after { 
+    content: "\E114";
+    font-family: 'Glyphicons Halflings';
+    font-size: 8px;
+    margin: 5px;
+    background-color: #ddd;
+    border-radius: 20px;
+    padding: 3px 4px; 
+} 

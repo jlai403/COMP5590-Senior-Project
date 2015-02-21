@@ -138,6 +138,7 @@
     <Content Include="Content\css\module\controls.css" />
     <Content Include="Content\css\module\errors.css" />
     <Content Include="Content\css\module\nav.css" />
+    <Content Include="Content\css\module\tablesorter.css" />
     <Content Include="Content\css\theme\create-request.css" />
     <Content Include="Content\css\theme\dashboard.css" />
     <Content Include="Content\css\theme\layout.css" />
@@ -173,6 +174,7 @@
     <Content Include="Scripts\js\animation.js" />
     <Content Include="Scripts\js\collapse-text.js" />
     <Content Include="Scripts\js\errors.js" />
+    <Content Include="Scripts\js\tablesorter\jquery.tablesorter.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Sql\Recreate.sql" />
     <Content Include="Web.config">
