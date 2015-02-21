@@ -266,6 +266,10 @@
     <Compile Include="Migrations\201502210921401_AddProgramToCourse.Designer.cs">
       <DependentUpon>201502210921401_AddProgramToCourse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502210932325_AddIndexToIndexKey.cs" />
+    <Compile Include="Migrations\201502210932325_AddIndexToIndexKey.Designer.cs">
+      <DependentUpon>201502210932325_AddIndexToIndexKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -464,6 +468,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502210921401_AddProgramToCourse.resx">
       <DependentUpon>201502210921401_AddProgramToCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502210932325_AddIndexToIndexKey.resx">
+      <DependentUpon>201502210932325_AddIndexToIndexKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
