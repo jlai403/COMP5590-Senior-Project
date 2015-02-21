@@ -56,6 +56,7 @@ namespace WorkflowManagementSystem.Tests
             course.ITSImpact.ShouldBeEquivalentTo(courseInputViewModel.ITSImpact);
             course.RequestedDateUtc.ShouldBeEquivalentTo(courseInputViewModel.RequestedDateUtc);
             course.Requester.ShouldBeEquivalentTo(requester.DisplayName);
+            course.ProgramName.ShouldBeEquivalentTo(courseInputViewModel.ProgramName);
         }
     }
 }

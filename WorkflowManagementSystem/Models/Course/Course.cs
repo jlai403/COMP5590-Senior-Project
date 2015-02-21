@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
 using WorkflowManagementSystem.Models.Workflow;
@@ -17,6 +18,7 @@ namespace WorkflowManagementSystem.Models.Course
         public string StudentImpact { get; set; }
         public string LibraryImpact { get; set; }
         public string ITSImpact { get; set; }
+        public virtual Program Program { get; set; }
         
         public void Update(User user, CourseRequestInputViewModel courseRequestInputViewModel)
         {
@@ -29,7 +31,10 @@ namespace WorkflowManagementSystem.Models.Course
             StudentImpact = courseRequestInputViewModel.StudentImpact;
             LibraryImpact = courseRequestInputViewModel.LibraryImpact;
             ITSImpact = courseRequestInputViewModel.ITSImpact;
+
+            Program = ProgramRepository.FindProgram(courseRequestInputViewModel.ProgramName);
         }
+
 
         protected override HashSet<string> ExtractSearchKeysForWorkflowItem()
         {

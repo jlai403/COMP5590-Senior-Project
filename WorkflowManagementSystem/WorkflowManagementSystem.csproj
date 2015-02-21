@@ -262,6 +262,10 @@
     <Compile Include="Migrations\201502150812283_AddWorkflowInvertedIndex.Designer.cs">
       <DependentUpon>201502150812283_AddWorkflowInvertedIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502210921401_AddProgramToCourse.cs" />
+    <Compile Include="Migrations\201502210921401_AddProgramToCourse.Designer.cs">
+      <DependentUpon>201502210921401_AddProgramToCourse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -457,6 +461,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502150812283_AddWorkflowInvertedIndex.resx">
       <DependentUpon>201502150812283_AddWorkflowInvertedIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502210921401_AddProgramToCourse.resx">
+      <DependentUpon>201502210921401_AddProgramToCourse.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

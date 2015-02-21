@@ -23,6 +23,7 @@ namespace WorkflowManagementSystem.Models.Course
             courseViewModel.ITSImpact = Course.ITSImpact;
             courseViewModel.RequestedDateUtc = Course.RequestedDateUTC;
             courseViewModel.Requester = Course.Requester.GetDisplayName();
+            courseViewModel.ProgramName = Course.Program.Name;
             return courseViewModel;
         }
     }
