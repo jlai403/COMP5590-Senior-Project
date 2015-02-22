@@ -36,6 +36,42 @@ namespace WorkflowManagementSystem.Models.Programs
             {
                 AddComment(user, programRequestInputViewModel.RequestedDateUTC, programRequestInputViewModel.Comment);
             }
+
+            AssertNameIsNotNull();
+            AssertCrossImpactIsNotNull();
+            AssertStudentImpactIsNotNull();
+            AssertLibraryImpactIsNotNull();
+            AssertITSImpactIsNotNull();
+        }
+
+        private void AssertNameIsNotNull()
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+                throw  new WMSException("Program name is required.");
+        }
+
+        private void AssertCrossImpactIsNotNull()
+        {
+            if (string.IsNullOrWhiteSpace(CrossImpact))
+                throw new WMSException("Cross impact is required.");
+        }
+
+        private void AssertStudentImpactIsNotNull()
+        {
+            if (string.IsNullOrWhiteSpace(StudentImpact))
+                throw new WMSException("Student impact is required.");
+        }
+
+        private void AssertLibraryImpactIsNotNull()
+        {
+            if (string.IsNullOrWhiteSpace(LibraryImpact))
+                throw new WMSException("Library impact is required.");
+        }
+
+        private void AssertITSImpactIsNotNull()
+        {
+            if (string.IsNullOrWhiteSpace(ITSImpact))
+                throw new WMSException("ITS impact is required.");
         }
 
         private void AssertProgramWithNameDoesntAlreadyExist(string name)

@@ -4,6 +4,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.Course;
+using WorkflowManagementSystem.Models.ErrorHandling;
 
 namespace WorkflowManagementSystem.Tests
 {

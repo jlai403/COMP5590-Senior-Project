@@ -104,6 +104,125 @@ namespace WorkflowManagementSystem.Tests
             act.ShouldThrow<WMSException>().WithMessage("Program with the name 'Program Name' already exists.");
         }
 
+        [Test]
+        public void CreateProgramRequest_NoName()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
+            programRequestInputViewModel.Name = "";
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Program name is required.");
+        }
+
+        [Test]
+        public void CreateProgramRequest_StudentImpact()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
+            programRequestInputViewModel.StudentImpact = "";
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Student impact is required.");
+        }
+
+        [Test]
+        public void CreateProgramRequest_CrossImpact()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
+            programRequestInputViewModel.CrossImpact = "";
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Cross impact is required.");
+        }
+
+        [Test]
+        public void CreateProgramRequest_LibraryImpact()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
+            programRequestInputViewModel.LibraryImpact = "";
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Library impact is required.");
+        }
+
+        [Test]
+        public void CreateProgramRequest_ITSImpact()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
+            programRequestInputViewModel.ITSImpact = "";
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("ITS impact is required.");
+        }
 
         [Test]
         public void FindProgram_NotFound()
