@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Linq;
 using WorkflowManagementSystem.Models.DataAccess;
 using WorkflowManagementSystem.Models.ErrorHandling;
+using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Users;
 using WorkflowManagementSystem.Models.Workflow;
 
@@ -21,6 +23,11 @@ namespace WorkflowManagementSystem.Models.Course
         public static Course FindCourse(string name)
         {
             return Queryable<Course>().FirstOrDefault(x => x.Name.Equals(name));
+        }
+
+        public static List<int> FindAllCourseNumbers(Discipline discipline)
+        {
+            return Queryable<Course>().Select(x => x.CourseNumber).ToList();
         }
     }
 }

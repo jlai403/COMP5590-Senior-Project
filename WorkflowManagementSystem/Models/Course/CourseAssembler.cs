@@ -13,7 +13,8 @@ namespace WorkflowManagementSystem.Models.Course
         {
             var courseViewModel = new CourseViewModel();
             courseViewModel.Name = Course.Name;
-            courseViewModel.Code = Course.Code;
+            courseViewModel.CourseNumber = Course.CourseNumber.ToString();
+            courseViewModel.Discipline = Course.Discipline.Code;
             courseViewModel.Credits = Course.Credits;
             courseViewModel.Semester = Course.Semester.GetDisplayName();
             courseViewModel.CalendarEntry = Course.CalendarEntry;

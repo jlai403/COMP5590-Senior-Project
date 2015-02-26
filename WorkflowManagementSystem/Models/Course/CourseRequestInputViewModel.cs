@@ -4,7 +4,6 @@ namespace WorkflowManagementSystem.Models.Course
 {
     public class CourseRequestInputViewModel
     {
-        public string Code { get; set; }
         public string Name { get; set; }
         public string ProgramName { get; set; }
         public string Credits { get; set; }
@@ -16,6 +15,8 @@ namespace WorkflowManagementSystem.Models.Course
         public string ITSImpact { get; set; }
         public string Comment { get; set; }
         public DateTime RequestedDateUtc { get; set; }
+        public int Discipline { get; set; }
+        public string CourseNumber { get; set; }
 
         public CourseRequestInputViewModel()
         {

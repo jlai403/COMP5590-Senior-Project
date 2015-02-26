@@ -4,7 +4,8 @@ namespace WorkflowManagementSystem.Models.Course
 {
     public class CourseViewModel
     {
-        public string Code { get; set; }
+        public string Discipline { get; set; }
+        public string CourseNumber { get; set; }
         public string Name { get; set; }
         public string ProgramName { get; set; }
         public string Credits { get; set; }

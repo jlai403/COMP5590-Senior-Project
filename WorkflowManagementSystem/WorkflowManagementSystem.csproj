@@ -270,6 +270,10 @@
     <Compile Include="Migrations\201502210932325_AddIndexToIndexKey.Designer.cs">
       <DependentUpon>201502210932325_AddIndexToIndexKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502232043356_AddDisciplineToCourse.cs" />
+    <Compile Include="Migrations\201502232043356_AddDisciplineToCourse.Designer.cs">
+      <DependentUpon>201502232043356_AddDisciplineToCourse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -280,6 +284,7 @@
     <Compile Include="Models\ApprovalChains\ApprovalChainViewModel.cs" />
     <Compile Include="Models\Course\Course.cs" />
     <Compile Include="Models\Course\CourseAssembler.cs" />
+    <Compile Include="Models\Course\CourseNumberGenerator.cs" />
     <Compile Include="Models\Course\CourseRepository.cs" />
     <Compile Include="Models\Course\CourseRequestInputViewModel.cs" />
     <Compile Include="Models\Course\CourseViewModel.cs" />
@@ -364,6 +369,7 @@
     <Compile Include="Tests\ApprovalChainTest.cs" />
     <Compile Include="Tests\ApprovalChainTestHelper.cs" />
     <Compile Include="Tests\CourseTest.cs" />
+    <Compile Include="Tests\CourseTestHelper.cs" />
     <Compile Include="Tests\FileTest.cs" />
     <Compile Include="Tests\DisciplineTestHelper.cs" />
     <Compile Include="Tests\FacultyTest.cs" />
@@ -471,6 +477,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502210932325_AddIndexToIndexKey.resx">
       <DependentUpon>201502210932325_AddIndexToIndexKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502232043356_AddDisciplineToCourse.resx">
+      <DependentUpon>201502232043356_AddDisciplineToCourse.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
