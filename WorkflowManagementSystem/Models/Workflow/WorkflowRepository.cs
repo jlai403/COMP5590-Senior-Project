@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.DataAccess;
-using WorkflowManagementSystem.Models.Programs;
+using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Models.Workflow
@@ -21,13 +20,18 @@ namespace WorkflowManagementSystem.Models.Workflow
 
         public static WorkflowItem FindWorkflowItemForType(WorkflowItemTypes workflowItemType, string workflowItemName)
         {
-            switch (workflowItemType)
-            {
-                case WorkflowItemTypes.Program:
-                    return ProgramRepository.FindProgram(workflowItemName);
-                default:
-                    throw new NotImplementedException(string.Format("Unknown WorkflowItemType: '{0}'", workflowItemType));
-            }
+            var workflowItem = Queryable<WorkflowItem>().FirstOrDefault(x => x.Name.Equals(workflowItemName) && x.Type == workflowItemType);
+            if (workflowItem == null) throw new WMSException("Cannot find Request of type '{0}' with the name '{1}'.", workflowItemType.ToString(), workflowItemName);
+            return workflowItem;
+            //switch (workflowItemType)
+            //{
+            //    case WorkflowItemTypes.Program:
+            //        return ProgramRepository.FindProgram(workflowItemName);
+            //    case WorkflowItemTypes.Course:
+            //        return CourseRepository.FindCourse(workflowItemName);
+            //    default:
+            //        throw new NotImplementedException(string.Format("Unknown WorkflowItemType: '{0}'", workflowItemType));
+            //}
         }
 
         public static List<WorkflowItem> FindWorkflowItemsAwaitingForAction(string email)

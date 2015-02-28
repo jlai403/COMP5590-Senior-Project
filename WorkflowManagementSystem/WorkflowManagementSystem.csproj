@@ -185,6 +185,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\FileController.cs" />
@@ -408,6 +409,9 @@
     <Content Include="Views\Program\_ProgramSummaryDetailsPartial.cshtml" />
     <Content Include="Views\Program\_ProgramWorkflowStepsPartial.cshtml" />
     <Content Include="Views\Search\SearchResults.cshtml" />
+    <Content Include="Views\Course\CreateRequest.cshtml" />
+    <Content Include="Views\Course\Requested.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

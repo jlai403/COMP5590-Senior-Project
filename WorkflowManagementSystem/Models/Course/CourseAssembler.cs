@@ -1,3 +1,6 @@
+using WorkflowManagementSystem.Models.Files;
+using WorkflowManagementSystem.Models.Workflow;
+
 namespace WorkflowManagementSystem.Models.Course
 {
     public class CourseAssembler
@@ -24,7 +27,9 @@ namespace WorkflowManagementSystem.Models.Course
             courseViewModel.ITSImpact = Course.ITSImpact;
             courseViewModel.RequestedDateUtc = Course.RequestedDateUTC;
             courseViewModel.Requester = Course.Requester.GetDisplayName();
-            courseViewModel.ProgramName = Course.Program.Name;
+            courseViewModel.ProgramName = Course.Program == null ? "" : Course.Program.Name;
+            courseViewModel.Comments = CommentAssembler.AssembleAll(Course.Comments);
+            courseViewModel.Attachments = FileAssembler.AssembleAll(Course.Attachments);
             return courseViewModel;
         }
     }

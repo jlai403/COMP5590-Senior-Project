@@ -269,6 +269,26 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void UploadAttachment_ProgramNotFound()
+        {
+            // assemble
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var attachmentFileName = "some pdf";
+            var expectedContentBytes = new byte[] { 0xFF, 0xFF, 0x00, 0xAA };
+            var content = new MemoryStream(expectedContentBytes);
+            var expectedContentType = "text/pdf";
+
+            var fileInputViewModel = new FileInputViewModel("such bogus", attachmentFileName, content, expectedContentType);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().UploadFile(user.Email, fileInputViewModel, WorkflowItemTypes.Program);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Cannot find Request of type 'Program' with the name 'such bogus'.");
+        }
+
+        [Test]
         public void CreateProgramRequest_NoComment()
         {
             // assemble

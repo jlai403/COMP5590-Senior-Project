@@ -33,7 +33,7 @@ namespace WorkflowManagementSystem.Controllers
             {
                 FacadeFactory.GetDomainFacade().CreateProgramRequest(User.Identity.Name, programRequestInputViewModel);
                 
-                new FileController().UploadAttachments(User.Identity.Name, programRequestInputViewModel.Name, files);
+                new FileController().UploadAttachments(User.Identity.Name, programRequestInputViewModel.Name, files, WorkflowItemTypes.Program);
             }
             catch (WMSException e)
             {
@@ -88,7 +88,7 @@ namespace WorkflowManagementSystem.Controllers
                 FacadeFactory.GetDomainFacade().ApproveProgramRequest(User.Identity.Name, workflowItemName);
 
             new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
-            new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"]);
+            new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"], WorkflowItemTypes.Program);
 
             return RedirectToAction("Index", new { name = workflowItemName });
         }
@@ -98,7 +98,7 @@ namespace WorkflowManagementSystem.Controllers
             FacadeFactory.GetDomainFacade().RejectProgramRequest(User.Identity.Name, workflowItemName);
 
             new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
-            new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"]);
+            new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"], WorkflowItemTypes.Program);
 
             return RedirectToAction("Index", new { name = workflowItemName });
         }

@@ -16,7 +16,7 @@ namespace WorkflowManagementSystem.Controllers
             return File(file.Content, file.ContentType, file.FileName);
         }
 
-        public void UploadAttachments(string userEmail, string workflowItemName, List<HttpPostedFileBase> files)
+        public void UploadAttachments(string userEmail, string workflowItemName, List<HttpPostedFileBase> files, WorkflowItemTypes workflowItemType)
         {
             if (files == null) return;
 
@@ -24,7 +24,7 @@ namespace WorkflowManagementSystem.Controllers
             {
                 if (file == null) continue;
                 var attachmentInputViewModel = new FileInputViewModel(workflowItemName, file.FileName, file.InputStream, file.ContentType);
-                FacadeFactory.GetDomainFacade().UploadFile(userEmail, attachmentInputViewModel, WorkflowItemTypes.Program);
+                FacadeFactory.GetDomainFacade().UploadFile(userEmail, attachmentInputViewModel, workflowItemType);
             }
         }
     }

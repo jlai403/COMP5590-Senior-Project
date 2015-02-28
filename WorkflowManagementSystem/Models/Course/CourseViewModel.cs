@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using WorkflowManagementSystem.Models.Workflow;
 
 namespace WorkflowManagementSystem.Models.Course
 {
@@ -17,5 +19,13 @@ namespace WorkflowManagementSystem.Models.Course
         public string ITSImpact { get; set; }
         public DateTime RequestedDateUtc { get; set; }
         public string Requester { get; set; }
+        public List<CommentViewModel> Comments { get; set; }
+        public Dictionary<string, Guid> Attachments { get; set; }
+
+        public CourseViewModel()
+        {
+            Comments = new List<CommentViewModel>();
+            Attachments = new Dictionary<string, Guid>();
+        }
     }
 }

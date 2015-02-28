@@ -1,5 +1,3 @@
-using System.EnterpriseServices;
-using System.Linq;
 using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.DataAccess;
@@ -81,6 +79,10 @@ namespace WorkflowManagementSystem.Migrations
             if (!FacadeFactory.GetDomainFacade().FindAllApprovalChains().Exists(x => x.Name.Equals("Program")))
                 FacadeFactory.GetDomainFacade().CreateApprovalChain(
                     new ApprovalChainInputViewModel { Name = "Program", Roles = {"Faculty Council Member","Faculty Curriculumn Member","APPC Member", "GFC Member"} }
+            );
+            if (!FacadeFactory.GetDomainFacade().FindAllApprovalChains().Exists(x => x.Name.Equals("Course")))
+                FacadeFactory.GetDomainFacade().CreateApprovalChain(
+                    new ApprovalChainInputViewModel { Name = "Course", Roles = { "Faculty Council Member", "Faculty Curriculumn Member", "APPC Member", "GFC Member" } }
             );
         }
     }

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
+using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Semesters;
@@ -37,6 +37,11 @@ namespace WorkflowManagementSystem.Models.Course
             ITSImpact = courseRequestInputViewModel.ITSImpact;
 
             Program = ProgramRepository.FindProgram(courseRequestInputViewModel.ProgramName);
+
+            if (!courseRequestInputViewModel.Comment.IsNullOrWhiteSpace())
+            {
+                AddComment(user, courseRequestInputViewModel.RequestedDateUtc, courseRequestInputViewModel.Comment);
+            }
         }
 
         private int GenerateValidCourseNumber(string courseNumber)
