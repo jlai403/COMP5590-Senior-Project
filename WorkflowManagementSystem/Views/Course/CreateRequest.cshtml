@@ -66,6 +66,14 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-5 right-align">
+                        Program:
+                    </div>
+                    <div class="col-xs-5">
+                        <span class="programName left-align"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5 right-align">
                         Course Number:
                     </div>
                     <div class="col-xs-5">
@@ -74,10 +82,18 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-5 right-align">
-                        Program:
+                        Credits:
                     </div>
                     <div class="col-xs-5">
-                        <span class="programName left-align"></span>
+                        <span class="credits left-align"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5 right-align">
+                        Grading:
+                    </div>
+                    <div class="col-xs-5">
+                        <span class="grading left-align"></span>
                     </div>
                 </div>
                 <div class="row">
@@ -136,6 +152,15 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-md-3">
+                        Program
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(x => x.ProgramName, new {@class = "form-control", tabindex = "4", placeholder = "Program name"})
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-md-3 required">
                         Course Number
                     </div>
@@ -143,20 +168,33 @@
                         @{
                             var disciplinesSelectList = Html.ConvertToSelectListItem((List<DisciplineViewModel>) ViewBag.Disciplines);
                         }
-                        @Html.DropDownListFor(x => x.Discipline, disciplinesSelectList, new {@class = "form-control", tabindex = "3"})
+                        @Html.DropDownListFor(x => x.Discipline, disciplinesSelectList, new {@class = "form-control", tabindex = "5"})
                     </div>
                     <div class="col-md-3">
-                        @Html.TextBoxFor(x => x.CourseNumber, new {maxlength = "4", @class = "form-control", tabindex = "4", placeholder = "(i.e. 1xxx)"})
+                        @Html.TextBoxFor(x => x.CourseNumber, new {maxlength = "4", @class = "form-control", tabindex = "6", placeholder = "(i.e. 1xxx)"})
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        Program
+                 <div class="row">
+                    <div class="col-md-3 required">
+                        Credits
                     </div>
-                    <div class="col-md-9">
-                        @Html.TextBoxFor(x => x.ProgramName, new {@class = "form-control", tabindex = "5", placeholder="Program name"})
+                     <div class="col-md-3">
+                         @{
+                             var creditsSelectList = Html.ConvertToSelectListItem((string[]) ViewBag.Credits);
+                         }
+                         @Html.DropDownListFor(x => x.Credits, creditsSelectList, new {@class = "form-control", tabindex= "7"})
+                     </div>
+
+                     <div class="col-md-3 required">
+                        Grading
                     </div>
+                     <div class="col-md-3">
+                         @{
+                             var grading = Html.ConvertToSelectListItem((string[]) ViewBag.Gradings);
+                         }
+                         @Html.DropDownListFor(x => x.Grading, grading, new {@class = "form-control", tabindex="8"})
+                     </div>
                 </div>
 
                 <div class="row">
@@ -164,12 +202,12 @@
                         Calendar Entry
                     </div>
                     <div class="col-md-9">
-                        <textarea name="CalendarEntry" class="form-control expandOnFocus" rows="2" tabindex="6"
+                        <textarea name="CalendarEntry" class="form-control expandOnFocus" rows="2" tabindex="9"
                                   placeholder="Please provide the calendar entry that will be used for the proposed course.">@(Model == null ? "" : Model.CalendarEntry)</textarea>
                     </div>
                 </div>
 
-                <div class="row center-text" style="padding: 0 100px; margin: 15px 0;" tabindex="7">
+                <div class="row center-text" style="padding: 0 100px; margin: 15px 0;" tabindex="10">
                     <input class="form-control button dark-blue" type="button" value="Next"/>
                 </div>
             </div>
@@ -182,7 +220,7 @@
                         Cross Impact
                     </div>
                     <div class="col-md-9">
-                        <textarea name="CrossImpact" class="form-control expandOnFocus" rows="2" tabindex="8"
+                        <textarea name="CrossImpact" class="form-control expandOnFocus" rows="2" tabindex="11"
                                   placeholder="Please identify how impact to other departments has been addressed, including General Education as appropriate">@(Model == null ? "" : Model.CrossImpact)</textarea>
                     </div>
                 </div>
@@ -192,7 +230,7 @@
                         Student Impact
                     </div>
                     <div class="col-md-9">
-                        <textarea name="StudentImpact" class="form-control expandOnFocus" rows="2" tabindex="9"
+                        <textarea name="StudentImpact" class="form-control expandOnFocus" rows="2" tabindex="12"
                                   placeholder="Please identify how student input or impact has been assessed">@(Model == null ? "" : Model.StudentImpact)</textarea>
                     </div>
                 </div>
@@ -202,7 +240,7 @@
                         Library Impact
                     </div>
                     <div class="col-md-9">
-                        <textarea name="LibraryImpact" class="form-control expandOnFocus" rows="2" tabindex="10"
+                        <textarea name="LibraryImpact" class="form-control expandOnFocus" rows="2" tabindex="13"
                                   placeholder="Please identify how impact to the Library has been addressed">@(Model == null ? "" : Model.LibraryImpact)</textarea>
                     </div>
                 </div>
@@ -212,14 +250,14 @@
                         ITS Impact
                     </div>
                     <div class="col-md-9">
-                        <textarea name="ItsImpact" class="form-control expandOnFocus" rows="2" tabindex="11"
+                        <textarea name="ItsImpact" class="form-control expandOnFocus" rows="2" tabindex="14"
                                   placeholder="Please identify how impact to ITS has been add
                             ressed">@(Model == null ? "" : Model.ITSImpact)</textarea>
                     </div>
                 </div>
 
                 <div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
-                    <input class="form-control button dark-blue" type="button" value="Next" tabindex="12"/>
+                    <input class="form-control button dark-blue" type="button" value="Next" tabindex="15"/>
                 </div>
             </div>
             <!-- STEP TWO END -->
@@ -231,7 +269,7 @@
                         Comments
                     </div>
                     <div class="col-md-9">
-                        <textarea name="Comment" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="13">@(Model == null ? "" : Model.Comment)</textarea>
+                        <textarea name="Comment" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="16">@(Model == null ? "" : Model.Comment)</textarea>
                     </div>
                 </div>
 
@@ -240,12 +278,12 @@
                         Attachments
                     </div>
                     <div class="col-md-9">
-                        <input name="Files" type="file" multiple style="font-size: 12px;" tabindex="14"/>
+                        <input name="Files" type="file" multiple style="font-size: 12px;" tabindex="17"/>
                     </div>
                 </div>
 
                 <div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
-                    <input class="form-control button dark-blue" type="submit" value="Request" tabindex="15"/>
+                    <input class="form-control button dark-blue" type="submit" value="Request" tabindex="18"/>
                 </div>
             </div>
             <!-- STEP END START -->
@@ -356,8 +394,10 @@
         $(".context .courseName").text($("#Name").val());
         $(".context .effectiveTerm").text($("#Semester option:selected").text());
         var courseNumber = $("#Discipline option:selected").text().substr(0, 4) + $("#CourseNumber").val();
-        $(".context .courseNumber").text(courseNumber);
         $(".context .programName").text($("#ProgramName").val());
+        $(".context .courseNumber").text(courseNumber);
+        $(".context .credits").text($("#Credits option:selected").text());
+        $(".context .grading").text($("#Grading option:selected").text());
         $(".context .calendarEntry").text($("textarea[name='CalendarEntry']").val());
     }
 

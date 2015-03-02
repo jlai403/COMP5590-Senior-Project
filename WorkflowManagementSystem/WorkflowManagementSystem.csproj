@@ -275,6 +275,10 @@
     <Compile Include="Migrations\201502232043356_AddDisciplineToCourse.Designer.cs">
       <DependentUpon>201502232043356_AddDisciplineToCourse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503021958483_AddGradingToCourse.cs" />
+    <Compile Include="Migrations\201503021958483_AddGradingToCourse.Designer.cs">
+      <DependentUpon>201503021958483_AddGradingToCourse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -285,6 +289,7 @@
     <Compile Include="Models\ApprovalChains\ApprovalChainViewModel.cs" />
     <Compile Include="Models\Course\Course.cs" />
     <Compile Include="Models\Course\CourseAssembler.cs" />
+    <Compile Include="Models\Course\CourseConstants.cs" />
     <Compile Include="Models\Course\CourseNumberGenerator.cs" />
     <Compile Include="Models\Course\CourseRepository.cs" />
     <Compile Include="Models\Course\CourseRequestInputViewModel.cs" />
@@ -484,6 +489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502232043356_AddDisciplineToCourse.resx">
       <DependentUpon>201502232043356_AddDisciplineToCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503021958483_AddGradingToCourse.resx">
+      <DependentUpon>201503021958483_AddGradingToCourse.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

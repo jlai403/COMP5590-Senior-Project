@@ -19,6 +19,7 @@ namespace WorkflowManagementSystem.Models.Course
             courseViewModel.CourseNumber = Course.CourseNumber.ToString();
             courseViewModel.Discipline = Course.Discipline.Code;
             courseViewModel.Credits = Course.Credits;
+            courseViewModel.Grading = Course.Grading;
             courseViewModel.Semester = Course.Semester.GetDisplayName();
             courseViewModel.CalendarEntry = Course.CalendarEntry;
             courseViewModel.StudentImpact = Course.StudentImpact;

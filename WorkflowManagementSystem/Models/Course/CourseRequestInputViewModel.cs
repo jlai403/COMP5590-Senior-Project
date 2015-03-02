@@ -6,7 +6,6 @@ namespace WorkflowManagementSystem.Models.Course
     {
         public string Name { get; set; }
         public string ProgramName { get; set; }
-        public string Credits { get; set; }
         public int Semester { get; set; }
         public string CalendarEntry { get; set; }
         public string CrossImpact { get; set; }
@@ -17,6 +16,8 @@ namespace WorkflowManagementSystem.Models.Course
         public DateTime RequestedDateUtc { get; set; }
         public int Discipline { get; set; }
         public string CourseNumber { get; set; }
+        public string Grading { get; set; }
+        public string Credits { get; set; }
 
         public CourseRequestInputViewModel()
         {

@@ -36,7 +36,8 @@ namespace WorkflowManagementSystem.Tests
             courseInputViewModel.CourseNumber = "6590";
             courseInputViewModel.Discipline = discipline.Id;
             courseInputViewModel.ProgramName = programRequestInputViewModel.Name;
-            courseInputViewModel.Credits = "3";
+            courseInputViewModel.Credits = CourseConstants.AVAILABLE_CREDITS.First();
+            courseInputViewModel.Grading = CourseConstants.AVAILABLE_GRADINGS.First();
             courseInputViewModel.Semester = semester.Id;
             courseInputViewModel.CalendarEntry = "Calendar Entry";
             courseInputViewModel.CrossImpact = "Cross Impact";
@@ -55,6 +56,7 @@ namespace WorkflowManagementSystem.Tests
             course.Discipline.ShouldBeEquivalentTo(discipline.Code);
             course.Name.ShouldBeEquivalentTo(courseInputViewModel.Name);
             course.Credits.ShouldBeEquivalentTo(courseInputViewModel.Credits);
+            course.Grading.ShouldBeEquivalentTo(courseInputViewModel.Grading);
             course.Semester.ShouldBeEquivalentTo(semester.DisplayName);
             course.CalendarEntry.ShouldBeEquivalentTo(courseInputViewModel.CalendarEntry);
             course.CrossImpact.ShouldBeEquivalentTo(courseInputViewModel.CrossImpact);
@@ -88,7 +90,8 @@ namespace WorkflowManagementSystem.Tests
             courseInputViewModel.CourseNumber = "6590";
             courseInputViewModel.Discipline = discipline.Id;
             courseInputViewModel.ProgramName = programRequestInputViewModel.Name;
-            courseInputViewModel.Credits = "3";
+            courseInputViewModel.Credits = CourseConstants.AVAILABLE_CREDITS.First();
+            courseInputViewModel.Grading = CourseConstants.AVAILABLE_GRADINGS.First();
             courseInputViewModel.Semester = semester.Id;
             courseInputViewModel.CalendarEntry = "Calendar Entry";
             courseInputViewModel.CrossImpact = "Cross Impact";
@@ -108,6 +111,7 @@ namespace WorkflowManagementSystem.Tests
             course.Discipline.ShouldBeEquivalentTo(discipline.Code);
             course.Name.ShouldBeEquivalentTo(courseInputViewModel.Name);
             course.Credits.ShouldBeEquivalentTo(courseInputViewModel.Credits);
+            course.Grading.ShouldBeEquivalentTo(courseInputViewModel.Grading);
             course.Semester.ShouldBeEquivalentTo(semester.DisplayName);
             course.CalendarEntry.ShouldBeEquivalentTo(courseInputViewModel.CalendarEntry);
             course.CrossImpact.ShouldBeEquivalentTo(courseInputViewModel.CrossImpact);
@@ -203,7 +207,8 @@ namespace WorkflowManagementSystem.Tests
             courseInputViewModel.CourseNumber = "5xxx";
             courseInputViewModel.Discipline = discipline.Id;
             courseInputViewModel.ProgramName = programRequestInputViewModel.Name;
-            courseInputViewModel.Credits = "3";
+            courseInputViewModel.Credits = CourseConstants.AVAILABLE_CREDITS.First();
+            courseInputViewModel.Grading = CourseConstants.AVAILABLE_GRADINGS.First();
             courseInputViewModel.Semester = semester.Id;
             courseInputViewModel.CalendarEntry = "Calendar Entry";
             courseInputViewModel.CrossImpact = "Cross Impact";
@@ -222,6 +227,7 @@ namespace WorkflowManagementSystem.Tests
             course.Discipline.ShouldBeEquivalentTo(discipline.Code);
             course.Name.ShouldBeEquivalentTo(courseInputViewModel.Name);
             course.Credits.ShouldBeEquivalentTo(courseInputViewModel.Credits);
+            course.Grading.ShouldBeEquivalentTo(courseInputViewModel.Grading);
             course.Semester.ShouldBeEquivalentTo(semester.DisplayName);
             course.CalendarEntry.ShouldBeEquivalentTo(courseInputViewModel.CalendarEntry);
             course.CrossImpact.ShouldBeEquivalentTo(courseInputViewModel.CrossImpact);
@@ -267,6 +273,7 @@ namespace WorkflowManagementSystem.Tests
             course.Discipline.ShouldBeEquivalentTo(discipline.Code);
             course.Name.ShouldBeEquivalentTo(courseRequestInputViewModel.Name);
             course.Credits.ShouldBeEquivalentTo(courseRequestInputViewModel.Credits);
+            course.Grading.ShouldBeEquivalentTo(courseRequestInputViewModel.Grading);
             course.Semester.ShouldBeEquivalentTo(semester.DisplayName);
             course.CalendarEntry.ShouldBeEquivalentTo(courseRequestInputViewModel.CalendarEntry);
             course.CrossImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.CrossImpact);
@@ -312,6 +319,7 @@ namespace WorkflowManagementSystem.Tests
             course.Discipline.ShouldBeEquivalentTo(discipline.Code);
             course.Name.ShouldBeEquivalentTo(courseRequestInputViewModel.Name);
             course.Credits.ShouldBeEquivalentTo(courseRequestInputViewModel.Credits);
+            course.Grading.ShouldBeEquivalentTo(courseRequestInputViewModel.Grading);
             course.Semester.ShouldBeEquivalentTo(semester.DisplayName);
             course.CalendarEntry.ShouldBeEquivalentTo(courseRequestInputViewModel.CalendarEntry);
             course.CrossImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.CrossImpact);

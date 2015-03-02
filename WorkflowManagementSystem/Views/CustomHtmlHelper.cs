@@ -24,5 +24,10 @@ namespace WorkflowManagementSystem.Views
             return
                 disciplines.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.DisplayName }).OrderBy(x => x.Text);
         }
+
+        public static IEnumerable<SelectListItem> ConvertToSelectListItem(this HtmlHelper helper, string[] list)
+        {
+            return list.Select(x => new SelectListItem { Value = x, Text = x });
+        }
     }
 }

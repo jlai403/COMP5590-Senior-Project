@@ -17,6 +17,8 @@ namespace WorkflowManagementSystem.Controllers
             ViewBag.Semesters = FacadeFactory.GetDomainFacade().FindAllSemesters();
             ViewBag.Faculties = FacadeFactory.GetDomainFacade().FindAllFaculties();
             ViewBag.Disciplines = FacadeFactory.GetDomainFacade().FindAllDisciplines();
+            ViewBag.Credits = CourseConstants.AVAILABLE_CREDITS;
+            ViewBag.Gradings = CourseConstants.AVAILABLE_GRADINGS;
         }
 
         public ActionResult Index(string name)

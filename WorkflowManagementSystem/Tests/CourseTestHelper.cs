@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using WorkflowManagementSystem.Models.Course;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Semesters;
@@ -16,7 +17,8 @@ namespace WorkflowManagementSystem.Tests
             courseRequestInputViewModel.Discipline = discipline.Id;
             courseRequestInputViewModel.CourseNumber = Random.Next(1000, 9999).ToString();
             courseRequestInputViewModel.ProgramName = programName;
-            courseRequestInputViewModel.Credits = "3";
+            courseRequestInputViewModel.Credits = CourseConstants.AVAILABLE_CREDITS.First();
+            courseRequestInputViewModel.Grading = CourseConstants.AVAILABLE_GRADINGS.First();
             courseRequestInputViewModel.Semester = semester.Id;
             courseRequestInputViewModel.CalendarEntry = "Calendar Entry";
             courseRequestInputViewModel.CrossImpact = "Cross Impact";

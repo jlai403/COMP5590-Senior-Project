@@ -16,6 +16,7 @@ namespace WorkflowManagementSystem.Models.Course
         public virtual Discipline Discipline { get; set; }
         public int CourseNumber { get; set; }
         public string Credits { get; set; }
+        public string Grading { get; set; }
         public string CalendarEntry { get; set; }
         public string CrossImpact { get; set; }
         public string StudentImpact { get; set; }
@@ -30,6 +31,7 @@ namespace WorkflowManagementSystem.Models.Course
             Discipline = DisciplineRepository.FindDiscipline(courseRequestInputViewModel.Discipline);
             CourseNumber = GenerateValidCourseNumber(courseRequestInputViewModel.CourseNumber);
             Credits = courseRequestInputViewModel.Credits;
+            Grading = courseRequestInputViewModel.Grading;
             CalendarEntry = courseRequestInputViewModel.CalendarEntry;
             CrossImpact = courseRequestInputViewModel.CrossImpact;
             StudentImpact = courseRequestInputViewModel.StudentImpact;

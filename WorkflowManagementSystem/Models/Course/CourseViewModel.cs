@@ -21,6 +21,7 @@ namespace WorkflowManagementSystem.Models.Course
         public string Requester { get; set; }
         public List<CommentViewModel> Comments { get; set; }
         public Dictionary<string, Guid> Attachments { get; set; }
+        public string Grading { get; set; }
 
         public CourseViewModel()
         {
