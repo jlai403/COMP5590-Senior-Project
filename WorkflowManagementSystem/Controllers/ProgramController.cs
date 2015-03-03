@@ -82,10 +82,10 @@ namespace WorkflowManagementSystem.Controllers
 
         public ActionResult Approve(string workflowItemName)
         {
-            if (FacadeFactory.GetDomainFacade().IsProgramRequestCurrentlyOnLastWorkflowStep(workflowItemName))
-                FacadeFactory.GetDomainFacade().CompleteProgramRequest(User.Identity.Name, workflowItemName);
+            if (FacadeFactory.GetDomainFacade().IsWorkflowItemCurrentlyOnLastWorkflowStep(workflowItemName, WorkflowItemTypes.Program))
+                FacadeFactory.GetDomainFacade().CompleteWorkflowItem(User.Identity.Name, workflowItemName, WorkflowItemTypes.Program);
             else
-                FacadeFactory.GetDomainFacade().ApproveProgramRequest(User.Identity.Name, workflowItemName);
+                FacadeFactory.GetDomainFacade().ApproveWorkflowItem(User.Identity.Name, workflowItemName, WorkflowItemTypes.Program);
 
             new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
             new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"], WorkflowItemTypes.Program);
@@ -95,7 +95,7 @@ namespace WorkflowManagementSystem.Controllers
 
         public ActionResult Reject(string workflowItemName)
         {
-            FacadeFactory.GetDomainFacade().RejectProgramRequest(User.Identity.Name, workflowItemName);
+            FacadeFactory.GetDomainFacade().RejectWorkflowItem(User.Identity.Name, workflowItemName, WorkflowItemTypes.Program);
 
             new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
             new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"], WorkflowItemTypes.Program);

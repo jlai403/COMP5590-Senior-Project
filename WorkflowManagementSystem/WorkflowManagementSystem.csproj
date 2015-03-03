@@ -391,6 +391,7 @@
     <Compile Include="Tests\UserTestHelper.cs" />
     <Compile Include="Tests\WorkflowItemTest.cs" />
     <Compile Include="Tests\WorkflowManagementSystemTest.cs" />
+    <Compile Include="Tests\WorkflowTestHelper.cs" />
     <Compile Include="Views\CustomHtmlHelper.cs" />
     <Compile Include="Views\WorkflowHtmlHelper.cs" />
     <Compile Include="WebMembershipInitializer.cs" />
@@ -412,11 +413,12 @@
     <Content Include="Views\Program\UpdateStatus.cshtml" />
     <Content Include="Views\Shared\_WorkflowItemCommentPartial.cshtml" />
     <Content Include="Views\Program\_ProgramSummaryDetailsPartial.cshtml" />
-    <Content Include="Views\Program\_ProgramWorkflowStepsPartial.cshtml" />
+    <Content Include="Views\Shared\_WorkflowStepsPartial.cshtml" />
     <Content Include="Views\Search\SearchResults.cshtml" />
     <Content Include="Views\Course\CreateRequest.cshtml" />
     <Content Include="Views\Course\Requested.cshtml" />
     <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\Course\_CourseSummaryDetailsPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

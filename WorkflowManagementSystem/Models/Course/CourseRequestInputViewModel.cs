@@ -13,7 +13,7 @@ namespace WorkflowManagementSystem.Models.Course
         public string LibraryImpact { get; set; }
         public string ITSImpact { get; set; }
         public string Comment { get; set; }
-        public DateTime RequestedDateUtc { get; set; }
+        public DateTime RequestedDateUTC { get; set; }
         public int Discipline { get; set; }
         public string CourseNumber { get; set; }
         public string Grading { get; set; }
@@ -21,7 +21,7 @@ namespace WorkflowManagementSystem.Models.Course
 
         public CourseRequestInputViewModel()
         {
-            RequestedDateUtc = DateTime.UtcNow;
+            RequestedDateUTC = DateTime.UtcNow;
         }
     }
 }

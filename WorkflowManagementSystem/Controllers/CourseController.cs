@@ -55,5 +55,11 @@ namespace WorkflowManagementSystem.Controllers
             ViewBag.CourseName = name;
             return View();
         }
+
+        public ActionResult AddComment(CommentInputViewModel commentInputViewModel)
+        {
+            var commentViewModel = FacadeFactory.GetDomainFacade().AddComment(User.Identity.Name, commentInputViewModel, WorkflowItemTypes.Course);
+            return PartialView("_WorkflowItemCommentPartial", commentViewModel);
+        }
     }
 }

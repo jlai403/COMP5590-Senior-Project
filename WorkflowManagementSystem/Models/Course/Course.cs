@@ -26,7 +26,7 @@ namespace WorkflowManagementSystem.Models.Course
         
         public void Update(User user, CourseRequestInputViewModel courseRequestInputViewModel)
         {
-            UpdateWorkflowItem(user, courseRequestInputViewModel.Name, courseRequestInputViewModel.RequestedDateUtc, WorkflowItemTypes.Course);
+            UpdateWorkflowItem(user, courseRequestInputViewModel.Name, courseRequestInputViewModel.RequestedDateUTC, WorkflowItemTypes.Course);
             Semester = SemesterRepository.FindSemester(courseRequestInputViewModel.Semester);
             Discipline = DisciplineRepository.FindDiscipline(courseRequestInputViewModel.Discipline);
             CourseNumber = GenerateValidCourseNumber(courseRequestInputViewModel.CourseNumber);
@@ -42,7 +42,7 @@ namespace WorkflowManagementSystem.Models.Course
 
             if (!courseRequestInputViewModel.Comment.IsNullOrWhiteSpace())
             {
-                AddComment(user, courseRequestInputViewModel.RequestedDateUtc, courseRequestInputViewModel.Comment);
+                AddComment(user, courseRequestInputViewModel.RequestedDateUTC, courseRequestInputViewModel.Comment);
             }
         }
 

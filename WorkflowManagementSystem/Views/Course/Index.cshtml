@@ -1,1 +1,84 @@
-﻿@model WorkflowManagementSystem.Models.Course.CourseViewModel
+﻿@using System.Web.Mvc.Html
+@using System.Web.Optimization
+@model WorkflowManagementSystem.Models.Course.CourseViewModel
+
+@Styles.Render("~/Content/css/theme/workflow-item.css")
+
+<div class="container workflow-item center">
+    <div class="col-xs-12">
+        <div class="row center-text">
+            <p class="header">Program Request</p>
+        </div>
+
+        <div class="row content">
+            @{Html.RenderPartial("_CourseSummaryDetailsPartial", Model);}
+
+            <!-- workflow details start -->
+            <div class="col-sm-6 workflow-details">
+                <div class="row center-text">
+                    <p class="sub-header">Workflow</p>
+                </div>
+
+                @{Html.RenderPartial("_WorkflowStepsPartial", Model.WorkflowSteps);}
+            </div>
+            <!-- workflow details end -->
+        </div>
+
+        <!-- comments start -->
+        <div class="row content comments">
+            <div class="col-xs-12">
+                <div class="row center-text">
+                    <p class="sub-header">Comments</p>
+                </div>
+
+                @if (Model.Comments.Count == 0)
+                {
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p class="comment center-text small-text">
+                                No Comments
+                            </p>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    foreach (var comment in Model.Comments)
+                    {
+                        Html.RenderPartial("_WorkflowItemCommentPartial", comment);
+                    }
+                }
+
+                <div class="row add-comment" style="margin-top: 20px;">
+                    @using (Html.BeginForm("AddComment", "Course", FormMethod.Post, new { id = "add-comment-form" }))
+                    {
+                        @Html.Hidden("WorkflowItemName", Model.Name)
+                        <textarea name="Text" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="11"></textarea>
+                        <input class="form-control button dark-blue" type="submit" value="Add Comment" tabindex="13" style="max-width: 400px; margin: 15px auto;"/>
+                    }
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $("#add-comment-form").submit(function (e) {
+                    e.preventDefault();
+                    var form = $(this);
+                    $.ajax({
+                        type: "POST",
+                        dataType: "html",
+                        url: form.attr("action"),
+                        data: form.serialize(),
+                        async: true,
+                        success: function (html) {
+                            $(html).insertBefore($(".comments .row.add-comment"));
+                            $(".comments form")[0].reset();
+                        }
+                    });
+                });
+            });
+        </script>
+        <!-- comments end-->
+
+    </div>
+</div>

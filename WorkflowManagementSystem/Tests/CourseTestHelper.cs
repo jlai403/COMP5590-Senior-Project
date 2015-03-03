@@ -25,7 +25,7 @@ namespace WorkflowManagementSystem.Tests
             courseRequestInputViewModel.StudentImpact = "Student Impact";
             courseRequestInputViewModel.LibraryImpact = "Library Impact";
             courseRequestInputViewModel.ITSImpact = "ITS Impact";
-            courseRequestInputViewModel.RequestedDateUtc = new DateTime(2015, 2, 10);
+            courseRequestInputViewModel.RequestedDateUTC = new DateTime(2015, 2, 10);
             return courseRequestInputViewModel;
         }
     }

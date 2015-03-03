@@ -1,0 +1,115 @@
+﻿@using System.Web.Optimization
+@model WorkflowManagementSystem.Models.Course.CourseViewModel
+
+@Styles.Render("~/Content/css/module/collapse-text.css")
+@Scripts.Render("~/Scripts/js/collapse-text.js")
+@Scripts.Render("~/Scripts/js/animation.js")
+
+<script>
+    $(document).ready(function () {
+        $(".calendar-entry").addReadMore();
+        $(".cross-impact").addReadMore();
+        $(".student-impact").addReadMore();
+        $(".library-impact").addReadMore();
+        $(".its-impact").addReadMore();
+    });
+</script>
+
+<!-- summary details start -->
+<div class="col-sm-6 summary-details">
+    <div class="row center-text">
+        <p class="sub-header">Summary</p>
+    </div>
+
+    <div class="details small-text">
+        <div class="row">
+            <div class="col-xs-6 bold-text right-align"> Requested On: </div>
+            <div class="col-xs-6 "> @Model.RequestedDateUTC </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 bold-text right-align"> Requested By: </div>
+            <div class="col-xs-6 "> @Model.Requester </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 bold-text right-align"> Name: </div>
+            <div class="col-xs-6 "> @Model.Name </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 bold-text right-align"> Program: </div>
+            <div class="col-xs-6 "> @Model.ProgramName </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 bold-text right-align"> Discipline: </div>
+            <div class="col-xs-6 "> @Model.Discipline </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 bold-text right-align"> Course Number: </div>
+            <div class="col-xs-6 "> @Model.CourseNumber </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 bold-text right-align"> Credits: </div>
+            <div class="col-xs-6 "> @Model.Credits </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 bold-text right-align"> Grading: </div>
+            <div class="col-xs-6 "> @Model.Grading </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 bold-text right-align"> Calendar Entry: </div>
+            <div class="col-xs-6 ">
+                <p class=calendar-entry> @Model.CalendarEntry </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 bold-text right-align"> Cross Impact: </div>
+            <div class="col-xs-6 ">
+                <p class=cross-impact> @Model.CrossImpact </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 bold-text right-align"> Student Impact: </div>
+            <div class="col-xs-6">
+                <p class="student-impact"> @Model.StudentImpact </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 bold-text right-align"> Library Impact: </div>
+            <div class="col-xs-6">
+                <p class="library-impact"> @Model.LibraryImpact </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 bold-text right-align"> ITS Impact: </div>
+            <div class="col-xs-6">
+                <p class="its-impact"> @Model.ITSImpact </p>
+            </div>
+        </div>
+
+        @if (Model.Attachments.Count > 0)
+        {
+            <div class="row">
+				<div class="col-xs-6 bold-text right-align"> Attachments: </div>
+				<div class="col-xs-6"> 
+					@foreach (var attachment in Model.Attachments)
+					{
+                        @Html.ActionLink(attachment.Key, "Download", "File", new {fileId = attachment.Value}, new {target="_blank"})
+                        <br/>
+					}
+				</div>
+			</div>
+        }
+    </div>
+</div>
+<!-- summary details end -->

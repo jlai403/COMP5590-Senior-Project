@@ -20,7 +20,7 @@ namespace WorkflowManagementSystem.Tests
             // assemble
             new RoleTestHelper().CreateTestRoles();
             new ApprovalChainTestHelper().CreateProgramApprovalChain();
-            new ApprovalChainTestHelper().CreateCoursesApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
             new SemesterTestHelper().CreateTestSemesters();
             new DisciplineTestHelper().CreateTestDisciplines();
 
@@ -44,7 +44,7 @@ namespace WorkflowManagementSystem.Tests
             courseInputViewModel.StudentImpact = "Student Impact";
             courseInputViewModel.LibraryImpact = "Library Impact";
             courseInputViewModel.ITSImpact = "ITS Impact";
-            courseInputViewModel.RequestedDateUtc = new DateTime(2015, 2, 10);
+            courseInputViewModel.RequestedDateUTC = new DateTime(2015, 2, 10);
 
             // act
             FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseInputViewModel);
@@ -63,9 +63,13 @@ namespace WorkflowManagementSystem.Tests
             course.StudentImpact.ShouldBeEquivalentTo(courseInputViewModel.StudentImpact);
             course.LibraryImpact.ShouldBeEquivalentTo(courseInputViewModel.LibraryImpact);
             course.ITSImpact.ShouldBeEquivalentTo(courseInputViewModel.ITSImpact);
-            course.RequestedDateUtc.ShouldBeEquivalentTo(courseInputViewModel.RequestedDateUtc);
+            course.RequestedDateUTC.ShouldBeEquivalentTo(courseInputViewModel.RequestedDateUTC);
             course.Requester.ShouldBeEquivalentTo(requester.DisplayName);
             course.ProgramName.ShouldBeEquivalentTo(courseInputViewModel.ProgramName);
+
+            course.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            var workflowTestHelper = new WorkflowTestHelper();
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[0], WorkflowStates.PENDING_APPROVAL, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, string.Empty);
         }
 
         [Test]
@@ -74,7 +78,7 @@ namespace WorkflowManagementSystem.Tests
             // assemble
             new RoleTestHelper().CreateTestRoles();
             new ApprovalChainTestHelper().CreateProgramApprovalChain();
-            new ApprovalChainTestHelper().CreateCoursesApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
             new SemesterTestHelper().CreateTestSemesters();
             new DisciplineTestHelper().CreateTestDisciplines();
 
@@ -98,7 +102,7 @@ namespace WorkflowManagementSystem.Tests
             courseInputViewModel.StudentImpact = "Student Impact";
             courseInputViewModel.LibraryImpact = "Library Impact";
             courseInputViewModel.ITSImpact = "ITS Impact";
-            courseInputViewModel.RequestedDateUtc = new DateTime(2015, 2, 10);
+            courseInputViewModel.RequestedDateUTC = new DateTime(2015, 2, 10);
             courseInputViewModel.Comment = "Such comment";
 
             // act
@@ -118,14 +122,18 @@ namespace WorkflowManagementSystem.Tests
             course.StudentImpact.ShouldBeEquivalentTo(courseInputViewModel.StudentImpact);
             course.LibraryImpact.ShouldBeEquivalentTo(courseInputViewModel.LibraryImpact);
             course.ITSImpact.ShouldBeEquivalentTo(courseInputViewModel.ITSImpact);
-            course.RequestedDateUtc.ShouldBeEquivalentTo(courseInputViewModel.RequestedDateUtc);
+            course.RequestedDateUTC.ShouldBeEquivalentTo(courseInputViewModel.RequestedDateUTC);
             course.Requester.ShouldBeEquivalentTo(requester.DisplayName);
             course.ProgramName.ShouldBeEquivalentTo(courseInputViewModel.ProgramName);
             
             course.Comments.Count.ShouldBeEquivalentTo(1);
-            course.Comments.First().DateTimeUtc.ShouldBeEquivalentTo(courseInputViewModel.RequestedDateUtc);
+            course.Comments.First().DateTimeUtc.ShouldBeEquivalentTo(courseInputViewModel.RequestedDateUTC);
             course.Comments.First().User.ShouldBeEquivalentTo(requester.DisplayName);
             course.Comments.First().Text.ShouldBeEquivalentTo(courseInputViewModel.Comment);
+
+            course.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            var workflowTestHelper = new WorkflowTestHelper();
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[0], WorkflowStates.PENDING_APPROVAL, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, string.Empty);
         }
 
         [Test]
@@ -134,7 +142,7 @@ namespace WorkflowManagementSystem.Tests
             // assemble
             new RoleTestHelper().CreateTestRoles();
             new ApprovalChainTestHelper().CreateProgramApprovalChain();
-            new ApprovalChainTestHelper().CreateCoursesApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
             new SemesterTestHelper().CreateTestSemesters();
             new DisciplineTestHelper().CreateTestDisciplines();
 
@@ -191,7 +199,7 @@ namespace WorkflowManagementSystem.Tests
             // assemble
             new RoleTestHelper().CreateTestRoles();
             new ApprovalChainTestHelper().CreateProgramApprovalChain();
-            new ApprovalChainTestHelper().CreateCoursesApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
             new SemesterTestHelper().CreateTestSemesters();
             new DisciplineTestHelper().CreateTestDisciplines();
 
@@ -215,7 +223,7 @@ namespace WorkflowManagementSystem.Tests
             courseInputViewModel.StudentImpact = "Student Impact";
             courseInputViewModel.LibraryImpact = "Library Impact";
             courseInputViewModel.ITSImpact = "ITS Impact";
-            courseInputViewModel.RequestedDateUtc = new DateTime(2015, 2, 10);
+            courseInputViewModel.RequestedDateUTC = new DateTime(2015, 2, 10);
 
             // act
             FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseInputViewModel);
@@ -234,9 +242,13 @@ namespace WorkflowManagementSystem.Tests
             course.StudentImpact.ShouldBeEquivalentTo(courseInputViewModel.StudentImpact);
             course.LibraryImpact.ShouldBeEquivalentTo(courseInputViewModel.LibraryImpact);
             course.ITSImpact.ShouldBeEquivalentTo(courseInputViewModel.ITSImpact);
-            course.RequestedDateUtc.ShouldBeEquivalentTo(courseInputViewModel.RequestedDateUtc);
+            course.RequestedDateUTC.ShouldBeEquivalentTo(courseInputViewModel.RequestedDateUTC);
             course.Requester.ShouldBeEquivalentTo(requester.DisplayName);
             course.ProgramName.ShouldBeEquivalentTo(courseInputViewModel.ProgramName);
+
+            course.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            var workflowTestHelper = new WorkflowTestHelper();
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[0], WorkflowStates.PENDING_APPROVAL, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, string.Empty);
         }
 
         [Test]
@@ -245,7 +257,7 @@ namespace WorkflowManagementSystem.Tests
             // assemble
             new RoleTestHelper().CreateTestRoles();
             new ApprovalChainTestHelper().CreateProgramApprovalChain();
-            new ApprovalChainTestHelper().CreateCoursesApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
             new SemesterTestHelper().CreateTestSemesters();
             new DisciplineTestHelper().CreateTestDisciplines();
 
@@ -280,9 +292,13 @@ namespace WorkflowManagementSystem.Tests
             course.StudentImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.StudentImpact);
             course.LibraryImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.LibraryImpact);
             course.ITSImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.ITSImpact);
-            course.RequestedDateUtc.ShouldBeEquivalentTo(courseRequestInputViewModel.RequestedDateUtc);
+            course.RequestedDateUTC.ShouldBeEquivalentTo(courseRequestInputViewModel.RequestedDateUTC);
             course.Requester.ShouldBeEquivalentTo(requester.DisplayName);
             course.ProgramName.ShouldBeEquivalentTo(courseRequestInputViewModel.ProgramName);
+
+            course.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            var workflowTestHelper = new WorkflowTestHelper();
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[0], WorkflowStates.PENDING_APPROVAL, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, string.Empty);
         }
 
         [Test]
@@ -291,7 +307,7 @@ namespace WorkflowManagementSystem.Tests
             // assemble
             new RoleTestHelper().CreateTestRoles();
             new ApprovalChainTestHelper().CreateProgramApprovalChain();
-            new ApprovalChainTestHelper().CreateCoursesApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
             new SemesterTestHelper().CreateTestSemesters();
             new DisciplineTestHelper().CreateTestDisciplines();
 
@@ -326,9 +342,55 @@ namespace WorkflowManagementSystem.Tests
             course.StudentImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.StudentImpact);
             course.LibraryImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.LibraryImpact);
             course.ITSImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.ITSImpact);
-            course.RequestedDateUtc.ShouldBeEquivalentTo(courseRequestInputViewModel.RequestedDateUtc);
+            course.RequestedDateUTC.ShouldBeEquivalentTo(courseRequestInputViewModel.RequestedDateUTC);
             course.Requester.ShouldBeEquivalentTo(requester.DisplayName);
             course.ProgramName.ShouldBeEquivalentTo(courseRequestInputViewModel.ProgramName);
+
+            course.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            var workflowTestHelper = new WorkflowTestHelper();
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[0], WorkflowStates.PENDING_APPROVAL, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, string.Empty);
+        }
+
+        [Test]
+        public void AddComment_Course()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var commenter = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            var commentInputViewModel = new CommentInputViewModel();
+            commentInputViewModel.WorkflowItemName = courseRequestInputViewModel.Name;
+            commentInputViewModel.Text = "Comment Two";
+            commentInputViewModel.DateTimeUtc = new DateTime(2015, 1, 20);
+
+            // act
+            var comment = FacadeFactory.GetDomainFacade().AddComment(commenter.Email, commentInputViewModel, WorkflowItemTypes.Course);
+
+            // assert
+            comment.User.ShouldBeEquivalentTo(commenter.DisplayName);
+            comment.Text.ShouldBeEquivalentTo(commentInputViewModel.Text);
+            comment.DateTimeUtc.ShouldBeEquivalentTo(commentInputViewModel.DateTimeUtc);
+
+            var courseViewModel = FacadeFactory.GetDomainFacade().FindCourse(courseRequestInputViewModel.Name);
+            courseViewModel.Comments.Count.ShouldBeEquivalentTo(1);
+            comment = courseViewModel.Comments.First();
+            comment.User.ShouldBeEquivalentTo(commenter.DisplayName);
+            comment.Text.ShouldBeEquivalentTo(commentInputViewModel.Text);
+            comment.DateTimeUtc.ShouldBeEquivalentTo(commentInputViewModel.DateTimeUtc);
         }
 
         [Test]
@@ -441,6 +503,470 @@ namespace WorkflowManagementSystem.Tests
 
             // assert
             actual.ShouldBeEquivalentTo(1770);
+        }
+
+        [Test]
+        public void ApproveWorkflowItem()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            // act
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // assert
+            var course = FacadeFactory.GetDomainFacade().FindCourse(courseRequestInputViewModel.Name);
+            course.WorkflowSteps.Count.Should().Be(2);
+
+            var workflowTestHelper = new WorkflowTestHelper();
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[0], WorkflowStates.APPROVED, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, approver.DisplayName);
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[1], WorkflowStates.PENDING_APPROVAL, RoleTestHelper.FACULTY_COUNCIL_MEMBER, string.Empty);
+        }
+
+        [Test]
+        public void RejectWorkflowItem()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var rejector = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            // act
+            FacadeFactory.GetDomainFacade().RejectWorkflowItem(rejector.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // assert
+            var course = FacadeFactory.GetDomainFacade().FindCourse(courseRequestInputViewModel.Name);
+            course.WorkflowSteps.Count.Should().Be(1);
+            
+            new WorkflowTestHelper().AssertWorkflowStep(course.WorkflowSteps[0], WorkflowStates.REJECTED, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, rejector.DisplayName);
+        }
+
+        [Test]
+        public void ApproveWorkflowItem_SecondApproval()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+            var approverTwo = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // act
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approverTwo.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // assert
+            var course = FacadeFactory.GetDomainFacade().FindCourse(courseRequestInputViewModel.Name);
+            course.WorkflowSteps.Count.Should().Be(3);
+
+            var workflowTestHelper = new WorkflowTestHelper();
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[0], WorkflowStates.APPROVED, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, approver.DisplayName);
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[1], WorkflowStates.APPROVED, RoleTestHelper.FACULTY_COUNCIL_MEMBER, approver.DisplayName);
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[2], WorkflowStates.PENDING_APPROVAL, RoleTestHelper.APPC_MEMBER, string.Empty);
+        }
+
+        [Test]
+        public void ApproveWorkflowItem_WorkflowOnLastStep()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+            var approverTwo = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approverTwo.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approverTwo.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approverTwo.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Request is currently on the last workflow and should be completed.");
+        }
+
+        [Test]
+        public void IsWorkflowItemCurrentlyOnLastWorkflowStep()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // act
+            var result = FacadeFactory.GetDomainFacade().IsWorkflowItemCurrentlyOnLastWorkflowStep(courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // assert
+            result.Should().BeFalse();
+        }
+
+        [Test]
+        public void IsWorkflowItemCurrentlyOnLastWorkflowStep_CurrentlyOnLastWorkflowStep()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+            var approverTwo = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approverTwo.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approverTwo.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // act
+            var result = FacadeFactory.GetDomainFacade().IsWorkflowItemCurrentlyOnLastWorkflowStep(courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // assert
+            result.Should().BeTrue();
+        }
+
+        [Test]
+        public void CompleteWorkflowItem()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // act
+            FacadeFactory.GetDomainFacade().CompleteWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // assert
+            var course = FacadeFactory.GetDomainFacade().FindCourse(courseRequestInputViewModel.Name);
+            course.WorkflowSteps.Count.Should().Be(4);
+
+            var workflowTestHelper = new WorkflowTestHelper();
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[0], WorkflowStates.APPROVED, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, approver.DisplayName);
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[1], WorkflowStates.APPROVED, RoleTestHelper.FACULTY_COUNCIL_MEMBER, approver.DisplayName);
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[2], WorkflowStates.APPROVED, RoleTestHelper.APPC_MEMBER, approver.DisplayName);
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[3], WorkflowStates.COMPLETED, RoleTestHelper.GFC_MEMBER, approver.DisplayName);
+        }
+
+        [Test]
+        public void CompleteWorkflowItem_RejectedWorkflow()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().RejectWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().CompleteWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Request has already been rejected");
+        }
+
+        [Test]
+        public void ApproveWorkflowItem_CompletedWorkflow()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+            FacadeFactory.GetDomainFacade().CompleteWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Request has already been completed");
+        }
+
+        [Test]
+        public void ApproveWorkflowItem_ApproverNotPartOfResponsibleParty()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+            var approver = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // assert
+            var errorMessage = string.Format("User '{0}' does not have sufficient permissions to approve request", approver.DisplayName);
+            act.ShouldThrow<WMSException>().WithMessage(errorMessage);
+        }
+
+        [Test]
+        public void RejectWorkflowItem_RejectorNotPartOfResponsibleParty()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+            var approver = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, RoleTestHelper.FACULTY_COUNCIL_MEMBER, RoleTestHelper.APPC_MEMBER);
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().CompleteWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // assert
+            var errorMessage = string.Format("User '{0}' does not have sufficient permissions to complete request", approver.DisplayName);
+            act.ShouldThrow<WMSException>().WithMessage(errorMessage);
+        }
+
+        [Test]
+        public void CompleteWorkflowItem_RejectorNotPartOfResponsibleParty()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+            var approver = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().RejectWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // assert
+            var errorMessage = string.Format("User '{0}' does not have sufficient permissions to reject request", approver.DisplayName);
+            act.ShouldThrow<WMSException>().WithMessage(errorMessage);
+        }
+
+        [Test]
+        public void ApproveWorkflowItem_Rejected()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().RejectWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Request has already been rejected");
+        }
+
+        [Test]
+        public void RejectWorkflowItem_CompletedWorkflow()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+            FacadeFactory.GetDomainFacade().CompleteWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // act
+            Action act = () => FacadeFactory.GetDomainFacade().RejectWorkflowItem(approver.Email, courseRequestInputViewModel.Name, WorkflowItemTypes.Course);
+
+            // assert
+            act.ShouldThrow<WMSException>().WithMessage("Request has already been completed");
         }
     }
 }

@@ -182,45 +182,45 @@ namespace WorkflowManagementSystem.Models
             });
         }
 
-        public void ApproveProgramRequest(string email, string programName)
+        public void ApproveWorkflowItem(string email, string name, WorkflowItemTypes type)
         {
             TransactionHandler.Instance.Execute(() =>
             {
                 var user = UserRepository.FindUser(email);
-                var program = ProgramRepository.FindProgram(programName);
-                new WorkflowHandler(program).Approve(user);
+                var workflowItem = WorkflowRepository.FindWorkflowItemForType(type, name);
+                new WorkflowHandler(workflowItem).Approve(user);
                 return null;
             });
         }
 
-        public void RejectProgramRequest(string email, string programName)
+        public void RejectWorkflowItem(string email, string name, WorkflowItemTypes type)
         {
             TransactionHandler.Instance.Execute(() =>
             {
                 var user = UserRepository.FindUser(email);
-                var program = ProgramRepository.FindProgram(programName);
-                new WorkflowHandler(program).Reject(user);
+                var workflowItem = WorkflowRepository.FindWorkflowItemForType(type, name);
+                new WorkflowHandler(workflowItem).Reject(user);
                 return null;
             });
         }
 
-        public void CompleteProgramRequest(string email, string programName)
+        public void CompleteWorkflowItem(string email, string name, WorkflowItemTypes type)
         {
             TransactionHandler.Instance.Execute(() =>
             {
                 var user = UserRepository.FindUser(email);
-                var program = ProgramRepository.FindProgram(programName);
-                new WorkflowHandler(program).Complete(user);
+                var workflowItem = WorkflowRepository.FindWorkflowItemForType(type, name);
+                new WorkflowHandler(workflowItem).Complete(user);
                 return null;
             });
         }
 
-        public bool IsProgramRequestCurrentlyOnLastWorkflowStep(string name)
+        public bool IsWorkflowItemCurrentlyOnLastWorkflowStep(string name, WorkflowItemTypes type)
         {
             return TransactionHandler.Instance.Execute(() =>
             {
-                var program = ProgramRepository.FindProgram(name);
-                return program.CurrentWorkflowData.IsLastWorkflowStep();
+                var workflowItem = WorkflowRepository.FindWorkflowItemForType(type, name);
+                return workflowItem.CurrentWorkflowData.IsLastWorkflowStep();
             });
         }
 

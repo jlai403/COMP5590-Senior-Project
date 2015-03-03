@@ -10,7 +10,7 @@ namespace WorkflowManagementSystem.Tests
             CreateApprovalChain("Program", RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, RoleTestHelper.FACULTY_COUNCIL_MEMBER, RoleTestHelper.APPC_MEMBER, RoleTestHelper.GFC_MEMBER);
         }
 
-        public void CreateCoursesApprovalChain()
+        public void CreateCourseApprovalChain()
         {
             CreateApprovalChain("Course", RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, RoleTestHelper.FACULTY_COUNCIL_MEMBER, RoleTestHelper.APPC_MEMBER, RoleTestHelper.GFC_MEMBER);
         }

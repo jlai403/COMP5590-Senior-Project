@@ -19,7 +19,7 @@
                     <p class="sub-header">Workflow</p>
                 </div>
 
-                @{ Html.RenderPartial("_ProgramWorkflowStepsPartial", Model.WorkflowSteps); }
+                @{ Html.RenderPartial("_WorkflowStepsPartial", Model.WorkflowSteps); }
 
                 @if (Model.CurrentState() == WorkflowStates.PENDING_APPROVAL){
                     using (Html.BeginForm("UpdateStatus", "Program", FormMethod.Post, new { @class = "update-workflow-item-form", enctype = "multipart/form-data" }))

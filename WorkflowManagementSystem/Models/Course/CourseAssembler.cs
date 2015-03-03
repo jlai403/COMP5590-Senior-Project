@@ -26,9 +26,10 @@ namespace WorkflowManagementSystem.Models.Course
             courseViewModel.CrossImpact = Course.CrossImpact;
             courseViewModel.LibraryImpact = Course.LibraryImpact;
             courseViewModel.ITSImpact = Course.ITSImpact;
-            courseViewModel.RequestedDateUtc = Course.RequestedDateUTC;
+            courseViewModel.RequestedDateUTC = Course.RequestedDateUTC;
             courseViewModel.Requester = Course.Requester.GetDisplayName();
             courseViewModel.ProgramName = Course.Program == null ? "" : Course.Program.Name;
+            courseViewModel.WorkflowSteps = WorkflowAssembler.AssembleWorkflowDatas(Course.GetWorkflowHistory());
             courseViewModel.Comments = CommentAssembler.AssembleAll(Course.Comments);
             courseViewModel.Attachments = FileAssembler.AssembleAll(Course.Attachments);
             return courseViewModel;

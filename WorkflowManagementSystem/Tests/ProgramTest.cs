@@ -407,7 +407,7 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void ApproveProgramRequest()
+        public void ApproveWorkflowItem()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -425,7 +425,7 @@ namespace WorkflowManagementSystem.Tests
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             // act
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             var program = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
@@ -441,7 +441,7 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void RejectProgramRequest()
+        public void RejectWorkflowItem()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -459,7 +459,7 @@ namespace WorkflowManagementSystem.Tests
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             // act
-            FacadeFactory.GetDomainFacade().RejectProgramRequest(rejector.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().RejectWorkflowItem(rejector.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             var program = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
@@ -472,7 +472,7 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void ApproveProgramRequest_SecondApproval()
+        public void ApproveWorkflowItem_SecondApproval()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -490,10 +490,10 @@ namespace WorkflowManagementSystem.Tests
             var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
             
             // act
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approverTwo.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approverTwo.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             var program = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
@@ -516,7 +516,7 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void ApproveProgramRequest_WorkflowOnLastStep()
+        public void ApproveWorkflowItem_WorkflowOnLastStep()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -534,12 +534,12 @@ namespace WorkflowManagementSystem.Tests
             var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approverTwo.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approverTwo.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approverTwo.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approverTwo.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // act
-            Action act = ()=> FacadeFactory.GetDomainFacade().ApproveProgramRequest(approverTwo.Email, programRequestInputViewModel.Name);
+            Action act = () => FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approverTwo.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Request is currently on the last workflow and should be completed.");
@@ -551,7 +551,7 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void IsProgramRequestCurrentlyOnLastWorkflowStep()
+        public void IsWorkflowItemCurrentlyOnLastWorkflowStep()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -561,7 +561,6 @@ namespace WorkflowManagementSystem.Tests
 
             var requester = new UserTestHelper().CreateUserWithTestRoles();
             var approver = new UserTestHelper().CreateUserWithTestRoles();
-            var approverTwo = new UserTestHelper().CreateUserWithTestRoles();
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
@@ -569,17 +568,17 @@ namespace WorkflowManagementSystem.Tests
             var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // act
-            var result = FacadeFactory.GetDomainFacade().IsProgramRequestCurrentlyOnLastWorkflowStep(programRequestInputViewModel.Name);
+            var result = FacadeFactory.GetDomainFacade().IsWorkflowItemCurrentlyOnLastWorkflowStep(programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             result.Should().BeFalse();
         }
 
         [Test]
-        public void IsProgramRequestCurrentlyOnLastWorkflowStep_CurrentlyOnLastWorkflowStep()
+        public void IsWorkflowItemCurrentlyOnLastWorkflowStep_CurrentlyOnLastWorkflowStep()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -597,19 +596,19 @@ namespace WorkflowManagementSystem.Tests
             var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approverTwo.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approverTwo.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approverTwo.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approverTwo.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // act
-            var result = FacadeFactory.GetDomainFacade().IsProgramRequestCurrentlyOnLastWorkflowStep(programRequestInputViewModel.Name);
+            var result = FacadeFactory.GetDomainFacade().IsWorkflowItemCurrentlyOnLastWorkflowStep(programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             result.Should().BeTrue();
         }
 
         [Test]
-        public void CompleteProgramRequest()
+        public void CompleteWorkflowItem()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -626,12 +625,12 @@ namespace WorkflowManagementSystem.Tests
             var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // act
-            FacadeFactory.GetDomainFacade().CompleteProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().CompleteWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             var program = FacadeFactory.GetDomainFacade().FindProgram(programRequestInputViewModel.Name);
@@ -659,7 +658,7 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void CompleteProgramRequest_RejectedWorkflow()
+        public void CompleteWorkflowItem_RejectedWorkflow()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -676,10 +675,10 @@ namespace WorkflowManagementSystem.Tests
             var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
-            FacadeFactory.GetDomainFacade().RejectProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().RejectWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // act
-            Action act = ()=> FacadeFactory.GetDomainFacade().CompleteProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            Action act = ()=> FacadeFactory.GetDomainFacade().CompleteWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Request has already been rejected");
@@ -691,7 +690,7 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void ApproveProgramRequest_CompletedWorkflow()
+        public void ApproveWorkflowItem_CompletedWorkflow()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -708,13 +707,13 @@ namespace WorkflowManagementSystem.Tests
             var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().CompleteProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().CompleteWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // act
-            Action act = ()=> FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            Action act = () => FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Request has already been completed");
@@ -726,7 +725,7 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void ApproveProgramRequest_ApproverNotPartOfResponsibleParty()
+        public void ApproveWorkflowItem_ApproverNotPartOfResponsibleParty()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -744,7 +743,7 @@ namespace WorkflowManagementSystem.Tests
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             // act
-            Action act = () => FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            Action act = () => FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             var errorMessage = string.Format("User '{0}' does not have sufficient permissions to approve request", approver.DisplayName);
@@ -756,7 +755,7 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void RejectProgramRequest_RejectorNotPartOfResponsibleParty()
+        public void RejectWorkflowItem_RejectorNotPartOfResponsibleParty()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -773,12 +772,12 @@ namespace WorkflowManagementSystem.Tests
             var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // act
-            Action act = () => FacadeFactory.GetDomainFacade().CompleteProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            Action act = () => FacadeFactory.GetDomainFacade().CompleteWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             var errorMessage = string.Format("User '{0}' does not have sufficient permissions to complete request", approver.DisplayName);
@@ -790,7 +789,7 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void CompleteProgramRequest_RejectorNotPartOfResponsibleParty()
+        public void CompleteWorkflowItem_RejectorNotPartOfResponsibleParty()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -808,7 +807,7 @@ namespace WorkflowManagementSystem.Tests
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             // act
-            Action act = () => FacadeFactory.GetDomainFacade().RejectProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            Action act = () => FacadeFactory.GetDomainFacade().RejectWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             var errorMessage = string.Format("User '{0}' does not have sufficient permissions to reject request", approver.DisplayName);
@@ -820,7 +819,7 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void ApproveProgramRequest_Rejected()
+        public void ApproveWorkflowItem_Rejected()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -837,10 +836,10 @@ namespace WorkflowManagementSystem.Tests
 
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
-            FacadeFactory.GetDomainFacade().RejectProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().RejectWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // act
-            Action act = () => FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            Action act = () => FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Request has already been rejected");
@@ -850,7 +849,7 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
-        public void RejectProgramRequest_CompletedWorkflow()
+        public void RejectWorkflowItem_CompletedWorkflow()
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
@@ -867,13 +866,13 @@ namespace WorkflowManagementSystem.Tests
             var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(requester, semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().ApproveProgramRequest(approver.Email, programRequestInputViewModel.Name);
-            FacadeFactory.GetDomainFacade().CompleteProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().CompleteWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // act
-            Action act = () => FacadeFactory.GetDomainFacade().RejectProgramRequest(approver.Email, programRequestInputViewModel.Name);
+            Action act = () => FacadeFactory.GetDomainFacade().RejectWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
 
             // assert
             act.ShouldThrow<WMSException>().WithMessage("Request has already been completed");
