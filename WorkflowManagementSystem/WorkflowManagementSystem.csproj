@@ -419,6 +419,7 @@
     <Content Include="Views\Course\Requested.cshtml" />
     <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\Course\_CourseSummaryDetailsPartial.cshtml" />
+    <Content Include="Views\Course\UpdateStatus.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

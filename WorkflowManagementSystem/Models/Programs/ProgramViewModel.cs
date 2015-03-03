@@ -25,11 +25,6 @@ namespace WorkflowManagementSystem.Models.Programs
             WorkflowSteps = new List<WorkflowDataViewModel>();
         }
 
-        public string CurrentResponsibleParty()
-        {
-            return WorkflowSteps.Last().ResponsibleParty;
-        }
-
         public WorkflowStates CurrentState()
         {
             return WorkflowSteps.Last().State;

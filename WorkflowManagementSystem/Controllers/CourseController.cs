@@ -33,13 +33,60 @@ namespace WorkflowManagementSystem.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult UpdateStatus(string name)
+        {
+            var course = FacadeFactory.GetDomainFacade().FindCourse(name);
+            return View(course);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateStatus(string workflowItemName, string submit, CommentInputViewModel commentInputViewModel, List<HttpPostedFileBase> files)
+        {
+            TempData["commentInputViewModel"] = commentInputViewModel;
+            TempData["files"] = files;
+            switch (submit)
+            {
+                case "approve":
+                    return RedirectToAction("Approve", new { workflowItemName });
+                case "reject":
+                    return RedirectToAction("Reject", new { workflowItemName });
+                default:
+                    TempData.Remove("commentInputViewModel");
+                    TempData.Remove("files");
+                    throw new WMSException("Unknown/unimplemented action '{0}", submit);
+            }
+        }
+
+        public ActionResult Approve(string workflowItemName)
+        {
+            if (FacadeFactory.GetDomainFacade().IsWorkflowItemCurrentlyOnLastWorkflowStep(workflowItemName, WorkflowItemTypes.Course))
+                FacadeFactory.GetDomainFacade().CompleteWorkflowItem(User.Identity.Name, workflowItemName, WorkflowItemTypes.Course);
+            else
+                FacadeFactory.GetDomainFacade().ApproveWorkflowItem(User.Identity.Name, workflowItemName, WorkflowItemTypes.Course);
+
+            new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
+            new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"], WorkflowItemTypes.Course);
+
+            return RedirectToAction("Index", new { name = workflowItemName });
+        }
+
+        public ActionResult Reject(string workflowItemName)
+        {
+            FacadeFactory.GetDomainFacade().RejectWorkflowItem(User.Identity.Name, workflowItemName, WorkflowItemTypes.Course);
+
+            new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
+            new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"], WorkflowItemTypes.Course);
+
+            return RedirectToAction("Index", new { name = workflowItemName });
+        }
+
         [HttpPost]
         public ActionResult CreateRequest(CourseRequestInputViewModel courseRequestInputViewModel, List<HttpPostedFileBase> files)
         {
             try
             {
                 FacadeFactory.GetDomainFacade().CreateCourseRequest(User.Identity.Name, courseRequestInputViewModel);
-
                 new FileController().UploadAttachments(User.Identity.Name, courseRequestInputViewModel.Name, files, WorkflowItemTypes.Course);
             }
             catch (WMSException e)

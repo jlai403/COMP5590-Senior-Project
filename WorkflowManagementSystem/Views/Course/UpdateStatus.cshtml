@@ -1,0 +1,85 @@
+﻿@using System.Web.Optimization
+@using WorkflowManagementSystem.Models.Workflow
+@model WorkflowManagementSystem.Models.Course.CourseViewModel
+
+@Styles.Render("~/Content/css/theme/workflow-item.css")
+
+<div class="container workflow-item center">
+	<div class="col-xs-12">
+		<div class="row center-text">
+			<p class="header">Update Course Status</p>
+		</div>
+				
+		<div class="row content">
+			@{Html.RenderPartial("_CourseSummaryDetailsPartial", Model);}
+
+            <!-- workflow details start -->
+            <div class="col-sm-6 workflow-details">
+                <div class="row center-text">
+                    <p class="sub-header">Workflow</p>
+                </div>
+
+                @{ Html.RenderPartial("_WorkflowStepsPartial", Model.WorkflowSteps); }
+
+                @if (Model.CurrentState() == WorkflowStates.PENDING_APPROVAL){
+                    using (Html.BeginForm("UpdateStatus", "Course", FormMethod.Post, new { @class = "update-workflow-item-form", enctype = "multipart/form-data" }))
+                    {
+                        @Html.Hidden("workflowItemName", Model.Name)
+                        <div class="row left-align" style="padding: 0 15px; margin-top: 15px;">
+		                    <h6 style="padding-left: 2px;">Comments</h6>
+		                    <textarea name="text" class="form-control expandOnFocus" rows="2" placeholder="Comments..."></textarea>
+	                    </div>
+									
+	                    <div class="row">
+		                    <div class="col-md-3">
+			                    Attachments
+		                    </div>
+		                    <div class="col-md-9">
+			                    <input name="files" type="file" multiple style="font-size:12px;"/>
+		                    </div>
+	                    </div>
+                    
+	                    <div class="row" style="margin-top: 10px;">
+		                    <div class="col-xs-6">
+		                        <input type="submit" name="submit" value="approve" class="form-control button green"/>
+		                    </div>
+		                    <div class="col-xs-6">
+		                        <input type="submit" name="submit" value="reject" class="form-control button red"/>
+		                    </div>
+	                    </div>
+                    }
+                }
+            </div>
+		    <!-- workflow details end -->
+
+            <!-- comments start -->
+            <div class="row content comments">
+                <div class="col-xs-12">
+                    <div class="row center-text">
+                        <p class="sub-header">Comments</p>
+                    </div>
+
+                    @if (Model.Comments.Count == 0)
+                    {
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p class="comment center-text small-text">
+                                    No Comments
+                                </p>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var comment in Model.Comments)
+                        {
+                            Html.RenderPartial("_WorkflowItemCommentPartial", comment);
+                        }
+                    }
+                </div>
+            </div>
+		    <!-- comments end-->
+
+		</div>
+	</div>
+</div>

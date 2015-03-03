@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Web.Mvc;
+using System.Linq;
 using WorkflowManagementSystem.Models.Workflow;
 
 namespace WorkflowManagementSystem.Models.Course
@@ -29,6 +29,11 @@ namespace WorkflowManagementSystem.Models.Course
         {
             Comments = new List<CommentViewModel>();
             Attachments = new Dictionary<string, Guid>();
+        }
+
+        public WorkflowStates CurrentState()
+        {
+            return WorkflowSteps.Last().State;
         }
     }
 }
