@@ -4,7 +4,6 @@ namespace WorkflowManagementSystem.Models.Programs
 {
     public class ProgramRequestInputViewModel
     {
-        public string Requester { get; set; }
         public string Name { get; set; }
         public int Semester { get; set; }
         public int Discipline { get; set; }

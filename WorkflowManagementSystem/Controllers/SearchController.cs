@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using WorkflowManagementSystem.Models;
 
@@ -25,6 +26,13 @@ namespace WorkflowManagementSystem.Controllers
 
             ViewBag.Keywords = keywords;
             return View("SearchResults", workflowItems);
+        }
+
+        [HttpPost]
+        public ActionResult ProgramNames(string keywords)
+        {
+            var programNames = FacadeFactory.GetSearchFacade().SearchForProgramNames(keywords);
+            return Json(programNames);
         }
     }
 }

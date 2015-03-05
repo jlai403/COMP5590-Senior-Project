@@ -13,12 +13,6 @@ namespace WorkflowManagementSystem.Controllers
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            ViewBag.UsersFullName = FacadeFactory.GetDomainFacade().FindUser(User.Identity.Name).DisplayName;
-            ViewBag.Semesters = FacadeFactory.GetDomainFacade().FindAllSemesters();
-            ViewBag.Faculties = FacadeFactory.GetDomainFacade().FindAllFaculties();
-            ViewBag.Disciplines = FacadeFactory.GetDomainFacade().FindAllDisciplines();
-            ViewBag.Credits = CourseConstants.AVAILABLE_CREDITS;
-            ViewBag.Gradings = CourseConstants.AVAILABLE_GRADINGS;
         }
 
         public ActionResult Index(string name)
@@ -30,6 +24,12 @@ namespace WorkflowManagementSystem.Controllers
         [HttpGet]
         public ActionResult CreateRequest()
         {
+            ViewBag.UsersFullName = FacadeFactory.GetDomainFacade().FindUser(User.Identity.Name).DisplayName;
+            ViewBag.Semesters = FacadeFactory.GetDomainFacade().FindAllSemesters();
+            ViewBag.Faculties = FacadeFactory.GetDomainFacade().FindAllFaculties();
+            ViewBag.Disciplines = FacadeFactory.GetDomainFacade().FindAllDisciplines();
+            ViewBag.Credits = CourseConstants.AVAILABLE_CREDITS;
+            ViewBag.Gradings = CourseConstants.AVAILABLE_GRADINGS;
             return View();
         }
 

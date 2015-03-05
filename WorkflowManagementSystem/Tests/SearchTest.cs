@@ -25,7 +25,6 @@ namespace WorkflowManagementSystem.Tests
 
             var randomProgram = new ProgramRequestInputViewModel();
             randomProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
-            randomProgram.Requester = user.Email;
             randomProgram.Name = "random";
             randomProgram.Semester = semester.Id;
             randomProgram.Discipline = discipline.Id;
@@ -37,7 +36,6 @@ namespace WorkflowManagementSystem.Tests
 
             var robotsAndUnicornsProgram = new ProgramRequestInputViewModel();
             robotsAndUnicornsProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
-            robotsAndUnicornsProgram.Requester = user.Email;
             robotsAndUnicornsProgram.Name = "Robots and unicorns";
             robotsAndUnicornsProgram.Semester = semester.Id;
             robotsAndUnicornsProgram.Discipline = discipline.Id;
@@ -49,7 +47,6 @@ namespace WorkflowManagementSystem.Tests
 
             var dogeProgram = new ProgramRequestInputViewModel();
             dogeProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
-            dogeProgram.Requester = user.Email;
             dogeProgram.Name = "Such program";
             dogeProgram.Semester = semester.Id;
             dogeProgram.Discipline = discipline.Id;
@@ -84,7 +81,6 @@ namespace WorkflowManagementSystem.Tests
 
             var randomProgram = new ProgramRequestInputViewModel();
             randomProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
-            randomProgram.Requester = user.Email;
             randomProgram.Name = "random";
             randomProgram.Semester = semester.Id;
             randomProgram.Discipline = discipline.Id;
@@ -96,7 +92,6 @@ namespace WorkflowManagementSystem.Tests
 
             var robotsAndUnicornsProgram = new ProgramRequestInputViewModel();
             robotsAndUnicornsProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
-            robotsAndUnicornsProgram.Requester = user.Email;
             robotsAndUnicornsProgram.Name = "Robots and unicorns";
             robotsAndUnicornsProgram.Semester = semester.Id;
             robotsAndUnicornsProgram.Discipline = discipline.Id;
@@ -108,7 +103,6 @@ namespace WorkflowManagementSystem.Tests
 
             var suchProgram = new ProgramRequestInputViewModel();
             suchProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
-            suchProgram.Requester = user.Email;
             suchProgram.Name = "Such program";
             suchProgram.Semester = semester.Id;
             suchProgram.Discipline = discipline.Id;
@@ -120,7 +114,6 @@ namespace WorkflowManagementSystem.Tests
 
             var muchProgram = new ProgramRequestInputViewModel();
             muchProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
-            muchProgram.Requester = user.Email;
             muchProgram.Name = "Much program";
             muchProgram.Semester = semester.Id;
             muchProgram.Discipline = discipline.Id;
@@ -155,7 +148,6 @@ namespace WorkflowManagementSystem.Tests
 
             var randomProgram = new ProgramRequestInputViewModel();
             randomProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
-            randomProgram.Requester = user.Email;
             randomProgram.Name = "random";
             randomProgram.Semester = semester.Id;
             randomProgram.Discipline = discipline.Id;
@@ -167,7 +159,6 @@ namespace WorkflowManagementSystem.Tests
 
             var robotsAndUnicornsProgram = new ProgramRequestInputViewModel();
             robotsAndUnicornsProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
-            robotsAndUnicornsProgram.Requester = user.Email;
             robotsAndUnicornsProgram.Name = "Robots and unicorns";
             robotsAndUnicornsProgram.Semester = semester.Id;
             robotsAndUnicornsProgram.Discipline = discipline.Id;
@@ -179,7 +170,6 @@ namespace WorkflowManagementSystem.Tests
 
             var suchProgram = new ProgramRequestInputViewModel();
             suchProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
-            suchProgram.Requester = user.Email;
             suchProgram.Name = "Such program";
             suchProgram.Semester = semester.Id;
             suchProgram.Discipline = discipline.Id;
@@ -191,7 +181,6 @@ namespace WorkflowManagementSystem.Tests
 
             var muchProgram = new ProgramRequestInputViewModel();
             muchProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
-            muchProgram.Requester = user.Email;
             muchProgram.Name = "Much program";
             muchProgram.Semester = semester.Id;
             muchProgram.Discipline = discipline.Id;
@@ -207,6 +196,68 @@ namespace WorkflowManagementSystem.Tests
             // assert
             workflowItemResults.Count().ShouldBeEquivalentTo(1);
             workflowItemResults.Should().Contain(x => x.Name.Equals(robotsAndUnicornsProgram.Name));
+        }
+
+        [Test]
+        public void SearchForProgramNames()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var dogeProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            dogeProgram.Name = "doge program";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, dogeProgram);
+
+            var robotsAndUnicornsProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            robotsAndUnicornsProgram.Name = "robots and unicorns program";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, robotsAndUnicornsProgram);
+
+            // act
+            var programNames = FacadeFactory.GetSearchFacade().SearchForProgramNames("doge");
+
+            // assert
+            programNames.Count().ShouldBeEquivalentTo(1);
+            programNames.Should().Contain(dogeProgram.Name);
+        }
+
+
+        [Test]
+        public void SearchForProgramNames_Multiple()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var dogeProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            dogeProgram.Name = "doge program";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, dogeProgram);
+
+            var robotsAndUnicornsProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            robotsAndUnicornsProgram.Name = "robots and unicorns program";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, robotsAndUnicornsProgram);
+
+            // act
+            var programNames = FacadeFactory.GetSearchFacade().SearchForProgramNames("program");
+
+            // assert
+            programNames.Count().ShouldBeEquivalentTo(2);
+            programNames.Should().Contain(dogeProgram.Name);
+            programNames.Should().Contain(robotsAndUnicornsProgram.Name);
         }
     }
 }

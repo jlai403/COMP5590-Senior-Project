@@ -13,11 +13,10 @@ namespace WorkflowManagementSystem.Tests
     {
         private static Random Random = new Random();
 
-        public ProgramRequestInputViewModel CreateNewValidProgramRequestInputViewModel(UserViewModel user, SemesterViewModel semester, DisciplineViewModel discipline)
+        public ProgramRequestInputViewModel CreateNewValidProgramRequestInputViewModel(SemesterViewModel semester, DisciplineViewModel discipline)
         {
             var programRequestInputViewModel = new ProgramRequestInputViewModel();
             programRequestInputViewModel.RequestedDateUTC = new DateTime(2015, 1, 19);
-            programRequestInputViewModel.Requester = user.DisplayName;
             programRequestInputViewModel.Name = string.Format("Program Name - {0}", Random.Next(1, 9999));
             programRequestInputViewModel.Semester = semester.Id;
             programRequestInputViewModel.Discipline = discipline.Id;

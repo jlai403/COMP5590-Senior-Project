@@ -23,7 +23,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(user, semester, discipline);
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
 
             var expectedContentBytes = new byte[] { 0xFF, 0xFF, 0x00, 0xAA };

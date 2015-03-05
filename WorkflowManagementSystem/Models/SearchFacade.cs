@@ -15,5 +15,13 @@ namespace WorkflowManagementSystem.Models
                 return WorkflowAssembler.AssembleWorkflowItems(searchResults);
             });
         }
+
+        public HashSet<string> SearchForProgramNames(string keywords)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                return InvertedIndexRepository.SearchForProgramNames(keywords);
+            });
+        }
     }
 }

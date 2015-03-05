@@ -10,7 +10,7 @@ namespace WorkflowManagementSystem.Models.Search
     {
         public static HashSet<WorkflowItem> SearchWorkflowItem(string searchQuery)
         {
-            var searchKeys = new Regex("[a-z]+").Matches(searchQuery.ToLower()).Cast<Match>().Select(x => x.Value).ToArray();
+            var searchKeys = new Regex("[a-z]+").Matches(searchQuery.ToLower()).Cast<Match>().Select(x => x.Value);
             var workflowItemIndices = Queryable<WorkflowItemIndex>().Where(x => searchKeys.Contains(x.Key.Key));
             return new HashSet<WorkflowItem>(workflowItemIndices.Select(x => x.Entity));
         }
@@ -47,6 +47,13 @@ namespace WorkflowManagementSystem.Models.Search
             AddEntity(index);
             index.Update(indexKey, indexable);
             return index;
+        }
+
+        public static HashSet<string> SearchForProgramNames(string keywords)
+        {
+            var searchKeys = new Regex("[a-z]+").Matches(keywords.ToLower()).Cast<Match>().Select(x => x.Value);
+            var workflowItemIndices = Queryable<WorkflowItemIndex>().Where(x => searchKeys.Contains(x.Key.Key));
+            return new HashSet<string>(workflowItemIndices.Select(x => x.Entity.Name));
         }
     }
 }
