@@ -14,6 +14,10 @@ namespace WorkflowManagementSystem.Controllers
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+        }
+
+        private void SetViewBagsForCreateRequest()
+        {
             ViewBag.UsersFullName = FacadeFactory.GetDomainFacade().FindUser(User.Identity.Name).DisplayName;
             ViewBag.Semesters = FacadeFactory.GetDomainFacade().FindAllSemesters();
             ViewBag.Faculties = FacadeFactory.GetDomainFacade().FindAllFaculties();
@@ -23,6 +27,7 @@ namespace WorkflowManagementSystem.Controllers
         [HttpGet]
         public ActionResult CreateRequest()
         {
+            SetViewBagsForCreateRequest();
             return View();
         }
 
@@ -37,6 +42,7 @@ namespace WorkflowManagementSystem.Controllers
             }
             catch (WMSException e)
             {
+                SetViewBagsForCreateRequest();
                 ViewBag.ErrorMessage = e.Message;
                 return View("CreateRequest", programRequestInputViewModel);
             }

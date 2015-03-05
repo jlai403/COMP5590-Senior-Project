@@ -24,13 +24,18 @@ namespace WorkflowManagementSystem.Controllers
         [HttpGet]
         public ActionResult CreateRequest()
         {
+            SetViewBagsForCreateRequest();
+            return View();
+        }
+
+        private void SetViewBagsForCreateRequest()
+        {
             ViewBag.UsersFullName = FacadeFactory.GetDomainFacade().FindUser(User.Identity.Name).DisplayName;
             ViewBag.Semesters = FacadeFactory.GetDomainFacade().FindAllSemesters();
             ViewBag.Faculties = FacadeFactory.GetDomainFacade().FindAllFaculties();
             ViewBag.Disciplines = FacadeFactory.GetDomainFacade().FindAllDisciplines();
             ViewBag.Credits = CourseConstants.AVAILABLE_CREDITS;
             ViewBag.Gradings = CourseConstants.AVAILABLE_GRADINGS;
-            return View();
         }
 
         [HttpGet]
@@ -91,6 +96,7 @@ namespace WorkflowManagementSystem.Controllers
             }
             catch (WMSException e)
             {
+                SetViewBagsForCreateRequest();
                 ViewBag.ErrorMessage = e.Message;
                 return View("CreateRequest", courseRequestInputViewModel);
             }

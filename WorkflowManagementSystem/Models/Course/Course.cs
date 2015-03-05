@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.Ajax.Utilities;
+using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Semesters;
@@ -37,13 +38,21 @@ namespace WorkflowManagementSystem.Models.Course
             StudentImpact = courseRequestInputViewModel.StudentImpact;
             LibraryImpact = courseRequestInputViewModel.LibraryImpact;
             ITSImpact = courseRequestInputViewModel.ITSImpact;
-
-            Program = ProgramRepository.FindProgram(courseRequestInputViewModel.ProgramName);
+            UpdateProgram(courseRequestInputViewModel.ProgramName);
 
             if (!courseRequestInputViewModel.Comment.IsNullOrWhiteSpace())
             {
                 AddComment(user, courseRequestInputViewModel.RequestedDateUTC, courseRequestInputViewModel.Comment);
             }
+        }
+
+        private void UpdateProgram(string programName)
+        {
+            if (string.IsNullOrWhiteSpace(programName)) return;
+
+            Program = ProgramRepository.FindProgram(programName);
+            if (Program == null) 
+                throw new WMSException("Could not find the program '{0}'", programName);
         }
 
         private int GenerateValidCourseNumber(string courseNumber)
