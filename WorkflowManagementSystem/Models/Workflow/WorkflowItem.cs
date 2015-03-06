@@ -60,11 +60,12 @@ namespace WorkflowManagementSystem.Models.Workflow
             return workflowDataHistory;
         }
 
-        /*** IInvertedIndex overrides ***/
-        public HashSet<string> ExtractKeys()
+        public void DeleteInvertedIndice()
         {
-            return ExtractSearchKeysForWorkflowItem();
+            InvertedIndexRepository.DeleteWorkflowIndice(this);
         }
-        protected abstract HashSet<string> ExtractSearchKeysForWorkflowItem();
+
+        public abstract void UpdateInvertedIndex();
+        public abstract HashSet<string> ExtractKeys();
     }
 }

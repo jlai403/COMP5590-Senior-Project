@@ -55,5 +55,14 @@ namespace WorkflowManagementSystem.Models.Search
             var workflowItemIndices = Queryable<WorkflowItemIndex>().Where(x => searchKeys.Contains(x.Key.Key));
             return new HashSet<string>(workflowItemIndices.Select(x => x.Entity.Name));
         }
+
+        public static void DeleteWorkflowIndice(WorkflowItem workflowItem)
+        {
+            var workflowItemIndices = Queryable<WorkflowItemIndex>().Where(x => x.Entity.Id == workflowItem.Id).ToList();
+            foreach (var workflowItemIndex in workflowItemIndices)
+            {
+                DeleteEntity(workflowItemIndex);
+            }
+        }
     }
 }

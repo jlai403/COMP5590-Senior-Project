@@ -3,6 +3,7 @@ using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Programs;
+using WorkflowManagementSystem.Models.Search;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
 using WorkflowManagementSystem.Models.Workflow;
@@ -44,6 +45,33 @@ namespace WorkflowManagementSystem.Models.Course
             {
                 AddComment(user, courseRequestInputViewModel.RequestedDateUTC, courseRequestInputViewModel.Comment);
             }
+
+            UpdateInvertedIndex();
+        }
+
+        public override void UpdateInvertedIndex()
+        {
+            DeleteInvertedIndice();
+            InvertedIndexRepository.AddIndex(this);
+        }
+
+        public override HashSet<string> ExtractKeys()
+        {
+            var searchKeys = new HashSet<string>();
+            searchKeys.Add(Type.ToString().ToLower());
+            searchKeys.Add(CourseNumber.ToString().ToLower());
+            searchKeys.Add(Grading.ToLower());
+            searchKeys.UnionWith(Name.ToLower().Split(' '));
+            searchKeys.UnionWith(Requester.GetDisplayName().ToLower().Split(' '));
+            searchKeys.UnionWith(CalendarEntry.ToLower().Split(' '));
+            searchKeys.UnionWith(CrossImpact.ToLower().Split(' '));
+            searchKeys.UnionWith(StudentImpact.ToLower().Split(' '));
+            searchKeys.UnionWith(LibraryImpact.ToLower().Split(' '));
+            searchKeys.UnionWith(ITSImpact.ToLower().Split(' '));
+
+            if (Program != null)
+                searchKeys.UnionWith(Program.Name.ToLower().Split(' '));
+            return searchKeys;
         }
 
         private void UpdateProgram(string programName)
@@ -52,7 +80,7 @@ namespace WorkflowManagementSystem.Models.Course
 
             Program = ProgramRepository.FindProgram(programName);
             if (Program == null) 
-                throw new WMSException("Could not find the program '{0}'", programName);
+                throw new WMSException("Could not find the program '{0}'.", programName);
         }
 
         private int GenerateValidCourseNumber(string courseNumber)
@@ -60,11 +88,6 @@ namespace WorkflowManagementSystem.Models.Course
             var takenCourseNumbers = CourseRepository.FindAllCourseNumbers(Discipline);
             var courseNumberGenerator = new CourseNumberGenerator(courseNumber, takenCourseNumbers);
             return courseNumberGenerator.GetNextValidCourseNumber();
-        }
-
-        protected override HashSet<string> ExtractSearchKeysForWorkflowItem()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

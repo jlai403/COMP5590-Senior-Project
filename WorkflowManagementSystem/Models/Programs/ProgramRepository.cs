@@ -16,7 +16,6 @@ namespace WorkflowManagementSystem.Models.Programs
             var program = new Program();
             AddEntity(program);
             program.Update(user, programRequestInputViewModel);
-            InvertedIndexRepository.AddIndex(program);
             return program;
         }
 

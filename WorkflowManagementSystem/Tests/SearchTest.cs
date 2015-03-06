@@ -66,6 +66,77 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void SearchWorkflowItems_Courses()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var robotsAndUnicornsCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            robotsAndUnicornsCourse.Name = "robots and unicorns";
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, robotsAndUnicornsCourse);
+
+            var dogeCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            dogeCourse.Name = "doge";
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, dogeCourse);
+
+            // act
+            var workflowItemResults = FacadeFactory.GetSearchFacade().SearchWorkflowItems("Cross");
+
+            // assert
+            workflowItemResults.Count().ShouldBeEquivalentTo(2);
+            workflowItemResults.Should().Contain(x => x.Name.Equals(robotsAndUnicornsCourse.Name));
+            workflowItemResults.Should().Contain(x => x.Name.Equals(dogeCourse.Name));
+        }
+
+        [Test]
+        public void SearchWorkflowItems_Courses_MultipleKeywords()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var robotsAndUnicornsCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            robotsAndUnicornsCourse.Name = "robots and unicorns";
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, robotsAndUnicornsCourse);
+
+            var dogeCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            dogeCourse.Name = "doge";
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, dogeCourse);
+
+            var randomCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            randomCourse.Name = "random course";
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, randomCourse);
+
+            var suchCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            suchCourse.Name = "such course";
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, suchCourse);
+
+            // act
+            var workflowItemResults = FacadeFactory.GetSearchFacade().SearchWorkflowItems("Such Random");
+
+            // assert
+            workflowItemResults.Count().ShouldBeEquivalentTo(2);
+            workflowItemResults.Should().Contain(x => x.Name.Equals(randomCourse.Name));
+            workflowItemResults.Should().Contain(x => x.Name.Equals(suchCourse.Name));
+        }
+
+
+        [Test]
         public void SearchWorkflowItems_Programs_MultipleKeywords()
         {
             // assemble

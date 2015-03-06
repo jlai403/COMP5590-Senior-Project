@@ -26,7 +26,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
             Set(entity.GetType()).Add(entity);
         }
 
-        public void RemoveEntity(IEntity entity)
+        public void DeleteEntity(IEntity entity)
         {
             Set(entity.GetType()).Remove(entity);
         }

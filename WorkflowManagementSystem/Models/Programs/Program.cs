@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Faculty;
+using WorkflowManagementSystem.Models.Search;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
 using WorkflowManagementSystem.Models.Workflow;
@@ -42,6 +43,14 @@ namespace WorkflowManagementSystem.Models.Programs
             AssertStudentImpactIsNotNull();
             AssertLibraryImpactIsNotNull();
             AssertITSImpactIsNotNull();
+
+            UpdateInvertedIndex();
+        }
+
+        public override void UpdateInvertedIndex()
+        {
+            DeleteInvertedIndice();
+            InvertedIndexRepository.AddIndex(this);
         }
 
         private void AssertNameIsNotNull()
@@ -80,7 +89,7 @@ namespace WorkflowManagementSystem.Models.Programs
                 throw new WMSException("Program with the name '{0}' already exists.", name);
         }
 
-        protected override HashSet<string> ExtractSearchKeysForWorkflowItem()
+        public override HashSet<string> ExtractKeys()
         {
             var searchKeys = new HashSet<string>();
             searchKeys.Add(Type.ToString().ToLower());

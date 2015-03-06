@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WorkflowManagementSystem.Models.Search;
 
 namespace WorkflowManagementSystem.Models.DataAccess
 {
@@ -24,6 +25,11 @@ namespace WorkflowManagementSystem.Models.DataAccess
         protected static IQueryable<T> Queryable<T>() where T : class
         {
             return TransactionHandler.Instance.CurrentDbContext().Queryable<T>();
+        }
+
+        protected static void DeleteEntity(IEntity entity)
+        {
+            TransactionHandler.Instance.CurrentDbContext().DeleteEntity(entity);
         }
     }
 }
