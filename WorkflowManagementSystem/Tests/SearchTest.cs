@@ -70,6 +70,7 @@ namespace WorkflowManagementSystem.Tests
         {
             // assemble
             new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
             new ApprovalChainTestHelper().CreateCourseApprovalChain();
             new SemesterTestHelper().CreateTestSemesters();
             new DisciplineTestHelper().CreateTestDisciplines();
@@ -78,6 +79,9 @@ namespace WorkflowManagementSystem.Tests
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
 
             var robotsAndUnicornsCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
             robotsAndUnicornsCourse.Name = "robots and unicorns";
@@ -91,7 +95,8 @@ namespace WorkflowManagementSystem.Tests
             var workflowItemResults = FacadeFactory.GetSearchFacade().SearchWorkflowItems("Cross");
 
             // assert
-            workflowItemResults.Count().ShouldBeEquivalentTo(2);
+            workflowItemResults.Count().ShouldBeEquivalentTo(3);
+            workflowItemResults.Should().Contain(x => x.Name.Equals(programRequestInputViewModel.Name));
             workflowItemResults.Should().Contain(x => x.Name.Equals(robotsAndUnicornsCourse.Name));
             workflowItemResults.Should().Contain(x => x.Name.Equals(dogeCourse.Name));
         }
