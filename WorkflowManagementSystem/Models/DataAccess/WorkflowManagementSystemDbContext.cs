@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using WorkflowManagementSystem.Models.ApprovalChains;
+using WorkflowManagementSystem.Models.Course;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Files;
 using WorkflowManagementSystem.Models.Programs;
@@ -26,6 +27,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
         protected DbSet<ApprovalChainStep> ApprovalChainStep { get; set; }
         protected DbSet<Comment> Comment { get; set; }
         protected DbSet<Course.Course> Course { get; set; }
+        protected DbSet<PrerequisiteCourses> PrerequisiteCourses { get; set; }
         protected DbSet<Discipline> Discipline { get; set; }
         protected DbSet<Faculty.Faculty> Faculty { get; set; }
         protected DbSet<IndexKey> IndexKey { get; set; }
@@ -54,6 +56,8 @@ namespace WorkflowManagementSystem.Models.DataAccess
             modelBuilder.Entity<Discipline>().HasRequired(d => d.Faculty).WithMany(f => f.Disciplines).WillCascadeOnDelete(true);
 
             modelBuilder.Entity<ApprovalChain>().HasMany(ac => ac.ApprovalChainSteps);
+
+            modelBuilder.Entity<Course.Course>().HasOptional(x => x.PrerequisiteCourses).WithRequired(x => x.Course);
         }
 
     }

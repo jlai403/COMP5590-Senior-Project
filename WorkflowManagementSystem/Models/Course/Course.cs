@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Faculty;
@@ -25,6 +26,7 @@ namespace WorkflowManagementSystem.Models.Course
         public string LibraryImpact { get; set; }
         public string ITSImpact { get; set; }
         public virtual Program Program { get; set; }
+        public virtual PrerequisiteCourses PrerequisiteCourses { get; set; }
         
         public void Update(User user, CourseRequestInputViewModel courseRequestInputViewModel)
         {
@@ -40,6 +42,7 @@ namespace WorkflowManagementSystem.Models.Course
             LibraryImpact = courseRequestInputViewModel.LibraryImpact;
             ITSImpact = courseRequestInputViewModel.ITSImpact;
             UpdateProgram(courseRequestInputViewModel.ProgramName);
+            UpdatePrerequisites(courseRequestInputViewModel.Prerequisites);
 
             if (!courseRequestInputViewModel.Comment.IsNullOrWhiteSpace())
             {
@@ -81,6 +84,12 @@ namespace WorkflowManagementSystem.Models.Course
             Program = ProgramRepository.FindProgram(programName);
             if (Program == null) 
                 throw new WMSException("Could not find the program '{0}'.", programName);
+        }
+
+        private void UpdatePrerequisites(List<string> prerequisites)
+        {
+            if (!prerequisites.Any()) return;
+            PrerequisiteCourses = CourseRepository.CreatePrequisiteCourses(this, prerequisites);
         }
 
         private int GenerateValidCourseNumber(string courseNumber)

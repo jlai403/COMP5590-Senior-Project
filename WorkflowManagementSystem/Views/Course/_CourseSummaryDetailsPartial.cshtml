@@ -70,6 +70,13 @@
         </div>
 
         <div class="row">
+            <div class="col-xs-6 bold-text right-align"> Prerequisite(s): </div>
+            <div class="col-xs-6 ">
+                @string.Join(", ", Model.Prerequisites)
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-xs-6 bold-text right-align"> Cross Impact: </div>
             <div class="col-xs-6 ">
                 <p class=cross-impact> @Model.CrossImpact </p>

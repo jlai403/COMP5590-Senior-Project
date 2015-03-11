@@ -24,11 +24,13 @@ namespace WorkflowManagementSystem.Models.Course
         public Dictionary<string, Guid> Attachments { get; set; }
         public string Grading { get; set; }
         public List<WorkflowDataViewModel> WorkflowSteps { get; set; }
+        public List<string> Prerequisites { get; set; }
 
         public CourseViewModel()
         {
             Comments = new List<CommentViewModel>();
             Attachments = new Dictionary<string, Guid>();
+            Prerequisites = new List<string>();
         }
 
         public WorkflowStates CurrentState()

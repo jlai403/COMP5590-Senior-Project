@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace WorkflowManagementSystem.Models.Course
 {
@@ -18,10 +19,12 @@ namespace WorkflowManagementSystem.Models.Course
         public string CourseNumber { get; set; }
         public string Grading { get; set; }
         public string Credits { get; set; }
+        public List<string> Prerequisites { get; set; }
 
         public CourseRequestInputViewModel()
         {
             RequestedDateUTC = DateTime.UtcNow;
+            Prerequisites = new List<string>();
         }
     }
 }

@@ -73,6 +73,107 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void CreateCourseRequest_PrerequisiteCourse()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().First(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().First(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var prerequisite = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, prerequisite);
+            
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            courseRequestInputViewModel.Prerequisites.Add(prerequisite.Name);
+
+            // act
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            // assert
+            var course = FacadeFactory.GetDomainFacade().FindCourse(courseRequestInputViewModel.Name);
+            course.Should().NotBeNull();
+            course.CourseNumber.ShouldBeEquivalentTo(courseRequestInputViewModel.CourseNumber);
+            course.Discipline.ShouldBeEquivalentTo(discipline.Code);
+            course.Name.ShouldBeEquivalentTo(courseRequestInputViewModel.Name);
+            course.Credits.ShouldBeEquivalentTo(courseRequestInputViewModel.Credits);
+            course.Grading.ShouldBeEquivalentTo(courseRequestInputViewModel.Grading);
+            course.Semester.ShouldBeEquivalentTo(semester.DisplayName);
+            course.CalendarEntry.ShouldBeEquivalentTo(courseRequestInputViewModel.CalendarEntry);
+            course.CrossImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.CrossImpact);
+            course.StudentImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.StudentImpact);
+            course.LibraryImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.LibraryImpact);
+            course.ITSImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.ITSImpact);
+            course.RequestedDateUTC.ShouldBeEquivalentTo(courseRequestInputViewModel.RequestedDateUTC);
+            course.Requester.ShouldBeEquivalentTo(requester.DisplayName);
+            course.ProgramName.ShouldBeEquivalentTo(courseRequestInputViewModel.ProgramName);
+            course.Prerequisites.Count.ShouldBeEquivalentTo(1);
+            course.Prerequisites.Should().Contain(prerequisite.Name);
+
+            course.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            var workflowTestHelper = new WorkflowTestHelper();
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[0], WorkflowStates.PENDING_APPROVAL, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, string.Empty);
+        }
+
+        [Test]
+        public void CreateCourseRequest_MultiplePrerequisiteCourses()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().First(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().First(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var prerequisiteOne = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, prerequisiteOne);
+
+            var prerequisiteTwo = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, prerequisiteTwo);
+
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            courseRequestInputViewModel.Prerequisites.Add(prerequisiteOne.Name);
+            courseRequestInputViewModel.Prerequisites.Add(prerequisiteTwo.Name);
+
+            // act
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            // assert
+            var course = FacadeFactory.GetDomainFacade().FindCourse(courseRequestInputViewModel.Name);
+            course.Should().NotBeNull();
+            course.CourseNumber.ShouldBeEquivalentTo(courseRequestInputViewModel.CourseNumber);
+            course.Discipline.ShouldBeEquivalentTo(discipline.Code);
+            course.Name.ShouldBeEquivalentTo(courseRequestInputViewModel.Name);
+            course.Credits.ShouldBeEquivalentTo(courseRequestInputViewModel.Credits);
+            course.Grading.ShouldBeEquivalentTo(courseRequestInputViewModel.Grading);
+            course.Semester.ShouldBeEquivalentTo(semester.DisplayName);
+            course.CalendarEntry.ShouldBeEquivalentTo(courseRequestInputViewModel.CalendarEntry);
+            course.CrossImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.CrossImpact);
+            course.StudentImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.StudentImpact);
+            course.LibraryImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.LibraryImpact);
+            course.ITSImpact.ShouldBeEquivalentTo(courseRequestInputViewModel.ITSImpact);
+            course.RequestedDateUTC.ShouldBeEquivalentTo(courseRequestInputViewModel.RequestedDateUTC);
+            course.Requester.ShouldBeEquivalentTo(requester.DisplayName);
+            course.ProgramName.ShouldBeEquivalentTo(courseRequestInputViewModel.ProgramName);
+            course.Prerequisites.Count.ShouldBeEquivalentTo(2);
+            course.Prerequisites.Should().Contain(prerequisiteOne.Name);
+            course.Prerequisites.Should().Contain(prerequisiteTwo.Name);
+
+            course.WorkflowSteps.Count.ShouldBeEquivalentTo(1);
+            var workflowTestHelper = new WorkflowTestHelper();
+            workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[0], WorkflowStates.PENDING_APPROVAL, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, string.Empty);
+        }
+
+        [Test]
         public void CreateCourseRequest_NoProgramProvided()
         {
             // assemble
@@ -357,15 +458,21 @@ namespace WorkflowManagementSystem.Tests
             var requester = new UserTestHelper().CreateUserWithTestRoles();
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().First(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
-            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().First(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var compSci = FacadeFactory.GetDomainFacade().FindAllDisciplines().First(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+            var management = FacadeFactory.GetDomainFacade().FindAllDisciplines().First(x => x.Name.Equals(DisciplineTestHelper.MANAGEMENT));
+
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, compSci);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
-            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, compSci, programRequestInputViewModel.Name);
             courseRequestInputViewModel.CourseNumber = "5100";
             FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
 
-            courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
+            courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, management, string.Empty);
+            courseRequestInputViewModel.CourseNumber = "5101";
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseRequestInputViewModel);
+
+            courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, compSci, programRequestInputViewModel.Name);
             courseRequestInputViewModel.CourseNumber = "51xx";
 
             // act
@@ -375,7 +482,7 @@ namespace WorkflowManagementSystem.Tests
             var course = FacadeFactory.GetDomainFacade().FindCourse(courseRequestInputViewModel.Name);
             course.Should().NotBeNull();
             course.CourseNumber.Should().BeEquivalentTo("5101");
-            course.Discipline.ShouldBeEquivalentTo(discipline.Code);
+            course.Discipline.ShouldBeEquivalentTo(compSci.Code);
             course.Name.ShouldBeEquivalentTo(courseRequestInputViewModel.Name);
             course.Credits.ShouldBeEquivalentTo(courseRequestInputViewModel.Credits);
             course.Grading.ShouldBeEquivalentTo(courseRequestInputViewModel.Grading);

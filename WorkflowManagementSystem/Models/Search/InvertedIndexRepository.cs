@@ -52,7 +52,13 @@ namespace WorkflowManagementSystem.Models.Search
         public static HashSet<string> SearchForProgramNames(string keywords)
         {
             var searchKeys = new Regex("[a-z]+").Matches(keywords.ToLower()).Cast<Match>().Select(x => x.Value);
-            var workflowItemIndices = Queryable<WorkflowItemIndex>().Where(x => searchKeys.Contains(x.Key.Key));
+            var workflowItemIndices = Queryable<WorkflowItemIndex>().Where(x => searchKeys.Contains(x.Key.Key) && x.Entity.Type == WorkflowItemTypes.Program);
+            return new HashSet<string>(workflowItemIndices.Select(x => x.Entity.Name));
+        }
+        public static HashSet<string> SearchForCourseNames(string keywords)
+        {
+            var searchKeys = new Regex("[a-z]+").Matches(keywords.ToLower()).Cast<Match>().Select(x => x.Value);
+            var workflowItemIndices = Queryable<WorkflowItemIndex>().Where(x => searchKeys.Contains(x.Key.Key) && x.Entity.Type == WorkflowItemTypes.Course);
             return new HashSet<string>(workflowItemIndices.Select(x => x.Entity.Name));
         }
 

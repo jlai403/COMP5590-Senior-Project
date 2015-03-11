@@ -280,6 +280,7 @@ namespace WorkflowManagementSystem.Tests
             // assemble
             new RoleTestHelper().CreateTestRoles();
             new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
             new SemesterTestHelper().CreateTestSemesters();
             new DisciplineTestHelper().CreateTestDisciplines();
 
@@ -287,6 +288,10 @@ namespace WorkflowManagementSystem.Tests
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var dogeCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            dogeCourse.Name = "doge course";
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, dogeCourse);
 
             var dogeProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
             dogeProgram.Name = "doge program";
@@ -334,6 +339,72 @@ namespace WorkflowManagementSystem.Tests
             programNames.Count().ShouldBeEquivalentTo(2);
             programNames.Should().Contain(dogeProgram.Name);
             programNames.Should().Contain(robotsAndUnicornsProgram.Name);
+        }
+
+        [Test]
+        public void SearchForCourseNames()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var dogeProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            dogeProgram.Name = "doge program";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, dogeProgram);
+
+            var dogeCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            dogeCourse.Name = "doge course";
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, dogeCourse);
+
+            var robotsAndUnicornsCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            robotsAndUnicornsCourse.Name = "robots and unicorns course";
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, robotsAndUnicornsCourse);
+
+            // act
+            var programNames = FacadeFactory.GetSearchFacade().SearchForCourseNames("doge");
+
+            // assert
+            programNames.Count().ShouldBeEquivalentTo(1);
+            programNames.Should().Contain(dogeCourse.Name);
+        }
+
+        [Test]
+        public void SearchForCourseNames_Multiple()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var user = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+
+            var dogeCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            dogeCourse.Name = "doge course";
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, dogeCourse);
+
+            var robotsAndUnicornsCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            robotsAndUnicornsCourse.Name = "robots and unicorns course";
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, robotsAndUnicornsCourse);
+
+            // act
+            var programNames = FacadeFactory.GetSearchFacade().SearchForCourseNames("course");
+
+            // assert
+            programNames.Count().ShouldBeEquivalentTo(2);
+            programNames.Should().Contain(dogeCourse.Name);
+            programNames.Should().Contain(robotsAndUnicornsCourse.Name);
         }
     }
 }

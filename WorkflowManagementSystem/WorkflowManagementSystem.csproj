@@ -133,6 +133,7 @@
     <Content Include="Content\css\bootstrap-3.2.0-dist\js\bootstrap.js" />
     <Content Include="Content\css\bootstrap-3.2.0-dist\js\bootstrap.min.js" />
     <Content Include="Content\css\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\css\module\jquery-ui.theme.min.css" />
     <Content Include="Content\css\module\collapse-text.css" />
     <Content Include="Content\css\module\colors.css" />
     <Content Include="Content\css\module\controls.css" />
@@ -279,6 +280,10 @@
     <Compile Include="Migrations\201503021958483_AddGradingToCourse.Designer.cs">
       <DependentUpon>201503021958483_AddGradingToCourse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503100130560_AddPrerequisitesToCourse.cs" />
+    <Compile Include="Migrations\201503100130560_AddPrerequisitesToCourse.Designer.cs">
+      <DependentUpon>201503100130560_AddPrerequisitesToCourse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -294,6 +299,7 @@
     <Compile Include="Models\Course\CourseRepository.cs" />
     <Compile Include="Models\Course\CourseRequestInputViewModel.cs" />
     <Compile Include="Models\Course\CourseViewModel.cs" />
+    <Compile Include="Models\Course\PrerequisiteCourses.cs" />
     <Compile Include="Models\Files\File.cs" />
     <Compile Include="Models\Files\FileAssembler.cs" />
     <Compile Include="Models\Files\FileInputViewModel.cs" />
@@ -495,6 +501,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503021958483_AddGradingToCourse.resx">
       <DependentUpon>201503021958483_AddGradingToCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503100130560_AddPrerequisitesToCourse.resx">
+      <DependentUpon>201503100130560_AddPrerequisitesToCourse.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

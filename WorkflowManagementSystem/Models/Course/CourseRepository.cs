@@ -27,7 +27,15 @@ namespace WorkflowManagementSystem.Models.Course
 
         public static List<int> FindAllCourseNumbers(Discipline discipline)
         {
-            return Queryable<Course>().Select(x => x.CourseNumber).ToList();
+            return Queryable<Course>().Where(x => x.Discipline.Id == discipline.Id).Select(x => x.CourseNumber).ToList();
+        }
+
+        public static PrerequisiteCourses CreatePrequisiteCourses(Course course, List<string> prerequisites)
+        {
+            var prerequisiteCourses = new PrerequisiteCourses();
+            AddEntity(prerequisiteCourses);
+            prerequisiteCourses.Update(course, prerequisites);
+            return prerequisiteCourses;
         }
     }
 }

@@ -34,5 +34,12 @@ namespace WorkflowManagementSystem.Controllers
             var programNames = FacadeFactory.GetSearchFacade().SearchForProgramNames(keywords);
             return Json(programNames);
         }
+
+        [HttpPost]
+        public ActionResult CourseNames(string keywords)
+        {
+            var courseNames = FacadeFactory.GetSearchFacade().SearchForCourseNames(keywords);
+            return Json(courseNames);
+        }
     }
 }

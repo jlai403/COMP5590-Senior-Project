@@ -23,5 +23,13 @@ namespace WorkflowManagementSystem.Models
                 return InvertedIndexRepository.SearchForProgramNames(keywords);
             });
         }
+
+        public HashSet<string> SearchForCourseNames(string keywords)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                return InvertedIndexRepository.SearchForCourseNames(keywords);
+            });
+        }
     }
 }

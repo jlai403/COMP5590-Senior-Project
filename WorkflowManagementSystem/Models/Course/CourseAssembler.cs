@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using WorkflowManagementSystem.Models.Files;
 using WorkflowManagementSystem.Models.Workflow;
 
@@ -29,6 +31,7 @@ namespace WorkflowManagementSystem.Models.Course
             courseViewModel.RequestedDateUTC = Course.RequestedDateUTC;
             courseViewModel.Requester = Course.Requester.GetDisplayName();
             courseViewModel.ProgramName = Course.Program == null ? "" : Course.Program.Name;
+            courseViewModel.Prerequisites = Course.PrerequisiteCourses == null ? null : Course.PrerequisiteCourses.Prerequisites.Select(x => x.Name).ToList();
             courseViewModel.WorkflowSteps = WorkflowAssembler.AssembleWorkflowDatas(Course.GetWorkflowHistory());
             courseViewModel.Comments = CommentAssembler.AssembleAll(Course.Comments);
             courseViewModel.Attachments = FileAssembler.AssembleAll(Course.Attachments);

@@ -5,6 +5,7 @@
 @model WorkflowManagementSystem.Models.Course.CourseRequestInputViewModel
 
 @Styles.Render("~/Content/css/theme/create-request.css")
+@Styles.Render("~/Content/css/module/jquery-ui.theme.min.css")
 
 <div class="container form center">
     <div class="col-md-12">
@@ -94,6 +95,14 @@
                     </div>
                     <div class="col-xs-5">
                         <span class="calendarEntry left-align"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5 right-align">
+                        Prerequisite(s):
+                    </div>
+                    <div class="col-xs-5">
+                        <span class="prerequisites left-align"></span>
                     </div>
                 </div>
             </div>
@@ -190,16 +199,34 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-3 required">
-                        Calendar Entry
-                    </div>
+                    <div class="col-md-3 required"> Calendar Entry </div>
                     <div class="col-md-9">
                         <textarea name="CalendarEntry" class="form-control expandOnFocus" rows="2" tabindex="9"
                                   placeholder="Please provide the calendar entry that will be used for the proposed course.">@(Model == null ? "" : Model.CalendarEntry)</textarea>
                     </div>
                 </div>
 
-                <div class="row center-text" style="padding: 0 100px; margin: 15px 0;" tabindex="10">
+                <div class="row">
+                    <div class="col-md-3"> Prerequisite(s) </div>
+                    <div class="col-md-9">
+                        @if (Model != null && Model.Prerequisites.Any())
+                        {
+                            foreach (var prerequisite in Model.Prerequisites)
+                            {
+                                <input name="Prerequisites" class="form-control" tabindex="10" value="@prerequisite" placeholder="Course name"/>
+                            }
+                        }
+                        else
+                        {
+                            <input name="Prerequisites" class="form-control" tabindex="10" placeholder="Course name"/>
+                        }
+                        <div id="add-prerequisite" class="cursor" style="font-size: 11px;">
+                            <span style="font-style: italic"><i class="glyphicon glyphicon-plus" style="font-size: 10px;"></i> Add new </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row center-text" style="padding: 0 100px; margin: 15px 0;" tabindex="11">
                     <input class="form-control button dark-blue" type="button" value="Next"/>
                 </div>
             </div>
@@ -212,7 +239,7 @@
                         Cross Impact
                     </div>
                     <div class="col-md-9">
-                        <textarea name="CrossImpact" class="form-control expandOnFocus" rows="2" tabindex="11"
+                        <textarea name="CrossImpact" class="form-control expandOnFocus" rows="2" tabindex="12"
                                   placeholder="Please identify how impact to other departments has been addressed, including General Education as appropriate">@(Model == null ? "" : Model.CrossImpact)</textarea>
                     </div>
                 </div>
@@ -222,7 +249,7 @@
                         Student Impact
                     </div>
                     <div class="col-md-9">
-                        <textarea name="StudentImpact" class="form-control expandOnFocus" rows="2" tabindex="12"
+                        <textarea name="StudentImpact" class="form-control expandOnFocus" rows="2" tabindex="13"
                                   placeholder="Please identify how student input or impact has been assessed">@(Model == null ? "" : Model.StudentImpact)</textarea>
                     </div>
                 </div>
@@ -232,7 +259,7 @@
                         Library Impact
                     </div>
                     <div class="col-md-9">
-                        <textarea name="LibraryImpact" class="form-control expandOnFocus" rows="2" tabindex="13"
+                        <textarea name="LibraryImpact" class="form-control expandOnFocus" rows="2" tabindex="14"
                                   placeholder="Please identify how impact to the Library has been addressed">@(Model == null ? "" : Model.LibraryImpact)</textarea>
                     </div>
                 </div>
@@ -242,14 +269,14 @@
                         ITS Impact
                     </div>
                     <div class="col-md-9">
-                        <textarea name="ItsImpact" class="form-control expandOnFocus" rows="2" tabindex="14"
+                        <textarea name="ItsImpact" class="form-control expandOnFocus" rows="2" tabindex="15"
                                   placeholder="Please identify how impact to ITS has been add
                             ressed">@(Model == null ? "" : Model.ITSImpact)</textarea>
                     </div>
                 </div>
 
                 <div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
-                    <input class="form-control button dark-blue" type="button" value="Next" tabindex="15"/>
+                    <input class="form-control button dark-blue" type="button" value="Next" tabindex="16"/>
                 </div>
             </div>
             <!-- STEP TWO END -->
@@ -261,7 +288,7 @@
                         Comments
                     </div>
                     <div class="col-md-9">
-                        <textarea name="Comment" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="16">@(Model == null ? "" : Model.Comment)</textarea>
+                        <textarea name="Comment" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="17">@(Model == null ? "" : Model.Comment)</textarea>
                     </div>
                 </div>
 
@@ -285,7 +312,7 @@
 
 <script>
     var disciplinesLookUp = new Array();
-    @foreach (var faculty in (List<FacultyViewModel>) ViewBag.Faculties)
+    @foreach (var faculty in (List<FacultyViewModel>)ViewBag.Faculties)
     {
         @:disciplinesLookUp['@faculty.Name'] = new Array();
     }
@@ -295,7 +322,9 @@
     }
 
     $(document).ready(function () {
+        bindAddPrerequisite();
         bindAutoCompleteForProgram();
+        bindAutoCompleteForPrerequisites();
         setDisciplinesDropDown($("#Faculty").val());
 
         showStepOne();
@@ -327,6 +356,32 @@
             source: function (request, response) {
                 $.ajax({
                     url: "@Url.Action("ProgramNames", "Search")",
+                    type: 'post',
+                    dataType: "json",
+                    data: {
+                        keywords: request.term
+                    },
+                    success: function (data) {
+                        response(data);
+                    }
+                });
+            },
+            minLength: 3
+        });
+    }
+
+    function bindAddPrerequisite() {
+        $("#add-prerequisite").click(function(e) {
+            $("<input name='Prerequisites' class='form-control' tabindex='10' placeholder='Course name'/>").insertBefore($(this));
+            bindAutoCompleteForPrerequisites();
+        });
+    }
+
+    function bindAutoCompleteForPrerequisites() {
+        $("input[name='Prerequisites']").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "@Url.Action("CourseNames", "Search")",
                     type: 'post',
                     dataType: "json",
                     data: {
@@ -409,6 +464,11 @@
         $(".context .credits").text($("#Credits option:selected").text());
         $(".context .grading").text($("#Grading option:selected").text());
         $(".context .calendarEntry").text($("textarea[name='CalendarEntry']").val());
+        var prerequisites = [];
+        $("input[name='Prerequisites']").each(function() {
+            prerequisites.push($(this).val());
+        });
+        $(".context .prerequisites").text(prerequisites.join(", "));
     }
 
     function hideContext(){

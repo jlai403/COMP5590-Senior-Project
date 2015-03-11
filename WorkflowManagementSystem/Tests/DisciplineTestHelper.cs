@@ -6,13 +6,14 @@ namespace WorkflowManagementSystem.Tests
     public class DisciplineTestHelper
     {
         public static string COMP_SCI = "Computer Science";
+        public static string MANAGEMENT = "Management";
 
         public void CreateTestDisciplines()
         {
             var businessAdministrationFaculty = new FacultyTestHelper().CreateBusinessAdministrationFaculty();
             var management = new DisciplineInputViewModel();
             management.Code = "MGMT";
-            management.Name = "Management";
+            management.Name = MANAGEMENT;
             management.Faculty = businessAdministrationFaculty.Name;
             FacadeFactory.GetDomainFacade().CreateDiscipline(management);
 
