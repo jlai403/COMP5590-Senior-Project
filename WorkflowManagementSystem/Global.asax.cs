@@ -4,7 +4,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using WorkflowManagementSystem.Controllers;
+using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.DataAccess;
+using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem
 {
@@ -19,6 +21,9 @@ namespace WorkflowManagementSystem
             DatabaseManager.Instance.Initialize(new WorkflowManagementSystemDbContext(connectionString));
 
             WebMembershipInitializer.Initialize();
+
+            FacadeFactory.GetDomainFacade().CreateDefaultAdmin();
+            SecurityManager.CreateAccount(UserConstants.DEFAULT_ADMIN_EMAIL, UserConstants.DEFAULT_ADMIN_PASSWORD);
         }
 
         protected void Application_Error(Object sender, EventArgs e)

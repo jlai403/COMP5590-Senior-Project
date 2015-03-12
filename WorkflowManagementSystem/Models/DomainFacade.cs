@@ -16,11 +16,11 @@ namespace WorkflowManagementSystem.Models
 {
     public class DomainFacade
     {
-        public List<UserViewModel> FindAllUsers()
+        public List<UserViewModel> FindAllUsers(bool includeDefaultAdmin = false)
         {
             return TransactionHandler.Instance.Execute(() =>
             {
-                var users = UserRepository.FindAllUsers();
+                var users = UserRepository.FindAllUsers(includeDefaultAdmin);
                 return UserAssembler.AssembleAll(users);
             });
         }
@@ -287,6 +287,15 @@ namespace WorkflowManagementSystem.Models
             {
                 var course = CourseRepository.FindCourse(name);
                 return new CourseAssembler(course).Assemble();
+            });
+        }
+
+        public void CreateDefaultAdmin()
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                UserRepository.CreateDefaultAdmin();
+                return null;
             });
         }
     }

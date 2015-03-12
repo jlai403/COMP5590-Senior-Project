@@ -12,17 +12,19 @@ namespace WorkflowManagementSystem.Models.Users
             Roles = new List<Role>();
         }
 
+        public int Id { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public virtual List<Role> Roles { get; set; }
-        public int Id { get; set; }
+        public bool IsAdmin { get; set; }
 
         public void Update(UserSignUpViewModel userSignUpViewModel)
         {
             FirstName = userSignUpViewModel.FirstName;
             LastName = userSignUpViewModel.LastName;
             Email = userSignUpViewModel.Email;
+            IsAdmin = userSignUpViewModel.IsAdmin;
             UpdateRoles(userSignUpViewModel.Roles);
 
             AssertEmailIsNotTaken();
@@ -31,6 +33,7 @@ namespace WorkflowManagementSystem.Models.Users
             AssertAtLeastOneRoleIsSelected();
             AssertPasswordIsValid(userSignUpViewModel.Password);
         }
+
 
         private void AssertPasswordIsValid(string password)
         {

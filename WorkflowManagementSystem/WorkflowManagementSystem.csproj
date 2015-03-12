@@ -284,6 +284,10 @@
     <Compile Include="Migrations\201503100130560_AddPrerequisitesToCourse.Designer.cs">
       <DependentUpon>201503100130560_AddPrerequisitesToCourse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503112357562_AddIsAdminToUser.cs" />
+    <Compile Include="Migrations\201503112357562_AddIsAdminToUser.Designer.cs">
+      <DependentUpon>201503112357562_AddIsAdminToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -354,6 +358,7 @@
     <Compile Include="Models\Users\SecurityManager.cs" />
     <Compile Include="Models\Users\User.cs" />
     <Compile Include="Models\Users\UserAssembler.cs" />
+    <Compile Include="Models\Users\UserConstants.cs" />
     <Compile Include="Models\Users\UserRepository.cs" />
     <Compile Include="Models\Users\UserSignUpViewModel.cs" />
     <Compile Include="Models\Users\UserViewModel.cs" />
@@ -504,6 +509,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503100130560_AddPrerequisitesToCourse.resx">
       <DependentUpon>201503100130560_AddPrerequisitesToCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503112357562_AddIsAdminToUser.resx">
+      <DependentUpon>201503112357562_AddIsAdminToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

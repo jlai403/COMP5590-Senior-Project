@@ -36,7 +36,27 @@ namespace WorkflowManagementSystem.Tests
             userViewModel.Roles.Count.ShouldBeEquivalentTo(1);
             userViewModel.Roles.Should().Contain(RoleTestHelper.FACULTY_MEMBER);
             userViewModel.DisplayName.ShouldBeEquivalentTo("Some Dude");
+            userViewModel.IsAdmin.Should().BeFalse();
         }
+
+        [Test]
+        public void CreateDefaultAdmin()
+        {
+            // assemble
+            // act
+            FacadeFactory.GetDomainFacade().CreateDefaultAdmin();
+
+            // assert
+            var users = FacadeFactory.GetDomainFacade().FindAllUsers(true);
+            users.Count.ShouldBeEquivalentTo(1);
+            var userViewModel = users.First();
+            userViewModel.FirstName.ShouldBeEquivalentTo(UserConstants.DEFAULT_ADMIN_EMAIL);
+            userViewModel.LastName.ShouldBeEquivalentTo(string.Empty);
+            userViewModel.Email.ShouldBeEquivalentTo(UserConstants.DEFAULT_ADMIN_EMAIL);
+            userViewModel.Roles.Count.ShouldBeEquivalentTo(0);
+            userViewModel.IsAdmin.Should().BeTrue();
+        }
+
 
         [Test]
         public void CreateUser_EmailTaken()

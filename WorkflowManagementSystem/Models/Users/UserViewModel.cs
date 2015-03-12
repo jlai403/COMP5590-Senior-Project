@@ -9,5 +9,6 @@ namespace WorkflowManagementSystem.Models.Users
         public string Email { get; set; }
         public List<string> Roles { get; set; }
         public string DisplayName { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

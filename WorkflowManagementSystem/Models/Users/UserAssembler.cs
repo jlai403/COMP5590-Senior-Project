@@ -32,6 +32,7 @@ namespace WorkflowManagementSystem.Models.Users
             viewModel.Email = User.Email;
             viewModel.DisplayName = User.GetDisplayName();
             viewModel.Roles = User.Roles.Select(x => x.Name).ToList();
+            viewModel.IsAdmin = User.IsAdmin;
             return viewModel;
         }
     }
