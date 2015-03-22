@@ -288,6 +288,10 @@
     <Compile Include="Migrations\201503112357562_AddIsAdminToUser.Designer.cs">
       <DependentUpon>201503112357562_AddIsAdminToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503191809535_VersioningApprovalChain.cs" />
+    <Compile Include="Migrations\201503191809535_VersioningApprovalChain.Designer.cs">
+      <DependentUpon>201503191809535_VersioningApprovalChain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -512,6 +516,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503112357562_AddIsAdminToUser.resx">
       <DependentUpon>201503112357562_AddIsAdminToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503191809535_VersioningApprovalChain.resx">
+      <DependentUpon>201503191809535_VersioningApprovalChain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

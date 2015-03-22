@@ -44,7 +44,7 @@ namespace WorkflowManagementSystem.Models.Workflow
             var currentWorkflowData = request.CurrentWorkflowData;
             currentWorkflowData.UpdateStatus(user, WorkflowStates.APPROVED);
 
-            var approvalChain = ApprovalChainRepository.FindApprovalChain(request.APPROVAL_CHAIN_NAME);
+            var approvalChain = ApprovalChainRepository.FindActiveApprovalChain(request.APPROVAL_CHAIN_NAME);
             int nextApprovalChainStepSequence = currentWorkflowData.ApprovalChainStep.Sequence + 1;
             var nextApprovalChainStep = approvalChain.ApprovalChainSteps.First(x => x.Sequence == nextApprovalChainStepSequence);
 

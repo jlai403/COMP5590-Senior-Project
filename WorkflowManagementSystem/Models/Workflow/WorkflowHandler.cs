@@ -16,7 +16,7 @@ namespace WorkflowManagementSystem.Models.Workflow
 
         public void InitiateWorkflow()
         {
-            var approvalChain = ApprovalChainRepository.FindApprovalChain(Request.APPROVAL_CHAIN_NAME);
+            var approvalChain = ApprovalChainRepository.FindActiveApprovalChain(Request.APPROVAL_CHAIN_NAME);
 
             if (approvalChain == null) 
                 throw new WMSException("Unable to find Approval Chain for '{0}'", Request.APPROVAL_CHAIN_NAME);

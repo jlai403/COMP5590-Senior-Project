@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models.ErrorHandling;
 
 namespace WorkflowManagementSystem.Models.Course
@@ -20,6 +21,7 @@ namespace WorkflowManagementSystem.Models.Course
 
             foreach (var prerequisite in prerequisites)
             {
+                if (prerequisite.IsNullOrWhiteSpace()) continue;
                 var prerequisiteCourse = CourseRepository.FindCourse(prerequisite);
                 if (prerequisiteCourse == null)
                     throw new WMSException("Could not find prerequisite course '{0}'", prerequisite);

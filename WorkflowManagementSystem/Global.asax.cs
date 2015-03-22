@@ -22,8 +22,8 @@ namespace WorkflowManagementSystem
 
             WebMembershipInitializer.Initialize();
 
-            FacadeFactory.GetDomainFacade().CreateDefaultAdmin();
-            SecurityManager.CreateAccount(UserConstants.DEFAULT_ADMIN_EMAIL, UserConstants.DEFAULT_ADMIN_PASSWORD);
+            //FacadeFactory.GetDomainFacade().CreateDefaultAdmin();
+            //SecurityManager.CreateAccount(UserConstants.DEFAULT_ADMIN_EMAIL, UserConstants.DEFAULT_ADMIN_PASSWORD);
         }
 
         protected void Application_Error(Object sender, EventArgs e)

@@ -164,11 +164,11 @@ namespace WorkflowManagementSystem.Models
             });
         }
 
-        public List<ApprovalChainStepViewModel> FindApprovalChainSteps(string approvalChainName)
+        public List<ApprovalChainStepViewModel> FindActiveApprovalChainSteps(string approvalChainName)
         {
             return TransactionHandler.Instance.Execute(() =>
             {
-                var approvalChain = ApprovalChainRepository.FindApprovalChain(approvalChainName);
+                var approvalChain = ApprovalChainRepository.FindActiveApprovalChain(approvalChainName);
                 return new ApprovalChainAssembler(approvalChain).AssembleApprovalChainSteps();
             });
         }

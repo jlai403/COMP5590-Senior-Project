@@ -78,11 +78,11 @@ namespace WorkflowManagementSystem.Migrations
             // APPROVAL CHAINS
             if (!FacadeFactory.GetDomainFacade().FindAllApprovalChains().Exists(x => x.Name.Equals("Program")))
                 FacadeFactory.GetDomainFacade().CreateApprovalChain(
-                    new ApprovalChainInputViewModel { Name = "Program", Roles = {"Faculty Council Member","Faculty Curriculumn Member","APPC Member", "GFC Member"} }
+                    new ApprovalChainInputViewModel { Name = "Program", Roles = {"Faculty Council Member","Faculty Curriculumn Member","APPC Member", "GFC Member"}, Active = true}
             );
             if (!FacadeFactory.GetDomainFacade().FindAllApprovalChains().Exists(x => x.Name.Equals("Course")))
                 FacadeFactory.GetDomainFacade().CreateApprovalChain(
-                    new ApprovalChainInputViewModel { Name = "Course", Roles = { "Faculty Council Member", "Faculty Curriculumn Member", "APPC Member", "GFC Member" } }
+                    new ApprovalChainInputViewModel { Name = "Course", Roles = {"Faculty Council Member", "Faculty Curriculumn Member", "APPC Member", "GFC Member"}, Active = true }
             );
         }
     }
