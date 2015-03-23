@@ -39,5 +39,10 @@ namespace WorkflowManagementSystem.Models.Course
             prerequisiteCourse.Update(course, prerequisite);
             return prerequisiteCourse;
         }
+
+        public static HashSet<string> SearchForCourseNames(string keywords)
+        {
+            return new HashSet<string>(Queryable<Course>().Where(x => x.Name.StartsWith(keywords)).Select(x => x.Name));
+        }
     }
 }

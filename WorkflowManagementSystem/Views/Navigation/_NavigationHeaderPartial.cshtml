@@ -28,8 +28,12 @@
                         </div>
                     }
                 </li>
-						
+
                 <!-- NAV LINKS START -->
+                @if (ViewBag.IsAdmin)
+                {
+                    <li> @Html.ActionLink("Admin", "Index", "Admin") </li>
+                }
                 <li> @Html.ActionLink("Create Program", "CreateRequest", "Program") </li>
                 <li> @Html.ActionLink("Create Course", "CreateRequest", "Course") </li>
                 <li> @Html.ActionLink("Logout","Logout","Account") </li>

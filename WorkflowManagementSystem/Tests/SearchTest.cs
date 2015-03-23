@@ -324,20 +324,20 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
-            var dogeProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
-            dogeProgram.Name = "doge program";
-            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, dogeProgram);
+            var randomProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            randomProgram.Name = "random program";
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, randomProgram);
 
             var robotsAndUnicornsProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
             robotsAndUnicornsProgram.Name = "robots and unicorns program";
             FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, robotsAndUnicornsProgram);
 
             // act
-            var programNames = FacadeFactory.GetSearchFacade().SearchForProgramNames("program");
+            var programNames = FacadeFactory.GetSearchFacade().SearchForProgramNames("r");
 
             // assert
             programNames.Count().ShouldBeEquivalentTo(2);
-            programNames.Should().Contain(dogeProgram.Name);
+            programNames.Should().Contain(randomProgram.Name);
             programNames.Should().Contain(robotsAndUnicornsProgram.Name);
         }
 
@@ -369,11 +369,11 @@ namespace WorkflowManagementSystem.Tests
             FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, robotsAndUnicornsCourse);
 
             // act
-            var programNames = FacadeFactory.GetSearchFacade().SearchForCourseNames("doge");
+            var programNames = FacadeFactory.GetSearchFacade().SearchForCourseNames("ro");
 
             // assert
             programNames.Count().ShouldBeEquivalentTo(1);
-            programNames.Should().Contain(dogeCourse.Name);
+            programNames.Should().Contain(robotsAndUnicornsCourse.Name);
         }
 
         [Test]
@@ -390,20 +390,20 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
-            var dogeCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
-            dogeCourse.Name = "doge course";
-            FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, dogeCourse);
+            var randomCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            randomCourse.Name = "random course";
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, randomCourse);
 
             var robotsAndUnicornsCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
             robotsAndUnicornsCourse.Name = "robots and unicorns course";
             FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, robotsAndUnicornsCourse);
 
             // act
-            var programNames = FacadeFactory.GetSearchFacade().SearchForCourseNames("course");
+            var programNames = FacadeFactory.GetSearchFacade().SearchForCourseNames("r");
 
             // assert
             programNames.Count().ShouldBeEquivalentTo(2);
-            programNames.Should().Contain(dogeCourse.Name);
+            programNames.Should().Contain(randomCourse.Name);
             programNames.Should().Contain(robotsAndUnicornsCourse.Name);
         }
     }

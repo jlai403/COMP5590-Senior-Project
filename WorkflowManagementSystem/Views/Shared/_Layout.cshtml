@@ -26,7 +26,7 @@
     <body>
         @if (Request.IsAuthenticated)
         {
-            Html.RenderPartial("_NavigationHeaderPartial");
+            Html.RenderAction("RenderNavigationHeader", "Navigation");
         }
         @RenderBody()
     </body>

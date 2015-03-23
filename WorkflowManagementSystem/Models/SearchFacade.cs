@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using WorkflowManagementSystem.Models.Course;
 using WorkflowManagementSystem.Models.DataAccess;
+using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Search;
 using WorkflowManagementSystem.Models.Workflow;
 
@@ -20,7 +22,7 @@ namespace WorkflowManagementSystem.Models
         {
             return TransactionHandler.Instance.Execute(() =>
             {
-                return InvertedIndexRepository.SearchForProgramNames(keywords);
+                return ProgramRepository.SearchForProgramNames(keywords);
             });
         }
 
@@ -28,7 +30,7 @@ namespace WorkflowManagementSystem.Models
         {
             return TransactionHandler.Instance.Execute(() =>
             {
-                return InvertedIndexRepository.SearchForCourseNames(keywords);
+                return CourseRepository.SearchForCourseNames(keywords);
             });
         }
     }

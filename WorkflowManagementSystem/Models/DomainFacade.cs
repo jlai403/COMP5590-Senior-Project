@@ -297,6 +297,15 @@ namespace WorkflowManagementSystem.Models
                 UserRepository.CreateDefaultAdmin();
                 return null;
             });
+            SecurityManager.CreateAccount(UserConstants.DEFAULT_ADMIN_EMAIL, UserConstants.DEFAULT_ADMIN_PASSWORD);
+        }
+
+        public bool IsAdmin(string email)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                return UserRepository.FindUser(email).IsAdmin;
+            });
         }
     }
 }

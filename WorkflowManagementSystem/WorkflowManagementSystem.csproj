@@ -140,6 +140,7 @@
     <Content Include="Content\css\module\errors.css" />
     <Content Include="Content\css\module\nav.css" />
     <Content Include="Content\css\module\tablesorter.css" />
+    <Content Include="Content\css\theme\admin.css" />
     <Content Include="Content\css\theme\create-request.css" />
     <Content Include="Content\css\theme\dashboard.css" />
     <Content Include="Content\css\theme\layout.css" />
@@ -185,12 +186,14 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\ProgramController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
@@ -295,6 +298,10 @@
     <Compile Include="Migrations\201503230006301_FixPrequisiteCoursesDbMapping.cs" />
     <Compile Include="Migrations\201503230006301_FixPrequisiteCoursesDbMapping.Designer.cs">
       <DependentUpon>201503230006301_FixPrequisiteCoursesDbMapping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503230243007_RemoveVersionFromApprovalChain.cs" />
+    <Compile Include="Migrations\201503230243007_RemoveVersionFromApprovalChain.Designer.cs">
+      <DependentUpon>201503230243007_RemoveVersionFromApprovalChain.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
@@ -422,7 +429,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_NavigationHeaderPartial.cshtml" />
+    <Content Include="Views\Navigation\_NavigationHeaderPartial.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Errors\Index.cshtml" />
@@ -439,6 +446,7 @@
     <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\Course\_CourseSummaryDetailsPartial.cshtml" />
     <Content Include="Views\Course\UpdateStatus.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -526,6 +534,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503230006301_FixPrequisiteCoursesDbMapping.resx">
       <DependentUpon>201503230006301_FixPrequisiteCoursesDbMapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503230243007_RemoveVersionFromApprovalChain.resx">
+      <DependentUpon>201503230243007_RemoveVersionFromApprovalChain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,18 @@
+﻿.user-management, .approval-chains {
+	min-height: 400px;
+    background-color: #FFFFFF;
+	box-shadow: 0 0 40px #CDCDCD;
+	margin: 0 0 20px;
+	padding: 0;
+}
+
+.user-management .header, .approval-chains .header {
+	padding: 30px 20px;
+    margin-bottom: 0;
+    background-color: #34495e;
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 16px;
+}

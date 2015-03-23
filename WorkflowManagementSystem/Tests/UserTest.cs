@@ -40,6 +40,40 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void IsAdmin()
+        {
+            // assemble
+            FacadeFactory.GetDomainFacade().CreateDefaultAdmin();
+
+            // act
+            var isAdmin = FacadeFactory.GetDomainFacade().IsAdmin(UserConstants.DEFAULT_ADMIN_EMAIL);
+
+            // assert
+            isAdmin.Should().BeTrue();
+        }
+
+        [Test]
+        public void IsAdmin_RegularUser()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+
+            var userSignUpViewModel = new UserSignUpViewModel();
+            userSignUpViewModel.FirstName = "Some";
+            userSignUpViewModel.LastName = "Dude";
+            userSignUpViewModel.Email = "somedude@someawesomeemailprovider.com";
+            userSignUpViewModel.Password = "123456";
+            userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
+            FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
+
+            // act
+            var isAdmin = FacadeFactory.GetDomainFacade().IsAdmin(userSignUpViewModel.Email);
+
+            // assert
+            isAdmin.Should().BeFalse();
+        }
+
+        [Test]
         public void CreateDefaultAdmin()
         {
             // assemble
