@@ -26,8 +26,14 @@ namespace WorkflowManagementSystem.Models.Course
         public string LibraryImpact { get; set; }
         public string ITSImpact { get; set; }
         public virtual Program Program { get; set; }
-        public virtual PrerequisiteCourses PrerequisiteCourses { get; set; }
-        
+        //public virtual PrerequisiteCourses PrerequisiteCourses { get; set; }
+        public virtual List<PrerequisiteCourse> PrerequisiteCourses { get; set; }
+
+        public Course()
+        {
+            PrerequisiteCourses = new List<PrerequisiteCourse>();
+        }
+
         public void Update(User user, CourseRequestInputViewModel courseRequestInputViewModel)
         {
             UpdateWorkflowItem(user, courseRequestInputViewModel.Name, courseRequestInputViewModel.RequestedDateUTC, WorkflowItemTypes.Course);
@@ -41,7 +47,9 @@ namespace WorkflowManagementSystem.Models.Course
             StudentImpact = courseRequestInputViewModel.StudentImpact;
             LibraryImpact = courseRequestInputViewModel.LibraryImpact;
             ITSImpact = courseRequestInputViewModel.ITSImpact;
+            
             UpdateProgram(courseRequestInputViewModel.ProgramName);
+            
             UpdatePrerequisites(courseRequestInputViewModel.Prerequisites);
 
             if (!courseRequestInputViewModel.Comment.IsNullOrWhiteSpace())
@@ -88,8 +96,11 @@ namespace WorkflowManagementSystem.Models.Course
 
         private void UpdatePrerequisites(List<string> prerequisites)
         {
-            if (!prerequisites.Any()) return;
-            PrerequisiteCourses = CourseRepository.CreatePrequisiteCourses(this, prerequisites);
+            foreach (var prerequisite in prerequisites)
+            {
+                if (prerequisite.IsNullOrWhiteSpace()) continue;
+                PrerequisiteCourses.Add(CourseRepository.CreatePrequisiteCourses(this, prerequisite));
+            }
         }
 
         private int GenerateValidCourseNumber(string courseNumber)

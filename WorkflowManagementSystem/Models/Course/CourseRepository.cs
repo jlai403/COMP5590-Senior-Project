@@ -30,12 +30,14 @@ namespace WorkflowManagementSystem.Models.Course
             return Queryable<Course>().Where(x => x.Discipline.Id == discipline.Id).Select(x => x.CourseNumber).ToList();
         }
 
-        public static PrerequisiteCourses CreatePrequisiteCourses(Course course, List<string> prerequisites)
+        public static PrerequisiteCourse CreatePrequisiteCourses(Course course, string prerequisiteCourseName)
         {
-            var prerequisiteCourses = new PrerequisiteCourses();
-            AddEntity(prerequisiteCourses);
-            prerequisiteCourses.Update(course, prerequisites);
-            return prerequisiteCourses;
+            var prerequisiteCourse = new PrerequisiteCourse();
+            AddEntity(prerequisiteCourse);
+            var prerequisite = FindCourse(prerequisiteCourseName);
+            if (prerequisite == null) throw new WMSException("Course '{0}' not found", prerequisiteCourseName);
+            prerequisiteCourse.Update(course, prerequisite);
+            return prerequisiteCourse;
         }
     }
 }

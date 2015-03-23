@@ -173,6 +173,43 @@ namespace WorkflowManagementSystem.Tests
             workflowTestHelper.AssertWorkflowStep(course.WorkflowSteps[0], WorkflowStates.PENDING_APPROVAL, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, string.Empty);
         }
 
+        [Test] 
+        public void CreateCourseRequest_CourseIsPrerequisiteForMultipleCourses()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateCourseApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().First(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().First(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
+
+            var prerequisite = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, prerequisite);
+
+            var courseOne = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            courseOne.Prerequisites.Add(prerequisite.Name);
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseOne);
+
+            var courseTwo = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
+            courseTwo.Prerequisites.Add(prerequisite.Name);
+
+            // act
+            FacadeFactory.GetDomainFacade().CreateCourseRequest(requester.Email, courseTwo);
+
+            // assert
+            var actualCourseOne = FacadeFactory.GetDomainFacade().FindCourse(courseOne.Name);
+            actualCourseOne.Prerequisites.Count.ShouldBeEquivalentTo(1);
+            actualCourseOne.Prerequisites.Should().Contain(prerequisite.Name);
+
+            var actualCourseTwo = FacadeFactory.GetDomainFacade().FindCourse(courseTwo.Name);
+            actualCourseTwo.Prerequisites.Count.ShouldBeEquivalentTo(1);
+            actualCourseTwo.Prerequisites.Should().Contain(prerequisite.Name);
+        }
+
         [Test]
         public void CreateCourseRequest_NoProgramProvided()
         {

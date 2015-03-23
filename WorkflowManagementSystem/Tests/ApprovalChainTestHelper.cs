@@ -19,6 +19,7 @@ namespace WorkflowManagementSystem.Tests
         {
             var approvalChainInputViewModel = new ApprovalChainInputViewModel();
             approvalChainInputViewModel.Name = name;
+            approvalChainInputViewModel.Active = true;
             foreach (var role in roles)
             {
                 approvalChainInputViewModel.Roles.Add(role);   

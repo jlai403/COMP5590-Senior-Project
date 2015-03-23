@@ -292,6 +292,10 @@
     <Compile Include="Migrations\201503191809535_VersioningApprovalChain.Designer.cs">
       <DependentUpon>201503191809535_VersioningApprovalChain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503230006301_FixPrequisiteCoursesDbMapping.cs" />
+    <Compile Include="Migrations\201503230006301_FixPrequisiteCoursesDbMapping.Designer.cs">
+      <DependentUpon>201503230006301_FixPrequisiteCoursesDbMapping.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -307,7 +311,7 @@
     <Compile Include="Models\Course\CourseRepository.cs" />
     <Compile Include="Models\Course\CourseRequestInputViewModel.cs" />
     <Compile Include="Models\Course\CourseViewModel.cs" />
-    <Compile Include="Models\Course\PrerequisiteCourses.cs" />
+    <Compile Include="Models\Course\PrerequisiteCourse.cs" />
     <Compile Include="Models\Files\File.cs" />
     <Compile Include="Models\Files\FileAssembler.cs" />
     <Compile Include="Models\Files\FileInputViewModel.cs" />
@@ -519,6 +523,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503191809535_VersioningApprovalChain.resx">
       <DependentUpon>201503191809535_VersioningApprovalChain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503230006301_FixPrequisiteCoursesDbMapping.resx">
+      <DependentUpon>201503230006301_FixPrequisiteCoursesDbMapping.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
