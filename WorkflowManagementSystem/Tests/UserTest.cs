@@ -40,6 +40,68 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void CreateUser_RoleNotFound()
+        {
+            // assemble
+            var userSignUpViewModel = new UserSignUpViewModel();
+            userSignUpViewModel.FirstName = "Some";
+            userSignUpViewModel.LastName = "Dude";
+            userSignUpViewModel.Email = "somedude@someawesomeemailprovider.com";
+            userSignUpViewModel.Password = "123456";
+            userSignUpViewModel.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
+
+            // act
+            Action act = ()=> FacadeFactory.GetDomainFacade().CreateUser(userSignUpViewModel);
+
+            // assert
+            act.ShouldThrow<WMSException>()
+                .WithMessage(string.Format("Unable to find the role '{0}'.", RoleTestHelper.FACULTY_MEMBER));
+        }
+
+        [Test]
+        public void UpdateIsAdmin()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+
+            var user = new UserSignUpViewModel();
+            user.FirstName = "Some";
+            user.LastName = "Dude";
+            user.Email = "somedude@someawesomeemailprovider.com";
+            user.Password = "123456";
+            user.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
+            FacadeFactory.GetDomainFacade().CreateUser(user);
+
+            // act
+            FacadeFactory.GetDomainFacade().UpdateIsAdmin(user.Email, true);
+
+            // assert
+            FacadeFactory.GetDomainFacade().IsAdmin(user.Email).Should().BeTrue();
+        }
+
+        [Test]
+        public void UpdateIsAdmin_RevokeAdmin()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+
+            var user = new UserSignUpViewModel();
+            user.FirstName = "Some";
+            user.LastName = "Dude";
+            user.Email = "somedude@someawesomeemailprovider.com";
+            user.Password = "123456";
+            user.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
+            user.IsAdmin = true;
+            FacadeFactory.GetDomainFacade().CreateUser(user);
+
+            // act
+            FacadeFactory.GetDomainFacade().UpdateIsAdmin(user.Email, false);
+
+            // assert
+            FacadeFactory.GetDomainFacade().IsAdmin(user.Email).Should().BeFalse();
+        }
+
+        [Test]
         public void IsAdmin()
         {
             // assemble
@@ -235,6 +297,8 @@ namespace WorkflowManagementSystem.Tests
         public void CreateUser_PasswordInvalidLength()
         {
             // assemble
+            new RoleTestHelper().CreateTestRoles();
+
             var userSignUpViewModel = new UserSignUpViewModel();
             userSignUpViewModel.FirstName = "Some";
             userSignUpViewModel.LastName = "Dude";

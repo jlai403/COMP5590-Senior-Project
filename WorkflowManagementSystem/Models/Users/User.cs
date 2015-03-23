@@ -24,7 +24,7 @@ namespace WorkflowManagementSystem.Models.Users
             FirstName = userSignUpViewModel.FirstName;
             LastName = userSignUpViewModel.LastName;
             Email = userSignUpViewModel.Email;
-            IsAdmin = userSignUpViewModel.IsAdmin;
+            UpdateIsAdmin(userSignUpViewModel.IsAdmin);
             UpdateRoles(userSignUpViewModel.Roles);
 
             AssertEmailIsNotTaken();
@@ -52,6 +52,7 @@ namespace WorkflowManagementSystem.Models.Users
             foreach (var roleName in roleNames)
             {
                 var role = RoleRepository.FindRole(roleName);
+                if (role == null) throw new WMSException("Unable to find the role '{0}'.", roleName);
                 Roles.Add(role);
             }
         }
@@ -77,6 +78,11 @@ namespace WorkflowManagementSystem.Models.Users
         public string GetDisplayName()
         {
             return string.Format("{0} {1}", FirstName, LastName);
+        }
+
+        public void UpdateIsAdmin(bool isAdmin)
+        {
+            IsAdmin = isAdmin;
         }
     }
 }

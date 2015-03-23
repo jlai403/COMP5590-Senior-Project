@@ -36,5 +36,10 @@ namespace WorkflowManagementSystem.Models.Users
             user.LastName = string.Empty;
             user.IsAdmin = true;
         }
+
+        public static List<User> SearchForUsers(string emailPartial)
+        {
+            return Queryable<User>().Where(x => x.Email.StartsWith(emailPartial)).ToList();
+        }
     }
 }

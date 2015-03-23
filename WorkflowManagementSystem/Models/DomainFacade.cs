@@ -307,5 +307,15 @@ namespace WorkflowManagementSystem.Models
                 return UserRepository.FindUser(email).IsAdmin;
             });
         }
+
+        public void UpdateIsAdmin(string email, bool isAdmin)
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                var user = UserRepository.FindUser(email);
+                user.UpdateIsAdmin(isAdmin);
+                return null;
+            });
+        }
     }
 }

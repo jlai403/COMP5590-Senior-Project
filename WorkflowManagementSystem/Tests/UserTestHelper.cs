@@ -26,7 +26,7 @@ namespace WorkflowManagementSystem.Tests
             return FacadeFactory.GetDomainFacade().FindUser(userSignUpViewModel.Email);
         }
 
-        public UserViewModel CreateUserRoles(params string[] roles)
+        public UserViewModel CreateUser(params string[] roles)
         {
             var userSignUpViewModel = new UserSignUpViewModel();
             userSignUpViewModel.FirstName = "Some";

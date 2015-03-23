@@ -3,22 +3,110 @@
 
 <div class="container">
     <div class="row">
-        <!-- ACTIONABLE ITEMS START -->
+        <!-- USER MANAGEMENT START -->
         <div class="col-md-6">
             <div class="user-management">
                 <p class="header">User Management</p>
-
+                <div class="row user-search">
+                    <div class="col-xs-3">
+                        Search:
+                    </div>
+                    <div class="col-xs-9">
+                        <input id="user-search" class="form-control"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <table id="userSearchResultsTable" class="table tablesorter">
+                        <thead>
+                        <tr>
+                            <th class="center-text" style="width: 40%">Email</th>
+                            <th class="center-text" style="width: 40%">Display Name</th>
+                            <th class="center-text" style="width: 20%">IsAdmin</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <!-- ACTIONABLE ITEMS END -->
+        <!-- USER MANAGEMENT END -->
 
-        <!-- REQUESTS START -->
+        <!-- APPROVAL CHAINS START -->
         <div class="col-md-6">
             <div class="approval-chains">
                 <p class="header">Approval Chains</p>
 
             </div>
         </div>
-        <!-- REQUESTS END -->
+        <!-- APPROVAL CHAINS END -->
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        bindUserSearch();
+    });
+
+    function bindUserSearch() {
+        $('#user-search').keyup(function() {
+            var emailPartial = $(this).val();
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "@Url.Action("FindUsers")",
+                data: {
+                    emailPartial: emailPartial
+                },
+                async: true,
+                success: function (jsonData) {
+                    renderUsers(jsonData);
+                    bindUpdateAdmin();
+                }
+            });
+        });
+    }
+
+    function renderUsers(jsonData)
+    {
+        var userSearchResultsBody = $("#userSearchResultsTable tbody");
+        userSearchResultsBody.empty();
+        for (var index in jsonData) {
+            var userJson = jsonData[index];
+            var row = $("<tr></tr>");
+            var emailColumn = $("<td></td>").addClass("center-text").text(userJson.Email);
+            var displayNameColumn = $("<td></td>").addClass("center-text").text(userJson.DisplayName);
+
+            var isAdminCheckBox = $("<input type='checkbox'/>").data("email", userJson.Email).addClass("update-admin");
+            if (userJson.IsAdmin) {
+                isAdminCheckBox.attr("checked", true);
+            }
+            var isAdminColumn = $("<td></td>").addClass("center-text").html(isAdminCheckBox);
+
+            row.append(emailColumn);
+            row.append(displayNameColumn);
+            row.append(isAdminColumn);
+            userSearchResultsBody.append(row);
+        }
+    }
+
+    function bindUpdateAdmin() {
+        $(".update-admin").change(function () {
+            var email = $(this).data("email");
+            var isAdmin = $(this).is(":checked");
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "@Url.Action("UpdateIsAdmin")",
+                data: {
+                    email: email,
+                    isAdmin: isAdmin
+                },
+                async: true,
+                success: function (jsonData) {
+                }
+            });
+        });
+    }
+</script>

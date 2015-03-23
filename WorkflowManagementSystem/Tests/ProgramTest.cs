@@ -270,6 +270,7 @@ namespace WorkflowManagementSystem.Tests
         public void UploadAttachment_ProgramNotFound()
         {
             // assemble
+            new RoleTestHelper().CreateTestRoles();
             var user = new UserTestHelper().CreateUserWithTestRoles();
 
             var attachmentFileName = "some pdf";
@@ -730,8 +731,8 @@ namespace WorkflowManagementSystem.Tests
             new SemesterTestHelper().CreateTestSemesters();
             new DisciplineTestHelper().CreateTestDisciplines();
 
-            var requester = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
-            var approver = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+            var requester = new UserTestHelper().CreateUser(RoleTestHelper.FACULTY_MEMBER);
+            var approver = new UserTestHelper().CreateUser(RoleTestHelper.FACULTY_MEMBER);
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
@@ -760,8 +761,8 @@ namespace WorkflowManagementSystem.Tests
             new SemesterTestHelper().CreateTestSemesters();
             new DisciplineTestHelper().CreateTestDisciplines();
 
-            var requester = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
-            var approver = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, RoleTestHelper.FACULTY_COUNCIL_MEMBER, RoleTestHelper.APPC_MEMBER);
+            var requester = new UserTestHelper().CreateUser(RoleTestHelper.FACULTY_MEMBER);
+            var approver = new UserTestHelper().CreateUser(RoleTestHelper.FACULTY_MEMBER, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, RoleTestHelper.FACULTY_COUNCIL_MEMBER, RoleTestHelper.APPC_MEMBER);
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));
@@ -794,8 +795,8 @@ namespace WorkflowManagementSystem.Tests
             new SemesterTestHelper().CreateTestSemesters();
             new DisciplineTestHelper().CreateTestDisciplines();
 
-            var requester = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
-            var approver = new UserTestHelper().CreateUserRoles(RoleTestHelper.FACULTY_MEMBER);
+            var requester = new UserTestHelper().CreateUser(RoleTestHelper.FACULTY_MEMBER);
+            var approver = new UserTestHelper().CreateUser(RoleTestHelper.FACULTY_MEMBER);
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals(SemesterTestHelper.WINTER_2015));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals(DisciplineTestHelper.COMP_SCI));

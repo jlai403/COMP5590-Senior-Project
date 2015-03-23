@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.Programs;
+using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Tests
 {
@@ -405,6 +407,46 @@ namespace WorkflowManagementSystem.Tests
             programNames.Count().ShouldBeEquivalentTo(2);
             programNames.Should().Contain(randomCourse.Name);
             programNames.Should().Contain(robotsAndUnicornsCourse.Name);
+        }
+
+        [Test]
+        public void SearchForUsers()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+
+            var userOne = new UserSignUpViewModel();
+            userOne.FirstName = "User";
+            userOne.LastName = "One";
+            userOne.Email = "user1@someawesomeemailprovider.com";
+            userOne.Password = "123456";
+            userOne.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
+            FacadeFactory.GetDomainFacade().CreateUser(userOne);
+
+            var userTwo = new UserSignUpViewModel();
+            userTwo.FirstName = "User";
+            userTwo.LastName = "Two";
+            userTwo.Email = "user2@someawesomeemailprovider.com";
+            userTwo.Password = "123456";
+            userTwo.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
+            FacadeFactory.GetDomainFacade().CreateUser(userTwo);
+
+            var userThree = new UserSignUpViewModel();
+            userThree.FirstName = "User";
+            userThree.LastName = "Three";
+            userThree.Email = "threeUser@someawesomeemailprovider.com";
+            userThree.Password = "123456";
+            userThree.Roles.Add(RoleTestHelper.FACULTY_MEMBER);
+            FacadeFactory.GetDomainFacade().CreateUser(userThree);
+
+            // act
+            var users = FacadeFactory.GetSearchFacade().SearchForUsers("user");
+
+            // assert
+            users.Count().ShouldBeEquivalentTo(2);
+            users.Should().Contain(x => x.Email.Equals(userOne.Email));
+            users.Should().Contain(x => x.Email.Equals(userTwo.Email));
+            users.Should().NotContain(x => x.Email.Equals(userThree.Email));
         }
     }
 }

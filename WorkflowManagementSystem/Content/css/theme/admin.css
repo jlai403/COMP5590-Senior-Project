@@ -16,3 +16,13 @@
     letter-spacing: 0.5px;
     font-size: 16px;
 }
+
+.user-management .row {
+    margin: 0;
+    padding: 20px;
+}
+
+
+.user-management .row.user-search {
+    border-bottom: 1px solid #cdcdcd;
+}

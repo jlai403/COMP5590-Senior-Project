@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using WorkflowManagementSystem.Models;
+using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Controllers
 {
@@ -7,6 +10,18 @@ namespace WorkflowManagementSystem.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult FindUsers(string emailPartial)
+        {
+            var users = FacadeFactory.GetSearchFacade().SearchForUsers(emailPartial);
+            return Json(users);
+        }
+
+        [HttpPost]
+        public void UpdateIsAdmin(string email, bool isAdmin)
+        {
+            FacadeFactory.GetDomainFacade().UpdateIsAdmin(email, isAdmin);
         }
     }
 }
