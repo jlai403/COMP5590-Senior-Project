@@ -10,7 +10,6 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
         public string Name { get; set; }
         public virtual List<ApprovalChainStep> ApprovalChainSteps { get; set; }
         public bool Active { get; set; }
-        public int Version { get; set; }
 
         public ApprovalChain()
         {
