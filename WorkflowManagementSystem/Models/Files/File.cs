@@ -28,7 +28,7 @@ namespace WorkflowManagementSystem.Models.Files
             byte[] byteArray;
             using(var ms = new MemoryStream())
             {
-                stream.CopyToAsync(ms);
+                stream.CopyTo(ms);
                 byteArray = ms.ToArray();
             }
             return byteArray;
