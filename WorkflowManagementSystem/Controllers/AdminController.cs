@@ -23,5 +23,10 @@ namespace WorkflowManagementSystem.Controllers
         {
             FacadeFactory.GetDomainFacade().UpdateIsAdmin(email, isAdmin);
         }
+
+        public ActionResult CreateApprovalChain()
+        {
+            return View();
+        }
     }
 }

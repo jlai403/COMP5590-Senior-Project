@@ -8,10 +8,10 @@
             <div class="user-management">
                 <p class="header">User Management</p>
                 <div class="row user-search">
-                    <div class="col-xs-3">
+                    <div class="col-xs-2">
                         Search:
                     </div>
-                    <div class="col-xs-9">
+                    <div class="col-xs-10">
                         <input id="user-search" class="form-control"/>
                     </div>
                 </div>
@@ -37,7 +37,19 @@
         <div class="col-md-6">
             <div class="approval-chains">
                 <p class="header">Approval Chains</p>
-
+                <div class="row approval-chains-search">
+                    <div class="col-xs-2">
+                        Search:
+                    </div>
+                    <div class="col-xs-9">
+                        <input id="approval-chains-search" class="form-control"/>
+                    </div>
+                    <div class="col-xs-1">
+                        <a class="create-approval-chain"href="@Url.Action("CreateApprovalChain")">+</a>                   
+                    </div>
+                </div>
+                <div class="row">
+                </div>
             </div>
         </div>
         <!-- APPROVAL CHAINS END -->
