@@ -220,9 +220,6 @@
                         {
                             <input name="Prerequisites" class="form-control" tabindex="10" placeholder="Course name"/>
                         }
-                        <div id="add-prerequisite" class="cursor" style="font-size: 11px;">
-                            <span style="font-style: italic"><i class="glyphicon glyphicon-plus" style="font-size: 10px;"></i> Add new </span>
-                        </div>
                     </div>
                 </div>
 
@@ -322,7 +319,7 @@
     }
 
     $(document).ready(function () {
-        bindAddPrerequisite();
+        bindEventToNewPrerequisiteInput();
         bindAutoCompleteForProgram();
         bindAutoCompleteForPrerequisites();
         setDisciplinesDropDown($("#Faculty").val());
@@ -370,10 +367,12 @@
         });
     }
 
-    function bindAddPrerequisite() {
-        $("#add-prerequisite").click(function(e) {
-            $("<input name='Prerequisites' class='form-control' tabindex='10' placeholder='Course name'/>").insertBefore($(this));
+    function bindEventToNewPrerequisiteInput() {
+        $("input[name='Prerequisites']:last-child").keypress(function(e) {
+            $(this).off();
+            $("<input name='Prerequisites' class='form-control' tabindex='10' placeholder='Course name'/>").insertAfter($(this));
             bindAutoCompleteForPrerequisites();
+            bindEventToNewPrerequisiteInput();
         });
     }
 
