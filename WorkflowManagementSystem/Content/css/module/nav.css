@@ -22,7 +22,7 @@
 }
 
 .nav-pills li a {
-	color: #34495e;
+	color: #34495e !important;
 	border-radius: 3px;
 	
 	font-size: 12px;
@@ -39,8 +39,8 @@
 }
 
 .nav-pills li.active a, .nav-pills li a:HOVER {
-	color: #FFFFFF;
-	background-color: #34495e;
+	color: #FFFFFF !important;
+	background-color: #34495e !important;
 	text-decoration: none;
 	text-transform: uppercase;
 }
