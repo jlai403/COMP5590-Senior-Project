@@ -112,7 +112,7 @@
             }
             var rolesColumn = $("<td></td>").addClass("left-align").html(approvalChainSteps);
 
-            var isActiveCheckBox = $("<input type='checkbox'/>").data("email", approvalChainJson.IsActive);
+            var isActiveCheckBox = $("<input name='activeApprovalChain' type='radio'/>").data("id", approvalChainJson.Id);
             if (approvalChainJson.IsActive) {
                 isActiveCheckBox.attr("checked", true);
             }
