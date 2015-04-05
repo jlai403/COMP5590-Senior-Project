@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using WorkflowManagementSystem.Models;
-using WorkflowManagementSystem.Models.Users;
 
 namespace WorkflowManagementSystem.Controllers
 {
@@ -27,6 +25,12 @@ namespace WorkflowManagementSystem.Controllers
         public ActionResult CreateApprovalChain()
         {
             return View();
+        }
+
+        public ActionResult FindApprovalChains(string approvalChainType)
+        {
+            var approvalChains = FacadeFactory.GetDomainFacade().FindAllApprovalChains(approvalChainType);
+            return Json(approvalChains);
         }
     }
 }

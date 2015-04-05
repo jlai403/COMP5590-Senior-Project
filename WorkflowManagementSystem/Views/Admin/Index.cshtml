@@ -1,4 +1,6 @@
 ﻿@using System.Web.Optimization
+@using WorkflowManagementSystem.Models.ApprovalChains
+@using WorkflowManagementSystem.Views
 @Styles.Render("~/Content/css/theme/admin.css")
 
 <div class="container">
@@ -39,16 +41,28 @@
                 <p class="header">Approval Chains</p>
                 <div class="row approval-chains-search">
                     <div class="col-xs-2">
-                        Search:
+                        Types:
                     </div>
                     <div class="col-xs-9">
-                        <input id="approval-chains-search" class="form-control"/>
+                        @Html.DropDownList("approvalChainTypes", Html.ConvertToSelectListItem(ApprovalChainTypes.TYPES), new {@class = "form-control"})
                     </div>
                     <div class="col-xs-1">
                         <a class="create-approval-chain"href="@Url.Action("CreateApprovalChain")">+</a>                   
                     </div>
                 </div>
                 <div class="row">
+                    <table id="approvalChainSearchResultsTable" class="table tablesorter">
+                        <thead>
+                        <tr>
+                            <th class="center-text" style="width: 35%">Approval Chain Type</th>
+                            <th class="center-text" style="width: 50%">Roles</th>
+                            <th class="center-text" style="width: 15%">IsActive</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -59,10 +73,60 @@
 <script>
     $(document).ready(function() {
         bindUserSearch();
+        bindApprovalChainSearch();
+        searchForApprovalChains();
     });
 
+    function bindApprovalChainSearch() {
+        $("#approvalChainTypes").change(searchForApprovalChains);
+    }
+
+    function searchForApprovalChains() {
+        var approvalChainType = $("#approvalChainTypes").val();
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "@Url.Action("FindApprovalChains")",
+                data: {
+                    approvalChainType: approvalChainType
+                },
+                async: true,
+                success: function (jsonData) {
+                    renderApprovalChains(jsonData);
+                }
+            });
+    }
+
+    function renderApprovalChains(jsonData) {
+        var approvalChainsSearchResultsBody = $("#approvalChainSearchResultsTable tbody");
+        approvalChainsSearchResultsBody.empty();
+        for (var index in jsonData) {
+            var approvalChainJson = jsonData[index];
+            var row = $("<tr></tr>");
+            var approvalChainName = $("<td></td>").addClass("center-text").text(approvalChainJson.Name);
+
+            var approvalChainSteps = "";
+            for (var index in approvalChainJson.ApprovalChainSteps) {
+                var approvalChainStepsJson = approvalChainJson.ApprovalChainSteps[index];
+                approvalChainSteps = approvalChainSteps + approvalChainStepsJson.Sequence + ". " + approvalChainStepsJson.RoleName + " <br/>";
+            }
+            var rolesColumn = $("<td></td>").addClass("left-align").html(approvalChainSteps);
+
+            var isActiveCheckBox = $("<input type='checkbox'/>").data("email", approvalChainJson.IsActive);
+            if (approvalChainJson.IsActive) {
+                isActiveCheckBox.attr("checked", true);
+            }
+            var isActiveColumn = $("<td></td>").addClass("center-text").html(isActiveCheckBox);
+
+            row.append(approvalChainName);
+            row.append(rolesColumn);
+            row.append(isActiveColumn);
+            approvalChainsSearchResultsBody.append(row);
+        }
+    }
+
     function bindUserSearch() {
-        $('#user-search').keyup(function() {
+        $('#user-search').keypress(function() {
             var emailPartial = $(this).val();
             $.ajax({
                 type: "POST",

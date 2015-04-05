@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.Ajax.Utilities;
+using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Search;
@@ -18,7 +19,7 @@ namespace WorkflowManagementSystem.Models.Programs
         public string LibraryImpact { get; set; }
         public string ITSImpact { get; set; }
         
-        public override string APPROVAL_CHAIN_NAME { get { return "Program"; } }
+        public override string APPROVAL_CHAIN_NAME { get { return ApprovalChainTypes.PROGRAM; } }
 
         public void Update(User user, ProgramRequestInputViewModel programRequestInputViewModel)
         {

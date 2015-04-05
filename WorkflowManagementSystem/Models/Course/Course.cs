@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Ajax.Utilities;
+using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Faculty;
 using WorkflowManagementSystem.Models.Programs;
@@ -13,7 +14,7 @@ namespace WorkflowManagementSystem.Models.Course
 {
     public class Course : WorkflowItem
     {
-        public override string APPROVAL_CHAIN_NAME { get { return "Course"; } }
+        public override string APPROVAL_CHAIN_NAME { get { return ApprovalChainTypes.COURSE; } }
 
         public virtual Semester Semester { get; set; }
         public virtual Discipline Discipline { get; set; }
@@ -26,7 +27,6 @@ namespace WorkflowManagementSystem.Models.Course
         public string LibraryImpact { get; set; }
         public string ITSImpact { get; set; }
         public virtual Program Program { get; set; }
-        //public virtual PrerequisiteCourses PrerequisiteCourses { get; set; }
         public virtual List<PrerequisiteCourse> PrerequisiteCourses { get; set; }
 
         public Course()

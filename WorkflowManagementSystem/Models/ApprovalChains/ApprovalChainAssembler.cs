@@ -14,7 +14,7 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
 
         public List<ApprovalChainStepViewModel> AssembleApprovalChainSteps()
         {
-            return ApprovalChain.ApprovalChainSteps.Select(approvalChainStep => AssembleApprovalChainStep(approvalChainStep)).ToList();
+            return ApprovalChain.ApprovalChainSteps.Select(AssembleApprovalChainStep).ToList();
         }
 
         private ApprovalChainStepViewModel AssembleApprovalChainStep(ApprovalChainStep approvalChainStep)
@@ -35,6 +35,7 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
             var approvalChainViewModel = new ApprovalChainViewModel();
             approvalChainViewModel.Name = ApprovalChain.Name;
             approvalChainViewModel.ApprovalChainSteps = AssembleApprovalChainSteps();
+            approvalChainViewModel.IsActive = ApprovalChain.Active;
             return approvalChainViewModel;
         }
     }

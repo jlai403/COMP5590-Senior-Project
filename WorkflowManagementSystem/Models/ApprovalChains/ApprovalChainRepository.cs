@@ -21,14 +21,14 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
             return approvalChainStep;
         }
 
-        public static ApprovalChain FindActiveApprovalChain(string approvalChainName)
+        public static ApprovalChain FindActiveApprovalChain(string approvalChainType)
         {
-            return Queryable<ApprovalChain>().FirstOrDefault(x => x.Name.Equals(approvalChainName) && x.Active);
+            return Queryable<ApprovalChain>().FirstOrDefault(x => x.Name.Equals(approvalChainType) && x.Active);
         }
 
-        public static List<ApprovalChain> FindAllApprovalChains()
+        public static List<ApprovalChain> FindAllApprovalChains(string approvalChainType)
         {
-            return FindAll<ApprovalChain>();
+            return Queryable<ApprovalChain>().Where(x => x.Name.Equals(approvalChainType)).ToList();
         }
     }
 }

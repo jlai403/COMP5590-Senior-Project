@@ -1,1 +1,36 @@
-﻿@model dynamic
+﻿@using System.Web.Optimization
+@model WorkflowManagementSystem.Models.ApprovalChains.ApprovalChainInputViewModel
+
+@Styles.Render("~/Content/css/theme/create-request.css")
+
+<div class="container form center">
+    <div class="col-md-12">
+        @using (Html.BeginForm("CreateApprovalChain", "Admin", FormMethod.Post))
+        {
+            <div class="row center-text">
+                <p class="header">Create Approval Chain</p>
+            </div>
+
+            <div class="row" style="margin-bottom: 15px;">
+                <ul class="errors center-text">
+                    @if (ViewBag.ErrorMessage != null)
+                    {
+                        <li>@ViewBag.ErrorMessage</li>
+                    }
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    Comments
+                </div>
+                <div class="col-md-9">
+                </div>
+            </div>
+
+            <div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
+                <input class="form-control button dark-blue" type="submit" value="Create"/>
+            </div>
+        }
+    </div>
+</div>

@@ -310,6 +310,7 @@
     <Compile Include="Models\ApprovalChains\ApprovalChainRepository.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainStep.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainStepViewModel.cs" />
+    <Compile Include="Models\ApprovalChains\ApprovalChainTypes.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainViewModel.cs" />
     <Compile Include="Models\Course\Course.cs" />
     <Compile Include="Models\Course\CourseAssembler.cs" />
