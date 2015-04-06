@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.Course;
 using WorkflowManagementSystem.Models.DataAccess;
 using WorkflowManagementSystem.Models.Programs;
+using WorkflowManagementSystem.Models.Roles;
 using WorkflowManagementSystem.Models.Search;
 using WorkflowManagementSystem.Models.Users;
 using WorkflowManagementSystem.Models.Workflow;
@@ -33,6 +33,14 @@ namespace WorkflowManagementSystem.Models
             return TransactionHandler.Instance.Execute(() =>
             {
                 return CourseRepository.SearchForCourseNames(keywords);
+            });
+        }
+
+        public HashSet<string> SearchForRoleNames(string keywords)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                return RoleRepository.SearchForRoleNames(keywords);
             });
         }
 

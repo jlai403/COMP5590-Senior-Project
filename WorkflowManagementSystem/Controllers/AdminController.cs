@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using WorkflowManagementSystem.Models;
+using WorkflowManagementSystem.Models.ApprovalChains;
 
 namespace WorkflowManagementSystem.Controllers
 {
@@ -22,9 +23,17 @@ namespace WorkflowManagementSystem.Controllers
             FacadeFactory.GetDomainFacade().UpdateIsAdmin(email, isAdmin);
         }
 
+        [HttpGet]
         public ActionResult CreateApprovalChain()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateApprovalChain(ApprovalChainInputViewModel approvalChainInputViewModel)
+        {
+            FacadeFactory.GetDomainFacade().CreateApprovalChain(approvalChainInputViewModel);
+            return RedirectToAction("Index");
         }
 
         public ActionResult FindApprovalChains(string approvalChainType)

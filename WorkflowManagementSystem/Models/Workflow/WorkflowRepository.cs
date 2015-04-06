@@ -38,7 +38,10 @@ namespace WorkflowManagementSystem.Models.Workflow
         {
             var user = UserRepository.FindUser(email);
             var userRoles = user.Roles.Select(x => x.Id);
-            return Queryable<WorkflowItem>().Where(x => userRoles.Contains(x.CurrentWorkflowData.ApprovalChainStep.Role.Id)).ToList();
+            return Queryable<WorkflowItem>()
+                .Where(x => 
+                    userRoles.Contains(x.CurrentWorkflowData.ApprovalChainStep.Role.Id) &&
+                    x.CurrentWorkflowData.State == WorkflowStates.PENDING_APPROVAL).ToList();
         }
 
         public static List<WorkflowItem> FindWorkflowItemsRequestedByUser(string email)

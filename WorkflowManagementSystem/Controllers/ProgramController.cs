@@ -93,7 +93,7 @@ namespace WorkflowManagementSystem.Controllers
             else
                 FacadeFactory.GetDomainFacade().ApproveWorkflowItem(User.Identity.Name, workflowItemName, WorkflowItemTypes.Program);
 
-            new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
+            new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"], WorkflowItemTypes.Program);
             new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"], WorkflowItemTypes.Program);
 
             return RedirectToAction("Index", new { name = workflowItemName });
@@ -103,7 +103,7 @@ namespace WorkflowManagementSystem.Controllers
         {
             FacadeFactory.GetDomainFacade().RejectWorkflowItem(User.Identity.Name, workflowItemName, WorkflowItemTypes.Program);
 
-            new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"]);
+            new CommentController().AddComment(User.Identity.Name, (CommentInputViewModel)TempData["commentInputViewModel"], WorkflowItemTypes.Program);
             new FileController().UploadAttachments(User.Identity.Name, workflowItemName, (List<HttpPostedFileBase>)TempData["files"], WorkflowItemTypes.Program);
 
             return RedirectToAction("Index", new { name = workflowItemName });

@@ -22,5 +22,10 @@ namespace WorkflowManagementSystem.Models.Roles
         {
             return Queryable<Role>().FirstOrDefault(x => x.Name.Equals(roleName));
         }
+
+        public static HashSet<string> SearchForRoleNames(string keywords)
+        {
+            return new HashSet<string>(Queryable<Role>().Where(x => x.Name.StartsWith(keywords)).Select(x => x.Name));
+        }
     }
 }

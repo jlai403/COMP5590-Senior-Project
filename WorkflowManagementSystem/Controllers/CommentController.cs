@@ -7,11 +7,11 @@ namespace WorkflowManagementSystem.Controllers
 {
     public class CommentController : Controller
     {
-        public void AddComment(string userEmail, CommentInputViewModel commentInputViewModel)
+        public void AddComment(string userEmail, CommentInputViewModel commentInputViewModel, WorkflowItemTypes workflowItemType)
         {
             if (commentInputViewModel == null || commentInputViewModel.Text.IsNullOrWhiteSpace()) return;
 
-            FacadeFactory.GetDomainFacade().AddComment(userEmail, commentInputViewModel, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().AddComment(userEmail, commentInputViewModel, workflowItemType);
         }
     }
 }

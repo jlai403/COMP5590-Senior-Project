@@ -1,7 +1,10 @@
 ﻿@using System.Web.Optimization
-@model WorkflowManagementSystem.Models.ApprovalChains.ApprovalChainInputViewModel
+@using WorkflowManagementSystem.Models.ApprovalChains
+@using WorkflowManagementSystem.Views
+@model ApprovalChainInputViewModel
 
-@Styles.Render("~/Content/css/theme/create-request.css")
+@Styles.Render("~/Content/css/module/jquery-ui.theme.min.css")
+@Styles.Render("~/Content/css/theme/create-approval-chain.css")
 
 <div class="container form center">
     <div class="col-md-12">
@@ -9,6 +12,19 @@
         {
             <div class="row center-text">
                 <p class="header">Create Approval Chain</p>
+            </div>
+
+            <div class="progress-container">
+                <div class="row">
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 50%"></div>
+                    </div>
+                </div>
+                <div class="row progress-steps">
+                    <div class="col-xs-4 step-one-progress">approval chain</div>
+                    <div class="col-xs-4 step-two-progress">approval chain <br/> sequence</div>
+                    <div class="col-xs-4 step-complete-progress">complete</div>
+                </div>
             </div>
 
             <div class="row" style="margin-bottom: 15px;">
@@ -20,17 +36,157 @@
                 </ul>
             </div>
 
-            <div class="row">
-                <div class="col-md-3">
-                    Comments
+            <!-- STEP ONE -->
+            <div class="step-one">
+                <div class="row">
+                    <div class="col-md-3">
+                        Type:
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(x => x.Name, Html.ConvertToSelectListItem(ApprovalChainTypes.TYPES), new {@class = "form-control"})
+                    </div>
                 </div>
-                <div class="col-md-9">
-                </div>
-            </div>
 
-            <div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
-                <input class="form-control button dark-blue" type="submit" value="Create"/>
+                <div class="row">
+                    <div class="col-md-3">
+                        Roles:
+                    </div>
+                    <div class="col-md-9">
+                        <input class="add-roles form-control" placeholder="Role"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        Active:
+                    </div>
+                    <div class="col-md-9">
+                        @Html.CheckBoxFor(x => x.Active)
+                    </div>
+                </div>
+
+                <div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
+                    <input class="form-control button dark-blue" type="button" value="Next"/>
+                </div>
             </div>
+            <!-- END STEP ONE -->
+
+            <!-- STEP TWO -->
+            <div class="step-two" style="display: none;">
+                <div class="row">
+                    <div class="col-md-3">
+                        Sequence
+                    </div>
+                    <div class="col-md-9">
+                        <ul id="sortable" class="roles sortable">
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
+                    <input class="form-control button dark-blue" type="submit" value="Create"/>
+                </div>
+            </div>
+            <!-- END STEP TWO -->
         }
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        bindEventToRoleInput();
+        bindAutoCompleteForRolesInput();
+        showStepOne();
+        setProgressBar("1%");
+
+        $("#sortable").sortable();
+        $("#sortable").disableSelection();
+    });
+
+    function bindEventToRoleInput() {
+        $(".add-roles:last-child").keypress(function (e) {
+            $(this).off();
+            $("<input class='add-roles form-control' placeholder='Role'/>").insertAfter($(this));
+            bindEventToRoleInput();
+            bindAutoCompleteForRolesInput();
+        });
+    }
+
+    function bindAutoCompleteForRolesInput() {
+        $(".add-roles").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "@Url.Action("RoleNames", "Search")",
+                    type: 'post',
+                    dataType: "json",
+                    data: {
+                        keywords: request.term
+                    },
+                    success: function (data) {
+                        response(data);
+                    }
+                });
+            },
+            minLength: 1
+        });
+    }
+
+    function setProgressBar(progress) {
+        $(".progress-bar").css("width", progress);
+    }
+
+    function showStepOne() {
+        $(".step-one").show();
+        $(".step-two").hide();
+    }
+
+    function showStepTwo() {
+        $(".step-one").hide();
+        $(".step-two").show();
+
+        $(".roles.sortable").empty();
+        $.each($(".add-roles"), function (i, val) {
+            var roleName = $(this).val();
+            if (roleName === '') return;
+
+            var sortableItem = $("<li></li>").addClass("ui-state-default");
+            var arrowIcon = $("<i class='glyphicon glyphicon-resize-vertical' aria-hidden='true' style='margin: 0 5px;'></i>");
+            var hiddenInput = $("<input type='hidden' name='Roles'/>").val(roleName);
+
+            sortableItem.append(arrowIcon);
+            sortableItem.append(roleName);
+            sortableItem.append(hiddenInput);
+            $(".roles.sortable").append(sortableItem);
+        });
+        
+    }
+
+    // STEP ONE
+    $(".step-one input").keydown(function () {
+        // enter key
+        if (event.keyCode === 13) {
+            $(".step-one .button").click();
+            return false;
+        }
+    });
+
+    $(".step-one .button").click(function () {
+        clearErrors();
+
+        if (hasErrors()) {
+            printErrors();
+            return false;
+        }
+
+        showStepTwo();
+        setProgressBar("50%");
+        $(".step-one-progress").addClass("cursor");
+        $(".step-one-progress").on("click", function (e) {
+            showStepOne();
+        });
+        
+        return true;
+    });
+
+
+</script>

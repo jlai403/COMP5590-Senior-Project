@@ -39,6 +39,61 @@ namespace WorkflowManagementSystem.Tests
         }
 
         [Test]
+        public void FindWorkflowItemsAwaitingForAction_Program_Completed()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUser(RoleTestHelper.FACULTY_MEMBER);
+            var approver = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+            FacadeFactory.GetDomainFacade().CompleteWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+
+            // act
+            var actionableWorkflowItems = FacadeFactory.GetDomainFacade().FindWorkflowItemsAwaitingForAction(approver.Email);
+
+            // assert
+            actionableWorkflowItems.Count.ShouldBeEquivalentTo(0);
+        }
+
+        [Test]
+        public void FindWorkflowItemsAwaitingForAction_Program_Rejected()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+            new ApprovalChainTestHelper().CreateProgramApprovalChain();
+            new SemesterTestHelper().CreateTestSemesters();
+            new DisciplineTestHelper().CreateTestDisciplines();
+
+            var requester = new UserTestHelper().CreateUser(RoleTestHelper.FACULTY_MEMBER);
+            var rejector = new UserTestHelper().CreateUserWithTestRoles();
+
+            var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
+            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
+
+            FacadeFactory.GetDomainFacade().RejectWorkflowItem(rejector.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
+
+            // act
+            var actionableWorkflowItems = FacadeFactory.GetDomainFacade().FindWorkflowItemsAwaitingForAction(rejector.Email);
+
+            // assert
+            actionableWorkflowItems.Count.ShouldBeEquivalentTo(0);
+        }
+
+        [Test]
         public void FindWorkflowItemsAwaitingForAction_Course()
         {
             // assemble

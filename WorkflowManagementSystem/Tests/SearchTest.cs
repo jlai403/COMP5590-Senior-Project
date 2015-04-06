@@ -447,5 +447,20 @@ namespace WorkflowManagementSystem.Tests
             users.Should().Contain(x => x.Email.Equals(userTwo.Email));
             users.Should().NotContain(x => x.Email.Equals(userThree.Email));
         }
+
+        [Test]
+        public void SearchForRoleNames()
+        {
+            // assemble
+            new RoleTestHelper().CreateTestRoles();
+
+            // act
+            var roleNames = FacadeFactory.GetSearchFacade().SearchForRoleNames("Fac");
+
+            // assert
+            roleNames.Should().Contain(RoleTestHelper.FACULTY_MEMBER);
+            roleNames.Should().Contain(RoleTestHelper.FACULTY_CURRICULUMN_MEMBER);
+            roleNames.Should().Contain(RoleTestHelper.FACULTY_COUNCIL_MEMBER);
+        }
     }
 }
