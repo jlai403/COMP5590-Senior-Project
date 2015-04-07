@@ -5,7 +5,7 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
 {
     public class ApprovalChainInputViewModel
     {
-        public string Name { get; set; }
+        public string Type { get; set; }
         public List<String> Roles { get; set; }
         public bool Active { get; set; }
 

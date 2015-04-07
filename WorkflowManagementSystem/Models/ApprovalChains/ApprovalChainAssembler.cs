@@ -34,7 +34,7 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
         {
             var approvalChainViewModel = new ApprovalChainViewModel();
             approvalChainViewModel.Id = ApprovalChain.Id;
-            approvalChainViewModel.Name = ApprovalChain.Name;
+            approvalChainViewModel.Type = ApprovalChain.Type;
             approvalChainViewModel.ApprovalChainSteps = AssembleApprovalChainSteps();
             approvalChainViewModel.IsActive = ApprovalChain.Active;
             return approvalChainViewModel;

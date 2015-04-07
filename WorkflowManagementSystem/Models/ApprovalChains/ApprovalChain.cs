@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models.ErrorHandling;
 
@@ -7,7 +8,7 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
     public class ApprovalChain : IEntity
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Type { get; set; }
         public virtual List<ApprovalChainStep> ApprovalChainSteps { get; set; }
         public bool Active { get; set; }
 
@@ -18,13 +19,13 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
 
         public void Update(ApprovalChainInputViewModel approvalChainInputViewModel)
         {
-            Name = approvalChainInputViewModel.Name;
+            Type = approvalChainInputViewModel.Type;
             var sequence = 1;
             foreach (var roleName in approvalChainInputViewModel.Roles)
             {
                 ApprovalChainSteps.Add(ApprovalChainRepository.CreateApprovalChainStep(this, roleName, sequence++));
             }
-            Active = approvalChainInputViewModel.Active;
+            SetActive(approvalChainInputViewModel.Active);
 
             AssertApprovalChainName();
             AssertApprovalChainHasSteps();
@@ -32,9 +33,9 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
 
         private void AssertApprovalChainName()
         {
-            if (Name.IsNullOrWhiteSpace())
+            if (Type.IsNullOrWhiteSpace() || ApprovalChainTypes.TYPES.Contains(Type) == false)
             {
-                throw new WMSException("Approval chain name is required.");
+                throw new WMSException("Approval chain type is invalid.");
             }
         }
 
@@ -42,8 +43,23 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
         {
             if (ApprovalChainSteps.Count == 0)
             {
-                throw new WMSException("Approval chain '{0}' does not have any steps specified.", Name);
+                throw new WMSException("Approval chain '{0}' does not have any steps specified.", Type);
             }
+        }
+
+        public void SetActive(bool isActive)
+        {
+            if (isActive)
+            {
+                var currentActiveApprovalChain = ApprovalChainRepository.FindActiveApprovalChain(Type);
+
+                if (currentActiveApprovalChain != null)
+                    currentActiveApprovalChain.SetActive(false);
+                Active = true;
+            }
+            else
+                Active = false;
+            
         }
     }
 }

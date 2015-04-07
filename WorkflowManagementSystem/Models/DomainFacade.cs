@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.Course;
 using WorkflowManagementSystem.Models.DataAccess;
@@ -314,6 +315,16 @@ namespace WorkflowManagementSystem.Models
             {
                 var user = UserRepository.FindUser(email);
                 user.UpdateIsAdmin(isAdmin);
+                return null;
+            });
+        }
+
+        public void SetActiveApprovalChain(int approvalChainId)
+        {
+            TransactionHandler.Instance.Execute(() =>
+            {
+                var approvalChain = ApprovalChainRepository.FindApprovalChain(approvalChainId);
+                approvalChain.SetActive(true);
                 return null;
             });
         }

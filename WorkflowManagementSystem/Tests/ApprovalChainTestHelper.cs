@@ -15,10 +15,10 @@ namespace WorkflowManagementSystem.Tests
             CreateApprovalChain(ApprovalChainTypes.COURSE, RoleTestHelper.FACULTY_CURRICULUMN_MEMBER, RoleTestHelper.FACULTY_COUNCIL_MEMBER, RoleTestHelper.APPC_MEMBER, RoleTestHelper.GFC_MEMBER);
         }
 
-        public void CreateApprovalChain(string name, params string[] roles)
+        public void CreateApprovalChain(string approvalChainType, params string[] roles)
         {
             var approvalChainInputViewModel = new ApprovalChainInputViewModel();
-            approvalChainInputViewModel.Name = name;
+            approvalChainInputViewModel.Type = approvalChainType;
             approvalChainInputViewModel.Active = true;
             foreach (var role in roles)
             {

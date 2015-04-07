@@ -41,5 +41,11 @@ namespace WorkflowManagementSystem.Controllers
             var approvalChains = FacadeFactory.GetDomainFacade().FindAllApprovalChains(approvalChainType);
             return Json(approvalChains);
         }
+
+        [HttpPost]
+        public void SetActiveApprovalChain(int approvalChainId)
+        {
+            FacadeFactory.GetDomainFacade().SetActiveApprovalChain(approvalChainId);
+        }
     }
 }

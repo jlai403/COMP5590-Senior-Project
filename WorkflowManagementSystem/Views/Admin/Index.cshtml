@@ -72,16 +72,16 @@
 
 <script>
     $(document).ready(function() {
-        bindUserSearch();
-        bindApprovalChainSearch();
-        searchForApprovalChains();
+        bindUserSearchEvent();
+        bindApprovalChainSearchEvent();
+        approvalChainSearch();
     });
 
-    function bindApprovalChainSearch() {
-        $("#approvalChainTypes").change(searchForApprovalChains);
+    function bindApprovalChainSearchEvent() {
+        $("#approvalChainTypes").change(approvalChainSearch);
     }
 
-    function searchForApprovalChains() {
+    function approvalChainSearch() {
         var approvalChainType = $("#approvalChainTypes").val();
         $.ajax({
             type: "POST",
@@ -93,6 +93,7 @@
                 async: true,
                 success: function (jsonData) {
                     renderApprovalChains(jsonData);
+                    bindSetActiveApprovalChainEvent();
                 }
             });
     }
@@ -112,7 +113,7 @@
             }
             var rolesColumn = $("<td></td>").addClass("left-align").html(approvalChainSteps);
 
-            var isActiveCheckBox = $("<input name='activeApprovalChain' type='radio'/>").data("id", approvalChainJson.Id);
+            var isActiveCheckBox = $("<input name='activeApprovalChain' type='radio'/>").data("id", approvalChainJson.Id).addClass("set-active-approval-chain");
             if (approvalChainJson.IsActive) {
                 isActiveCheckBox.attr("checked", true);
             }
@@ -125,7 +126,25 @@
         }
     }
 
-    function bindUserSearch() {
+    function bindSetActiveApprovalChainEvent() {
+        $(".set-active-approval-chain").change(function() {
+            var approvalChainId = $(this).data("id");
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "@Url.Action("SetActiveApprovalChain")",
+                data: {
+                    approvalChainId: approvalChainId
+                },
+                async: true,
+                success: function (jsonData) {
+                }
+            });
+        });
+    }
+
+    function bindUserSearchEvent() {
         $('#user-search').keypress(function() {
             var emailPartial = $(this).val();
             $.ajax({
@@ -138,7 +157,7 @@
                 async: true,
                 success: function (jsonData) {
                     renderUsers(jsonData);
-                    bindUpdateAdmin();
+                    bindUpdateAdminEvent();
                 }
             });
         });
@@ -167,7 +186,7 @@
         }
     }
 
-    function bindUpdateAdmin() {
+    function bindUpdateAdminEvent() {
         $(".update-admin").change(function () {
             var email = $(this).data("email");
             var isAdmin = $(this).is(":checked");

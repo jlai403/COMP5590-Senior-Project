@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using WorkflowManagementSystem.Models.Search;
 
 namespace WorkflowManagementSystem.Models.DataAccess
 {
@@ -12,9 +10,9 @@ namespace WorkflowManagementSystem.Models.DataAccess
             TransactionHandler.Instance.CurrentDbContext().AddEntity(entity);
         }
 
-        protected static void FindEntity<T>(int id)
+        protected static T FindEntity<T>(int id) where T : class, IEntity
         {
-            throw new NotImplementedException();
+            return TransactionHandler.Instance.CurrentDbContext().Set<T>().First(x => x.Id == id);
         }
 
         protected static List<T> FindAll<T>() where T : class

@@ -304,6 +304,10 @@
     <Compile Include="Migrations\201503230243007_RemoveVersionFromApprovalChain.Designer.cs">
       <DependentUpon>201503230243007_RemoveVersionFromApprovalChain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504070610459_UpdateApprovalChainNameToType.cs" />
+    <Compile Include="Migrations\201504070610459_UpdateApprovalChainNameToType.Designer.cs">
+      <DependentUpon>201504070610459_UpdateApprovalChainNameToType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -540,6 +544,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503230243007_RemoveVersionFromApprovalChain.resx">
       <DependentUpon>201503230243007_RemoveVersionFromApprovalChain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504070610459_UpdateApprovalChainNameToType.resx">
+      <DependentUpon>201504070610459_UpdateApprovalChainNameToType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
