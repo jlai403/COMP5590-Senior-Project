@@ -11,7 +11,7 @@
                 <p class="header">User Management</p>
                 <div class="row user-search">
                     <div class="col-xs-2">
-                        Search:
+                        Email:
                     </div>
                     <div class="col-xs-10">
                         <input id="user-search" class="form-control"/>
@@ -145,7 +145,7 @@
     }
 
     function bindUserSearchEvent() {
-        $('#user-search').keypress(function() {
+        $('#user-search').keyup(function() {
             var emailPartial = $(this).val();
             $.ajax({
                 type: "POST",
