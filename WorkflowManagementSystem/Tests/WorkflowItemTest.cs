@@ -22,7 +22,7 @@ namespace WorkflowManagementSystem.Tests
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             // act
@@ -52,7 +52,7 @@ namespace WorkflowManagementSystem.Tests
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             FacadeFactory.GetDomainFacade().ApproveWorkflowItem(approver.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
@@ -81,7 +81,7 @@ namespace WorkflowManagementSystem.Tests
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             FacadeFactory.GetDomainFacade().RejectWorkflowItem(rejector.Email, programRequestInputViewModel.Name, WorkflowItemTypes.Program);
@@ -108,7 +108,7 @@ namespace WorkflowManagementSystem.Tests
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
@@ -141,8 +141,7 @@ namespace WorkflowManagementSystem.Tests
             var approver = new UserTestHelper().CreateUser(RoleTestHelper.FACULTY_MEMBER);
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
-            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             // act
@@ -167,7 +166,7 @@ namespace WorkflowManagementSystem.Tests
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);
@@ -192,13 +191,11 @@ namespace WorkflowManagementSystem.Tests
             var requester = new UserTestHelper().CreateUser(RoleTestHelper.FACULTY_MEMBER);
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
-            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Spring"));
-            discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
-            var programRequestInputViewModel2 = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var programRequestInputViewModel2 = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel2);
 
             // act
@@ -238,12 +235,11 @@ namespace WorkflowManagementSystem.Tests
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel);
 
             semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Spring"));
-            discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
-            var programRequestInputViewModel2 = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var programRequestInputViewModel2 = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(requester.Email, programRequestInputViewModel2);
 
             var courseRequestInputViewModel = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, programRequestInputViewModel.Name);

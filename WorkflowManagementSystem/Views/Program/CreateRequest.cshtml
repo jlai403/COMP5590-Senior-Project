@@ -1,5 +1,5 @@
 ﻿@using System.Web.Optimization
-@using WorkflowManagementSystem.Models.Faculty
+@using WorkflowManagementSystem.Models.Faculties
 @using WorkflowManagementSystem.Models.Semesters
 @using WorkflowManagementSystem.Views
 @model WorkflowManagementSystem.Models.Programs.ProgramRequestInputViewModel
@@ -41,35 +41,27 @@
             <!-- CONTEXT FOR STEP TWO AND THREE -->
             <div class="context hide small-text" style="padding: 10px 0; margin: -15px 0 15px; background-color: #FAFAFA;">
                 <div class="row">
-                    <div class="col-xs-5 right-align">
-                        Program Name:
-                    </div>
-                    <div class="col-xs-5">
-                        <span class="programName left-align"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-5 right-align">
-                        Effective Term:
-                    </div>
-                    <div class="col-xs-5">
-                        <span class="effectiveTerm left-align"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-5 right-align">
-                        Faculty:
-                    </div>
+                    <div class="col-xs-5 right-align"> Faculty: </div>
                     <div class="col-xs-5">
                         <span class="faculty left-align"></span>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-5 right-align">
-                        Discipline:
-                    </div>
+                    <div class="col-xs-5 right-align"> Program Name: </div>
                     <div class="col-xs-5">
-                        <span class="discipline left-align"></span>
+                        <span class="programName left-align"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5 right-align"> Effective Term: </div>
+                    <div class="col-xs-5">
+                        <span class="effectiveTerm left-align"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5 right-align"> Courses: </div>
+                    <div class="col-xs-5">
+                        <span class="courses left-align"></span>
                     </div>
                 </div>
             </div>
@@ -78,39 +70,14 @@
             <!-- STEP ONE START -->
             <div class="step-one">
                 <div class="row">
-                    <div class="col-md-3">
-                        Requester
-                    </div>
+                    <div class="col-md-3"> Requester </div>
                     <div class="col-md-9">
                         @Html.TextBox("UserName", (string) ViewBag.UsersFullName, new {@class = "form-control", @readonly = "true"})
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-3 required">
-                        Program Name
-                    </div>
-                    <div class="col-md-9">
-                        @Html.TextBoxFor(m => m.Name, new {@class = "form-control", placeholder = "Program Name", tabindex = "1"})
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-3 required">
-                        Effective Term
-                    </div>
-                    <div class="col-md-9">
-                        @{
-                            var semestersSelectList = Html.ConvertToSelectListItem((List<SemesterViewModel>) ViewBag.Semesters);
-                        }
-                        @Html.DropDownListFor(m => m.Semester, semestersSelectList, new {@class = "form-control", tabindex = "2"})
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-3 required">
-                        Faculty
-                    </div>
+                    <div class="col-md-3 required"> Faculty </div>
                     <div class="col-md-9">
                         @{
                             var facultiesSelectList = Html.ConvertToSelectListItem((List<FacultyViewModel>) ViewBag.Faculties);
@@ -120,14 +87,26 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-3 required">
-                        Discipline
+                    <div class="col-md-3 required"> Program Name </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.Name, new {@class = "form-control", placeholder = "Program Name", tabindex = "1"})
                     </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 required"> Effective Term </div>
                     <div class="col-md-9">
                         @{
-                            var disciplinesSelectList = Html.ConvertToSelectListItem((List<DisciplineViewModel>) ViewBag.Disciplines);
+                            var semestersSelectList = Html.ConvertToSelectListItem((List<SemesterViewModel>) ViewBag.Semesters);
                         }
-                        @Html.DropDownListFor(x => x.Discipline, disciplinesSelectList, new {@class = "form-control", tabindex = "3"})
+                        @Html.DropDownListFor(m => m.Semester, semestersSelectList, new {@class = "form-control", tabindex = "2"})
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3"> Courses </div>
+                    <div class="col-md-9">
+                        <input name="Courses" class="form-control" tabindex="10" placeholder="Course name"/>
                     </div>
                 </div>
 
@@ -216,19 +195,7 @@
 </div>
 
 <script>
-    var disciplinesLookUp = new Array();
-    @foreach (var faculty in (List<FacultyViewModel>) ViewBag.Faculties)
-    {
-        @:disciplinesLookUp['@faculty.Name'] = new Array();
-    }
-    @foreach (var discipline in (List<DisciplineViewModel>)ViewBag.Disciplines)
-    {
-        @:disciplinesLookUp['@discipline.Faculty'].push(@Html.Raw(Json.Encode(discipline)));
-    }
-
     $(document).ready(function() {
-        setDisciplinesDropDown($("#Faculty").val());
-
         showStepOne();
         setProgressBar("1%");
 
@@ -247,11 +214,35 @@
                 return false;
             }
         });
-
-        $("#Faculty").change(function() {
-            setDisciplinesDropDown($(this).val());
-        });
     });
+
+    function bindEventToNewCourseInput() {
+        $("input[name='Courses']:last-child").keypress(function (e) {
+            $(this).off();
+            $("<input name='Courses' class='form-control' tabindex='10' placeholder='Course name'/>").insertAfter($(this));
+            bindAutoCompleteForCourses();
+            bindEventToNewCourseInput();
+        });
+    }
+
+    function bindAutoCompleteForCourses() {
+        $("input[name='Courses']").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "@Url.Action("CourseNames", "Search")",
+                    type: 'post',
+                    dataType: "json",
+                    data: {
+                        keywords: request.term
+                    },
+                    success: function (data) {
+                        response(data);
+                    }
+                });
+            },
+            minLength: 3
+        });
+    }
 
     function showStepOne() {
         $(".step-one").show();
@@ -273,15 +264,6 @@
 
     function setProgressBar(progress) {
         $(".progress-bar").css("width", progress);
-    }
-
-    function setDisciplinesDropDown(selectedFaculty) {
-        var disciplines = disciplinesLookUp[selectedFaculty];
-        $("#Discipline").empty();
-        disciplines.forEach(function (discipline) {
-            var option = $("<option></option>").val(discipline.Id).text(discipline.Code + " - " + discipline.Name);
-            $("#Discipline").append(option);
-        });
     }
 
     // STEP ONE
@@ -314,7 +296,12 @@
         $(".context .programName").text($("#Name").val());
         $(".context .effectiveTerm").text($("#Semester option:selected").text());
         $(".context .faculty").text($("#Faculty option:selected").text());
-        $(".context  .discipline").text($("#Discipline option:selected").text());
+
+        var courses = [];
+        $("input[name='Courses']").each(function () {
+            courses.push($(this).val());
+        });
+        $(".context .courses").text(courses.join(", "));
     }
 
     function hideContext(){

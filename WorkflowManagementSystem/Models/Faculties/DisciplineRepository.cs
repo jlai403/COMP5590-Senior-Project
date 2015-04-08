@@ -3,7 +3,7 @@ using System.Linq;
 using WorkflowManagementSystem.Models.DataAccess;
 using WorkflowManagementSystem.Models.ErrorHandling;
 
-namespace WorkflowManagementSystem.Models.Faculty
+namespace WorkflowManagementSystem.Models.Faculties
 {
     public class DisciplineRepository : Repository
     {

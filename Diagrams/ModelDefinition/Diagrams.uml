@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner"
   dslVersion="1.0.0.0"
   Id="64dc87b2-debc-454d-989f-9759be8ccce4"
   name="Diagrams" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -35,6 +35,66 @@
         Id="1c796b2f-bebd-4540-a120-6fac8e85a15b"
         LastKnownName="System"
         LastKnownLocation="Package1_1124.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="43e62c97-97d2-4cb6-bfe6-673274741a32"
+        name="Activity1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="1cdeb18a-fed7-44b3-b0c3-dce6b0de5e0a"
+            name="Initial1"
+            isLeaf="false">
+            <objectFlowTargets>
+              <objectFlow
+                Id="c51d8b39-a878-4602-8f1b-8468ec5360f0"
+                isLeaf="false"
+                isMulticast="false"
+                isMultireceive="false">
+                <objectNodeMoniker
+                  Id="bc9ec59c-16ac-412d-8f46-424d35a554e5"
+                  LastKnownName="User submits a request"
+                  LastKnownLocation="Diagrams.uml" />
+              </objectFlow>
+            </objectFlowTargets>
+          </initialNode>
+          <objectNode
+            Id="bc9ec59c-16ac-412d-8f46-424d35a554e5"
+            name="User submits a request"
+            isLeaf="false"
+            ordering="Unordered"
+            isControlType="false">
+            <objectFlowTargets>
+              <objectFlow
+                Id="bc36a6ab-6068-42a6-85c6-883119fa6bdb"
+                isLeaf="false"
+                isMulticast="false"
+                isMultireceive="false">
+                <decisionNodeMoniker
+                  Id="08b07161-0d86-47ff-8292-58563d6b4b13"
+                  LastKnownName="Decision1"
+                  LastKnownLocation="Diagrams.uml" />
+              </objectFlow>
+            </objectFlowTargets>
+            <upperBound>
+              <literalInteger
+                Id="a6e5b64a-cac4-4492-b5f2-4552fac5e11c"
+                name="2147483647"
+                value="2147483647" />
+            </upperBound>
+          </objectNode>
+          <decisionNode
+            Id="08b07161-0d86-47ff-8292-58563d6b4b13"
+            name="Decision1"
+            isLeaf="false" />
+        </nodes>
+      </activity>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

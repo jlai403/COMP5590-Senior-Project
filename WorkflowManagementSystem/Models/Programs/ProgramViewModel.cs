@@ -8,9 +8,9 @@ namespace WorkflowManagementSystem.Models.Programs
     public class ProgramViewModel
     {
         public string Requester { get; set; }
+        public string Faculty { get; set; }
         public string Name { get; set; }
         public string Semester { get; set; }
-        public string Discipline { get; set; }
         public string CrossImpact { get; set; }
         public string StudentImpact { get; set; }
         public string LibraryImpact { get; set; }

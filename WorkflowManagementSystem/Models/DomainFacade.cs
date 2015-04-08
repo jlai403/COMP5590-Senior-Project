@@ -5,7 +5,7 @@ using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.Course;
 using WorkflowManagementSystem.Models.DataAccess;
 using WorkflowManagementSystem.Models.ErrorHandling;
-using WorkflowManagementSystem.Models.Faculty;
+using WorkflowManagementSystem.Models.Faculties;
 using WorkflowManagementSystem.Models.Files;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Roles;

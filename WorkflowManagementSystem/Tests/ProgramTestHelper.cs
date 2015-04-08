@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using FluentAssertions;
-using WorkflowManagementSystem.Models.Faculty;
+using WorkflowManagementSystem.Models.Faculties;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
@@ -13,13 +13,13 @@ namespace WorkflowManagementSystem.Tests
     {
         private static Random Random = new Random();
 
-        public ProgramRequestInputViewModel CreateNewValidProgramRequestInputViewModel(SemesterViewModel semester, DisciplineViewModel discipline)
+        public ProgramRequestInputViewModel CreateNewValidProgramRequestInputViewModel(SemesterViewModel semester, string facultyName)
         {
             var programRequestInputViewModel = new ProgramRequestInputViewModel();
             programRequestInputViewModel.RequestedDateUTC = new DateTime(2015, 1, 19);
             programRequestInputViewModel.Name = string.Format("Program Name - {0}", Random.Next(1, 9999));
+            programRequestInputViewModel.Faculty = facultyName;
             programRequestInputViewModel.Semester = semester.Id;
-            programRequestInputViewModel.Discipline = discipline.Id;
             programRequestInputViewModel.CrossImpact = "Cross Impact";
             programRequestInputViewModel.StudentImpact = "Student Impact";
             programRequestInputViewModel.LibraryImpact = "Library Impact";
@@ -33,7 +33,6 @@ namespace WorkflowManagementSystem.Tests
             actual.Requester.ShouldBeEquivalentTo(assertParameters[0]);
             actual.Name.ShouldBeEquivalentTo(expected.Name);
             actual.Semester.ShouldBeEquivalentTo(assertParameters[1]);
-            actual.Discipline.ShouldBeEquivalentTo(assertParameters[2]);
             actual.CrossImpact.ShouldBeEquivalentTo(expected.CrossImpact);
             actual.StudentImpact.ShouldBeEquivalentTo(expected.StudentImpact);
             actual.LibraryImpact.ShouldBeEquivalentTo(expected.LibraryImpact);

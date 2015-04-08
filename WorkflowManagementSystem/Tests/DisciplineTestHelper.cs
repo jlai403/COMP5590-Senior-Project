@@ -1,5 +1,5 @@
 using WorkflowManagementSystem.Models;
-using WorkflowManagementSystem.Models.Faculty;
+using WorkflowManagementSystem.Models.Faculties;
 
 namespace WorkflowManagementSystem.Tests
 {

@@ -25,8 +25,8 @@ namespace WorkflowManagementSystem.Models.Programs
             programViewModel.RequestedDateUTC = Program.RequestedDateUTC;
             programViewModel.Name = Program.Name;
             programViewModel.Requester = Program.Requester.GetDisplayName();
+            programViewModel.Faculty = Program.Faculty.Name;
             programViewModel.Semester = Program.Semester.GetDisplayName();
-            programViewModel.Discipline = Program.Discipline.GetDisplayName();
             programViewModel.CrossImpact = Program.CrossImpact;
             programViewModel.StudentImpact = Program.StudentImpact;
             programViewModel.LibraryImpact = Program.LibraryImpact;

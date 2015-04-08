@@ -6,7 +6,7 @@ namespace WorkflowManagementSystem.Models.Programs
     {
         public string Name { get; set; }
         public int Semester { get; set; }
-        public int Discipline { get; set; }
+        public string Faculty { get; set; }
         public string CrossImpact { get; set; }
         public string StudentImpact { get; set; }
         public string LibraryImpact { get; set; }

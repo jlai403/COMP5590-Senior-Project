@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WorkflowManagementSystem.Models.DataAccess;
 using WorkflowManagementSystem.Models.ErrorHandling;
-using WorkflowManagementSystem.Models.Faculty;
+using WorkflowManagementSystem.Models.Faculties;
 using WorkflowManagementSystem.Models.Users;
 using WorkflowManagementSystem.Models.Workflow;
 

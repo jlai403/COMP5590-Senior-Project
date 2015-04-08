@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.ErrorHandling;
-using WorkflowManagementSystem.Models.Faculty;
+using WorkflowManagementSystem.Models.Faculties;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Search;
 using WorkflowManagementSystem.Models.Semesters;
@@ -37,6 +37,20 @@ namespace WorkflowManagementSystem.Models.Course
         public void Update(User user, CourseRequestInputViewModel courseRequestInputViewModel)
         {
             UpdateWorkflowItem(user, courseRequestInputViewModel.Name, courseRequestInputViewModel.RequestedDateUTC, WorkflowItemTypes.Course);
+            UpdateCourse(courseRequestInputViewModel);
+            AddComment(courseRequestInputViewModel.Comment);
+
+            UpdateInvertedIndex();
+        }
+
+        private void AddComment(string comment)
+        {
+            if (comment.IsNullOrWhiteSpace()) return;
+            AddComment(Requester, RequestedDateUTC, comment);
+        }
+
+        private void UpdateCourse(CourseRequestInputViewModel courseRequestInputViewModel)
+        {
             Semester = SemesterRepository.FindSemester(courseRequestInputViewModel.Semester);
             Discipline = DisciplineRepository.FindDiscipline(courseRequestInputViewModel.Discipline);
             CourseNumber = GenerateValidCourseNumber(courseRequestInputViewModel.CourseNumber);
@@ -47,17 +61,9 @@ namespace WorkflowManagementSystem.Models.Course
             StudentImpact = courseRequestInputViewModel.StudentImpact;
             LibraryImpact = courseRequestInputViewModel.LibraryImpact;
             ITSImpact = courseRequestInputViewModel.ITSImpact;
-            
+
             UpdateProgram(courseRequestInputViewModel.ProgramName);
-            
             UpdatePrerequisites(courseRequestInputViewModel.Prerequisites);
-
-            if (!courseRequestInputViewModel.Comment.IsNullOrWhiteSpace())
-            {
-                AddComment(user, courseRequestInputViewModel.RequestedDateUTC, courseRequestInputViewModel.Comment);
-            }
-
-            UpdateInvertedIndex();
         }
 
         public override void UpdateInvertedIndex()

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models.ErrorHandling;
 
-namespace WorkflowManagementSystem.Models.Faculty
+namespace WorkflowManagementSystem.Models.Faculties
 {
     public class Faculty : IEntity
     {

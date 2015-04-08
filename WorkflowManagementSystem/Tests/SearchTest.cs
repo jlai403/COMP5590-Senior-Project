@@ -22,13 +22,12 @@ namespace WorkflowManagementSystem.Tests
             var user = new UserTestHelper().CreateUserWithTestRoles();
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
-            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
             var randomProgram = new ProgramRequestInputViewModel();
             randomProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
             randomProgram.Name = "random";
+            randomProgram.Faculty = FacultyTestHelper.SCIENCE_AND_TECHNOLOGY;
             randomProgram.Semester = semester.Id;
-            randomProgram.Discipline = discipline.Id;
             randomProgram.CrossImpact = "random";
             randomProgram.StudentImpact = "random";
             randomProgram.LibraryImpact = "random";
@@ -38,8 +37,8 @@ namespace WorkflowManagementSystem.Tests
             var robotsAndUnicornsProgram = new ProgramRequestInputViewModel();
             robotsAndUnicornsProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
             robotsAndUnicornsProgram.Name = "Robots and unicorns";
+            robotsAndUnicornsProgram.Faculty = FacultyTestHelper.SCIENCE_AND_TECHNOLOGY;
             robotsAndUnicornsProgram.Semester = semester.Id;
-            robotsAndUnicornsProgram.Discipline = discipline.Id;
             robotsAndUnicornsProgram.CrossImpact = "Cross Impact";
             robotsAndUnicornsProgram.StudentImpact = "Student Impact";
             robotsAndUnicornsProgram.LibraryImpact = "Library Impact";
@@ -49,8 +48,8 @@ namespace WorkflowManagementSystem.Tests
             var dogeProgram = new ProgramRequestInputViewModel();
             dogeProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
             dogeProgram.Name = "Such program";
+            dogeProgram.Faculty = FacultyTestHelper.SCIENCE_AND_TECHNOLOGY;
             dogeProgram.Semester = semester.Id;
-            dogeProgram.Discipline = discipline.Id;
             dogeProgram.CrossImpact = "Cross Impact";
             dogeProgram.StudentImpact = "Student Impact";
             dogeProgram.LibraryImpact = "Library Impact";
@@ -81,7 +80,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
-            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var programRequestInputViewModel = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, programRequestInputViewModel);
 
             var robotsAndUnicornsCourse = new CourseTestHelper().CreateNewValidCourseRequestInputViewModel(semester, discipline, string.Empty);
@@ -154,13 +153,12 @@ namespace WorkflowManagementSystem.Tests
             var user = new UserTestHelper().CreateUserWithTestRoles();
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
-            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
             var randomProgram = new ProgramRequestInputViewModel();
             randomProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
             randomProgram.Name = "random";
+            randomProgram.Faculty = FacultyTestHelper.SCIENCE_AND_TECHNOLOGY;
             randomProgram.Semester = semester.Id;
-            randomProgram.Discipline = discipline.Id;
             randomProgram.CrossImpact = "random";
             randomProgram.StudentImpact = "random";
             randomProgram.LibraryImpact = "random";
@@ -170,8 +168,8 @@ namespace WorkflowManagementSystem.Tests
             var robotsAndUnicornsProgram = new ProgramRequestInputViewModel();
             robotsAndUnicornsProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
             robotsAndUnicornsProgram.Name = "Robots and unicorns";
+            robotsAndUnicornsProgram.Faculty = FacultyTestHelper.SCIENCE_AND_TECHNOLOGY;
             robotsAndUnicornsProgram.Semester = semester.Id;
-            robotsAndUnicornsProgram.Discipline = discipline.Id;
             robotsAndUnicornsProgram.CrossImpact = "Cross Impact";
             robotsAndUnicornsProgram.StudentImpact = "Student Impact";
             robotsAndUnicornsProgram.LibraryImpact = "Library Impact";
@@ -181,8 +179,8 @@ namespace WorkflowManagementSystem.Tests
             var suchProgram = new ProgramRequestInputViewModel();
             suchProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
             suchProgram.Name = "Such program";
+            suchProgram.Faculty = FacultyTestHelper.SCIENCE_AND_TECHNOLOGY;
             suchProgram.Semester = semester.Id;
-            suchProgram.Discipline = discipline.Id;
             suchProgram.CrossImpact = "Cross Impact";
             suchProgram.StudentImpact = "Student Impact";
             suchProgram.LibraryImpact = "Library Impact";
@@ -192,8 +190,8 @@ namespace WorkflowManagementSystem.Tests
             var muchProgram = new ProgramRequestInputViewModel();
             muchProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
             muchProgram.Name = "Much program";
+            muchProgram.Faculty = FacultyTestHelper.SCIENCE_AND_TECHNOLOGY;
             muchProgram.Semester = semester.Id;
-            muchProgram.Discipline = discipline.Id;
             muchProgram.CrossImpact = "Cross Impact";
             muchProgram.StudentImpact = "Student Impact";
             muchProgram.LibraryImpact = "Library Impact";
@@ -221,13 +219,12 @@ namespace WorkflowManagementSystem.Tests
             var user = new UserTestHelper().CreateUserWithTestRoles();
 
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
-            var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
             var randomProgram = new ProgramRequestInputViewModel();
             randomProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
             randomProgram.Name = "random";
+            randomProgram.Faculty = FacultyTestHelper.SCIENCE_AND_TECHNOLOGY;
             randomProgram.Semester = semester.Id;
-            randomProgram.Discipline = discipline.Id;
             randomProgram.CrossImpact = "random";
             randomProgram.StudentImpact = "random";
             randomProgram.LibraryImpact = "random";
@@ -237,8 +234,8 @@ namespace WorkflowManagementSystem.Tests
             var robotsAndUnicornsProgram = new ProgramRequestInputViewModel();
             robotsAndUnicornsProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
             robotsAndUnicornsProgram.Name = "Robots and unicorns";
+            robotsAndUnicornsProgram.Faculty = FacultyTestHelper.SCIENCE_AND_TECHNOLOGY;
             robotsAndUnicornsProgram.Semester = semester.Id;
-            robotsAndUnicornsProgram.Discipline = discipline.Id;
             robotsAndUnicornsProgram.CrossImpact = "Cross Impact";
             robotsAndUnicornsProgram.StudentImpact = "Student Impact";
             robotsAndUnicornsProgram.LibraryImpact = "Library Impact";
@@ -248,8 +245,8 @@ namespace WorkflowManagementSystem.Tests
             var suchProgram = new ProgramRequestInputViewModel();
             suchProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
             suchProgram.Name = "Such program";
+            suchProgram.Faculty = FacultyTestHelper.SCIENCE_AND_TECHNOLOGY;
             suchProgram.Semester = semester.Id;
-            suchProgram.Discipline = discipline.Id;
             suchProgram.CrossImpact = "Cross Impact";
             suchProgram.StudentImpact = "Student Impact";
             suchProgram.LibraryImpact = "Library Impact";
@@ -259,8 +256,8 @@ namespace WorkflowManagementSystem.Tests
             var muchProgram = new ProgramRequestInputViewModel();
             muchProgram.RequestedDateUTC = new DateTime(2015, 1, 19);
             muchProgram.Name = "Much program";
+            muchProgram.Faculty = FacultyTestHelper.SCIENCE_AND_TECHNOLOGY;
             muchProgram.Semester = semester.Id;
-            muchProgram.Discipline = discipline.Id;
             muchProgram.CrossImpact = "Cross Impact";
             muchProgram.StudentImpact = "Student Impact";
             muchProgram.LibraryImpact = "Library Impact";
@@ -294,11 +291,11 @@ namespace WorkflowManagementSystem.Tests
             dogeCourse.Name = "doge course";
             FacadeFactory.GetDomainFacade().CreateCourseRequest(user.Email, dogeCourse);
 
-            var dogeProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var dogeProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             dogeProgram.Name = "doge program";
             FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, dogeProgram);
 
-            var robotsAndUnicornsProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var robotsAndUnicornsProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             robotsAndUnicornsProgram.Name = "robots and unicorns program";
             FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, robotsAndUnicornsProgram);
 
@@ -325,11 +322,11 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
-            var randomProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var randomProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             randomProgram.Name = "random program";
             FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, randomProgram);
 
-            var robotsAndUnicornsProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var robotsAndUnicornsProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             robotsAndUnicornsProgram.Name = "robots and unicorns program";
             FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, robotsAndUnicornsProgram);
 
@@ -357,7 +354,7 @@ namespace WorkflowManagementSystem.Tests
             var semester = FacadeFactory.GetDomainFacade().FindAllSemesters().FirstOrDefault(x => x.DisplayName.Equals("2015 - Winter"));
             var discipline = FacadeFactory.GetDomainFacade().FindAllDisciplines().FirstOrDefault(x => x.Name.Equals("Computer Science"));
 
-            var dogeProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, discipline);
+            var dogeProgram = new ProgramTestHelper().CreateNewValidProgramRequestInputViewModel(semester, FacultyTestHelper.SCIENCE_AND_TECHNOLOGY);
             dogeProgram.Name = "doge program";
             FacadeFactory.GetDomainFacade().CreateProgramRequest(user.Email, dogeProgram);
 

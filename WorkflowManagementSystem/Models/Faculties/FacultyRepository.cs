@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WorkflowManagementSystem.Models.DataAccess;
 
-namespace WorkflowManagementSystem.Models.Faculty
+namespace WorkflowManagementSystem.Models.Faculties
 {
     public class FacultyRepository : Repository
     {

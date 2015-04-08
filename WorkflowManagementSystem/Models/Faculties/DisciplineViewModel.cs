@@ -1,4 +1,4 @@
-namespace WorkflowManagementSystem.Models.Faculty
+namespace WorkflowManagementSystem.Models.Faculties
 {
     public class DisciplineViewModel
     {

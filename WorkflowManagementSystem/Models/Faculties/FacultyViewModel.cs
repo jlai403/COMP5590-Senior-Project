@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace WorkflowManagementSystem.Models.Faculty
+namespace WorkflowManagementSystem.Models.Faculties
 {
     public class FacultyViewModel
     {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Ajax.Utilities;
 using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.ErrorHandling;
-using WorkflowManagementSystem.Models.Faculty;
+using WorkflowManagementSystem.Models.Faculties;
 using WorkflowManagementSystem.Models.Search;
 using WorkflowManagementSystem.Models.Semesters;
 using WorkflowManagementSystem.Models.Users;
@@ -12,8 +12,8 @@ namespace WorkflowManagementSystem.Models.Programs
 {
     public class Program : WorkflowItem
     {
+        public virtual Faculty Faculty { get; set; }
         public virtual Semester Semester { get; set; }
-        public virtual Discipline Discipline { get; set; }
         public string CrossImpact { get; set; }
         public string StudentImpact { get; set; }
         public string LibraryImpact { get; set; }
@@ -26,32 +26,49 @@ namespace WorkflowManagementSystem.Models.Programs
             AssertProgramWithNameDoesntAlreadyExist(programRequestInputViewModel.Name);
             
             UpdateWorkflowItem(user, programRequestInputViewModel.Name, programRequestInputViewModel.RequestedDateUTC, WorkflowItemTypes.Program);
-            
-            Semester = SemesterRepository.FindSemester(programRequestInputViewModel.Semester);
-            Discipline = DisciplineRepository.FindDiscipline(programRequestInputViewModel.Discipline);
-            CrossImpact = programRequestInputViewModel.CrossImpact;
-            StudentImpact = programRequestInputViewModel.StudentImpact;
-            LibraryImpact = programRequestInputViewModel.LibraryImpact;
-            ITSImpact = programRequestInputViewModel.ITSImpact;
+            UpdateProgram(programRequestInputViewModel);
+            AddComment(programRequestInputViewModel.Comment);
+            AssertProgram();
 
-            if (!programRequestInputViewModel.Comment.IsNullOrWhiteSpace())
-            {
-                AddComment(user, programRequestInputViewModel.RequestedDateUTC, programRequestInputViewModel.Comment);
-            }
+            UpdateInvertedIndex();
+        }
 
+        private void AssertProgram()
+        {
             AssertNameIsNotNull();
+            AssertFacultyIsNotNull();
             AssertCrossImpactIsNotNull();
             AssertStudentImpactIsNotNull();
             AssertLibraryImpactIsNotNull();
             AssertITSImpactIsNotNull();
+        }
 
-            UpdateInvertedIndex();
+        private void AddComment(string comment)
+        {
+            if (comment.IsNullOrWhiteSpace()) return;
+            AddComment(Requester, RequestedDateUTC, comment);
+        }
+
+        private void UpdateProgram(ProgramRequestInputViewModel programRequestInputViewModel)
+        {
+            Faculty = FacultyRepository.FindFaculty(programRequestInputViewModel.Faculty);
+            Semester = SemesterRepository.FindSemester(programRequestInputViewModel.Semester);
+            CrossImpact = programRequestInputViewModel.CrossImpact;
+            StudentImpact = programRequestInputViewModel.StudentImpact;
+            LibraryImpact = programRequestInputViewModel.LibraryImpact;
+            ITSImpact = programRequestInputViewModel.ITSImpact;
         }
 
         public override void UpdateInvertedIndex()
         {
             DeleteInvertedIndice();
             InvertedIndexRepository.AddIndex(this);
+        }
+
+        private void AssertFacultyIsNotNull()
+        {
+            if (Faculty == null)
+                throw new WMSException("Faculty is required.");
         }
 
         private void AssertNameIsNotNull()

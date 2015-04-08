@@ -1,7 +1,7 @@
 using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.DataAccess;
-using WorkflowManagementSystem.Models.Faculty;
+using WorkflowManagementSystem.Models.Faculties;
 using WorkflowManagementSystem.Models.Roles;
 using WorkflowManagementSystem.Models.Semesters;
 

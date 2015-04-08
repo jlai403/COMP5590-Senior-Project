@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using WorkflowManagementSystem.Models.Course;
-using WorkflowManagementSystem.Models.Faculty;
+using WorkflowManagementSystem.Models.Faculties;
 using WorkflowManagementSystem.Models.Semesters;
 
 namespace WorkflowManagementSystem.Tests

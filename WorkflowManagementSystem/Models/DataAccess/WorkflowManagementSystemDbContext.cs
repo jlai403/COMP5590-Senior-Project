@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using WorkflowManagementSystem.Models.ApprovalChains;
 using WorkflowManagementSystem.Models.Course;
-using WorkflowManagementSystem.Models.Faculty;
+using WorkflowManagementSystem.Models.Faculties;
 using WorkflowManagementSystem.Models.Files;
 using WorkflowManagementSystem.Models.Programs;
 using WorkflowManagementSystem.Models.Roles;
@@ -29,7 +29,7 @@ namespace WorkflowManagementSystem.Models.DataAccess
         protected DbSet<Course.Course> Course { get; set; }
         protected DbSet<PrerequisiteCourse> PrerequisiteCourse { get; set; }
         protected DbSet<Discipline> Discipline { get; set; }
-        protected DbSet<Faculty.Faculty> Faculty { get; set; }
+        protected DbSet<Faculty> Faculty { get; set; }
         protected DbSet<IndexKey> IndexKey { get; set; }
         protected DbSet<Role> Role { get; set; }
         protected DbSet<Semester> Semester { get; set; }

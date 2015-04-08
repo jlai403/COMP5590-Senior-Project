@@ -308,6 +308,10 @@
     <Compile Include="Migrations\201504070610459_UpdateApprovalChainNameToType.Designer.cs">
       <DependentUpon>201504070610459_UpdateApprovalChainNameToType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504080053561_RemoveDisciplineFromProgram.cs" />
+    <Compile Include="Migrations\201504080053561_RemoveDisciplineFromProgram.Designer.cs">
+      <DependentUpon>201504080053561_RemoveDisciplineFromProgram.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChain.cs" />
     <Compile Include="Models\ApprovalChains\ApprovalChainAssembler.cs" />
@@ -341,16 +345,16 @@
     <Compile Include="Models\DomainFacade.cs" />
     <Compile Include="Models\ErrorHandling\WMSException.cs" />
     <Compile Include="Models\FacadeFactory.cs" />
-    <Compile Include="Models\Faculty\Discipline.cs" />
-    <Compile Include="Models\Faculty\DisciplineAssembler.cs" />
-    <Compile Include="Models\Faculty\DisciplineInputViewModel.cs" />
-    <Compile Include="Models\Faculty\DisciplineRepository.cs" />
-    <Compile Include="Models\Faculty\DisciplineViewModel.cs" />
-    <Compile Include="Models\Faculty\Faculty.cs" />
-    <Compile Include="Models\Faculty\FacultyAssembler.cs" />
-    <Compile Include="Models\Faculty\FacultyInputViewModel.cs" />
-    <Compile Include="Models\Faculty\FacultyRepository.cs" />
-    <Compile Include="Models\Faculty\FacultyViewModel.cs" />
+    <Compile Include="Models\Faculties\Discipline.cs" />
+    <Compile Include="Models\Faculties\DisciplineAssembler.cs" />
+    <Compile Include="Models\Faculties\DisciplineInputViewModel.cs" />
+    <Compile Include="Models\Faculties\DisciplineRepository.cs" />
+    <Compile Include="Models\Faculties\DisciplineViewModel.cs" />
+    <Compile Include="Models\Faculties\Faculty.cs" />
+    <Compile Include="Models\Faculties\FacultyAssembler.cs" />
+    <Compile Include="Models\Faculties\FacultyInputViewModel.cs" />
+    <Compile Include="Models\Faculties\FacultyRepository.cs" />
+    <Compile Include="Models\Faculties\FacultyViewModel.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\DataAccess\Repository.cs" />
     <Compile Include="Models\Programs\Program.cs" />
@@ -547,6 +551,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504070610459_UpdateApprovalChainNameToType.resx">
       <DependentUpon>201504070610459_UpdateApprovalChainNameToType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504080053561_RemoveDisciplineFromProgram.resx">
+      <DependentUpon>201504080053561_RemoveDisciplineFromProgram.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
