@@ -104,7 +104,7 @@
         for (var index in jsonData) {
             var approvalChainJson = jsonData[index];
             var row = $("<tr></tr>");
-            var approvalChainName = $("<td></td>").addClass("center-text").text(approvalChainJson.Name);
+            var approvalChainName = $("<td></td>").addClass("center-text").text(approvalChainJson.Type);
 
             var approvalChainSteps = "";
             for (var index in approvalChainJson.ApprovalChainSteps) {
