@@ -2,6 +2,7 @@
 @using WorkflowManagementSystem.Models.ApprovalChains
 @using WorkflowManagementSystem.Views
 @Styles.Render("~/Content/css/theme/admin.css")
+@Scripts.Render("~/Scripts/js/noty-wrapper.js")
 
 <div class="container">
     <div class="row">
@@ -132,13 +133,16 @@
 
             $.ajax({
                 type: "POST",
-                dataType: "json",
                 url: "@Url.Action("SetActiveApprovalChain")",
                 data: {
                     approvalChainId: approvalChainId
                 },
-                async: true,
+                async: false,
                 success: function (jsonData) {
+                    showSuccessNotification('Approval chain updated');
+                },
+                error: function (textStatus, errorThrown) {
+                    showErrorNotification('Was not able to update approval chain');
                 }
             });
         });
@@ -192,7 +196,6 @@
             var isAdmin = $(this).is(":checked");
             $.ajax({
                 type: "POST",
-                dataType: "json",
                 url: "@Url.Action("UpdateIsAdmin")",
                 data: {
                     email: email,
@@ -200,6 +203,10 @@
                 },
                 async: true,
                 success: function (jsonData) {
+                    showSuccessNotification('User updated');
+                },
+                error: function (textStatus, errorThrown) {
+                    showErrorNotification('Was not able to update user');
                 }
             });
         });

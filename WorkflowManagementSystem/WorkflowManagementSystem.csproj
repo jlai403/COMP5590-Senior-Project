@@ -126,6 +126,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\Animate\animate.css" />
     <Content Include="Content\css\bootstrap-3.2.0-dist\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-3.2.0-dist\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap-3.2.0-dist\bootstrap.css" />
@@ -177,6 +178,11 @@
     <Content Include="Scripts\js\animation.js" />
     <Content Include="Scripts\js\collapse-text.js" />
     <Content Include="Scripts\js\errors.js" />
+    <Content Include="Scripts\js\noty-wrapper.js" />
+    <Content Include="Scripts\js\noty\jquery.noty.packaged.min.js" />
+    <Content Include="Scripts\js\noty\themes\bootstrap.js" />
+    <Content Include="Scripts\js\noty\themes\default.js" />
+    <Content Include="Scripts\js\noty\themes\relax.js" />
     <Content Include="Scripts\js\tablesorter\jquery.tablesorter.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Sql\Recreate.sql" />
