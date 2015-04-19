@@ -368,8 +368,8 @@
     }
 
     function bindEventToNewPrerequisiteInput() {
-        $("input[name='Prerequisites']:last-child").keypress(function(e) {
-            $(this).off();
+        $("input[name='Prerequisites']:last-child").keypress(function (e) {
+            $(this).off("keypress");
             $("<input name='Prerequisites' class='form-control' tabindex='10' placeholder='Course name'/>").insertAfter($(this));
             bindAutoCompleteForPrerequisites();
             bindEventToNewPrerequisiteInput();
@@ -388,7 +388,7 @@
                     },
                     success: function (data) {
                         response(data);
-                    }
+                    },
                 });
             },
             minLength: 3

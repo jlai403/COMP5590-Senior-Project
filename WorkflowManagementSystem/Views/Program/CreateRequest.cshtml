@@ -218,7 +218,7 @@
 
     function bindEventToNewCourseInput() {
         $("input[name='Courses']:last-child").keypress(function (e) {
-            $(this).off();
+            $(this).off("keypress");
             $("<input name='Courses' class='form-control' tabindex='10' placeholder='Course name'/>").insertAfter($(this));
             bindAutoCompleteForCourses();
             bindEventToNewCourseInput();
