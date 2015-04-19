@@ -105,7 +105,7 @@
 
     function bindEventToRoleInput() {
         $(".add-roles:last-child").keypress(function (e) {
-            $(this).off();
+            $(this).off("keypress");
             $("<input class='add-roles form-control' placeholder='Role'/>").insertAfter($(this));
             bindEventToRoleInput();
             bindAutoCompleteForRolesInput();
