@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.ApprovalChains;
+using WorkflowManagementSystem.Models.Roles;
 
 namespace WorkflowManagementSystem.Controllers
 {
@@ -46,6 +48,22 @@ namespace WorkflowManagementSystem.Controllers
         public void SetActiveApprovalChain(int approvalChainId)
         {
             FacadeFactory.GetDomainFacade().SetActiveApprovalChain(approvalChainId);
+        }
+
+        [HttpPost]
+        public ActionResult CreateRole(RoleInputViewModel roleInputViewModel)
+        {
+            string result;
+            try
+            {
+                FacadeFactory.GetDomainFacade().CreateRole(roleInputViewModel);
+                result = "Role created";
+            }
+            catch(Exception e)
+            {
+                result = e.Message;
+            }
+            return Json(new {result});
         }
     }
 }

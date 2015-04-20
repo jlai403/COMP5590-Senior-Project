@@ -5,6 +5,7 @@
 
 @Styles.Render("~/Content/css/module/jquery-ui.theme.min.css")
 @Styles.Render("~/Content/css/theme/create-approval-chain.css")
+@Scripts.Render("~/Scripts/js/noty-wrapper.js")
 
 <div class="container form center">
     <div class="col-md-12">
@@ -53,6 +54,9 @@
                     </div>
                     <div class="col-md-9">
                         <input class="add-roles form-control" placeholder="Role"/>
+                        <div id="create-new-role" class="cursor" data-toggle="modal" data-target="#create-role-modal">
+                            <b><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></b> Create new role
+                        </div>
                     </div>
                 </div>
 
@@ -92,8 +96,44 @@
     </div>
 </div>
 
+<!-- START CREATE ROLE MODAL -->
+<div class="modal fade" id="create-role-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("CreateRole", "Admin", FormMethod.Post, new{id="create-role-form"}))
+            {
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Create new role</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid form center">
+                        <div class="col-md-12">
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Name:
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" name="Name" class="form-control" autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary dark-blue">Create</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>>
+<!-- END CREATE ROLE MODAL -->
+
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         bindEventToRoleInput();
         bindAutoCompleteForRolesInput();
         showStepOne();
@@ -103,13 +143,43 @@
         $("#sortable").disableSelection();
     });
 
-    function bindEventToRoleInput() {
-        $(".add-roles:last-child").keypress(function (e) {
-            $(this).off("keypress");
-            $("<input class='add-roles form-control' placeholder='Role'/>").insertAfter($(this));
-            bindEventToRoleInput();
-            bindAutoCompleteForRolesInput();
+    $("#create-role-form").submit(function (e) {
+        var form = $(this);
+        var result;
+        $.ajax({
+            url: form.attr("action"),
+            type: 'post',
+            dataType: "json",
+            data: $(this).serialize(),
+            async: false,
+            success: function (data) {
+                result = data.result;
+            }
         });
+
+        if (result === 'Role created') {
+            showSuccessNotification(result);
+            var lastAddRoleInput = $(".add-roles").last();
+            lastAddRoleInput.val(form.find("input[name='Name']").val());
+            addNewRoleInput(lastAddRoleInput);
+            $('#create-role-modal').modal('toggle');
+        } else {
+            showErrorNotification(result);
+        }
+        return false;
+    });
+
+    function bindEventToRoleInput() {
+        $(".add-roles").last().keypress(function (e) {
+            $(this).off("keypress");
+            addNewRoleInput($(this));
+        });
+    }
+
+    function addNewRoleInput(previousRoleInput) {
+        $("<input class='add-roles form-control' placeholder='Role'/>").insertAfter(previousRoleInput);
+        bindEventToRoleInput();
+        bindAutoCompleteForRolesInput();
     }
 
     function bindAutoCompleteForRolesInput() {

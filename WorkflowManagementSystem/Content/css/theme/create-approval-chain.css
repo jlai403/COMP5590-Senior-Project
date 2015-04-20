@@ -58,6 +58,22 @@
     list-style: none;
 }
 
+/** MODAL */
+#create-new-role {
+    font-size: 11px;
+    font-style: italic;
+    margin-bottom: 10px;
+    border-radius: 0;
+}
+
+#create-role-modal .modal-header {
+    background-color: #34495e;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
 /** Desktop Specific css **/
 @media only screen and (min-width:990px) {
 	.split-left {
