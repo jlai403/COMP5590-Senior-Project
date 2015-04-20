@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.ApprovalChains;
+using WorkflowManagementSystem.Models.ErrorHandling;
 using WorkflowManagementSystem.Models.Roles;
 
 namespace WorkflowManagementSystem.Controllers
@@ -59,7 +60,7 @@ namespace WorkflowManagementSystem.Controllers
                 FacadeFactory.GetDomainFacade().CreateRole(roleInputViewModel);
                 result = "Role created";
             }
-            catch(Exception e)
+            catch (WMSException e)
             {
                 result = e.Message;
             }

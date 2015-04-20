@@ -21,6 +21,14 @@ namespace WorkflowManagementSystem.Models.Roles
             Name = roleInputViewModel.Name;
 
             AssertNameIsValid();
+            AssertRoleDoesNotAlreadyExist();
+        }
+
+        private void AssertRoleDoesNotAlreadyExist()
+        {
+            Role role = RoleRepository.FindRole(Name);
+            if (role != null)
+                throw new WMSException("The role '{0}' already exists.", Name);
         }
 
         private void AssertNameIsValid()
