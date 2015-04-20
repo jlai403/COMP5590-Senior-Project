@@ -78,5 +78,274 @@
         </suppliersInternal>
       </class>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="9698f307-4c8b-4a60-bc09-99417ad67f54"
+        name="RoleRepository"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="f7465a00-40f3-4347-a055-1c660ab2be98"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.Roles Type%3DRoleRepository"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="a4d723d0-ef2e-4f35-9598-a7db649b8849"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="895e850c-c5a4-496f-859f-45390a666af9">
+                <propertyInstance
+                  Id="c9666ef7-7fba-42bb-91ac-f4ffee238f8e"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ec4e2a5c-9aee-4055-8734-afac8e961374">
+                <propertyInstance
+                  Id="3ea65c65-75a8-47f9-8dc2-964a13e2130b"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="cf946fc3-fc2f-42ef-82bf-531648e0379c">
+                <propertyInstance
+                  Id="d64d32bf-0c07-42a7-a1bb-a8162c350bd2"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4ad45b34-619d-41d2-92d7-6fd0ac3150f5">
+                <propertyInstance
+                  Id="6a9bbadc-a593-46cf-bbb6-d639651160ae"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5ca60959-bfbd-4596-984e-2c646f7a096f">
+                <propertyInstance
+                  Id="99dbe826-39a1-4058-b677-134af2c90471"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="0b04c5f2-adf6-462c-9044-42301f795847"
+            name="CreateRole"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="eae41f0b-e1d2-409d-b61c-a726947928bf"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.Roles Type%3DRoleRepository Member%3D(Name%3DCreateRole OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.Roles Type%3DRoleInputViewModel)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="54df955d-15d7-4d56-b27a-7d70aae52b56"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6e31c314-2192-4be5-a809-3a75676b0bd0">
+                    <propertyInstance
+                      Id="fd49d0f9-27f1-4c13-a7f7-2bc93f0ee973"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="25abccd1-eee5-4ff1-8235-888aaa65242e">
+                    <propertyInstance
+                      Id="1bc26fa2-5eec-4991-9a9a-c40eea8bf8ad"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e6f80a18-d1fa-41ce-bf17-297b81d502c5">
+                    <propertyInstance
+                      Id="ac8d6349-b0c2-45bf-b603-15d3cacf4f06"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="174aaa4e-3773-4177-9a72-1c3cab495c4d">
+                    <propertyInstance
+                      Id="eb355a53-2fd9-4d72-a0b4-72cd3abcc12f"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="fadf4d74-6bb7-40e6-87cc-1da614c4deb0">
+                    <propertyInstance
+                      Id="6e3822e0-f6a6-4af4-8e06-ebb4e0b2b9d9"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4fc701b5-81b0-48fc-9832-b9ccc194ea31">
+                    <propertyInstance
+                      Id="fae621b7-bcd8-4883-b604-e703d1355367"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="ec3a64af-51b4-490e-a4d2-cd3ed1562eb3"
+                  name="roleInputViewModel"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="ed85ddd1-bcd1-44af-8d49-bc9dcefdecb0"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.Roles Type%3DRoleRepository Member%3D(Name%3DCreateRole OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.Roles Type%3DRoleInputViewModel)]) ParameterIdentifier%3DroleInputViewModel"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="08cb6c77-0a65-494b-a7e1-c5b3cfb80135"
+                      LastKnownName="RoleInputViewModel"
+                      LastKnownLocation="Package_1141.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="c20e0a1e-76de-45ea-a024-b9d0243fce1b"
+            name="FindAllRoles"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="07f2559d-ae10-4cdf-bc1a-b096acf3d5d8"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.Roles Type%3DRoleRepository Member%3DFindAllRoles"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="c9d77082-3c7a-4696-8492-ba949b78325d"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="576d793b-33b5-4f63-8b6f-f6546b8ced6c">
+                    <propertyInstance
+                      Id="e909267e-c500-4082-a5c4-e92605845c2e"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8c67fc9c-d0aa-472d-9509-97f48598fcd1">
+                    <propertyInstance
+                      Id="3c2265ed-73ed-4497-aaf5-59c37436b35d"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="22d8dd7f-3422-4a4a-bd0d-eab05ab0cea9">
+                    <propertyInstance
+                      Id="391f8845-edc9-471d-b7be-bad6d9c2aaa1"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2c653003-8012-47f6-9c14-e0dc39991992">
+                    <propertyInstance
+                      Id="eb12afa3-5363-40c0-b688-95b5732af229"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4edd9a89-0677-4c95-bf2c-d1f621706290">
+                    <propertyInstance
+                      Id="de5da994-1cd1-4546-8ba6-3e8040209c0d"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="82ea34f2-2f87-483c-9f27-b2ca2cc702bc">
+                    <propertyInstance
+                      Id="3bb8cd06-9812-4c8a-a591-1ad21d65645d"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="08cb6c77-0a65-494b-a7e1-c5b3cfb80135"
+        name="RoleInputViewModel"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="f9b75c16-fac1-4776-a76d-09d40dcdc7af"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2Fjoseph%2FDocuments%2FVisual Studio 2012%2FProjects%2FCOMP5590-Senior-Project%2FWorkflowManagementSystem%2Fbin%2FWorkflowManagementSystem.dll&quot; Namespace%3DWorkflowManagementSystem.Models.Roles Type%3DRoleInputViewModel"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="fbf12f15-439e-49fa-a360-8983bf8d1d9f"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1a5d83cd-08ce-485e-a52d-97a4d21ea152">
+                <propertyInstance
+                  Id="e1e3c119-f310-4f08-84d0-a910b86064db"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="18ba7cf4-e93c-4c72-87ab-7d3339f34f99">
+                <propertyInstance
+                  Id="93fb772a-ea16-477d-8d6f-b80af1289e27"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="dceab13d-d808-4bf7-8b9b-42146067d03d">
+                <propertyInstance
+                  Id="fe3d21d8-ab83-46fe-b9e4-e1c7ce9b37a7"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1600908a-3b4f-4801-a470-526bd0af7191">
+                <propertyInstance
+                  Id="1847160c-0345-4df0-8ed6-337d93b70be2"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8b3e3ce5-44f6-4074-ab83-46b8f7c58858">
+                <propertyInstance
+                  Id="397b6359-7c2b-4587-96d7-092e1627dd02"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
   </packagedElements>
 </package>

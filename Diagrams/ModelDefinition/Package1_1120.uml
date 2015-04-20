@@ -191,5 +191,17 @@
         LastKnownName="Roles"
         LastKnownLocation="Package_1141.uml" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="e3f0ca5c-6fd7-4d43-97a8-cb9243cce422"
+        LastKnownName="Course"
+        LastKnownLocation="Package_1905.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="320da4d0-7eb8-4260-b390-8e6d71d1e27c"
+        LastKnownName="Faculties"
+        LastKnownLocation="Package1_1905.uml" />
+    </packageHasNamedElement>
   </packagedElements>
 </package>
