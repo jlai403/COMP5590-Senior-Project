@@ -11,5 +11,10 @@ namespace WorkflowManagementSystem.Models
         {
             return new SearchFacade();
         }
+
+        public static ImportExportFacade GetImportExportFacade()
+        {
+            return new ImportExportFacade();
+        }
     }
 }

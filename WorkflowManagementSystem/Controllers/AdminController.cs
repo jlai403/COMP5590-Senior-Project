@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using WorkflowManagementSystem.Models;
 using WorkflowManagementSystem.Models.ApprovalChains;
@@ -65,6 +66,26 @@ namespace WorkflowManagementSystem.Controllers
                 result = e.Message;
             }
             return Json(new {result});
+        }
+
+        [HttpPost]
+        public ActionResult Import(HttpPostedFileBase file)
+        {
+            string result;
+            bool success;
+            try
+            {
+                FacadeFactory.GetImportExportFacade().Import(file.InputStream);
+                success = true;
+                result = "Succesfully Imported";
+            }
+            catch (Exception e)
+            {
+                success = false;
+                result = "Import Failed";
+            }
+
+            return Json(new {success, result});
         }
     }
 }

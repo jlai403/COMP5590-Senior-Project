@@ -6,6 +6,36 @@
 
 <div class="container">
     <div class="row">
+        <!-- IMPORT/EXPORT START -->
+        <div class="col-md-12">
+            <div class="import-export">
+                <p class="header">Import/Export</p>
+                <div class="row">
+                    <div class="col-xs-6" style="border-right: #ccc solid 1px">
+                        @using (Html.BeginForm("Import", "Admin", FormMethod.Post, new { id = "import-form", enctype = "multipart/form-data" }))
+                        {
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    Import File
+                                </div>
+                                <div class="col-xs-9">
+                                    <input type="file" name="file"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <input type="submit" class="form-control button dark-blue center-block" style="max-width: 200px"/>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="col-xs-6">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- IMPORT/EXPORT END -->
+
         <!-- USER MANAGEMENT START -->
         <div class="col-md-6">
             <div class="user-management">
@@ -28,7 +58,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        
+
                         </tbody>
                     </table>
                 </div>
@@ -45,10 +75,10 @@
                         Types:
                     </div>
                     <div class="col-xs-9">
-                        @Html.DropDownList("approvalChainTypes", Html.ConvertToSelectListItem(ApprovalChainTypes.TYPES), new {@class = "form-control"})
+                        @Html.DropDownList("approvalChainTypes", Html.ConvertToSelectListItem(ApprovalChainTypes.TYPES), new { @class = "form-control" })
                     </div>
                     <div class="col-xs-1">
-                        <a class="create-approval-chain"href="@Url.Action("CreateApprovalChain")">+</a>                   
+                        <a class="create-approval-chain"href="@Url.Action("CreateApprovalChain")">+</a>
                     </div>
                 </div>
                 <div class="row">
@@ -61,7 +91,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        
+
                         </tbody>
                     </table>
                 </div>
@@ -72,6 +102,30 @@
 </div>
 
 <script>
+    $("#import-form").submit(function(e) {
+        var form = $(this);
+
+        $.ajax({
+            url: form.attr("action"),
+            type: 'post',
+            dataType: "json",
+            data: new FormData(this),
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.success) {
+                    showSuccessNotification(data.result);
+                } else {
+                    showErrorNotification(data.result);
+                }
+            }
+        });
+
+        return false;
+    });
+
     $(document).ready(function() {
         bindUserSearchEvent();
         bindApprovalChainSearchEvent();
@@ -88,15 +142,15 @@
             type: "POST",
             dataType: "json",
             url: "@Url.Action("FindApprovalChains")",
-                data: {
-                    approvalChainType: approvalChainType
-                },
-                async: true,
-                success: function (jsonData) {
-                    renderApprovalChains(jsonData);
-                    bindSetActiveApprovalChainEvent();
-                }
-            });
+            data: {
+                approvalChainType: approvalChainType
+            },
+            async: true,
+            success: function (jsonData) {
+                renderApprovalChains(jsonData);
+                bindSetActiveApprovalChainEvent();
+            }
+        });
     }
 
     function renderApprovalChains(jsonData) {
