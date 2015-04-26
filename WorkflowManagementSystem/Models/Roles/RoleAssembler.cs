@@ -5,8 +5,8 @@ namespace WorkflowManagementSystem.Models.Roles
     public class RoleAssembler
     {
         public Role Role { get; set; }
-
-        private RoleAssembler(Role role)
+        
+        public RoleAssembler(Role role)
         {
             Role = role;
         }
@@ -21,8 +21,10 @@ namespace WorkflowManagementSystem.Models.Roles
             return list;
         }
 
-        private RoleViewModel Assemble()
+        public RoleViewModel Assemble()
         {
+            if (Role == null) return null;
+
             var viewModel = new RoleViewModel();
             viewModel.Name = Role.Name;
             return viewModel;

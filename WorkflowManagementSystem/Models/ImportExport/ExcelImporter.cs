@@ -9,7 +9,8 @@ namespace WorkflowManagementSystem.Models.ImportExport
     {
         private List<string> _importOrder = new List<string>
         {
-            FacultyImporter.IMPORT_NAME
+            FacultyImporter.IMPORT_NAME,
+            RoleImporter.IMPORT_NAME
         };
 
         public void Import(Stream inputStream)
@@ -31,6 +32,8 @@ namespace WorkflowManagementSystem.Models.ImportExport
             {
                 case FacultyImporter.IMPORT_NAME:
                     return new FacultyImporter();
+                case RoleImporter.IMPORT_NAME:
+                    return new RoleImporter();
                 default:
                     throw new WMSException("Could not find import for '{0}'", importName);
             }

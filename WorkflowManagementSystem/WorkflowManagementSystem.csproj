@@ -373,6 +373,7 @@
     <Compile Include="Models\ImportExport\ExcelImporter.cs" />
     <Compile Include="Models\ImportExport\FacultyImporter.cs" />
     <Compile Include="Models\ImportExport\IImporter.cs" />
+    <Compile Include="Models\ImportExport\RoleImporter.cs" />
     <Compile Include="Models\Programs\Program.cs" />
     <Compile Include="Models\Programs\ProgramAssembler.cs" />
     <Compile Include="Models\Programs\ProgramRepository.cs" />
@@ -435,6 +436,7 @@
     <Compile Include="Tests\FacultyTestHelper.cs" />
     <Compile Include="Tests\ProgramTest.cs" />
     <Compile Include="Tests\ProgramTestHelper.cs" />
+    <Compile Include="Tests\RoleImportTest.cs" />
     <Compile Include="Tests\RoleTest.cs" />
     <Compile Include="Tests\RoleTestHelper.cs" />
     <Compile Include="Tests\SearchTest.cs" />

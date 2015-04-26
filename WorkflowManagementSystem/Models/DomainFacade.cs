@@ -328,5 +328,14 @@ namespace WorkflowManagementSystem.Models
                 return null;
             });
         }
+
+        public RoleViewModel FindRole(string name)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var role = RoleRepository.FindRole(name);
+                return new RoleAssembler(role).Assemble();
+            });
+        }
     }
 }
