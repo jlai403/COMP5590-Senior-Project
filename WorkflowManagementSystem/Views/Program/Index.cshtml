@@ -9,6 +9,14 @@
             <p class="header">Program Request</p>
         </div>
 
+        <div class="row">
+            <div style="float: right; margin-right: 10px;">
+                <a href="@Url.Action("Program", "Reports", new {name = Model.Name})">
+                    <i class="glyphicon glyphicon-print"></i>
+                </a>
+            </div>
+        </div>
+
         <div class="row content">
             @{Html.RenderPartial("_ProgramSummaryDetailsPartial", Model);}
 

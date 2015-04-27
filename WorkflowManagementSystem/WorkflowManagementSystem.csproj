@@ -493,6 +493,7 @@
     <Content Include="Views\Admin\CreateApprovalChain.cshtml" />
     <Content Include="Views\Reports\Course.cshtml" />
     <Content Include="Views\Shared\_PdfLayout.cshtml" />
+    <Content Include="Views\Reports\Program.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

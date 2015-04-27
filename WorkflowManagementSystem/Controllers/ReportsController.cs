@@ -11,5 +11,11 @@ namespace WorkflowManagementSystem.Controllers
             var course = FacadeFactory.GetDomainFacade().FindCourse(name);
             return new PdfActionResult(course);
         }
-	}
+
+        public ActionResult Program(string name)
+        {
+            var program = FacadeFactory.GetDomainFacade().FindProgram(name);
+            return new PdfActionResult(program);
+        }
+    }
 }
