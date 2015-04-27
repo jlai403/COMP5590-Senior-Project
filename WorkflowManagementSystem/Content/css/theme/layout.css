@@ -1,3 +1,17 @@
+ #ajaxSpinnerContainer { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    text-align:center;
+    padding:10px;
+    border:1px solid #666;
+    margin-left: -50px;
+    margin-top: -50px;
+    z-index:2;
+    overflow: auto; 
+    background-color: #ffffff
+}
+
 body {
     font-family: HelveticaNeue, 'Helvetica Neue', Helvetica, 'Open Sans', Arial, sans-serif;
     background-color: #ecf0f1;

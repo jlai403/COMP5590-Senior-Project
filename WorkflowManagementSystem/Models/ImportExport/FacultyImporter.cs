@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Ajax.Utilities;
 using SpreadsheetLight;
 using WorkflowManagementSystem.Models.Faculties;
 
@@ -25,8 +26,11 @@ namespace WorkflowManagementSystem.Models.ImportExport
             var facultyInputViewModels = new List<FacultyInputViewModel>();
             for (int row = HEADER_ROW + 1; row <= numberOfRows; row++)
             {
+                var facultyName = importDocument.GetCellValueAsString(row, NAME_COLUMN_INDEX);
+                if (facultyName.IsNullOrWhiteSpace()) continue;
+
                 var facultyInputViewModel = new FacultyInputViewModel();
-                facultyInputViewModel.Name = importDocument.GetCellValueAsString(row, NAME_COLUMN_INDEX);
+                facultyInputViewModel.Name = facultyName;
 
                 facultyInputViewModels.Add(facultyInputViewModel);
             }

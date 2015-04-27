@@ -169,6 +169,7 @@
     <Content Include="Content\css\theme\search-results.css" />
     <Content Include="Content\css\theme\signin.css" />
     <Content Include="Content\css\theme\signup.css" />
+    <Content Include="Content\img\ajax-loader.gif" />
     <Content Include="Content\img\Mount_Royal_University_Logo.svg.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Migrations\fonts\glyphicons-halflings-regular.svg" />
@@ -384,6 +385,7 @@
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\DataAccess\Repository.cs" />
     <Compile Include="Models\ImportExportFacade.cs" />
+    <Compile Include="Models\ImportExport\DisciplineImporter.cs" />
     <Compile Include="Models\ImportExport\ExcelImporter.cs" />
     <Compile Include="Models\ImportExport\FacultyImporter.cs" />
     <Compile Include="Models\ImportExport\IImporter.cs" />
@@ -443,6 +445,7 @@
     <Compile Include="Tests\ApprovalChainTestHelper.cs" />
     <Compile Include="Tests\CourseTest.cs" />
     <Compile Include="Tests\CourseTestHelper.cs" />
+    <Compile Include="Tests\DisciplineImportTest.cs" />
     <Compile Include="Tests\FacultyImportTest.cs" />
     <Compile Include="Tests\FileTest.cs" />
     <Compile Include="Tests\DisciplineTestHelper.cs" />

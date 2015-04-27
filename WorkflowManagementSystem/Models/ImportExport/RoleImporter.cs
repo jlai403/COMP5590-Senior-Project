@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Ajax.Utilities;
 using SpreadsheetLight;
 using WorkflowManagementSystem.Models.Roles;
 
@@ -25,8 +26,11 @@ namespace WorkflowManagementSystem.Models.ImportExport
             var roleInputViewModels = new List<RoleInputViewModel>();
             for (int row = HEADER_ROW + 1; row <= numberOfRows; row++)
             {
+                var roleName = importDocument.GetCellValueAsString(row, NAME_COLUMN_INDEX);
+                if (roleName.IsNullOrWhiteSpace()) continue;
+
                 var roleInputViewModel = new RoleInputViewModel();
-                roleInputViewModel.Name = importDocument.GetCellValueAsString(row, NAME_COLUMN_INDEX);
+                roleInputViewModel.Name = roleName;
 
                 roleInputViewModels.Add(roleInputViewModel);
             }

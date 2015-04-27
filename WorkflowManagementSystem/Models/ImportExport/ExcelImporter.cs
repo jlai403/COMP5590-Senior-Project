@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using SpreadsheetLight;
 using WorkflowManagementSystem.Models.ErrorHandling;
 
@@ -10,6 +11,7 @@ namespace WorkflowManagementSystem.Models.ImportExport
         private List<string> _importOrder = new List<string>
         {
             FacultyImporter.IMPORT_NAME,
+            DisciplineImporter.IMPORT_NAME,
             RoleImporter.IMPORT_NAME
         };
 
@@ -32,6 +34,8 @@ namespace WorkflowManagementSystem.Models.ImportExport
             {
                 case FacultyImporter.IMPORT_NAME:
                     return new FacultyImporter();
+                case DisciplineImporter.IMPORT_NAME:
+                    return new DisciplineImporter();
                 case RoleImporter.IMPORT_NAME:
                     return new RoleImporter();
                 default:

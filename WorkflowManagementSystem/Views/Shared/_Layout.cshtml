@@ -37,6 +37,22 @@
         {
             Html.RenderAction("RenderNavigationHeader", "Navigation");
         }
+
+        <div id="ajaxSpinnerContainer">
+            <img src="/Content/img/ajax-loader.gif" id="ajaxSpinnerImage" title="working...">
+            <br/>
+            Working...
+        </div>
         @RenderBody()
+
+        <script>
+            $(document)
+                .ajaxStart(function () {
+                    $("#ajaxSpinnerContainer").show();
+                })
+                .ajaxStop(function () {
+                    $("#ajaxSpinnerContainer").hide();
+                });
+        </script>
     </body>
 </html>
