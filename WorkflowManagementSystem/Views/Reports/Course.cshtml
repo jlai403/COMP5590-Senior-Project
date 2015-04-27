@@ -1,0 +1,179 @@
+﻿@using Microsoft.Ajax.Utilities
+@using WorkflowManagementSystem.Models.Workflow
+@model WorkflowManagementSystem.Models.Course.CourseViewModel
+
+@{
+    ViewBag.Title = "Course";
+    Layout = "~/Views/Shared/_PdfLayout.cshtml";
+}
+
+<style>
+    table tr td {
+        padding-bottom: 5px;
+    }
+
+    table {
+        font-family: "Helvetica Neue";
+        font-size: 12px;
+    }
+</style>
+
+<table style="margin-bottom: 20px;">
+    <tr>
+        <td>
+            <img src="@Context.Server.MapPath("~/Content/img/Mount_Royal_University_Logo.svg.png")" style="width: 150px;"/>
+        </td>
+        <td style="width: 100%; text-align: center; vertical-align: bottom">
+            <span style="font-size: 24px; font-weight: bold;">Course Request</span>
+        </td>
+    </tr>
+</table>
+
+<hr/>
+
+<table style="margin-bottom: 20px;">
+    <tr>
+        <td style="padding-right: 20px;">
+            <b>Request Date: </b>
+        </td>
+        <td>
+            @Model.RequestedDateUTC
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-right: 20px;">
+            <b>Requested By: </b>
+        </td>
+        <td>
+            @Model.Requester
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-right: 20px;">
+            <b>Course Name: </b>
+        </td>
+        <td>
+            @Model.Name
+        </td>
+    </tr>
+    @if (!Model.ProgramName.IsNullOrWhiteSpace())
+    {
+        <tr>
+            <td style="padding-right: 20px;">
+                <b>Program: </b>
+            </td>
+            <td>
+                @Model.ProgramName
+            </td>
+        </tr>
+    }
+    <tr>
+        <td style="padding-right: 20px;">
+            <b>Course Number: </b>
+        </td>
+        <td>
+            @Model.Discipline@Model.CourseNumber
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-right: 20px;">
+            <b>Credits: </b>
+        </td>
+        <td>
+            @Model.Credits
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-right: 20px;">
+            <b>Grading: </b>
+        </td>
+        <td>
+            @Model.Grading
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-right: 20px;">
+            <b>Prerequisites: </b>
+        </td>
+        <td>
+            @string.Join(", ", Model.Prerequisites)
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-right: 20px;">
+            <b>Status: </b>
+        </td>
+        <td>
+            @switch (Model.CurrentState())
+            {
+                case WorkflowStates.COMPLETED:
+                    @:Approved
+                    break;
+                case WorkflowStates.REJECTED:
+                    @:Rejected
+                    break;
+                default:
+                     @:Pending Approval
+                    break;
+            }
+        </td>
+    </tr>
+</table>
+
+<hr/>
+
+<table style="margin-top: 10px;">
+    <tr>
+        <td>
+            <b>Calendary Entry: </b>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>@Model.CalendarEntry</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b>Cross Impact: </b>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>@Model.CrossImpact</p>
+        </td>
+    </tr>
+   
+    <tr>
+        <td>
+            <b>Student Impact: </b>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>@Model.StudentImpact</p>
+        </td>
+    </tr>
+   
+    <tr>
+        <td>
+            <b>Library Impact: </b>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>@Model.LibraryImpact</p>
+        </td>
+    </tr>
+   
+    <tr>
+        <td>
+            <b>ITS Impact: </b>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>@Model.ITSImpact</p>
+        </td>
+    </tr>
+</table>
