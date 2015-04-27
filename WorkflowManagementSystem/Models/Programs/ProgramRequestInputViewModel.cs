@@ -16,7 +16,9 @@ namespace WorkflowManagementSystem.Models.Programs
 
         public ProgramRequestInputViewModel()
         {
-            RequestedDateUTC = DateTime.UtcNow;
+            //TODO: convert to UTC and back to user time
+            //RequestedDateUTC = DateTime.UtcNow;
+            RequestedDateUTC = DateTime.Now;
         }
     }
 }
