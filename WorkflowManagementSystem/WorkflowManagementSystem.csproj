@@ -385,11 +385,13 @@
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\DataAccess\Repository.cs" />
     <Compile Include="Models\ImportExportFacade.cs" />
+    <Compile Include="Models\ImportExport\ApprovalChainImporter.cs" />
     <Compile Include="Models\ImportExport\DisciplineImporter.cs" />
     <Compile Include="Models\ImportExport\ExcelImporter.cs" />
     <Compile Include="Models\ImportExport\FacultyImporter.cs" />
     <Compile Include="Models\ImportExport\IImporter.cs" />
     <Compile Include="Models\ImportExport\RoleImporter.cs" />
+    <Compile Include="Models\ImportExport\SemesterImporter.cs" />
     <Compile Include="Models\Programs\Program.cs" />
     <Compile Include="Models\Programs\ProgramAssembler.cs" />
     <Compile Include="Models\Programs\ProgramRepository.cs" />
@@ -441,6 +443,7 @@
     <Compile Include="Models\Workflow\WorkflowStates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\DataAccess\WorkflowManagementSystemDbContext.cs" />
+    <Compile Include="Tests\ApprovalChainImportTest.cs" />
     <Compile Include="Tests\ApprovalChainTest.cs" />
     <Compile Include="Tests\ApprovalChainTestHelper.cs" />
     <Compile Include="Tests\CourseTest.cs" />
@@ -457,6 +460,7 @@
     <Compile Include="Tests\RoleTest.cs" />
     <Compile Include="Tests\RoleTestHelper.cs" />
     <Compile Include="Tests\SearchTest.cs" />
+    <Compile Include="Tests\SemesterImportTest.cs" />
     <Compile Include="Tests\SemesterTest.cs" />
     <Compile Include="Tests\SemesterTestHelper.cs" />
     <Compile Include="Tests\UserTest.cs" />

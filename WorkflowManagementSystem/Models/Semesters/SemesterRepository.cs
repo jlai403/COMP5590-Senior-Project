@@ -22,5 +22,10 @@ namespace WorkflowManagementSystem.Models.Semesters
         {
             return Queryable<Semester>().FirstOrDefault(x => x.Id == semesterId);
         }
+
+        public static Semester FindSemester(string term, string year)
+        {
+            return Queryable<Semester>().FirstOrDefault(x => x.Term.Equals(term) && x.Year.Equals(year));
+        }
     }
 }

@@ -337,5 +337,23 @@ namespace WorkflowManagementSystem.Models
                 return new RoleAssembler(role).Assemble();
             });
         }
+
+        public SemesterViewModel FindSemester(string term, string year)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var semester = SemesterRepository.FindSemester(term, year);
+                return new SemesterAssembler(semester).Assemble();
+            });
+        }
+
+        public ApprovalChainViewModel FindApprovalChain(string type, List<string> roles)
+        {
+            return TransactionHandler.Instance.Execute(() =>
+            {
+                var approvalChain = ApprovalChainRepository.FindActiveApprovalChain(type, roles);
+                return new ApprovalChainAssembler(approvalChain).AssembleApprovalChainViewModel();
+            });
+        }
     }
 }

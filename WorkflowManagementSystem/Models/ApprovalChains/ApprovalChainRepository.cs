@@ -35,5 +35,11 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
         {
             return FindEntity<ApprovalChain>(approvalChainId);
         }
+
+        public static ApprovalChain FindActiveApprovalChain(string type, List<string> roles)
+        {
+            var approvalChains = FindAllApprovalChains(type);
+            return approvalChains.FirstOrDefault(ac => ac.Type.Equals(type) && ac.ApprovalChainSteps.Exists(acs => roles.Contains(acs.Role.Name)));
+        }
     }
 }

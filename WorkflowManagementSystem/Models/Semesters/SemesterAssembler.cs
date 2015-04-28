@@ -6,7 +6,7 @@ namespace WorkflowManagementSystem.Models.Semesters
     {
         public Semester Semester { get; set; }
 
-        private SemesterAssembler(Semester semester)
+        public SemesterAssembler(Semester semester)
         {
             Semester = semester;
         }
@@ -21,8 +21,10 @@ namespace WorkflowManagementSystem.Models.Semesters
             return list;
         }
 
-        private SemesterViewModel Assemble()
+        public SemesterViewModel Assemble()
         {
+            if (Semester == null) return null;
+
             var viewModel = new SemesterViewModel();
             viewModel.Id = Semester.Id;
             viewModel.Year = Semester.Year;

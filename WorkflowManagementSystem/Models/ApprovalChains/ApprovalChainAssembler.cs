@@ -30,8 +30,10 @@ namespace WorkflowManagementSystem.Models.ApprovalChains
             return approvalChains.Select(approvalChain => new ApprovalChainAssembler(approvalChain).AssembleApprovalChainViewModel()).ToList();
         }
 
-        private ApprovalChainViewModel AssembleApprovalChainViewModel()
+        public ApprovalChainViewModel AssembleApprovalChainViewModel()
         {
+            if (ApprovalChain == null) return null;
+
             var approvalChainViewModel = new ApprovalChainViewModel();
             approvalChainViewModel.Id = ApprovalChain.Id;
             approvalChainViewModel.Type = ApprovalChain.Type;

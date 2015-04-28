@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 using SpreadsheetLight;
 using WorkflowManagementSystem.Models.ErrorHandling;
 
@@ -12,7 +11,9 @@ namespace WorkflowManagementSystem.Models.ImportExport
         {
             FacultyImporter.IMPORT_NAME,
             DisciplineImporter.IMPORT_NAME,
-            RoleImporter.IMPORT_NAME
+            RoleImporter.IMPORT_NAME,
+            SemesterImporter.IMPORT_NAME,
+            ApprovalChainImporter.IMPORT_NAME
         };
 
         public void Import(Stream inputStream)
@@ -38,6 +39,10 @@ namespace WorkflowManagementSystem.Models.ImportExport
                     return new DisciplineImporter();
                 case RoleImporter.IMPORT_NAME:
                     return new RoleImporter();
+                case SemesterImporter.IMPORT_NAME:
+                    return new SemesterImporter();
+                case ApprovalChainImporter.IMPORT_NAME:
+                    return new ApprovalChainImporter();
                 default:
                     throw new WMSException("Could not find import for '{0}'", importName);
             }
