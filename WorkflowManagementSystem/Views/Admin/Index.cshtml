@@ -116,6 +116,7 @@
             success: function (data) {
                 if (data.success) {
                     showSuccessNotification(data.result);
+                    $("#approvalChainTypes").trigger("change");
                 } else {
                     showErrorNotification(data.result);
                 }
